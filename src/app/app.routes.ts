@@ -1,39 +1,45 @@
 import { Routes } from '@angular/router';
-import { LandingPageComponent } from './pages/landing-page/landing-page.component';
-import { AboutPageComponent } from './pages/about-page/about-page.component';
-import { NoPageComponent } from './pages/no-page/no-page.component';
-import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component';
-import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
+import { SignInPageComponent } from './features/common/sign-in-page/sign-in-page.component';
+import { PageNotFoundComponent } from './features/common/page-not-found/page-not-found.component';
+import { ForgotCredentialComponent } from './features/common/forgot-credential/forgot-credential.component';
+import { DashboardComponent as StudentDashboardComponent } from './features/student/dashboard/dashboard.component';
+import { CourseComponent } from './features/student/course/course.component';
+import { ProgressAndReportComponent } from './features/student/progress-and-report/progress-and-report.component';
+import { SchedulesComponent } from './features/student/schedules/schedules.component';
 
 export const routes: Routes = [
-    {
-        path: "",
-        component: LandingPageComponent
-    },
-    {
-        path: "about",
-        component: AboutPageComponent
-    },
+  {
+    path: "",
+    component: SignInPageComponent
+  },
 
+  {
+    path: "forgot-credential",
+    component: ForgotCredentialComponent
+  },
 
-    {
-        path: "login",
-        component: SignInPageComponent
-    },
+  {
+    path: "student-dashboard",
+    component: StudentDashboardComponent
+  },
 
-    {
-        path: "registration",
-        component: SignUpPageComponent
-    },
+  {
+    path: "progress-and-reports",
+    component: ProgressAndReportComponent
+  },
 
+  {
+    path: "course",
+    component: CourseComponent
+  },
 
-    // Insert diri ang mga role specific routes
-       // 
+  {
+    path: "schedules",
+    component: SchedulesComponent
+  },
 
-
-    // 404 page
-    {
-        path: "**",
-        component: NoPageComponent
-    }
+  {
+    path: "**",
+    component: PageNotFoundComponent
+  },
 ];

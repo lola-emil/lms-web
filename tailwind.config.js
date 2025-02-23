@@ -6,5 +6,11 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["autumn"],
+  },
+  plugins: [
+    require("daisyui")
+  ],
 }
+
