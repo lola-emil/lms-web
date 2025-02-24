@@ -3,10 +3,12 @@ import { DrawerComponent } from "../../../shared/components/drawer/drawer.compon
 import { DatePipe } from '@angular/common';
 import { MelloSvgComponent } from "../../../shared/svg/mello-svg/mello-svg.component";
 import { HelloSvgComponent } from "../../../shared/svg/hello-svg/hello-svg.component";
+import { RouterLink } from '@angular/router';
+import { TopbarComponent } from "../../../shared/components/topbar/topbar.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DrawerComponent, DatePipe, HelloSvgComponent],
+  imports: [DrawerComponent, DatePipe, HelloSvgComponent, RouterLink, TopbarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

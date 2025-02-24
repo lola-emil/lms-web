@@ -6,6 +6,8 @@ import { DashboardComponent as StudentDashboardComponent } from './features/stud
 import { CourseComponent } from './features/student/course/course.component';
 import { ProgressAndReportComponent } from './features/student/progress-and-report/progress-and-report.component';
 import { SchedulesComponent } from './features/student/schedules/schedules.component';
+import { CoursesComponent } from './features/student/courses/courses.component';
+import { AnnouncementsComponent } from './features/student/announcements/announcements.component';
 
 export const routes: Routes = [
   {
@@ -29,13 +31,23 @@ export const routes: Routes = [
   },
 
   {
-    path: "course",
+    path: "courses",
+    component: CoursesComponent,
+  },
+  {
+    path: "courses/1",
     component: CourseComponent
   },
 
   {
     path: "schedules",
-    component: SchedulesComponent
+    component: SchedulesComponent,
+
+  },
+
+  {
+    path: "announcements",
+    component: AnnouncementsComponent
   },
 
   {

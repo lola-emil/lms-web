@@ -1,20 +1,5 @@
 <app-drawer>
-  <!-- TOPBAR -->
-  <div class="h-20 w-full px-5 lg:px-16">
-    <div class="container mx-auto flex items-center h-full justify-between">
-      <div class="flex items-center gap-5">
-        <label for="left-drawer" class="btn btn-square lg:hidden btn-sm btn-ghost">
-          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M2.75 18h12.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.494L2.75 18h12.5-12.5Zm0-6.5h18.5a.75.75 0 0 1 .102 1.493L21.25 13H2.75a.75.75 0 0 1-.102-1.493l.102-.007h18.5-18.5Zm0-6.497h15.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.493l.102-.007h15.5-15.5Z"
-              class="fill-base-content" />
-          </svg>
-        </label>
-        <h3 class="font-semibold">Progress and Reports</h3>
-      </div>
-      <p class="text-sm">{{ today | date }}</p>
-    </div>
-  </div>
+  <app-topbar title="Progress and Reports"></app-topbar>
 
 
 </app-drawer>
