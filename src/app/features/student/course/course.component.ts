@@ -2,81 +2,35 @@ import { Component } from '@angular/core';
 import { DrawerComponent } from "../../../shared/components/drawer/drawer.component";
 import { CommonModule, DatePipe } from '@angular/common';
 import { TopbarComponent } from "../../../shared/components/topbar/topbar.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-course',
-  imports: [DrawerComponent, TopbarComponent, CommonModule],
+  imports: [DrawerComponent, TopbarComponent, CommonModule, RouterModule, DatePipe],
   templateUrl: './course.component.html',
   styleUrl: './course.component.css'
 })
 export class CourseComponent {
   today = new Date();
-  lessons = [
+  sessionSchedule = new Date("2025-03-08");
+  upcomingActivities = [
     {
-      title: "Introduction",
-      duration: "5 min",
-      type: "document"
+      title: "Algebra Quiz",
+      date: "2025-02-26",
+      type: "quiz",
+      description: "A short quiz covering basic algebraic expressions."
     },
     {
-      title: "Fundamentals of Algebra",
-      duration: "20 min",
-      type: "video"
+      title: "Geometry Assignment",
+      date: "2025-02-28",
+      type: "assignment",
+      description: "Solve problems related to angles and shapes."
     },
     {
-      title: "Linear Equations and Inequalities",
-      duration: "25 min",
-      type: "document"
-    },
-    {
-      title: "Quadratic Equations",
-      duration: "30 min",
-      type: "video"
-    },
-    {
-      title: "Functions and Graphs",
-      duration: "40 min",
-      type: "document"
-    },
-    {
-      title: "Geometry Basics",
-      duration: "35 min",
-      type: "video"
-    },
-    {
-      title: "Trigonometry: Angles and Ratios",
-      duration: "30 min",
-      type: "document"
-    },
-    {
-      title: "Statistics: Mean, Median, and Mode",
-      duration: "20 min",
-      type: "video"
-    },
-    {
-      title: "Probability Theory",
-      duration: "25 min",
-      type: "document"
-    },
-    {
-      title: "Differentiation and Its Applications",
-      duration: "45 min",
-      type: "video"
-    },
-    {
-      title: "Integration Techniques",
-      duration: "40 min",
-      type: "document"
-    },
-    {
-      title: "Vectors and Matrices",
-      duration: "35 min",
-      type: "video"
-    },
-    {
-      title: "Final Assessment and Summary",
-      duration: "10 min",
-      type: "document"
+      title: "Periodical Exam",
+      date: "2025-03-25",
+      type: "exam",
+      description: "The final exam covering all major topics discussed in the course."
     }
   ];
-
 }
