@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { DrawerComponent } from "../../../shared/components/drawer/drawer.component";
 import { CommonModule, DatePipe } from '@angular/common';
-import { TopbarComponent } from "../../../shared/components/topbar/topbar.component";
 import { RouterModule } from '@angular/router';
+import { DrawerComponent } from '../../components/drawer/drawer.component';
+import { TopbarComponent } from '../../components/topbar/topbar.component';
 
 @Component({
   selector: 'app-course',
@@ -14,12 +14,6 @@ export class CourseComponent {
   today = new Date();
   sessionSchedule = new Date("2025-03-08");
   upcomingActivities = [
-    {
-      title: "Algebra Quiz",
-      date: "2025-02-26",
-      type: "quiz",
-      description: "A short quiz covering basic algebraic expressions."
-    },
     {
       title: "Geometry Assignment",
       date: "2025-02-28",

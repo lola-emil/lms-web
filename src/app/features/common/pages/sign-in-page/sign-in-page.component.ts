@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { WelcomeComponent } from "../../../shared/svg/welcome/welcome.component";
 import { RouterLink } from '@angular/router';
+import { WelcomeComponent } from '../../../../shared/svg/welcome/welcome.component';
 
 @Component({
   selector: 'app-sign-in-page',

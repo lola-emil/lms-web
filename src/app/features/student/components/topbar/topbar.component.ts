@@ -12,7 +12,7 @@ export class TopbarComponent {
   @Input() title: string = "";
 
   avatar = createAvatar(pixelArt, {
-    seed: "madafafak"
+    seed: "SpiderBrad"
   }).toDataUri();
 
 }
