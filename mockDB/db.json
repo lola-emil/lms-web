@@ -1,0 +1,412 @@
+{
+    "courses": [
+        {
+            "id": 1,
+            "course_name": "Introduction to Programming",
+            "instructor": "Dr. John Doe"
+        },
+        {
+            "id": 2,
+            "course_name": "Advanced Web Development",
+            "instructor": "Jane Smith"
+        },
+        {
+            "id": 3,
+            "course_name": "Machine Learning Basics",
+            "instructor": "Michael Johnson"
+        },
+        {
+            "id": 4,
+            "course_name": "Data Science with Python",
+            "instructor": "Emily Davis"
+        },
+        {
+            "id": 5,
+            "course_name": "Mobile App Development",
+            "instructor": "Chris White"
+        },
+        {
+            "id": 6,
+            "course_name": "Database Management Systems",
+            "instructor": "Sarah Brown"
+        },
+        {
+            "id": 7,
+            "course_name": "Introduction to Cybersecurity",
+            "instructor": "David Lee"
+        },
+        {
+            "id": 8,
+            "course_name": "Cloud Computing Essentials",
+            "instructor": "Sophia Green"
+        },
+        {
+            "id": 9,
+            "course_name": "Artificial Intelligence with Python",
+            "instructor": "James Clark"
+        }
+    ],
+
+    "course_modules": [
+        {
+            "id": 1,
+            "title": "Introduction to Python",
+            "duration": "2 hours",
+            "course_id": 1,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 2,
+            "title": "Variables and Data Types",
+            "duration": "1.5 hours",
+            "course_id": 1,
+            "type": "document",
+            "done": true
+        },
+        {
+            "id": 3,
+            "title": "Loops and Conditionals",
+            "duration": "2 hours",
+            "course_id": 1,
+            "type": "video",
+            "done": false
+        },
+        {
+            "id": 4,
+            "title": "Functions and Modules",
+            "duration": "2.5 hours",
+            "course_id": 1,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 5,
+            "title": "Object-Oriented Programming",
+            "duration": "3 hours",
+            "course_id": 1,
+            "type": "video",
+            "done": true
+        },
+        {
+            "id": 6,
+            "title": "Frontend Basics: HTML & CSS",
+            "duration": "2 hours",
+            "course_id": 2,
+            "type": "document",
+            "done": true
+        },
+        {
+            "id": 7,
+            "title": "JavaScript Essentials",
+            "duration": "3 hours",
+            "course_id": 2,
+            "type": "video",
+            "done": false
+        },
+        {
+            "id": 8,
+            "title": "Responsive Design with Bootstrap",
+            "duration": "2 hours",
+            "course_id": 2,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 9,
+            "title": "Building Web Applications with Node.js",
+            "duration": "4 hours",
+            "course_id": 2,
+            "type": "video",
+            "done": false
+        },
+        {
+            "id": 10,
+            "title": "Deploying Web Applications to the Cloud",
+            "duration": "3 hours",
+            "course_id": 2,
+            "type": "document",
+            "done": true
+        },
+        {
+            "id": 11,
+            "title": "Supervised Learning Introduction",
+            "duration": "2 hours",
+            "course_id": 3,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 12,
+            "title": "Regression Algorithms",
+            "duration": "3 hours",
+            "course_id": 3,
+            "type": "video",
+            "done": true
+        },
+        {
+            "id": 13,
+            "title": "Classification Algorithms",
+            "duration": "3 hours",
+            "course_id": 3,
+            "type": "document",
+            "done": true
+        },
+        {
+            "id": 14,
+            "title": "Clustering Techniques",
+            "duration": "2.5 hours",
+            "course_id": 3,
+            "type": "video",
+            "done": false
+        },
+        {
+            "id": 15,
+            "title": "Neural Networks Introduction",
+            "duration": "2.5 hours",
+            "course_id": 3,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 16,
+            "title": "Data Preprocessing and Visualization",
+            "duration": "3 hours",
+            "course_id": 4,
+            "type": "document",
+            "done": true
+        },
+        {
+            "id": 17,
+            "title": "Pandas and NumPy Basics",
+            "duration": "2 hours",
+            "course_id": 4,
+            "type": "video",
+            "done": true
+        },
+        {
+            "id": 18,
+            "title": "Data Cleaning Techniques",
+            "duration": "3 hours",
+            "course_id": 4,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 19,
+            "title": "Exploratory Data Analysis",
+            "duration": "2.5 hours",
+            "course_id": 4,
+            "type": "video",
+            "done": true
+        },
+        {
+            "id": 20,
+            "title": "Machine Learning Models in Python",
+            "duration": "4 hours",
+            "course_id": 4,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 21,
+            "title": "App Development Basics with Kotlin",
+            "duration": "2 hours",
+            "course_id": 5,
+            "type": "document",
+            "done": true
+        },
+        {
+            "id": 22,
+            "title": "Building Simple Android Apps",
+            "duration": "3 hours",
+            "course_id": 5,
+            "type": "video",
+            "done": false
+        },
+        {
+            "id": 23,
+            "title": "UI/UX Design for Mobile Apps",
+            "duration": "2.5 hours",
+            "course_id": 5,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 24,
+            "title": "Working with APIs in Mobile Apps",
+            "duration": "3 hours",
+            "course_id": 5,
+            "type": "video",
+            "done": true
+        },
+        {
+            "id": 25,
+            "title": "App Deployment and Maintenance",
+            "duration": "2 hours",
+            "course_id": 5,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 26,
+            "title": "Database Design Concepts",
+            "duration": "2.5 hours",
+            "course_id": 6,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 27,
+            "title": "SQL Queries Basics",
+            "duration": "3 hours",
+            "course_id": 6,
+            "type": "video",
+            "done": true
+        },
+        {
+            "id": 28,
+            "title": "Normalization and Relationships",
+            "duration": "2.5 hours",
+            "course_id": 6,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 29,
+            "title": "Database Indexing and Optimization",
+            "duration": "3 hours",
+            "course_id": 6,
+            "type": "video",
+            "done": false
+        },
+        {
+            "id": 30,
+            "title": "Advanced SQL Techniques",
+            "duration": "3 hours",
+            "course_id": 6,
+            "type": "document",
+            "done": true
+        },
+        {
+            "id": 31,
+            "title": "Cybersecurity Overview",
+            "duration": "2 hours",
+            "course_id": 7,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 32,
+            "title": "Network Security Principles",
+            "duration": "3 hours",
+            "course_id": 7,
+            "type": "video",
+            "done": true
+        },
+        {
+            "id": 33,
+            "title": "Cryptography Fundamentals",
+            "duration": "2.5 hours",
+            "course_id": 7,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 34,
+            "title": "Threat Intelligence and Mitigation",
+            "duration": "3 hours",
+            "course_id": 7,
+            "type": "video",
+            "done": false
+        },
+        {
+            "id": 35,
+            "title": "Incident Response and Forensics",
+            "duration": "3 hours",
+            "course_id": 7,
+            "type": "document",
+            "done": true
+        },
+        {
+            "id": 36,
+            "title": "Cloud Computing Fundamentals",
+            "duration": "2 hours",
+            "course_id": 8,
+            "type": "document",
+            "done": true
+        },
+        {
+            "id": 37,
+            "title": "Understanding Cloud Service Models",
+            "duration": "2.5 hours",
+            "course_id": 8,
+            "type": "video",
+            "done": true
+        },
+        {
+            "id": 38,
+            "title": "Cloud Architecture and Security",
+            "duration": "3 hours",
+            "course_id": 8,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 39,
+            "title": "Cloud Deployment Models",
+            "duration": "3 hours",
+            "course_id": 8,
+            "type": "video",
+            "done": false
+        },
+        {
+            "id": 40,
+            "title": "Cloud Service Providers and Tools",
+            "duration": "2.5 hours",
+            "course_id": 8,
+            "type": "document",
+            "done": true
+        },
+        {
+            "id": 41,
+            "title": "Introduction to AI with Python",
+            "duration": "2.5 hours",
+            "course_id": 9,
+            "type": "document",
+            "done": true
+        },
+        {
+            "id": 42,
+            "title": "Machine Learning with Scikit-learn",
+            "duration": "3 hours",
+            "course_id": 9,
+            "type": "video",
+            "done": true
+        },
+        {
+            "id": 43,
+            "title": "Deep Learning Concepts",
+            "duration": "3.5 hours",
+            "course_id": 9,
+            "type": "document",
+            "done": false
+        },
+        {
+            "id": 44,
+            "title": "Natural Language Processing",
+            "duration": "3 hours",
+            "course_id": 9,
+            "type": "video",
+            "done": false
+        },
+        {
+            "id": 45,
+            "title": "AI Ethics and Bias",
+            "duration": "2.5 hours",
+            "course_id": 9,
+            "type": "document",
+            "done": false
+        }
+    ]
+}

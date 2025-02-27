@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
+import { CourseService } from '../../services/course.service';
+import { map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -10,55 +12,23 @@ import { TopbarComponent } from '../../components/topbar/topbar.component';
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css'
 })
-export class CoursesComponent {
+export class CoursesComponent implements OnInit {
+
+  constructor(private courseService: CourseService) {}
+
+  ngOnInit(): void {
+    this.courseService.get()
+    .pipe(
+      tap(data => {
+        console.log("Data fetched successfully");
+        this.courses = data;
+      })
+    ).subscribe();
+  }
   today = new Date;
 
-  courses = [
-    {
-      name: "Mathematics",
-      instructor: "Dr. Alice Johnson",
-      recentLesson: "Algebraic Expressions and Equations"
-    },
-    {
-      name: "Computer Science",
-      instructor: "Prof. Brian Smith",
-      recentLesson: "Introduction to Data Structures"
-    },
-    {
-      name: "Physics",
-      instructor: "Dr. Emily Davis",
-      recentLesson: "Newton’s Laws of Motion"
-    },
-    {
-      name: "English Literature",
-      instructor: "Ms. Sarah Williams",
-      recentLesson: "Shakespearean Drama Analysis"
-    },
-    {
-      name: "Biology",
-      instructor: "Dr. Mark Robinson",
-      recentLesson: "Cell Structure and Function"
-    },
-    {
-      name: "History",
-      instructor: "Prof. Laura Bennett",
-      recentLesson: "The Industrial Revolution"
-    },
-    {
-      name: "Economics",
-      instructor: "Dr. Daniel Carter",
-      recentLesson: "Supply and Demand Principles"
-    },
-    {
-      name: "Chemistry",
-      instructor: "Dr. Olivia Martinez",
-      recentLesson: "Periodic Table and Atomic Structure"
-    },
-    {
-      name: "Psychology",
-      instructor: "Prof. James Anderson",
-      recentLesson: "Cognitive Development Theories"
-    }
+  courses: any = [
+    
   ];
 
   colors = [

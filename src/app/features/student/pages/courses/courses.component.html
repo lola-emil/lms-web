@@ -17,13 +17,13 @@
     <br>
     <div class="grid gap-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
       @for (item of courses; track $index) {
-      <a [routerLink]="($index + 1).toString()" class="rounded-lg bg-slate-50">
+      <a [routerLink]="item.id" class="rounded-lg bg-slate-50">
         <div>
           <!-- <img {[]}="https://loremflickr.com/100/100?random=3" alt=""> -->
           <img [src]="imgURL + $index" class="w-full min-h-48 rounded-tl rounded-tr" alt="">
         </div>
         <div class="p-5">
-          <p class="font-semibold">{{item.name}}</p>
+          <p class="font-semibold">{{ item.course_name }}</p>
           <div class="flex flex-col">
             <p class="text-sm">{{ item.instructor }}</p>
 
