@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 type PaginationOpt = {
-  _page?: number,
-  _per_page?: number
+  _page?: string,
+  _per_page?: string
 };
 
 @Injectable({
@@ -15,12 +15,14 @@ export class CourseService {
 
   get(opt?: PaginationOpt) {
 
-    if (opt) {
-      opt._page = opt._page ?? 1;
-      opt._per_page = opt._per_page ?? 10
-    }
-    
-    return this.http.get(this.apiURL);
+    let query = new URLSearchParams({
+      _page: opt?._page || "1",
+      _per_page: opt?._per_page || "10"
+    });
+
+    console.log(query.toString());
+
+    return this.http.get(this.apiURL + "?" + query.toString());
   }
 
   getById(id: number | string) {

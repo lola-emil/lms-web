@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { CourseModuleService } from '../../services/course-module.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-lectures',
@@ -7,7 +9,26 @@ import { RouterLink } from '@angular/router';
   templateUrl: './lectures.component.html',
   styleUrl: './lectures.component.css'
 })
-export class LecturesComponent {
+export class LecturesComponent implements OnInit {
+
+  constructor(
+    private route: ActivatedRoute,
+    private courseModuleService: CourseModuleService
+  ) {}
+
+  ngOnInit(): void {
+    const courseId = this.route.parent?.snapshot.paramMap.get("id")!;
+    console.log(courseId);
+
+    this.courseModuleService.getByCourseId(courseId)
+    .pipe(
+      tap(val => {
+        console.log("Fetched successfully", val);
+        this.lessons = (val as any).data;
+      }),
+    )
+    .subscribe();
+  }
   // lessons = [
   //   {
   //     title: "Introduction",

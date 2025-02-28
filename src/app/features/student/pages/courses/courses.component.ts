@@ -15,13 +15,16 @@ import { map, tap } from 'rxjs';
 export class CoursesComponent implements OnInit {
 
   constructor(private courseService: CourseService) {}
+  
+  page: number = 1;
+  pageItems: number = 5;
 
   ngOnInit(): void {
-    this.courseService.get()
+    this.courseService.get({_page: this.page + "", _per_page: this.pageItems + ""})
     .pipe(
       tap(data => {
-        console.log("Data fetched successfully");
-        this.courses = data;
+        console.log("Data fetched successfully", (data as any));
+        this.courses = (data as any).data;
       })
     ).subscribe();
   }
