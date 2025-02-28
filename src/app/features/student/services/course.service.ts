@@ -20,8 +20,6 @@ export class CourseService {
       _per_page: opt?._per_page || "10"
     });
 
-    console.log(query.toString());
-
     return this.http.get(this.apiURL + "?" + query.toString());
   }
 

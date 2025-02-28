@@ -3,7 +3,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
-import { CourseModuleService } from '../../services/course-module.service';
 import { tap } from 'rxjs';
 import { CourseService } from '../../services/course.service';
 
@@ -27,7 +26,6 @@ export class CourseComponent implements OnInit {
     this.courseService.getById(id)
     .pipe(
       tap(data => {
-        console.log("fetch successful", data);
         this.title = data.course_name;
         this.instructor = data.instructor;
       })

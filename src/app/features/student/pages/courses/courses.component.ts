@@ -23,7 +23,6 @@ export class CoursesComponent implements OnInit {
     this.courseService.get({_page: this.page + "", _per_page: this.pageItems + ""})
     .pipe(
       tap(data => {
-        console.log("Data fetched successfully", (data as any));
         this.courses = (data as any).data;
       })
     ).subscribe();
