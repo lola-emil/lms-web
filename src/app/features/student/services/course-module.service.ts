@@ -6,6 +6,14 @@ type PaginationOpt = {
   _per_page?: string
 };
 
+export interface CourseModule {
+  id: number,
+  title: string,
+  duration: string,
+  course_id: number,
+  done: boolean
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,11 +29,11 @@ export class CourseModuleService {
       _per_page: opt?._per_page || "10"
     });
 
-    return this.http.get(this.apiURL + "?" + query.toString());
+    return this.http.get<CourseModule>(this.apiURL + "?" + query.toString());
   }
 
   getById(id: number | string) {
-    return this.http.get(this.apiURL + "/" + id);
+    return this.http.get<CourseModule>(this.apiURL + "/" + id);
   }
 
   getByCourseId(courseId: number | string, opt?: PaginationOpt) {

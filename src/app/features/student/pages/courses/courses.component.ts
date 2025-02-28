@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
 import { CourseService } from '../../services/course.service';
-import { map, tap } from 'rxjs';
+import { map, Subscription, tap } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -12,21 +12,32 @@ import { map, tap } from 'rxjs';
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css'
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, OnDestroy {
 
   constructor(private courseService: CourseService) {}
-  
+
   page: number = 1;
   pageItems: number = 5;
 
+  courseSubscription?: Subscription;
+
   ngOnInit(): void {
-    this.courseService.get({_page: this.page + "", _per_page: this.pageItems + ""})
+    this.courseSubscription = this.courseService.get({
+        _page: this.page + "", 
+        _per_page: this.pageItems + ""
+      })
     .pipe(
       tap(data => {
         this.courses = (data as any).data;
       })
     ).subscribe();
   }
+
+  ngOnDestroy(): void {
+    this.courseSubscription?.unsubscribe();
+  }
+
+
   today = new Date;
 
   courses: any = [

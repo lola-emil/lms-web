@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
-import { tap } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { CourseService } from '../../services/course.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { CourseService } from '../../services/course.service';
   templateUrl: './course.component.html',
   styleUrl: './course.component.css'
 })
-export class CourseComponent implements OnInit {
+export class CourseComponent implements OnInit, OnDestroy {
   title: string = "";
   instructor: string = "";
 
@@ -21,9 +21,12 @@ export class CourseComponent implements OnInit {
     private courseService: CourseService
   ) {}
 
+  courseSubscription?: Subscription;
+
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get("id")!;
-    this.courseService.getById(id)
+
+    this.courseSubscription = this.courseService.getById(id)
     .pipe(
       tap(data => {
         this.title = data.course_name;
@@ -31,6 +34,11 @@ export class CourseComponent implements OnInit {
       })
     ).subscribe();
   }
+
+  ngOnDestroy(): void {
+    this.courseSubscription?.unsubscribe();
+  }
+
 
   today = new Date();
 
