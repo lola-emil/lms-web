@@ -34,12 +34,13 @@
         </div>
 
         <div class="grid gap-5 grid-cols-1 xl:grid-cols-3">
-          @for (item of courses.slice(0,3); track $index) {
-          <a [routerLink]="'/student/courses/' + ($index + 1)" class="p-5 rounded-lg" [style.background-color]="colors[$index]">
-            <p class="text-xs">{{item.courseName}}</p>
+          @for (item of (recents$ | async)?.splice(0,3); track $index) {
+            <!-- [style.background-color]="colors[$index]" -->
+          <a [routerLink]="'/student/courses/' + ($index + 1)" class="p-5 border-[1px] hover:bg-base-200 rounded-lg" >
+            <p class="text-xs text-secondary-content">{{item.course_name}}</p>
 
             <div class="flex items-center justify-between">
-              <p class="text-sm font-semibold ">{{ item.recentLessonName }}</p>
+              <p class="text-sm font-semibold text-secondary-content">{{ item.instructor }}</p>
               <svg width="16" height="16" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M13.267 4.209a.75.75 0 0 0-1.034 1.086l6.251 5.955H3.75a.75.75 0 0 0 0 1.5h14.734l-6.251 5.954a.75.75 0 0 0 1.034 1.087l7.42-7.067a.996.996 0 0 0 .3-.58.758.758 0 0 0-.001-.29.995.995 0 0 0-.3-.578l-7.419-7.067Z"
@@ -56,7 +57,7 @@
 
     <!-- KATU MGA OVERVIEW UNSA MAN GALING TO -->
     <section class="flex gap-5 flex-col xl:flex-row">
-      <div class="card bg-slate-50 flex-1">
+      <div class="card flex-1">
         <div class="card-body">
           <div class="flex">
             <p class="text-sm font-semibold">Progress overview</p>
@@ -71,7 +72,7 @@
 
           <div class="flex flex-col gap-3">
             @for (item of progress.slice(0,5); track $index) {
-            <div class="py-5 flex flex-col lg:flex-row border-b-2 justify-between lg:items-center">
+            <div class="py-5 flex flex-col lg:flex-row justify-between lg:items-center">
               <div class="flex-1">
                 <p class="text-sm">{{ item.courseName }}</p>
               </div>
@@ -89,7 +90,7 @@
         </div>
       </div>
 
-      <div class="card bg-slate-50 flex-1">
+      <div class="card  flex-1">
         <div class="card-body">
           <div class="flex">
             <p class="text-sm font-semibold">Upcoming activities</p>
@@ -104,7 +105,7 @@
 
           <div class="flex flex-col">
             @for (item of reminders; track $index) {
-            <div class="py-5 flex items-center gap-2 border-b-[1px]">
+            <div class="py-5 flex items-center gap-2">
               <div>
 
                 @if (item.type == "session") {

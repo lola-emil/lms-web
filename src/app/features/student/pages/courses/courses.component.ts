@@ -23,7 +23,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.courseSubscription = this.courseService.get({
-        _page: this.page + "", 
+        _page: this.page + "",
         _per_page: this.pageItems + ""
       })
     .pipe(
@@ -41,7 +41,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   today = new Date;
 
   courses: any = [
-    
+
   ];
 
   colors = [

@@ -10,6 +10,8 @@ import { LecturesComponent } from './pages/lectures/lectures.component';
 import { LiveSessionComponent } from './pages/live-session/live-session.component';
 import { ProgressAndReportComponent } from './pages/progress-and-report/progress-and-report.component';
 import { SchedulesComponent } from './pages/schedules/schedules.component';
+import { ForumComponent } from './pages/forum/forum.component';
+import { LectureContentComponent } from './pages/lecture-content/lecture-content.component';
 
 
 const routes: Routes = [
@@ -35,14 +37,14 @@ const routes: Routes = [
     children: [
       {
         path: "lectures",
-        component: LecturesComponent
+        component: LecturesComponent,
+      },
+      {
+        path: "forum",
+        component: ForumComponent
       },
       {
         path: "activities",
-        component: ActivitiesComponent
-      },
-      {
-        path: "live-session",
         component: LiveSessionComponent
       },
       {
@@ -51,6 +53,11 @@ const routes: Routes = [
         pathMatch: "full"
       }
     ]
+  },
+
+  {
+    path: "courses/:id/lectures/:id",
+    component: LectureContentComponent
   },
 
   {
@@ -63,6 +70,11 @@ const routes: Routes = [
     path: "announcements",
     component: AnnouncementsComponent
   },
+
+  {
+    path: "forums",
+    component: ForumComponent
+  }
 
 ];
 

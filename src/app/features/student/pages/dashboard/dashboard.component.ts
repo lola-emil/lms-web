@@ -1,19 +1,35 @@
-import { Component } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HelloSvgComponent } from '../../../../shared/svg/hello-svg/hello-svg.component';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
+import { Course, CourseService } from '../../services/course.service';
+import { map, Observable, tap } from 'rxjs';
+import { createAvatar } from '@dicebear/core';
+import { pixelArt } from '@dicebear/collection';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DrawerComponent, DatePipe, HelloSvgComponent, RouterLink, TopbarComponent],
+  imports: [DrawerComponent, DatePipe, HelloSvgComponent, RouterLink, TopbarComponent, AsyncPipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
   today: Date = new Date();
 
+
+  recents$: Observable<Course[]>;
+
+  constructor(
+    private courseService: CourseService
+  ) {
+    this.recents$ = this.courseService.get().pipe(map((val: any) => val.data));
+  }
+
+  avatar = createAvatar(pixelArt, {
+    seed: "Bilat sa Kabayo"
+  }).toDataUri();
 
   progress = [
     { courseName: "Introduction to Angular", progress: 0.75 },
@@ -40,11 +56,12 @@ export class DashboardComponent {
   ];
 
   colors = [
-    "#0ea5e9",
-    "#10b981",
-    "#d946ef",
-    "#8b5cf6",
-    "#f59e0b",
+    "#161616",
+    "#161616",
+    "#161616",
+    "#161616",
+    "#161616",
+    "#161616",
   ];
 
   reminders = [

@@ -1,22 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+
 type PaginationOpt = {
   _page?: string,
   _per_page?: string
 };
 
-export interface Course {
-  id: number,
-  course_name: string,
-  instructor: string
-}
 
 @Injectable({
   providedIn: 'root'
 })
-export class CourseService {
-  apiURL = "http://localhost:3000/courses"
+export class ForumService {
+  apiURL = "http://localhost:3000/forums"
   constructor(private http: HttpClient) { }
 
   get(opt?: PaginationOpt) {
@@ -30,9 +26,7 @@ export class CourseService {
   }
 
   getById(id: number | string) {
-    return this.http.get<Course>(this.apiURL + "/" + id);
+    return this.http.get(this.apiURL + "/" + id);
   }
-
-
 
 }

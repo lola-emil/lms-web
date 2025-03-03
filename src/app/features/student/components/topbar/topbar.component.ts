@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { createAvatar } from "@dicebear/core";
 import { pixelArt } from '@dicebear/collection';
+
 @Component({
   selector: 'app-topbar',
   imports: [],
@@ -12,7 +13,7 @@ export class TopbarComponent {
   @Input() title: string = "";
 
   avatar = createAvatar(pixelArt, {
-    seed: "SpiderBrad"
+    seed: "bilat sa Kabayo"
   }).toDataUri();
 
 }
