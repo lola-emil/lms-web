@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AsyncPipe, DatePipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HelloSvgComponent } from '../../../../shared/svg/hello-svg/hello-svg.component';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
@@ -11,7 +11,7 @@ import { pixelArt } from '@dicebear/collection';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DrawerComponent, DatePipe, HelloSvgComponent, RouterLink, TopbarComponent, AsyncPipe],
+  imports: [DrawerComponent, DatePipe, HelloSvgComponent, RouterLink, TopbarComponent, CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -22,10 +22,11 @@ export class DashboardComponent {
   recents$: Observable<Course[]>;
 
   constructor(
-    private courseService: CourseService
+    private courseService: CourseService,
   ) {
     this.recents$ = this.courseService.get().pipe(map((val: any) => val.data));
   }
+
 
   avatar = createAvatar(pixelArt, {
     seed: "Bilat sa Kabayo"
@@ -56,12 +57,11 @@ export class DashboardComponent {
   ];
 
   colors = [
-    "#161616",
-    "#161616",
-    "#161616",
-    "#161616",
-    "#161616",
-    "#161616",
+    "#0ea5e9",
+    "#10b981",
+    "#d946ef",
+    "#8b5cf6",
+    "#f59e0b",
   ];
 
   reminders = [

@@ -3,17 +3,20 @@ import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
+import { Location } from '@angular/common';
+import { QuizComponent } from "../../components/quiz/quiz.component";
 
 @Component({
   selector: 'app-lecture-content',
-  imports: [DrawerComponent, TopbarComponent],
+  imports: [DrawerComponent, TopbarComponent, QuizComponent],
   templateUrl: './lecture-content.component.html',
   styleUrl: './lecture-content.component.css'
 })
 export class LectureContentComponent implements OnInit {
 
   constructor(
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private location: Location
   ){}
 
   docType = '';
@@ -25,4 +28,8 @@ export class LectureContentComponent implements OnInit {
     })
   }
 
+
+  goBack() {
+    this.location.back();
+  }
 }

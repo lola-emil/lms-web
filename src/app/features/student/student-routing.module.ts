@@ -54,7 +54,6 @@ const routes: Routes = [
       }
     ]
   },
-
   {
     path: "courses/:id/lectures/:id",
     component: LectureContentComponent

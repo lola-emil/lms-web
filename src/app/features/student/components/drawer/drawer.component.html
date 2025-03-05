@@ -10,20 +10,12 @@
         <ng-content />
 
       </div>
-      <div class="drawer-side">
-        <!-- <label for="right-drawer" class="drawer-overlay"></label> -->
-        <ul class="menu min-h-full w-80 p-4 text-base-content">
-          <!-- Sidebar content here -->
-          <!-- <li><a>Sidebar Item 1</a></li>
-          <li><a>Sidebar Item 2</a></li> -->
-        </ul>
-      </div>
     </div>
     <!-- /right drawer -->
   </div>
   <div class="drawer-side">
     <label for="left-drawer" class="drawer-overlay"></label>
-    <div class="min-h-full flex flex-col w-72  p-4 text-base-content border-r-[1px]">
+    <div class="min-h-full flex flex-col w-72 bg-base-100 p-4 text-base-content border-r-[1px]">
       <!-- Sidebar content here -->
       <div class="h-56 gap-5 flex flex-col items-center">
         <img src="/sclc-logo-removebg-preview.png" class="w-32" alt="">
@@ -31,62 +23,47 @@
       </div>
 
       <div class="flex-1 flex flex-col justify-between w-full">
-        <ul class="menu gap-5">
-          <li class="active">
-            <a routerLink="/student/dashboard">
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="m17.751 3 .185.005a3.25 3.25 0 0 1 3.06 3.06l.005.185v11.5l-.005.184A3.25 3.25 0 0 1 17.751 21H6.25a3.25 3.25 0 0 1-3.245-3.066L3 17.75V6.25a3.25 3.25 0 0 1 3.066-3.245L6.25 3h11.501ZM19.5 8H4.501L4.5 17.75a1.75 1.75 0 0 0 1.606 1.744l.144.006h11.501l.144-.006a1.75 1.75 0 0 0 1.6-1.593l.006-.151L19.5 8Zm-9.25 1.5a.75.75 0 0 1 .743.648l.007.102v7a.75.75 0 0 1-.648.743L10.25 18h-3.5a.75.75 0 0 1-.743-.648L6 17.25v-7a.75.75 0 0 1 .648-.743L6.75 9.5h3.5ZM9.5 11h-2v5.5h2V11Zm6.75 1.503a.75.75 0 0 1 .102 1.493l-.102.007h-3.496a.75.75 0 0 1-.101-1.493l.101-.007h3.496Zm1-3.003a.75.75 0 0 1 .102 1.493L17.25 11h-4.496a.75.75 0 0 1-.101-1.493l.101-.007h4.496Z"
-                  class="fill-base-content" />
-              </svg>
-              <span>Dashboard</span>
-            </a>
-          </li>
-
+        <ul>
           <li>
-            <a routerLink="/student/progress-and-reports">
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M18 20.5a.5.5 0 0 0 .5-.5V10H14a2 2 0 0 1-2-2V3.5H6a.5.5 0 0 0-.5.5v5.25a.75.75 0 0 1-1.5 0V4a2 2 0 0 1 2-2h6.172c.028 0 .055.004.082.007.02.003.04.006.059.007.215.015.427.056.624.138.057.024.112.056.166.087l.05.029.047.024a.652.652 0 0 1 .081.044c.078.053.148.116.219.18l.036.03a.493.493 0 0 1 .049.04l5.829 5.828A2 2 0 0 1 20 9.828V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3.75a.75.75 0 0 1 1.5 0V20a.5.5 0 0 0 .5.5h12Zm-.622-12L13.5 4.621V8a.5.5 0 0 0 .5.5h3.378Z"
-                  class="fill-base-content" />
-                <path
-                  d="M2.75 13h2.505l1.557-3.551a.75.75 0 0 1 1.327-.091l.006.01.05.103 2.413 6.027 1.427-2.1a.75.75 0 0 1 .545-.389l.01-.002.107-.007h2a.75.75 0 0 1 .113 1.492l-.01.001-.103.007h-1.554l-1.979 3.094a.75.75 0 0 1-1.306.04l-.005-.009-.05-.101-2.336-5.835-1.035 2.362a.75.75 0 0 1-.564.439l-.012.002-.11.008H2.75a.75.75 0 0 1-.113-1.492l.01-.001L2.75 13Z"
-                  class="fill-base-content" />
-              </svg>
-              <span>Grades & Reports</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/student/schedules">
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M17.75 3A3.25 3.25 0 0 1 21 6.25v11.5A3.25 3.25 0 0 1 17.75 21H6.25A3.25 3.25 0 0 1 3 17.75V6.25A3.25 3.25 0 0 1 6.25 3h11.5Zm1.75 5.5h-15v9.25c0 .966.784 1.75 1.75 1.75h11.5a1.75 1.75 0 0 0 1.75-1.75V8.5Zm-11.75 6a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm4.25 0a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm-4.25-4a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm4.25 0a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm4.25 0a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm1.5-6H6.25A1.75 1.75 0 0 0 4.5 6.25V7h15v-.75a1.75 1.75 0 0 0-1.75-1.75Z"
-                  class="fill-base-content" />
-              </svg>
-              <span>Schedules</span>
-            </a>
-          </li>
+            <h2 class="menu-title">Main</h2>
+            <ul class="menu gap-5">
+              <li class="active">
+                <a routerLink="/student/dashboard">
+                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="m17.751 3 .185.005a3.25 3.25 0 0 1 3.06 3.06l.005.185v11.5l-.005.184A3.25 3.25 0 0 1 17.751 21H6.25a3.25 3.25 0 0 1-3.245-3.066L3 17.75V6.25a3.25 3.25 0 0 1 3.066-3.245L6.25 3h11.501ZM19.5 8H4.501L4.5 17.75a1.75 1.75 0 0 0 1.606 1.744l.144.006h11.501l.144-.006a1.75 1.75 0 0 0 1.6-1.593l.006-.151L19.5 8Zm-9.25 1.5a.75.75 0 0 1 .743.648l.007.102v7a.75.75 0 0 1-.648.743L10.25 18h-3.5a.75.75 0 0 1-.743-.648L6 17.25v-7a.75.75 0 0 1 .648-.743L6.75 9.5h3.5ZM9.5 11h-2v5.5h2V11Zm6.75 1.503a.75.75 0 0 1 .102 1.493l-.102.007h-3.496a.75.75 0 0 1-.101-1.493l.101-.007h3.496Zm1-3.003a.75.75 0 0 1 .102 1.493L17.25 11h-4.496a.75.75 0 0 1-.101-1.493l.101-.007h4.496Z"
+                      class="fill-base-content" />
+                  </svg>
+                  <span>Dashboard</span>
+                </a>
+              </li>
 
-          <li>
-            <!-- <h2 class="menu-title flex items-center"> -->
-            <details open>
-              <summary>
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M5.754 22.005a2.25 2.25 0 0 1-2.25-2.25L3.502 5.75a2.25 2.25 0 0 1 2.25-2.25l.747-.001.001-.749a.75.75 0 0 1 .648-.743L7.25 2a.75.75 0 0 1 .743.648L8 2.75v.749H11V2.75a.75.75 0 0 1 .65-.743l.1-.007a.75.75 0 0 1 .744.648l.007.102v.749h2.997l.001-.749a.75.75 0 0 1 .648-.743L16.25 2a.75.75 0 0 1 .743.648L17 2.75v.749h.749a2.25 2.25 0 0 1 2.25 2.25l.001 11c0 .06-.007.12-.02.176l-.03.094-.045.096-.02.032a.685.685 0 0 1-.105.133l-4.504 4.505a.74.74 0 0 1-.085.073l.085-.073a.744.744 0 0 1-.105.087l-.088.052-.116.047-.114.026-.053.006-.055.002H5.754ZM17.748 5H5.742a.75.75 0 0 0-.74.75l.002 14.004c0 .415.336.75.75.75h8.24l.001-2.254a2.25 2.25 0 0 1 2.096-2.245l.154-.005H18.5V5.75a.75.75 0 0 0-.75-.75Zm-.31 12.5h-1.193a.75.75 0 0 0-.743.648l-.007.102v1.194l1.943-1.944ZM7.25 16h3.998a.75.75 0 0 1 .102 1.493l-.102.007H7.25a.75.75 0 0 1-.102-1.493L7.25 16h3.998H7.25Zm0-4h8.998a.75.75 0 0 1 .102 1.493l-.102.007H7.25a.75.75 0 0 1-.102-1.493L7.25 12h8.998H7.25Zm0-4h8.998a.75.75 0 0 1 .102 1.493l-.102.007H7.25a.75.75 0 0 1-.102-1.493L7.25 8h8.998H7.25Z"
-                    class="fill-base-content" />
-                </svg>
-                <span>Enrolled Courses</span>
-              </summary>
-              <ul>
-                @for (item of courses; track $index) {
-                  <li class="max-w-36"><a [routerLink]="'/student/courses/' + item.id" class="text-clip text-nowrap">{{ item.course_name }}</a></li>
-                }
-              </ul>
-            </details>
-          </li>
+              <li>
+                <a routerLink="/student/progress-and-reports">
+                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M18 20.5a.5.5 0 0 0 .5-.5V10H14a2 2 0 0 1-2-2V3.5H6a.5.5 0 0 0-.5.5v5.25a.75.75 0 0 1-1.5 0V4a2 2 0 0 1 2-2h6.172c.028 0 .055.004.082.007.02.003.04.006.059.007.215.015.427.056.624.138.057.024.112.056.166.087l.05.029.047.024a.652.652 0 0 1 .081.044c.078.053.148.116.219.18l.036.03a.493.493 0 0 1 .049.04l5.829 5.828A2 2 0 0 1 20 9.828V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3.75a.75.75 0 0 1 1.5 0V20a.5.5 0 0 0 .5.5h12Zm-.622-12L13.5 4.621V8a.5.5 0 0 0 .5.5h3.378Z"
+                      class="fill-base-content" />
+                    <path
+                      d="M2.75 13h2.505l1.557-3.551a.75.75 0 0 1 1.327-.091l.006.01.05.103 2.413 6.027 1.427-2.1a.75.75 0 0 1 .545-.389l.01-.002.107-.007h2a.75.75 0 0 1 .113 1.492l-.01.001-.103.007h-1.554l-1.979 3.094a.75.75 0 0 1-1.306.04l-.005-.009-.05-.101-2.336-5.835-1.035 2.362a.75.75 0 0 1-.564.439l-.012.002-.11.008H2.75a.75.75 0 0 1-.113-1.492l.01-.001L2.75 13Z"
+                      class="fill-base-content" />
+                  </svg>
+                  <span>Gradebook</span>
+                </a>
+              </li>
+              <li>
+                <a routerLink="/student/schedules">
+                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M17.75 3A3.25 3.25 0 0 1 21 6.25v11.5A3.25 3.25 0 0 1 17.75 21H6.25A3.25 3.25 0 0 1 3 17.75V6.25A3.25 3.25 0 0 1 6.25 3h11.5Zm1.75 5.5h-15v9.25c0 .966.784 1.75 1.75 1.75h11.5a1.75 1.75 0 0 0 1.75-1.75V8.5Zm-11.75 6a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm4.25 0a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm-4.25-4a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm4.25 0a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm4.25 0a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm1.5-6H6.25A1.75 1.75 0 0 0 4.5 6.25V7h15v-.75a1.75 1.75 0 0 0-1.75-1.75Z"
+                      class="fill-base-content" />
+                  </svg>
+                  <span>Schedules</span>
+                </a>
+              </li>
 
-          <!-- <li>
+
+              <!-- <li>
             <a routerLink="/student/forums">
               <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -103,20 +80,35 @@
             </a>
           </li> -->
 
-          <li>
-            <a routerLink="/student/announcements">
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M21.907 5.622c.062.208.093.424.093.641V17.74a2.25 2.25 0 0 1-2.891 2.156l-5.514-1.64a4.002 4.002 0 0 1-7.59-1.556L6 16.5l-.001-.5-2.39-.711A2.25 2.25 0 0 1 2 13.131V10.87a2.25 2.25 0 0 1 1.61-2.156l15.5-4.606a2.25 2.25 0 0 1 2.797 1.515ZM7.499 16.445l.001.054a2.5 2.5 0 0 0 4.624 1.321l-4.625-1.375Zm12.037-10.9-15.5 4.605a.75.75 0 0 0-.536.72v2.261a.75.75 0 0 0 .536.72l15.5 4.607a.75.75 0 0 0 .964-.72V6.264a.75.75 0 0 0-.964-.719Z"
-                  class="fill-base-content" />
-              </svg>
-              <span>Announcements</span>
-              <div class="badge badge-secondary">8</div>
-            </a>
+              <!-- <li>
+                <a routerLink="/student/announcements">
+                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M21.907 5.622c.062.208.093.424.093.641V17.74a2.25 2.25 0 0 1-2.891 2.156l-5.514-1.64a4.002 4.002 0 0 1-7.59-1.556L6 16.5l-.001-.5-2.39-.711A2.25 2.25 0 0 1 2 13.131V10.87a2.25 2.25 0 0 1 1.61-2.156l15.5-4.606a2.25 2.25 0 0 1 2.797 1.515ZM7.499 16.445l.001.054a2.5 2.5 0 0 0 4.624 1.321l-4.625-1.375Zm12.037-10.9-15.5 4.605a.75.75 0 0 0-.536.72v2.261a.75.75 0 0 0 .536.72l15.5 4.607a.75.75 0 0 0 .964-.72V6.264a.75.75 0 0 0-.964-.719Z"
+                      class="fill-base-content" />
+                  </svg>
+                  <span>Announcements</span>
+                  <div class="badge badge-secondary">8</div>
+                </a>
+              </li> -->
+            </ul>
+          </li>
+
+          <li class="mt-5">
+            <!-- <h2 class="menu-title flex items-center"> -->
+            <h2 class="menu-title flex items-center">
+              Enrolled Courses
+            </h2>
+            <ul class="menu gap-2">
+              @for (item of courses; track $index) {
+              <li class="max-w-36"><a [routerLink]="'/student/courses/' + item.id" class="text-clip text-nowrap">{{
+                  item.course_name }}</a></li>
+              }
+            </ul>
           </li>
         </ul>
 
-<!--
+        <!--
         <ul class="menu">
           <li>
             <a>

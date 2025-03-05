@@ -22,7 +22,6 @@ export class DrawerComponent implements OnInit, OnDestroy {
     .pipe(
       tap(val => {
         const data: Course[] = (val as any).data;
-        console.log(data);
         this.courses = data;
       })
     )
