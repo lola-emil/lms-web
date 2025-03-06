@@ -17,7 +17,8 @@ export class CourseComponent {
   title$!: Observable<{ course_name: string; instructor: string }>;
 
   readonly today = new Date();
-  readonly sessionSchedule = new Date("2025-03-08");
+  readonly sessionSchedule = new Date("2025-03-08"); 
+  // new Date("2025-03-08");
 
   upcomingActivities = [
     {
@@ -38,5 +39,18 @@ export class CourseComponent {
     this.title$ = this.route.params.pipe(
       switchMap(params => this.courseService.getById(params['id']))
     );
+  }
+
+  isSessionUpcoming(): boolean {
+    return new Date(this.sessionSchedule) > new Date();
+  }
+
+  isSessionToday(): boolean {
+    if (!this.sessionSchedule) return false;
+    
+    const sessionDate = new Date(this.sessionSchedule);
+    const today = new Date();
+    
+    return sessionDate.toDateString() === today.toDateString();
   }
 }

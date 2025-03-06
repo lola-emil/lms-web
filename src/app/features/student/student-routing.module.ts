@@ -45,6 +45,10 @@ const routes: Routes = [
       },
       {
         path: "activities",
+        component: ActivitiesComponent
+      },
+      {
+        path: "scores",
         component: LiveSessionComponent
       },
       {

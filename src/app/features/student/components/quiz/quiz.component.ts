@@ -1,6 +1,7 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import {NgModel, ReactiveFormsModule} from '@angular/forms';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 interface Question {
   question: string;
@@ -11,7 +12,7 @@ interface Question {
 
 @Component({
   selector: 'app-quiz',
-  imports: [NgFor, ReactiveFormsModule, CommonModule],
+  imports: [NgFor, ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './quiz.component.html',
   styleUrl: './quiz.component.css'
 })

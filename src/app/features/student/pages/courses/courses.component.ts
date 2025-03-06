@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
@@ -8,7 +8,7 @@ import { map, Subscription, tap } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
-  imports: [DrawerComponent, TopbarComponent, RouterLink],
+  imports: [DrawerComponent, TopbarComponent, RouterLink, DatePipe, CommonModule],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css'
 })
@@ -17,7 +17,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   constructor(private courseService: CourseService) {}
 
   page: number = 1;
-  pageItems: number = 5;
+  pageItems: number = 9;
 
   courseSubscription?: Subscription;
 
