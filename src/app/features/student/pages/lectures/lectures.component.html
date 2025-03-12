@@ -4,7 +4,7 @@
     No lessons available for this course.
   </div>
 
-  <div *ngFor="let lesson of (lessons$ | async)" class="card bg-base-100 shadow-md mt-4 border-l-4"
+  <div *ngFor="let lesson of (lessons$ | async)" class="card bg-slate-50  mt-4 border-l-4"
        [ngClass]="{
          'border-blue-500': lesson.type === 'document',
          'border-green-500': lesson.type === 'video',

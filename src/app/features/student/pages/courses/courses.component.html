@@ -20,7 +20,7 @@
       <a [routerLink]="item.id" class="rounded-lg border-[1px]">
         <div>
           <!-- <img {[]}="https://loremflickr.com/100/100?random=3" alt=""> -->
-          <img [src]="imgURL + $index" class="w-full min-h-48 rounded-tl rounded-tr" alt="">
+          <img [src]="imgURL + item.course_name" class="w-full min-h-48 rounded-tl rounded-tr" alt="">
         </div>
         <div class="p-5">
           <p class="font-semibold">{{ item.course_name }}</p>

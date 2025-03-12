@@ -2,17 +2,17 @@
   <h2 class="text-2xl font-bold mb-4">Forum Discussions</h2>
 
   <!-- New Forum Post Form -->
-  <div class="border rounded-lg shadow-lg p-5 mb-6">
+  <div class="rounded-lg bg-slate-50 p-5 mb-6">
     <h3 class="font-semibold text-lg mb-3">Ask a Question</h3>
-    <input 
+    <input
       placeholder="Title"
       class="w-full input input-bordered bg-white"
     />
-    <textarea 
+    <textarea
       placeholder="Describe your question..."
       class="w-full textarea textarea-bordered bg-white mt-2"
     ></textarea>
-    <button 
+    <button
       class="mt-2 btn bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
       (click)="addForum()"
     >
@@ -21,22 +21,22 @@
   </div>
 
   <!-- Forum Threads -->
-  <div *ngFor="let forum of forums | async" class="border rounded-lg shadow-lg p-5 mb-6">
+  <div *ngFor="let forum of forums | async" class="rounded-lg bg-slate-50 p-5 mb-6">
     <div class="flex items-center gap-3 mb-2">
       <img [src]="getAvatar(forum.author)" class="w-10 h-10 rounded-full" alt="Avatar">
       <div>
         <p class="font-semibold text-lg">{{ forum.title }}</p>
         <p class="text-sm text-gray-500">
-          Posted by <span class="font-medium">{{ forum.author }}</span> ({{ forum.author_role }}) 
+          Posted by <span class="font-medium">{{ forum.author }}</span> ({{ forum.author_role }})
           • {{ forum.created_at | date: 'medium' }}
         </p>
       </div>
     </div>
-    
+
     <p class="text-gray-700 mb-4">{{ forum.content }}</p>
 
     <!-- Toggle Replies Button -->
-    <button 
+    <button
       class="bg-blue-500 btn text-white px-4 py-2 rounded hover:bg-blue-600"
       (click)="toggleReplies(forum)"
     >
@@ -58,11 +58,11 @@
 
       <!-- Add Reply Form -->
       <div class="mt-4">
-        <textarea 
-          placeholder="Write a reply..." 
+        <textarea
+          placeholder="Write a reply..."
           class="w-full p-2 border rounded-md"
         ></textarea>
-        <button 
+        <button
           class="mt-2 bg-green-500 btn text-white px-4 py-2 rounded hover:bg-green-600"
           (click)="addReply(forum)"
         >

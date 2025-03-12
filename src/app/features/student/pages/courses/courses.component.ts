@@ -56,5 +56,5 @@ export class CoursesComponent implements OnInit, OnDestroy {
     "#f97316"
   ];
 
-  imgURL =  "https://loremflickr.com/200/100?random=";
+  imgURL =  "https://loremflickr.com/200/100?random=12";
 }
