@@ -3,7 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HelloSvgComponent } from '../../../../shared/svg/hello-svg/hello-svg.component';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
-import { TopbarComponent } from '../../components/topbar/topbar.component';
+import { TopbarComponent } from '../../../../shared/components/topbar/topbar.component';
 import { Course, CourseService } from '../../services/course.service';
 import { map, Observable, tap } from 'rxjs';
 import { createAvatar } from '@dicebear/core';

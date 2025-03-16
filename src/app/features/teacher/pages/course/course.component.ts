@@ -3,7 +3,7 @@ import { CommonModule} from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../../../shared/components/topbar/topbar.component';
-import { CourseService } from '../../services/course.service';
+import { CourseService } from '../../../student/services/course.service';
 import { Observable, switchMap } from 'rxjs';
 
 @Component({

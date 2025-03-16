@@ -690,5 +690,38 @@
         }
       ]
     }
+  ],
+  "submissions": [
+    {
+      "id": 1,
+      "title": "Mathematics - Algebra Quiz",
+      "submitted_by": "John Doe",
+      "date_submitted": "2025-02-23"
+    },
+    {
+      "id": 2,
+      "title": "Science - Physics Lab Report",
+      "submitted_by": "Jane Smith",
+      "date_submitted": "2025-02-22"
+    },
+    {
+      "id": 3,
+      "title": "English - Essay on Shakespeare",
+      "submitted_by": "Michael Johnson",
+      "date_submitted": "2025-02-21"
+    },
+    {
+      "id": 4,
+      "title": "History - World War II Assignment",
+      "submitted_by": "Emily Davis",
+      "date_submitted": "2025-02-20"
+    },
+    {
+      "id": 5,
+      "title": "Computer Science - Python Project",
+      "submitted_by": "William Brown",
+      "date_submitted": "2025-02-19"
+    }
   ]
+
 }

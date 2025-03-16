@@ -1,26 +1,28 @@
-import { Component } from '@angular/core';
-import { DrawerComponent } from '../../components/drawer/drawer.component';
-import { TopbarComponent } from '../../../../shared/components/topbar/topbar.component';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { DrawerComponent } from '../../components/drawer/drawer.component';
+import { NgFor } from '@angular/common';
+import { TopbarComponent } from "../../../../shared/components/topbar/topbar.component";
 
 @Component({
-  selector: 'app-progress-and-report',
-  imports: [DrawerComponent, TopbarComponent, CommonModule],
-  templateUrl: './progress-and-report.component.html',
-  styleUrl: './progress-and-report.component.css'
+  selector: 'app-gradebook',
+  templateUrl: './gradebook.component.html',
+  imports: [DrawerComponent, NgFor, TopbarComponent],
+  styleUrl: './gradebook.component.css'
 })
-export class ProgressAndReportComponent {
+export class GradebookComponent implements OnInit {
 
   students = [
     {
+      name: "John Doe",
       subject: "Mathematics",
       scores: { quizzes: 85, assignments: 90, exams: 88 },
       total: 87.6
     },
     {
+      name: "Jane Smith",
       subject: "Science",
       scores: { quizzes: 80, assignments: 85, exams: 82 },
       total: 82.4
@@ -41,7 +43,7 @@ export class ProgressAndReportComponent {
   downloadCSV() {
     let csvContent = "data:text/csv;charset=utf-8,Name,Subject,Quizzes,Assignments,Exams,Total\n";
     this.students.forEach(student => {
-      csvContent += `${student.subject},${student.scores.quizzes},${student.scores.assignments},${student.scores.exams},${student.total}\n`;
+      csvContent += `${student.name},${student.subject},${student.scores.quizzes},${student.scores.assignments},${student.scores.exams},${student.total}\n`;
     });
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
@@ -65,7 +67,7 @@ export class ProgressAndReportComponent {
     doc.text("Gradebook Report", 14, 10);
     autoTable(doc, {
       head: [["Name", "Subject", "Quizzes", "Assignments", "Exams", "Total"]],
-      body: this.students.map(s => [s.subject, s.scores.quizzes, s.scores.assignments, s.scores.exams, s.total]),
+      body: this.students.map(s => [s.name, s.subject, s.scores.quizzes, s.scores.assignments, s.scores.exams, s.total]),
     });
     doc.save("gradebook.pdf");
   }

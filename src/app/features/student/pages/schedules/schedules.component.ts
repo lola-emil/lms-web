@@ -1,7 +1,7 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
-import { TopbarComponent } from '../../components/topbar/topbar.component';
+import { TopbarComponent } from '../../../../shared/components/topbar/topbar.component';
 import { FullCalendarModule, FullCalendarComponent } from "@fullcalendar/angular";
 import { CalendarOptions } from '@fullcalendar/core/index.js';
 import dayGridPlugin from '@fullcalendar/daygrid';

@@ -1,8 +1,7 @@
 <app-drawer>
-  <app-topbar title="Dashboard"></app-topbar>
+  <app-topbar></app-topbar>
 
-  <section class="container mx-auto px-5 lg:px-16">
-    <!-- WELCOME BANNER -->
+  <div class="container mx-auto px-5 lg:px-16">
     <div class="card">
       <div class="card-body flex gap-10 flex-col-reverse xl:flex-row-reverse items-center">
         <div class="flex-1 flex flex-col items-center md:items-start">
@@ -17,73 +16,84 @@
         </div>
       </div>
     </div>
-    <br>
 
-    <!-- MGA COURSES -->
-    <section class=" w-full">
-        <div class="flex gap-5 justify-between items-center mb-3">
-          <p class="text-sm font-semibold">Recently viewed courses</p>
-          <a routerLink="/student/courses" class="text-sm flex items-center gap-1">More
-            <svg class="w-[0.875rem]" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <section class="w-full">
+      <div class="flex gap-5 justify-between items-center mb-3">
+        <p class="text-sm font-semibold">Enrolled courses</p>
+        <a routerLink="/student/courses" class="text-sm flex items-center gap-1">More
+          <svg class="w-[0.875rem]" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M8.47 4.22a.75.75 0 0 0 0 1.06L15.19 12l-6.72 6.72a.75.75 0 1 0 1.06 1.06l7.25-7.25a.75.75 0 0 0 0-1.06L9.53 4.22a.75.75 0 0 0-1.06 0Z"
+              class="fill-base-content" />
+          </svg>
+        </a>
+      </div>
+      <div class="grid gap-5 grid-cols-1 xl:grid-cols-3">
+        <a href="" class="p-5 rounded-lg bg-blue-500">
+          <p class="text-sm font-semibold text-secondary-content">Pre Calculus</p>
+          <div class="flex items-center justify-between">
+            <p class="text-xs text-secondary-content">Grade 11 STEM A</p>
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path
-                d="M8.47 4.22a.75.75 0 0 0 0 1.06L15.19 12l-6.72 6.72a.75.75 0 1 0 1.06 1.06l7.25-7.25a.75.75 0 0 0 0-1.06L9.53 4.22a.75.75 0 0 0-1.06 0Z"
+                d="M13.267 4.209a.75.75 0 0 0-1.034 1.086l6.251 5.955H3.75a.75.75 0 0 0 0 1.5h14.734l-6.251 5.954a.75.75 0 0 0 1.034 1.087l7.42-7.067a.996.996 0 0 0 .3-.58.758.758 0 0 0-.001-.29.995.995 0 0 0-.3-.578l-7.419-7.067Z"
                 class="fill-base-content" />
             </svg>
-          </a>
-        </div>
+          </div>
+        </a>
+
+        <a href="" class="p-5 rounded-lg bg-blue-500">
+          <p class="text-sm font-semibold text-secondary-content">Introduction to Programming</p>
+          <div class="flex items-center justify-between">
+            <p class="text-xs text-secondary-content">Grade 10 Justice</p>
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M13.267 4.209a.75.75 0 0 0-1.034 1.086l6.251 5.955H3.75a.75.75 0 0 0 0 1.5h14.734l-6.251 5.954a.75.75 0 0 0 1.034 1.087l7.42-7.067a.996.996 0 0 0 .3-.58.758.758 0 0 0-.001-.29.995.995 0 0 0-.3-.578l-7.419-7.067Z"
+                class="fill-base-content" />
+            </svg>
+          </div>
+        </a>
 
 
-        <div class="grid gap-5 grid-cols-1 xl:grid-cols-3">
-          @for (item of (recents$ | async)?.slice(0,3); track $index) {
-            <a [routerLink]="'/student/courses/' + ($index + 1)" class="p-5 rounded-lg" [style.background-color]="colors[$index]">
-              <p class="text-sm font-semibold text-secondary-content">{{ item.course_name }}</p>
-              <div class="flex items-center justify-between">
-                <p class="text-xs text-secondary-content">{{ item.instructor }}</p>
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M13.267 4.209a.75.75 0 0 0-1.034 1.086l6.251 5.955H3.75a.75.75 0 0 0 0 1.5h14.734l-6.251 5.954a.75.75 0 0 0 1.034 1.087l7.42-7.067a.996.996 0 0 0 .3-.58.758.758 0 0 0-.001-.29.995.995 0 0 0-.3-.578l-7.419-7.067Z"
-                    class="fill-base-content" />
-                </svg>
-              </div>
-            </a>
-          }
-        </div>
-
+      </div>
     </section>
 
     <br>
 
-    <!-- KATU MGA OVERVIEW UNSA MAN GALING TO -->
-    <section class="flex gap-5 flex-col xl:flex-row">
-      <div class="card flex-1 bg-slate-50">
+    <section class="flex gap-5 flex-col xl:flex-row min-h-96">
+      <div class="card bg-slate-50 flex-1">
         <div class="card-body">
           <div class="flex">
-            <p class="text-sm font-semibold">Progress overview</p>
-            <!-- <a routerLink="/student/progress-and-reports" class="text-sm flex items-center gap-1"><span>More</span>
+            <p class="text-sm font-semibold">Submissions</p>
+            <a routerLink="/student/schedules" class="text-sm flex items-center gap-1">View All
               <svg class="w-[0.875rem]" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M8.47 4.22a.75.75 0 0 0 0 1.06L15.19 12l-6.72 6.72a.75.75 0 1 0 1.06 1.06l7.25-7.25a.75.75 0 0 0 0-1.06L9.53 4.22a.75.75 0 0 0-1.06 0Z"
                   class="fill-base-content" />
               </svg>
-            </a> -->
+            </a>
+
           </div>
 
-          <div class="flex flex-col gap-3">
-            @for (item of progress.slice(0,5); track $index) {
-            <div class="py-5 flex flex-col lg:flex-row justify-between lg:items-center">
-              <div class="flex-1">
-                <p class="text-sm">{{ item.courseName }}</p>
-              </div>
-              <div class="flex-1 flex items-center gap-2">
-                <div class="h-1 bg-base-200 rounded-full flex-1">
-                  <div [style.width.%]="item.progress * 100" [style.background-color]="colors[$index]"
-                    class="h-full bg-black rounded-full"></div>
+          <!-- MAO NI DIRI ANG LIST SA MGA RECENT SUBMISSIONS -->
+          <div class="flex-col">
+            @for (item of (submissions | async); track $index) {
+              <a class="py-5 flex items-center justify-between gap-2">
+                <div>
+                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M5.754 22.005a2.25 2.25 0 0 1-2.25-2.25L3.502 5.75a2.25 2.25 0 0 1 2.25-2.25l.747-.001.001-.749a.75.75 0 0 1 .648-.743L7.25 2a.75.75 0 0 1 .743.648L8 2.75v.749H11V2.75a.75.75 0 0 1 .65-.743l.1-.007a.75.75 0 0 1 .744.648l.007.102v.749h2.997l.001-.749a.75.75 0 0 1 .648-.743L16.25 2a.75.75 0 0 1 .743.648L17 2.75v.749h.749a2.25 2.25 0 0 1 2.25 2.25l.001 11c0 .06-.007.12-.02.176l-.03.094-.045.096-.02.032a.685.685 0 0 1-.105.133l-4.504 4.505a.74.74 0 0 1-.085.073l.085-.073a.744.744 0 0 1-.105.087l-.088.052-.116.047-.114.026-.053.006-.055.002H5.754ZM17.748 5H5.742a.75.75 0 0 0-.74.75l.002 14.004c0 .415.336.75.75.75h8.24l.001-2.254a2.25 2.25 0 0 1 2.096-2.245l.154-.005H18.5V5.75a.75.75 0 0 0-.75-.75Zm-.31 12.5h-1.193a.75.75 0 0 0-.743.648l-.007.102v1.194l1.943-1.944ZM7.25 16h3.998a.75.75 0 0 1 .102 1.493l-.102.007H7.25a.75.75 0 0 1-.102-1.493L7.25 16h3.998H7.25Zm0-4h8.998a.75.75 0 0 1 .102 1.493l-.102.007H7.25a.75.75 0 0 1-.102-1.493L7.25 12h8.998H7.25Zm0-4h8.998a.75.75 0 0 1 .102 1.493l-.102.007H7.25a.75.75 0 0 1-.102-1.493L7.25 8h8.998H7.25Z"
+                      class="fill-green-400" />
+                  </svg>
                 </div>
-                <span class="text-xs">{{ item.progress * 100}}%</span>
-              </div>
-            </div>
+                <div class="flex flex-col flex-1">
+                  <p class="font-semibold text-sm ">{{item.title}}</p>
+                  <p class="text-sm">{{ item.submitted_by }}</p>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold">{{ item.date_submitted | date }}</p>
+                </div>
+              </a>
             }
-
           </div>
         </div>
       </div>
@@ -133,9 +143,10 @@
           </div>
         </div>
       </div>
+
     </section>
 
-    <br>
-  </section>
+  </div>
 
+<br>
 </app-drawer>

@@ -3,7 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../../../shared/components/topbar/topbar.component';
-import { CourseService } from '../../services/course.service';
+import { CourseService } from '../../../student/services/course.service';
 import { map, Subscription, tap } from 'rxjs';
 
 @Component({

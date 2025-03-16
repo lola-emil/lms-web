@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { TopbarComponent } from '../../components/topbar/topbar.component';
+import { TopbarComponent } from '../../../../shared/components/topbar/topbar.component';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 
 @Component({
