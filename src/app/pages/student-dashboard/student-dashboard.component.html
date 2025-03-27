@@ -1,0 +1,83 @@
+<app-navbar [crumbs]="['Dashboard']"></app-navbar>
+<app-student-layout>
+  <main class="min-h-screen w-full">
+    <div class="bg-base-200 h-64 w-full py-14">
+      <div class="container mx-auto px-5 lg:px-24">
+        <h1 class="text-2xl">Welcome Pedro</h1>
+        <br>
+        <p>You’ve completed <span class="text-secondary font-semibold">50%</span> of your tasks this semester<br>you're
+          making great progress!
+          Keep pushing forward, you're halfway there! 🚀</p>
+      </div>
+    </div>
+    <div class="container z-10 -translate-y-18 px-5 lg:px-24 mx-auto">
+      <!-- KATUNG MGA GRAPH -->
+      <div class=" grid grid-cols-1 xl:grid-cols-2 gap-5">
+        <div class="card shadow-md bg-neutral-50 border border-base-200">
+          <div class="card-body p-5">
+            <p class="text-md">Progress Overview</p>
+
+            <div echarts [options]="progressChartOpt">
+            </div>
+          </div>
+        </div>
+        <div class="card shadow-md bg-neutral-50 border border-base-200">
+          <div class="card-body p-5">
+            <p class="text-md">Content Completion Trend</p>
+
+            <div echarts [options]="chartOption" class="w-full"></div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <!--  -->
+    <div class="grid grid-cols-1 xl:grid-cols-12 gap-5">
+      <div class="card border col-span-12 xl:col-span-3 border-base-100 shadow-sm bg-neutral-50">
+        <div class="card-body">
+          <p>Total Class</p>
+        </div>
+      </div>
+      <div class="card border col-span-12 xl:col-span-3 border-base-100 shadow-sm bg-neutral-50">
+        <div class="card-body">
+          <p>Assignments</p>
+        </div>
+      </div>
+      <div class="card border col-span-12 xl:col-span-3 border-base-100 shadow-sm bg-neutral-50">
+        <div class="card-body">
+          <p>Quizzes</p>
+        </div>
+      </div>
+
+      <div class="card border col-span-12 xl:col-span-3 row-span-2 border-base-100 shadow-sm bg-neutral-50">
+        <div class="card-body">
+          <p>Today's Events</p>
+          <div class="flex flex-col gap-2 mt-2">
+            <div class="border-l-4 border-primary px-2">
+              <p class="font-semibold">Live session</p>
+              <span class="text-xs">🕒 10:00 AM - 11:30 AM</span>
+            </div>
+
+            <div class="border-l-4 border-primary px-2">
+              <p class="font-semibold">Assignment 1 Deadline</p>
+              <span class="text-xs">🕒 10:00 AM - 11:30 AM</span>
+            </div>
+
+            <div class="border-l-4 border-primary px-2">
+              <p class="font-semibold">Assignment 1 Deadline</p>
+              <span class="text-xs">🕒 10:00 AM - 11:30 AM</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card border col-span-12 xl:col-span-9 border-base-100 shadow-sm bg-neutral-50">
+        <div class="card-body">
+          <p>Recent Activities</p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </main>
+</app-student-layout>

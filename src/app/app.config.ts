@@ -15,7 +15,25 @@ import { getPerformance, providePerformance } from '@angular/fire/performance';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getRemoteConfig, provideRemoteConfig } from '@angular/fire/remote-config';
 import { getVertexAI, provideVertexAI } from '@angular/fire/vertexai';
+import { provideEchartsCore } from 'ngx-echarts';
+import * as echarts from 'echarts/core';
+
+import { BarChart, LineChart } from 'echarts/charts';
+import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
+import { SVGRenderer } from 'echarts/renderers';
+
+echarts.use([BarChart, LineChart, GridComponent, TooltipComponent, LegendComponent, SVGRenderer]);
+
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideHttpClient(), provideFirebaseApp(() => initializeApp({ projectId: "dunkin-donalds", appId: "1:742330078383:web:cf6f9780403420ebadb05a", storageBucket: "dunkin-donalds.firebasestorage.app", apiKey: "AIzaSyAfQAhWG_8sSSvaH6w1jnVD--ngxmYp3OE", authDomain: "dunkin-donalds.firebaseapp.com", messagingSenderId: "742330078383", measurementId: "G-1J0L1Q447E" })), provideAuth(() => getAuth()), provideAnalytics(() => getAnalytics()), ScreenTrackingService, UserTrackingService , provideFirestore(() => getFirestore()), provideDatabase(() => getDatabase()), provideFunctions(() => getFunctions()), provideMessaging(() => getMessaging()), providePerformance(() => getPerformance()), provideStorage(() => getStorage()), provideRemoteConfig(() => getRemoteConfig()), provideVertexAI(() => getVertexAI())]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideHttpClient(),
+    provideFirebaseApp(() => initializeApp({ projectId: "dunkin-donalds", appId: "1:742330078383:web:cf6f9780403420ebadb05a", storageBucket: "dunkin-donalds.firebasestorage.app", apiKey: "AIzaSyAfQAhWG_8sSSvaH6w1jnVD--ngxmYp3OE", authDomain: "dunkin-donalds.firebaseapp.com", messagingSenderId: "742330078383", measurementId: "G-1J0L1Q447E" })), provideAuth(() => getAuth()), provideAnalytics(() => getAnalytics()), ScreenTrackingService, UserTrackingService, provideFirestore(() => getFirestore()), provideDatabase(() => getDatabase()), provideFunctions(() => getFunctions()), provideMessaging(() => getMessaging()), providePerformance(() => getPerformance()),
+    provideStorage(() => getStorage()),
+    provideRemoteConfig(() => getRemoteConfig()),
+    provideVertexAI(() => getVertexAI()),
+    provideEchartsCore({ echarts })
+  ]
 };
