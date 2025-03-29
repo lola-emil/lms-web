@@ -41,5 +41,18 @@ export class CoursesComponent {
     },
   ];
 
+  activitiesTab = [
+    {
+      label: "Assignments",
+      content: ""
+    },
+    {
+      label: "Exams",
+      content: ""
+    },
+  ];
 
+  searchActivities() {
+
+  }
 }

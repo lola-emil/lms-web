@@ -24,7 +24,10 @@
         </div>
       </app-section>
 
-      <app-section title="Activities/Exams">
+      <app-section title="Activities/Exams"
+      [tabs]="activitiesTab"
+      (searchEvent)="searchActivities()"
+      >
         <table class="table">
           <thead>
             <tr class="bg-neutral-800">
