@@ -1,0 +1,43 @@
+<app-navbar [crumbs]="['Student Dashboard', 'Subjects']"></app-navbar>
+
+<div class="container mx-auto">
+  <div class="h-44 w-full flex items-end">
+    <h1 class="text-5xl font-semibold">Subjects</h1>
+  </div>
+  <br>
+  <div class="grid mt-16 gap-16 grid-cols-12">
+
+    <div class="col-span-12 flex flex-col gap-10">
+
+      <app-section title="Subject List">
+        <div class="grid grid-cols-4 gap-4">
+          @for (item of subjects; track $index) {
+          <button (click)="drawerService.openDrawer()"
+            class="card border-neutral-700 text-left transition-colors hover:bg-neutral-600 bg-neutral-800">
+            <div class="card-body p-5">
+              <p class="font-semibold">{{item.subjectName}}</p>
+              <span class="text-sm">Teacher: John Doe</span>
+              <span class="text-sm">CS110</span>
+            </div>
+          </button>
+          }
+        </div>
+      </app-section>
+
+      <app-section title="Activities/Exams">
+        <table class="table">
+          <thead>
+            <tr class="bg-neutral-800">
+              <th>Title</th>
+              <th align="center">Subject</th>
+              <th align="center">Due Date</th>
+              <th align="center">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </app-section>
+    </div>
+  </div>
+</div>

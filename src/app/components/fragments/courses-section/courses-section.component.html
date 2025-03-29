@@ -1,0 +1,20 @@
+<section>
+  <app-section-header title="Subjects"></app-section-header>
+  <div class="w-full mt-10 grid grid-cols-4 gap-4">
+
+    @for (item of subjects; track $index) {
+    <button (click)="openDrawer()" class="card border-neutral-700 text-left transition-colors hover:bg-neutral-600 bg-neutral-800">
+      <div class="card-body p-5">
+        <p class="font-semibold">{{item.subjectName}}</p>
+        <p class="text-sm">Assignments {{item.assignments}}, Exams {{item.exams}}</p>
+        <div class="flex items-center gap-2">
+          <span class="text-sm">{{ item.progress * 100 }}%</span>
+          <div class="h-2 rounded-full w-full ">
+            <div class="h-full bg-neutral-500 rounded-full" [style.width]="item.progress * 100 + '%'"></div>
+          </div>
+        </div>
+      </div>
+    </button>
+    }
+  </div>
+</section>
