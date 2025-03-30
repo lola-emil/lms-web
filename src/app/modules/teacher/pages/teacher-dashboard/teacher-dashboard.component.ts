@@ -5,7 +5,6 @@ import { DrawerService } from '../../../../components/layout/student-layout/draw
 import { ModalService } from '../../../../components/ui/modal/modal.service';
 import { MakeAnAnnouncementComponent } from '../../fragments/make-an-announcement/make-an-announcement.component';
 import { NewAssignmentComponent } from '../../fragments/new-assignment/new-assignment.component';
-import { SidenavComponent } from "../../../../components/fragments/sidenav/sidenav.component";
 import { LayoutComponent } from "../../layout/layout.component";
 
 @Component({
