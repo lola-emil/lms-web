@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, Navigation } from '../layout/layout.component';
+import { Action, Navigation } from '../../../components/layout/main-layout/main-layout.component';
 
 @Injectable({
   providedIn: 'root'
