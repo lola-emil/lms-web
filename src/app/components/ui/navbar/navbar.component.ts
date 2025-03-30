@@ -1,4 +1,8 @@
 import { Component, Input } from '@angular/core';
+export type Crumb = {
+  label: string;
+  path?: string;
+};
 
 @Component({
   selector: 'app-navbar',
@@ -9,5 +13,5 @@ import { Component, Input } from '@angular/core';
 export class NavbarComponent {
 
   @Input()
-  crumbs: string[] = [];
+  crumbs: Crumb[] = [];
 }

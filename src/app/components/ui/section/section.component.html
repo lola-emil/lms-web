@@ -1,17 +1,23 @@
 <section>
-  <div class="w-full border-b border-neutral-800" [ngClass]="tabs.length == 0 ? 'flex items-center justify-between' : ''">
+  <div class="w-full border-b border-neutral-800"
+    [ngClass]="tabs.length == 0 ? 'flex items-center justify-between' : ''">
     <div>
       <span class="text-xl font-bold ">{{title}}</span>
     </div>
 
-    <div class="flex items-end justify-between mt-3 pb-2">
+    <div class="flex items-end justify-between mt-3 ">
       <div *ngIf="tabs.length > 0">
         <div role="tablist" class="tabs">
-          <a *ngFor="let tab of tabs" role="tab" class="tab"
-          [ngClass]="tab.label == 'Assignments' ? 'tab-active border-b-2' : ''">{{ tab.label }}</a>
+          <button
+            *ngFor="let tab of tabs; let i = index"
+            (click)="selectTab(i)"
+            role="tab" class="tab border-b-2 border-transparent"
+            [ngClass]="i == activeTab ? 'tab-active border-b-2' : ''">
+            {{ tab.label }}
+          </button>
         </div>
       </div>
-      <ul class="flex items-center gap-3">
+      <ul class="flex items-center gap-3 pb-2">
         <li>
           <button class="btn btn-xs btn-ghost">
             <svg width="20" height="20" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -31,21 +37,33 @@
           </button>
         </li>
         <li>
-          <label *ngIf="searchEvent.observed" class="input input-bordered input-sm border border-neutral-600 flex items-center gap-2">
+          <label *ngIf="searchEvent.observed"
+            class="input input-bordered input-sm border border-neutral-600 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
               <path fill-rule="evenodd"
                 d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
                 clip-rule="evenodd" />
             </svg>
 
-            <input type="text" class="grow" placeholder="Search" (input)="search($event)"/>
+            <input type="text" class="grow" placeholder="Search" (input)="search($event)" />
           </label>
         </li>
       </ul>
     </div>
   </div>
 
+  @if (tabs.length > 0) {
+  <div class="w-full mt-10">
+    <ng-container>
+      <ng-container *ngIf="tabs[activeTab].content">
+        <ng-container *ngComponentOutlet="tabs[activeTab].content"></ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+  }
+  @else {
   <div class="w-full mt-10">
     <ng-content></ng-content>
   </div>
+  }
 </section>

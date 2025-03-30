@@ -1,9 +1,10 @@
 import { Component, ComponentRef, ElementRef, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { DrawerService } from './drawer.service';
+import { ModalComponent } from "../../ui/modal/modal.component";
 
 @Component({
   selector: 'app-student-layout',
-  imports: [],
+  imports: [ModalComponent],
   templateUrl: './student-layout.component.html',
   styleUrl: './student-layout.component.css'
 })
