@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { NavbarComponent } from "../../ui/navbar/navbar.component";
+import { PageCoverComponent } from "../../ui/page-cover/page-cover.component";
 
 @Component({
   selector: 'app-home-page',
-  imports: [RouterLink],
+  imports: [NavbarComponent, PageCoverComponent],
   templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css'
+  styles: ``
 })
 export class HomePageComponent {
 
