@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from "../../../../components/ui/navbar/navbar.component";
 import { SectionComponent } from "../../../../components/ui/section/section.component";
-import { DrawerService } from '../../../../components/layout/student-layout/drawer.service';
+import { DrawerService } from '../../../../components/ui/drawer/drawer.service';
 import { ModalService } from '../../../../components/ui/modal/modal.service';
 import { MakeAnAnnouncementComponent } from '../../fragments/make-an-announcement/make-an-announcement.component';
 import { NewAssignmentComponent } from '../../fragments/new-assignment/new-assignment.component';

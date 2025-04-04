@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 
 import { SectionHeaderComponent } from "../../../../components/ui/section-header/section-header.component";
 import { DatePipe, NgFor } from '@angular/common';
-import { DrawerService } from '../../../../components/layout/student-layout/drawer.service';
+import { DrawerService } from '../../../../components/ui/drawer/drawer.service';
 import { SectionComponent } from "../../../../components/ui/section/section.component";
 import { EventCalendarComponent } from "../../../../components/ui/event-calendar/event-calendar.component";
 import { LayoutComponent } from "../../layout/layout.component";
@@ -14,7 +14,7 @@ import { LayoutComponent } from "../../layout/layout.component";
 
 @Component({
   selector: 'app-student-dashboard',
-  imports: [CoursesSectionComponent, NgFor, DatePipe, SectionComponent, EventCalendarComponent, LayoutComponent],
+  imports: [CoursesSectionComponent, SectionComponent, EventCalendarComponent, LayoutComponent],
   templateUrl: './student-dashboard.component.html',
   styleUrl: './student-dashboard.component.css',
   providers: []

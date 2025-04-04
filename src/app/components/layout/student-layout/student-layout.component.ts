@@ -1,5 +1,5 @@
 import { Component, ComponentRef, ElementRef, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { DrawerService } from './drawer.service';
+import { DrawerService } from '../../ui/drawer/drawer.service';
 import { ModalComponent } from "../../ui/modal/modal.component";
 
 @Component({

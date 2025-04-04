@@ -14,7 +14,7 @@ export class SectionComponent {
   activeTab = 0;
 
   @Input()
-  title: string = "";
+  sectionTitle: string = "";
 
   selectTab(index: number) {
     this.activeTab = index;

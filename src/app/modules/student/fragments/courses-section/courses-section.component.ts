@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DrawerService } from '../../../../components/layout/student-layout/drawer.service';
+import { DrawerService } from '../../../../components/ui/drawer/drawer.service';
 import { SectionHeaderComponent } from "../../../../components/ui/section-header/section-header.component";
 import { CourseDetailsComponent } from '../course-details/course-details.component';
 

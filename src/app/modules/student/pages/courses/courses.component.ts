@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from "../../../../components/ui/navbar/navbar.component";
-import { DrawerService } from '../../../../components/layout/student-layout/drawer.service';
+import { DrawerService } from '../../../../components/ui/drawer/drawer.service';
 import { SectionComponent } from "../../../../components/ui/section/section.component";
 import { AssignmentsTabComponent } from '../../fragments/assignments-tab/assignments-tab.component';
 import { ExamsTabComponent } from '../../fragments/exams-tab/exams-tab.component';
