@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+  import { Injectable } from '@angular/core';
 import { Action, Navigation } from '../../../components/layout/main-layout/main-layout.component';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class StudentRouteService {
     },
 
     {
-      label: "Courses",
+      label: "Enrolled Subjects",
       path: "/student/courses"
     },
 

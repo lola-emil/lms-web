@@ -1,6 +1,6 @@
-<app-layout pageTitle="Courses">
+<app-layout pageTitle="Enrolled Subjects">
 
-  <app-section title="Subject List">
+  <app-section sectionTitle="Subject List">
     <div class="grid grid-cols-4 gap-4">
       @for (item of subjects; track $index) {
       <button (click)="drawerService.openDrawer()"
@@ -15,7 +15,7 @@
     </div>
   </app-section>
 
-  <app-section title="Activities/Exams"
+  <app-section sectionTitle="Activities/Exams"
   [tabs]="activitiesTab"
   (searchEvent)="searchActivities()"
   >

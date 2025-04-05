@@ -23,5 +23,6 @@ export class LayoutComponent {
   navigations: Navigation[] = [];
 
   @Input() crumbs: Crumb[] = [];
+  @Input() details: any = {};
 
 }

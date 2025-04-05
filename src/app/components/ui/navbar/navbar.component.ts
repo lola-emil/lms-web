@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NotificationComponent } from "../notification/notification.component";
 export type Crumb = {
   label: string;
   path?: string;
@@ -6,7 +7,7 @@ export type Crumb = {
 
 @Component({
   selector: 'app-navbar',
-  imports: [],
+  imports: [NotificationComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

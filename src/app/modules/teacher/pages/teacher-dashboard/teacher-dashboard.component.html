@@ -1,6 +1,6 @@
 
-<app-layout title="Teacher Dashboard">
-  <app-section title="Subject Overview">
+<app-layout pageTitle="Teacher Dashboard">
+  <app-section sectionTitle="Subject Overview">
     <div class="w-full mt-10 grid grid-cols-4 gap-4">
       @for (item of subjects; track $index) {
       <button (click)="openDrawer()"
@@ -14,6 +14,6 @@
       }
     </div>
   </app-section>
-  <app-section title="Student Submissions"></app-section>
+  <app-section sectionTitle="Recent Submissions"></app-section>
 
 </app-layout>

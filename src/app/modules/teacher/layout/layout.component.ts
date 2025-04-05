@@ -18,7 +18,7 @@ export class LayoutComponent {
     this.quickActions = this.teacherRouteService.quickActions;
   }
 
-  @Input() title: string = "";
+  @Input() pageTitle: string = "";
 
   quickActions: Action[] = [];
   navigations: Navigation[] = [];

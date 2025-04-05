@@ -29,6 +29,11 @@ export class TeacherRouteService {
     },
 
     {
+      label: "Gradebook",
+      path: "/teacher/gradebook"
+    },
+
+    {
       label: "Calendar",
       path: "/teacher/calendar"
     },
