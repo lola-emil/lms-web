@@ -1,0 +1,53 @@
+<app-drawer>
+  <app-navbar [crumbs]="crumbs"></app-navbar>
+
+  <div class="container mx-auto">
+    <div class="h-44 w-full flex items-end">
+      <h1 class="text-5xl font-semibold">{{pageTitle}}</h1>
+
+    </div>
+
+    <div class="flex flex-col w-full mt-8 gap-3">
+      <div *ngFor="let detail of details | keyvalue" class="flex text-neutral-400">
+        <div class="w-48">{{detail.key}}</div>
+        <div class="flex-1">{{detail.value}}</div>
+      </div>
+    </div>
+    <br>
+    <div class="grid mt-16 gap-16 grid-cols-12">
+
+      <div class=" flex flex-col gap-10"
+        [ngClass]="menus.length > 0 ? 'col-span-9' : 'col-span-12'">
+        <ng-content></ng-content>
+        <br>
+      </div>
+
+      <div class="col-span-3">
+
+        @for(menu of menus; track $index) {
+        <section>
+          <div class="w-full border-b py-2 border-neutral-800">
+            <span class="font-bold">{{ menu.title }}</span>
+          </div>
+          <ul class="flex flex-col gap-2 items-start py-3">
+            @for (item of menu.actions; track $index) {
+            @if (item.path) {
+            <li class="w-full"><a [routerLink]="item.path"
+                class="btn btn-sm w-full border-neutral-600 disabled:border-neutral-600 group">{{ item.label }}</a></li>
+            }
+
+            @else {
+            <button class="btn btn-sm w-full border-neutral-600 disabled:border-neutral-600 group"
+            (click)="item?.handler()">
+              <span class="group-disabled:text-neutral-600">{{ item.label }}</span>
+            </button>
+            }
+            }
+          </ul>
+        </section>
+        }
+      </div>
+    </div>
+  </div>
+
+</app-drawer>

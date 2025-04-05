@@ -1,23 +1,26 @@
 import { Routes } from '@angular/router';
-import { PageNotFoundComponent } from './features/common/pages/page-not-found/page-not-found.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component';
 
 export const routes: Routes = [
   {
     path: "",
-    loadChildren: () => import("./features/common/common-routing.module").then(m => m.CommonRoutingModule)
+    component: HomePageComponent
   },
-
+  {
+    path: "signin",
+    component: SignInPageComponent
+  },
   {
     path: "student",
-    loadChildren: () => import("./features/student/student-routing.module").then(m => m.StudentRoutingModule)
+    loadChildren: () => import("./modules/student/student.module").then(m => m.StudentModule)
   },
   {
     path: "teacher",
-    loadChildren: () => import("./features/teacher/teacher-routing.module").then(m => m.TeacherRoutingModule)
+    loadChildren: () => import("./modules/teacher/teacher.module").then(m => m.TeacherModule)
   },
-
   {
-    path: "**",
-    component: PageNotFoundComponent
-  },
+    path: "admin",
+    loadChildren: () => import("./modules/admin/admin.module").then(m => m.AdminModule)
+  }
 ];
