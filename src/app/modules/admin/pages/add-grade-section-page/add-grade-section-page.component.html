@@ -1,0 +1,36 @@
+<app-layout pageTitle="Add Grade Section">
+  <app-section>
+    <form [formGroup]="gradeSectionForm" (submit)="onSubmit()">
+      <div class="grid grid-cols-2 gap-5">
+        <label class="form-control w-full ">
+          <div class="label">
+            <span class="label-text">Grade Level <span class="text-red-500">*</span></span>
+          </div>
+          <select formControlName="grade_level_id" class="select select-bordered">
+            <option value="0" selected>-- Select grade level</option>
+
+            @for (item of gradeLevels; track $index) {
+            <option [value]="item.id">{{ item.grade_level }}</option>
+            }
+
+          </select>
+          <div class="label">
+            <span class="label-text-alt"></span>
+          </div>
+        </label>
+
+        <label class="form-control w-full ">
+          <div class="label">
+            <span class="label-text">Section Name <span class="text-red-500">*</span></span>
+          </div>
+          <input type="text" formControlName="section_name" class="input input-bordered w-full " />
+          <div class="label">
+            <span class="label-text-alt"></span>
+          </div>
+        </label>
+      </div>
+
+      <button class="btn">Submit</button>
+    </form>
+  </app-section>
+</app-layout>

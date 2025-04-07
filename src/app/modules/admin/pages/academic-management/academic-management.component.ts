@@ -3,11 +3,11 @@ import { LayoutComponent } from "../../layout/layout.component";
 import { SectionComponent } from "../../../../components/ui/section/section.component";
 
 @Component({
-  selector: 'app-curriculum-management',
+  selector: 'app-academic-management',
   imports: [LayoutComponent, SectionComponent],
-  templateUrl: './curriculum-management.component.html',
+  templateUrl: './academic-management.component.html',
   styles: ``
 })
-export class CurriculumManagementComponent {
+export class AcademicManagementComponent {
 
 }

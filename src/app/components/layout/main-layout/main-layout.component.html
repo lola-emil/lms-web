@@ -30,6 +30,14 @@
 
           <div class="flex flex-col gap-3 py-3 items-start">
             @for (item of quickActions; track $index) {
+            @if (item.path) {
+              <a [routerLink]="item.path" class="btn btn-sm w-full border-neutral-600 disabled:border-neutral-600 group">
+                <span class="group-disabled:text-neutral-600">{{ item.label }}</span>
+              </a>
+            }
+
+            @else {
+
             <button class="btn btn-sm w-full border-neutral-600 disabled:border-neutral-600 group">
               <!-- <svg width="20" height="20" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -38,6 +46,7 @@
             </svg> -->
               <span class="group-disabled:text-neutral-600">{{ item.label }}</span>
             </button>
+            }
             }
 
             <!-- <button class="btn btn-sm w-full border-neutral-600 disabled:border-neutral-600 group" disabled>

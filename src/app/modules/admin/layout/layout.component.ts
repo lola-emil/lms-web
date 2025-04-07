@@ -13,7 +13,15 @@ export class LayoutComponent {
 
   @Input() pageTitle: string = "";
 
-  quickActions: Action[];
+  quickActions: Action[] = [
+
+    {
+      label: "Import users (CSV)"
+    },
+    {
+      label: "Import subjects (CSV)"
+    },
+  ];
   navigations: Navigation[];
 
   @Input() crumbs: Crumb[] = [];
@@ -23,6 +31,6 @@ export class LayoutComponent {
   constructor(private adminRouteService: AdminRouteService) {
     this.navigations = this.adminRouteService.navigations;
     this.quickActions = this.adminRouteService.quickActions;
-   }
+  }
 
 }

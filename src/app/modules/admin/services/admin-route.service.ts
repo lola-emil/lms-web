@@ -10,14 +10,20 @@ export class AdminRouteService {
 
     quickActions: Action[] = [
       {
-        label: "Add new user"
+        label: "Add/Import Subject",
+        path: "/admin/add-subject"
       },
+
       {
-        label: "Import users (CSV)"
+        label: "Add/Import grade sections",
+        path: "/admin/add-grade-section"
       },
+
       {
-        label: "Import courses (CSV)"
-      }
+        label: "Add/Import new user",
+        path: "/admin/add-user"
+      },
+
     ];
 
     navigations: Navigation[] = [
@@ -26,16 +32,24 @@ export class AdminRouteService {
         path: "/admin"
       },
       {
-        label: "User management",
+        label: "User Management",
         path: "/admin/user-management"
       },
       {
-        label: "Curriculum Management",
-        path: "/admin/curriculum-management"
+        label: "Subject Management",
+        path: "/admin/subject-management"
+      },
+      {
+        label: "Academic Management",
+        path: "/admin/academic-management"
       },
       {
         label: "School Settings",
         path: "/admin/school-settings"
       }
     ];
+
+    setQuickActions(actions: Action[]) {
+      this.quickActions = actions;
+    }
 }

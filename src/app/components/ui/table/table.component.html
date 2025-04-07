@@ -1,0 +1,47 @@
+<div class="flex items-center justify-between">
+  <label class="input input-sm input-bordered flex items-center gap-2">
+    <svg class="h-4 w-4 opacity-70" width="16" height="16" fill="none" viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M10 2.75a7.25 7.25 0 0 1 5.63 11.819l4.9 4.9a.75.75 0 0 1-.976 1.134l-.084-.073-4.901-4.9A7.25 7.25 0 1 1 10 2.75Zm0 1.5a5.75 5.75 0 1 0 0 11.5 5.75 5.75 0 0 0 0-11.5Z"
+        fill="#fff" />
+    </svg>
+    <input type="text" class="grow" placeholder="Search" (input)="search($event)" />
+  </label>
+
+  <div class="join">
+    <button class="join-item btn btn-sm disabled:border-neutral-600 disabled:text-neutral-600"
+      [disabled]="this.page == 1">«</button>
+    <button class="join-item btn btn-sm disabled:border-neutral-600 disabled:text-neutral-600"
+      disabled>{{page}}</button>
+    <button class="join-item btn btn-sm disabled:border-neutral-600 disabled:text-neutral-600"
+      [disabled]="this.page == this.data.length">»</button>
+  </div>
+</div>
+
+<table class="table mt-5">
+  <thead>
+    <tr>
+      @for (item of headers; track $index) {
+      <th [align]="item.align" class="">{{ item.label }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of data; track $index) {
+    <tr class="border-t border-neutral-800">
+      @for (header of headers; track $index) {
+      <td [align]="header.align">
+        @if (header.clickable) {
+        <div class="link" (click)="itemClicked(item)">{{ item[header.value ?? ""] }}</div>
+        }
+        @else {
+        {{ item[header.value ?? ""] }}
+        }
+
+      </td>
+      }
+    </tr>
+    }
+  </tbody>
+</table>

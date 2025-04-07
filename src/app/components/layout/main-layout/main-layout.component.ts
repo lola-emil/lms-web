@@ -5,6 +5,7 @@ import { KeyValuePipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { DrawerComponent } from "../../ui/drawer/drawer.component";
 export type Action = {
   label: string;
+  path?: string;
 };
 
 export type Navigation = {
