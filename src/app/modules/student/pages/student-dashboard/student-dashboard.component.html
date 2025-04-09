@@ -24,7 +24,7 @@
 
   <div class="container mx-auto p-2">
     <div class="h-28"></div>
-    <h1 class="text-4xl font-bold">User Management</h1>
+    <h1 class="text-4xl font-bold">Student Dashboard</h1>
     <br>
     <br>
     <br>
@@ -35,31 +35,60 @@
 
       <div class="col-span-12 lg:col-span-9">
         <div class="border-b border-base-200 mb-5 flex items-center justify-between pb-2">
-          <span class="font-semibold">User list</span>
-          <button class="btn btn-secondary btn-sm">Add user</button>
+          <span class="font-semibold">Overview</span>
+        </div>
+
+        <div class=" grid grid-cols-3 gap-5">
+          <div class="card card-bordered ">
+            <div class="card-body">
+
+            </div>
+          </div>
+
+          <div class="card card-bordered">
+            <div class="card-body">
+
+            </div>
+          </div>
+
+          <div class="card card-bordered">
+            <div class="card-body">
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="border-b border-base-200 mb-5 flex items-center mt-12 justify-between pb-2">
+          <span class="font-semibold">Recent assignments</span>
         </div>
 
         <table class="table">
           <thead>
             <tr class="bg-base-200">
-              <th>Name</th>
-              <th>Email</th>
-              <th align="center">Grade/Section</th>
-              <th align="center">Role</th>
-              <th align="center">Last active</th>
+              <th>Title</th>
+              <th>Subject</th>
+              <th>Due date</th>
+              <th>Status</th>
             </tr>
           </thead>
+
           <tbody>
             <tr>
-              <td><a href="" class="link">Saladaga, Rens C.</a></td>
-              <td>{{"ewyaks.5@gmail.com"}}</td>
-              <td align="center">Grade 12 - A-11</td>
-              <td align="center">Student</td>
-              <td align="center">2025-04-09</td>
+              <td><a href="" class="link">Introduction to accounting act. 1</a></td>
+              <td>Mathematics</td>
+              <td>2025-04-09</td>
+              <td><div class="badge">Pending</div></td>
             </tr>
           </tbody>
         </table>
+
+
       </div>
     </div>
+
+
+
+
   </div>
 </app-user-layout>
