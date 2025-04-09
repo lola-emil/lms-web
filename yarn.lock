@@ -5399,6 +5399,13 @@ ngx-echarts@^19.0.0:
   dependencies:
     tslib "^2.3.0"
 
+ngx-fluent-ui-icons@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/ngx-fluent-ui-icons/-/ngx-fluent-ui-icons-1.0.2.tgz#efa9492a720216d28dffdbcd907292ecfd45e83b"
+  integrity sha512-Zi2nQ0YBNwUB1klDyeF3Yr7CnJlydCJF/2NP7Tb8UcD0WVK+hP0DR++zsKnWdIImngmkkW5FGBIRKX+DOKPg/Q==
+  dependencies:
+    tslib "^2.0.0"
+
 node-addon-api@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-6.1.0.tgz#ac8470034e58e67d0c6f1204a18ae6995d9c0d76"
