@@ -8,7 +8,7 @@ import { CalendarComponent } from "../../ui/calendar/calendar.component";
 
 @Component({
   selector: 'app-home-page',
-  imports: [NavbarComponent, ModalComponent, MainLayoutComponent, CalendarComponent],
+  imports: [NavbarComponent, ModalComponent, MainLayoutComponent],
   templateUrl: './home-page.component.html',
   styles: ``
 })

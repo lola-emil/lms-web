@@ -10,5 +10,9 @@ export const routes: Routes = [
   {
     path: "sign-in",
     component: SigninPageComponent
+  },
+  {
+    path: "admin",
+    loadChildren: () => import("./modules/admin/admin.module").then(m => m.AdminModule)
   }
 ];

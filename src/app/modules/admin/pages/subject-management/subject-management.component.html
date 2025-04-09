@@ -1,0 +1,68 @@
+<app-user-layout>
+  <nav class="navbar border-b border-base-200">
+    <div class="navbar-start">
+      <div class="dropdown lg:hidden inline-block">
+        <div tabindex="0" role="button" class="btn btn-sm btn-ghost m-1">
+          <span><svg width="20" height="20" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M2.75 18h12.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.494L2.75 18h12.5-12.5Zm0-6.5h18.5a.75.75 0 0 1 .102 1.493L21.25 13H2.75a.75.75 0 0 1-.102-1.493l.102-.007h18.5-18.5Zm0-6.497h15.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.493l.102-.007h15.5-15.5Z"
+                class="fill-base-content" />
+            </svg></span>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-max p-2 shadow">
+          <li><a>Admin Dashboard</a></li>
+          <li><a>User Management</a></li>
+          <li><a>Subject Management</a></li>
+          <li><a>School Settings</a></li>
+        </ul>
+      </div>
+      <a href="" class="btn btn-ghost">Sta. Cruz Learning Center</a>
+    </div>
+
+    <div class="navbar-end"></div>
+  </nav>
+
+  <div class="container mx-auto p-2">
+    <div class="h-28"></div>
+    <h1 class="text-4xl font-bold">Course/Subject Management</h1>
+    <br>
+    <br>
+    <br>
+    <div class="grid grid-cols-12 gap-10">
+      <div class="col-span-3 hidden lg:block">
+        <app-sidenav></app-sidenav>
+      </div>
+
+      <div class="col-span-12 lg:col-span-9">
+        <div class="border-b border-base-200 mb-5 flex items-center justify-between pb-2">
+          <span class="font-semibold">Subject list</span>
+          <button class="btn btn-primary btn-sm">Add subject</button>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr class="bg-base-200">
+              <th>Subject Name</th>
+              <th align="center">Grade Level</th>
+              <th align="center">Topics Count</th>
+              <th align="center">Last modified</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="" class="link">Pre-Calculus 1</a></td>
+              <td align="center">Grade 12 </td>
+              <td align="center">20</td>
+              <td align="center">2025-04-09</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+
+
+
+  </div>
+</app-user-layout>
