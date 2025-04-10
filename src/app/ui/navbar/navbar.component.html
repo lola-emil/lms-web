@@ -1,9 +1,24 @@
 <nav class="navbar border border-b-base-200">
   <div class="navbar-start">
+    <div class="dropdown lg:hidden inline-block">
+      <div tabindex="0" role="button" class="btn btn-sm btn-ghost m-1">
+        <span><svg width="20" height="20" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M2.75 18h12.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.494L2.75 18h12.5-12.5Zm0-6.5h18.5a.75.75 0 0 1 .102 1.493L21.25 13H2.75a.75.75 0 0 1-.102-1.493l.102-.007h18.5-18.5Zm0-6.497h15.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.493l.102-.007h15.5-15.5Z"
+              class="fill-base-content" />
+          </svg></span>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-max p-2 shadow">
+        @for (item of menus; track $index) {
+          <li><a [routerLink]="item.path">{{ item.label }}</a></li>
+        }
+      </ul>
+    </div>
+
     <a class="btn btn-ghost text-lgs">Sta. Cruz Learning Center Inc.</a>
   </div>
   <div class="navbar-end flex items-center">
-    <ul class="menu menu-horizontal px-1">
+    <ul class="menu menu-horizontal px-1 hidden lg:inline-flex">
       @for (item of menus; track $index) {
       @if (item.children) {
       <li>

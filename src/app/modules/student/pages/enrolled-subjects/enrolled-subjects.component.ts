@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { SidenavComponent } from "../../fragments/sidenav/sidenav.component";
-import { UserLayoutComponent } from "../../../../layout/user-layout/user-layout.component";
+import { LayoutComponent } from "../../layout/layout/layout.component";
 
 @Component({
   selector: 'app-enrolled-subjects',
-  imports: [SidenavComponent, UserLayoutComponent],
+  imports: [LayoutComponent],
   templateUrl: './enrolled-subjects.component.html',
   styles: ``
 })

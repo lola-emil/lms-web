@@ -1,0 +1,35 @@
+<div class="flex justify-between items-center mb-5">
+  <div></div>
+  <div>
+    <div class="join">
+      <button class="join-item border border-base-200 hover:bg-neutral-700 btn btn-sm btn-ghost">«</button>
+      <button class="join-item border border-base-200 hover:bg-neutral-700 btn btn-sm btn-ghost">1</button>
+      <button class="join-item border border-base-200 hover:bg-neutral-700 btn btn-sm btn-ghost">»</button>
+    </div>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr class="bg-base-200">
+      @for (item of headers; track $index) {
+        <th>{{ item.text }}</th>
+      }
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (data of tableData; track $index) {
+      <tr>
+        @for (header of headers; track $index) {
+          @if (header.onItemClicked) {
+            <td><div (click)="header.onItemClicked(data)" class="link">{{ data[header.value ?? ''] }}</div></td>
+          }
+          @else {
+            <td>{{ data[header.value ?? ''] }}</td>
+          }
+        }
+      </tr>
+    }
+  </tbody>
+</table>

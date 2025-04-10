@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, Type, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ComponentRef, ElementRef, OnDestroy, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DrawerService } from '../main-layout/drawer.service';
 import { ModalComponent } from "../../ui/modal/modal.component";
@@ -11,8 +11,9 @@ import { ModalComponent } from "../../ui/modal/modal.component";
 })
 export class UserLayoutComponent implements AfterViewInit, OnDestroy {
   @ViewChild('drawerCheckBox') drawerRef!: ElementRef<HTMLInputElement>;
-  componentToRender: Type<any> | null = null;
+  @ViewChild('drawerContainer', { read: ViewContainerRef }) containerRef!: ViewContainerRef;
 
+  private componentRef: ComponentRef<any> | null = null;
   private subscriptions: Subscription[] = [];
 
   constructor(private drawerService: DrawerService) { }
@@ -22,16 +23,24 @@ export class UserLayoutComponent implements AfterViewInit, OnDestroy {
       this.drawerService.isOpen$.subscribe((isOpen) => {
         const checkBox = this.drawerRef.nativeElement;
 
-        console.log(isOpen);
-
         if (isOpen) checkBox.checked = true;
         else checkBox.checked = false;
       }),
 
-      this.drawerService.component$.subscribe((component) => {
-        this.componentToRender = component;
+      this.drawerService.component$.subscribe(({component, data}) => {
+        if (component)
+        this.loadComponent(component, data)
       })
     );
+  }
+
+  loadComponent(component: Type<any>, data?: any) {
+    this.containerRef.clear();
+    this.componentRef = this.containerRef.createComponent(component);
+
+    if (data && this.componentRef.instance) {
+      Object.assign(this.componentRef.instance, data);
+    }
   }
 
   closeDrawer() {

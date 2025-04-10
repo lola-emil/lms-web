@@ -1,24 +1,26 @@
 import { Injectable, Type } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+interface DrawerPayload {
+  component: Type<any>;
+  data?: any;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class DrawerService {
-  private isOpen = new BehaviorSubject<boolean>(false);
-  private drawerContent = new BehaviorSubject<Type<any> | null>(null);
+  private isOpenSubject = new BehaviorSubject<boolean>(false);
+  isOpen$ = this.isOpenSubject.asObservable();
 
-  isOpen$ = this.isOpen.asObservable();
-  component$ = this.drawerContent.asObservable();
+  private componentSubject = new BehaviorSubject<DrawerPayload>({ component: null as any });
+  component$ = this.componentSubject.asObservable();
 
-
-  open(drawerContent?: Type<any>) {
-    this.drawerContent.next(drawerContent ?? null);
-    this.isOpen.next(true);
+  open(component: Type<any>, data?: any) {
+    this.componentSubject.next({ component, data });
+    this.isOpenSubject.next(true);
   }
 
   close() {
-    this.isOpen.next(false);
-    this.drawerContent.next(null);
+    this.isOpenSubject.next(false);
   }
 }

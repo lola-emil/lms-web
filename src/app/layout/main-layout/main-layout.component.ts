@@ -29,7 +29,6 @@ export class MainLayoutComponent implements AfterViewInit, OnDestroy {
       }),
 
       this.drawerService.component$.subscribe((component) => {
-        this.componentToRender = component;
       })
     );
   }

@@ -4,7 +4,6 @@ import { ModalComponent } from "../../ui/modal/modal.component";
 import { ModalService } from '../../ui/modal/modal.service';
 import { MainLayoutComponent } from "../../layout/main-layout/main-layout.component";
 import { DrawerService } from '../../layout/main-layout/drawer.service';
-import { CalendarComponent } from "../../ui/calendar/calendar.component";
 
 @Component({
   selector: 'app-home-page',
@@ -41,7 +40,5 @@ export class HomePageComponent {
   }
 
   openDrawer() {
-    console.log("shit");
-    this.drawerService.open();
   }
 }
