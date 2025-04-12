@@ -1,1 +1,9 @@
-<p>toast works!</p>
+<div class="toast toast-end">
+  @for (toast of toasts; track $index) {
+    <div class="alert alert-info"
+    [ngClass]="getToastClass(toast.type)"
+    >
+      <span>{{toast.message}}.</span>
+    </div>
+  }
+</div>

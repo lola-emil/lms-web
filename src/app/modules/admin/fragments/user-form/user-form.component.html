@@ -1,8 +1,7 @@
-<form class="container mx-auto">
-  <section class="grid grid-cols-12">
+<form [formGroup]="userFormGroup" class="container mx-auto" (submit)="submit()">
+  <section class="grid grid-cols-12" formGroupName="profile">
     <div class="col-span-2">
       <p class="font-semibold text-lg">Profile</p>
-      <!-- <span class="text-sm">Manage your exsisting team</span> -->
     </div>
 
     <div class="col-span-10">
@@ -11,9 +10,11 @@
           <div class="label">
             <span class="label-text">Firstname</span>
           </div>
-          <input type="text" formControlName="fname" class="input input-bordered w-full " />
+          <input type="text" formControlName="fname" class="input input-bordered w-full"
+          [ngClass]="userFormErrors['profile.fname'] ? 'input-error' : ''"/>
           <div class="label">
-            <span class="label-text-alt"></span>
+            <span class="label-text-alt text-error font-semibold"
+              *ngIf="userFormErrors['profile.fname']">{{userFormErrors['profile.fname'].message}}</span>
           </div>
         </label>
 
@@ -21,9 +22,11 @@
           <div class="label">
             <span class="label-text">Middlename</span>
           </div>
-          <input type="text" formControlName="fname" class="input input-bordered w-full " />
+          <input type="text" formControlName="mname" class="input input-bordered w-full "
+          [ngClass]="userFormErrors['profile.mname'] ? 'input-error' : ''"/>
           <div class="label">
-            <span class="label-text-alt"></span>
+            <span class="label-text-alt text-error font-semibold"
+              *ngIf="userFormErrors['profile.mname']">{{userFormErrors['profile.mname'].message}}</span>
           </div>
         </label>
 
@@ -31,9 +34,11 @@
           <div class="label">
             <span class="label-text">Lastname</span>
           </div>
-          <input type="text" formControlName="fname" class="input input-bordered w-full " />
+          <input type="text" formControlName="lname" class="input input-bordered w-full "
+          [ngClass]="userFormErrors['profile.lname'] ? 'input-error' : ''"/>
           <div class="label">
-            <span class="label-text-alt"></span>
+            <span class="label-text-alt text-error font-semibold"
+            *ngIf="userFormErrors['profile.lname']">{{userFormErrors['profile.lname'].message}}</span>
           </div>
         </label>
       </div>
@@ -42,9 +47,12 @@
         <div class="label">
           <span class="label-text">Contact No.</span>
         </div>
-        <input type="text" formControlName="fname" class="input input-bordered w-full " />
+        <input type="text" formControlName="contact_no" class="input input-bordered w-full "
+        [ngClass]="userFormErrors['profile.contact_no'] ? 'input-error' : ''"
+        />
         <div class="label">
-          <span class="label-text-alt"></span>
+          <span class="label-text-alt text-error font-semibold"
+          *ngIf="userFormErrors['profile.contact_no']">{{userFormErrors['profile.contact_no'].message}}</span>
         </div>
       </label>
 
@@ -52,16 +60,19 @@
         <div class="label">
           <span class="label-text">Address</span>
         </div>
-        <textarea class="textarea textarea-bordered" placeholder="Full address"></textarea>
+        <textarea class="textarea textarea-bordered" formControlName="home_address" placeholder="Full address"
+        [ngClass]="userFormErrors['profile.address'] ? 'textarea-error' : ''"
+        ></textarea>
         <div class="label">
-          <span class="label-text-alt"></span>
+          <span class="label-text-alt text-error font-semibold"
+          *ngIf="userFormErrors['profile.home_address']">{{userFormErrors['profile.home_address'].message}}</span>
         </div>
       </label>
     </div>
   </section>
 
   <br>
-  <section class="grid grid-cols-12">
+  <section class="grid grid-cols-12" formGroupName="credential">
     <div class="col-span-2">
       <p class="font-semibold text-lg">Credential</p>
       <!-- <span class="text-sm">Manage your exsisting team</span> -->
@@ -72,9 +83,12 @@
         <div class="label">
           <span class="label-text">Email</span>
         </div>
-        <input type="text" formControlName="fname" class="input input-bordered w-full " />
+        <input type="email" formControlName="email" class="input input-bordered w-full "
+        [ngClass]="userFormErrors['credential.email'] ? 'input-error' : ''"
+        />
         <div class="label">
-          <span class="label-text-alt"></span>
+          <span class="label-text-alt text-error font-semibold"
+          *ngIf="userFormErrors['credential.email']">{{userFormErrors['credential.email'].message}}</span>
         </div>
       </label>
 
@@ -82,9 +96,12 @@
         <div class="label">
           <span class="label-text">Password</span>
         </div>
-        <input type="text" formControlName="fname" class="input input-bordered w-full " />
+        <input type="password" formControlName="password" class="input input-bordered w-full "
+        [ngClass]="userFormErrors['credential.password'] ? 'input-error' : ''"
+        />
         <div class="label">
-          <span class="label-text-alt"></span>
+          <span class="label-text-alt text-error font-semibold"
+          *ngIf="userFormErrors['credential.password']">{{userFormErrors['credential.password'].message}}</span>
         </div>
       </label>
 
@@ -92,21 +109,26 @@
         <div class="label">
           <span class="label-text">Role</span>
         </div>
-        <select class="select select-bordered">
-          <option value="" disabled selected >-- Select role</option>
+        <select formControlName="user_role_id" class="select select-bordered"
+        [ngClass]="userFormErrors['credential.user_role_id'] ? 'select-error' : ''"
+        >
+          <option value="" disabled selected>-- Select role</option>
           @for (item of userRoles; track $index) {
-            <option [value]="item.id">{{ item.role_name }}</option>
+          <option [value]="item.id">{{ item.role_name }}</option>
           }
         </select>
         <div class="label">
-          <span class="label-text-alt"></span>
+          <span class="label-text-alt text-error font-semibold"
+          *ngIf="userFormErrors['credential.user_role_id']">{{userFormErrors['credential.user_role_id'].message}}</span>
         </div>
       </label>
 
-
+      <button class="btn">Submit</button>
 
     </div>
   </section>
+  <div class="container mx-auto">
+  </div>
 </form>
 
 

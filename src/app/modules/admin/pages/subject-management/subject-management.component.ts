@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { AdminLayoutComponent } from "../../layout/admin-layout/admin-layout.component";
 
 @Component({
-  selector: 'app-academic-management',
+  selector: 'app-subject-management',
   imports: [AdminLayoutComponent],
-  templateUrl: './academic-management.component.html',
+  templateUrl: './subject-management.component.html',
   styles: ``
 })
-export class AcademicManagementComponent {
+export class SubjectManagementComponent {
 
 }

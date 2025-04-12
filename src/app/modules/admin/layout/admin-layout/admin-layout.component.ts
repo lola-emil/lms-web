@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Menu, NavbarComponent } from "../../../../ui/navbar/navbar.component";
 import { ModalComponent } from "../../../../ui/modal/modal.component";
+import { ToastComponent } from "../../../../ui/toast/toast.component";
 
 @Component({
   selector: 'app-admin-layout',
-  imports: [NavbarComponent, ModalComponent],
+  imports: [NavbarComponent, ModalComponent, ToastComponent],
   templateUrl: './admin-layout.component.html',
   styles: ``
 })
@@ -20,8 +21,8 @@ export class AdminLayoutComponent {
     },
 
     {
-      label: "Academic Management",
-      path: "/admin/academic-management"
+      label: "Subject Management",
+      path: "/admin/subject-management"
     },
 
     {

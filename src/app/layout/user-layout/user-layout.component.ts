@@ -2,10 +2,11 @@ import { AfterViewInit, Component, ComponentRef, ElementRef, OnDestroy, Type, Vi
 import { Subscription } from 'rxjs';
 import { DrawerService } from '../main-layout/drawer.service';
 import { ModalComponent } from "../../ui/modal/modal.component";
+import { ToastComponent } from "../../ui/toast/toast.component";
 
 @Component({
   selector: 'app-user-layout',
-  imports: [ModalComponent],
+  imports: [ModalComponent, ToastComponent],
   templateUrl: './user-layout.component.html',
   styles: ``
 })
