@@ -10,7 +10,9 @@ type QueryModifiers<T> = {
 
   orderby?: keyof T;
 
-} & T;
+} & {
+  [K in keyof T]?: T[K] | T[K][];
+};
 
 
 export class CrudRepo<T> {

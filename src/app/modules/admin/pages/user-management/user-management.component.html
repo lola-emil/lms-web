@@ -12,8 +12,9 @@
 
     <div class="container mx-auto flex justify-between items-end border-b border-base-200">
 
-      <div role="tablist" class="tabs tabs-bordered ">
-        <a routerLink="/admin/user-management/user-list" role="tab" class="tab">
+      <div role="tablist" class="tabs tabs-bordered">
+        <a routerLinkActive="tab-active" [routerLinkActiveOptions]="{exact: true}"
+          routerLink="/admin/user-management/user-list" role="tab" class="tab ">
           <span class="mr-3">
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -22,7 +23,8 @@
             </svg>
           </span>
           User List</a>
-        <a routerLink="/admin/user-management/user-form" role="tab" class="tab">
+        <a routerLinkActive="tab-active" [routerLinkActiveOptions]="{exact: true}"
+          routerLink="/admin/user-management/user-form" role="tab" class="tab  border-transparent">
           <span class="mr-3">
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -31,7 +33,8 @@
             </svg>
           </span>
           Add user</a>
-        <a routerLink="/admin/user-management/import-user" role="tab" class="tab">
+        <a routerLinkActive="tab-active" [routerLinkActiveOptions]="{exact: true}"
+          routerLink="/admin/user-management/import-user" role="tab" class="tab  border-transparent">
           <span class="mr-3">
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path
