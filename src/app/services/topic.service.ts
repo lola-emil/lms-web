@@ -16,7 +16,7 @@ export type Topic = {
   providedIn: 'root'
 })
 export class TopicService {
-  apiURL = "http://localhost:8080/api";
+  apiURL = "http://localhost:8080/modules/academic-management";
 
   constructor(
     private http: HttpClient

@@ -1,29 +1,36 @@
-import { Component } from '@angular/core';
-import { UserLayoutComponent } from "../../../../layout/user-layout/user-layout.component";
-import { NavbarComponent } from "../../../../ui/navbar/navbar.component";
-import { ModalService } from '../../../../ui/modal/modal.service';
-import { DrawerService } from '../../../../layout/main-layout/drawer.service';
-import { RouterLink } from '@angular/router';
-import { SidenavComponent } from "../../fragments/sidenav/sidenav.component";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AdminLayoutComponent } from "../../layout/admin-layout/admin-layout.component";
+import { UserRepoService } from '../../../../repositories/user-repo.service';
+import { Subscription } from 'rxjs';
+import { GradeSectionRepoService } from '../../../../repositories/grade-section-repo.service';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [UserLayoutComponent, SidenavComponent],
+  imports: [AdminLayoutComponent],
   templateUrl: './admin-dashboard.component.html',
   styles: ``
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements OnInit, OnDestroy {
 
+  subscription: Subscription[] = [];
+  userCount: number = 0;
+  sectionCount: number = 0;
   constructor(
-    private modalService: ModalService,
-    private drawerService: DrawerService
-  ) {}
+    private userRepoService: UserRepoService,
+    private gradeSectionRepoService: GradeSectionRepoService
+  ) { }
 
-  openImportUsersModal() {
-    this.modalService.open();
+  ngOnInit(): void {
+    this.subscription.push(
+      this.userRepoService.count()
+        .subscribe(val => this.userCount = val.count),
+      this.gradeSectionRepoService.count()
+      .subscribe(val => this.sectionCount = val.count)
+    );
   }
 
-  openImportSectionsModal() {
-    this.modalService.open();
+  ngOnDestroy(): void {
+    this.subscription.forEach(sub => sub.unsubscribe());
   }
+
 }

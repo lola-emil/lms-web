@@ -16,7 +16,7 @@ export type Subject = {
   providedIn: 'root'
 })
 export class SubjectService {
-  apiURL = "http://localhost:8080/api";
+  apiURL = "http://localhost:8080/modules/academic-management";
 
   constructor(
     private http: HttpClient

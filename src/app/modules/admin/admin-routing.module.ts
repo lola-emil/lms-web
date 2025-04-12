@@ -1,22 +1,51 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
-import { SubjectManagementComponent } from './pages/subject-management/subject-management.component';
 import { UserManagementComponent } from './pages/user-management/user-management.component';
-import { SchoolSettingsComponent } from './fragments/school-settings/school-settings.component';
+import { UserListComponent } from './fragments/user-list/user-list.component';
+import { UserFormComponent } from './fragments/user-form/user-form.component';
+import { UserImportComponent } from './fragments/user-import/user-import.component';
+import { AcademicManagementComponent } from './pages/academic-management/academic-management.component';
+import { SubjectListComponent } from './fragments/subject-list/subject-list.component';
+import { SchoolSettingsComponent } from './pages/school-settings/school-settings.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: "dashboard",
     component: AdminDashboardComponent
   },
   {
-    path: "subject-management",
-    component: SubjectManagementComponent
+    path: "user-management",
+    component: UserManagementComponent,
+    children: [
+      {
+        path: "user-list",
+        component: UserListComponent,
+      },
+      {
+        path: "user-form",
+        component: UserFormComponent
+      },
+      {
+        path: "import-user",
+        component: UserImportComponent
+      },
+      {
+        path: "",
+        redirectTo: "user-list",
+        pathMatch: 'full'
+      }
+    ]
   },
   {
-    path: "user-management",
-    component: UserManagementComponent
+    path: "academic-management",
+    component: AcademicManagementComponent,
+    children: [
+      {
+        path: "",
+        component: SubjectListComponent
+      }
+    ]
   },
   {
     path: "school-settings",

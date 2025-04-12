@@ -1,13 +1,25 @@
-import { Component } from '@angular/core';
-import { UserLayoutComponent } from "../../../../layout/user-layout/user-layout.component";
-import { SidenavComponent } from "../../fragments/sidenav/sidenav.component";
+import { Component, OnInit } from '@angular/core';
+import { UserRepoService } from '../../../../repositories/user-repo.service';
+import { AdminLayoutComponent } from "../../layout/admin-layout/admin-layout.component";
+import { ModalService } from '../../../../ui/modal/modal.service';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user-management',
-  imports: [UserLayoutComponent, SidenavComponent],
+  imports: [AdminLayoutComponent, RouterModule, RouterLink],
   templateUrl: './user-management.component.html',
   styles: ``
 })
-export class UserManagementComponent {
+export class UserManagementComponent implements OnInit {
+
+
+
+  constructor(
+    private userRepoService: UserRepoService,
+    private modalService: ModalService
+  ) {}
+
+  ngOnInit(): void {
+  }
 
 }
