@@ -2,21 +2,23 @@ import { Injectable } from '@angular/core';
 import { CrudRepo } from './crud-repo';
 import { HttpClient } from '@angular/common/http';
 
-export type Subject = {
+
+export type SchoolYear = {
   id: number;
-  subject_name: string;
-  description?: string;
-  grade_level_id: number;
+  start_year: number;
+  end_year: number;
+
   created_at: string;
   updated_at: string;
 };
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class SubjectRepoService extends CrudRepo<Subject> {
+export class SchoolYearRepoService extends CrudRepo<SchoolYear> {
 
   constructor(http: HttpClient) {
-    super(http, "subject-management", "subjects");
+    super(http, "academic-management", "school-years");
   }
 }

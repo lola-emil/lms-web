@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class SubjectListComponent {
 
+  userListPage = 1;
+  userListMaxPage = 1;
+
+  prevUserListPage() {}
+  nextUserListPage() {}
 }

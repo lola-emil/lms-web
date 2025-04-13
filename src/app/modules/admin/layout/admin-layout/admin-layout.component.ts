@@ -26,8 +26,8 @@ export class AdminLayoutComponent {
     },
 
     {
-      label: "School Settings",
-      path: "/admin/school-settings"
+      label: "Settings",
+      path: "/admin/settings"
     }
   ];
 }

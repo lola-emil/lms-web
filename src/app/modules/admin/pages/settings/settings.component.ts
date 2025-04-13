@@ -3,12 +3,11 @@ import { AdminLayoutComponent } from "../../layout/admin-layout/admin-layout.com
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-subject-management',
-  imports: [AdminLayoutComponent, RouterModule, RouterLinkActive, RouterLink],
-  templateUrl: './subject-management.component.html',
+  selector: 'app-settings',
+  imports: [AdminLayoutComponent, RouterLink, RouterLinkActive, RouterModule],
+  templateUrl: './settings.component.html',
   styles: ``
 })
-export class SubjectManagementComponent {
+export class SettingsComponent {
 
-  constructor() {}
 }
