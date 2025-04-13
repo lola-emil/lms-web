@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { TeacherLayoutComponent } from "../../layout/teacher-layout/teacher-layout.component";
 
 @Component({
-  selector: 'app-teacher-dashboard',
+  selector: 'app-subject-management',
   imports: [TeacherLayoutComponent],
-  templateUrl: './teacher-dashboard.component.html',
+  templateUrl: './subject-management.component.html',
   styles: ``
 })
-export class TeacherDashboardComponent {
+export class SubjectManagementComponent {
 
 }

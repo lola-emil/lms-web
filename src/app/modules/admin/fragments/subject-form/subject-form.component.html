@@ -57,22 +57,22 @@
       </div>
       <br>
       @for (item of topics.controls; track $index) {
-        <div>
-          <div class="border-b border-base-200">
-            <span>Topic {{$index}}</span>
-          </div>
-          <div class="container mx-auto">
-            <label for="" class="form-control w-full">
-              <div class="label">
-                <div class="label-text">Description</div>
-              </div>
-              <textarea class="textarea textarea-bordered"></textarea>
-              <div class="label">
-                <div class="label-text-alt text-error font-semibold"></div>
-              </div>
-            </label>
-          </div>
+      <div>
+        <div class="border-b border-base-200">
+          <span>Topic {{$index}}</span>
         </div>
+        <div class="container mx-auto">
+          <label for="" class="form-control w-full">
+            <div class="label">
+              <div class="label-text">Description</div>
+            </div>
+            <textarea class="textarea textarea-bordered"></textarea>
+            <div class="label">
+              <div class="label-text-alt text-error font-semibold"></div>
+            </div>
+          </label>
+        </div>
+      </div>
       }
     </div>
   </section>

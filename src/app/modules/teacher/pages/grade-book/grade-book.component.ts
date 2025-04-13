@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { TeacherLayoutComponent } from "../../layout/teacher-layout/teacher-layout.component";
 
 @Component({
-  selector: 'app-teacher-dashboard',
+  selector: 'app-grade-book',
   imports: [TeacherLayoutComponent],
-  templateUrl: './teacher-dashboard.component.html',
+  templateUrl: './grade-book.component.html',
   styles: ``
 })
-export class TeacherDashboardComponent {
+export class GradeBookComponent {
 
 }

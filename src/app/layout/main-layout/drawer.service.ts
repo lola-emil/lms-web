@@ -1,7 +1,7 @@
 import { Injectable, Type } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 interface DrawerPayload {
-  component: Type<any>;
+  component: Type<any> | null;
   data?: any;
 }
 
@@ -15,8 +15,8 @@ export class DrawerService {
   private componentSubject = new BehaviorSubject<DrawerPayload>({ component: null as any });
   component$ = this.componentSubject.asObservable();
 
-  open(component: Type<any>, data?: any) {
-    this.componentSubject.next({ component, data });
+  open(component?: Type<any>, data?: any) {
+    this.componentSubject.next({ component: component ?? null, data });
     this.isOpenSubject.next(true);
   }
 

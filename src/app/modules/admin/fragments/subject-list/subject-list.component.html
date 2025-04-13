@@ -1,15 +1,13 @@
 <div class="container mx-auto">
   <section class="grid grid-cols-12">
     <div class="col-span-2">
-      <div class="font-semibold text-lg">List</div>
     </div>
 
     <div class="col-span-10">
       <div class="w-full flex mb-5 justify-between items-center">
         <div class="flex items-center gap-3">
           <div class="join">
-            <button class="join-item btn btn-sm" (click)="prevUserListPage()"
-              [disabled]="userListPage == 1">«</button>
+            <button class="join-item btn btn-sm" (click)="prevUserListPage()" [disabled]="userListPage == 1">«</button>
             <button class="join-item btn btn-sm"> {{userListPage}} </button>
             <button class="join-item btn btn-sm" (click)="nextUserListPage()"
               [disabled]="userListPage == userListMaxPage">»</button>
@@ -17,8 +15,7 @@
 
           <label class="input input-bordered input-sm flex items-center gap-2">
             <input type="text" class="grow" placeholder="Search" />
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-              class="h-4 w-4 opacity-70">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
               <path fill-rule="evenodd"
                 d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
                 clip-rule="evenodd" />
@@ -26,18 +23,24 @@
           </label>
         </div>
       </div>
-      <table class="table">
-        <thead>
-          <tr class="bg-base-200">
-            <th>Title</th>
-            <th>Grade Level</th>
-            <th>Lesson Count</th>
-            <th>Date added</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+
+      <div class="grid grid-cols-4 gap-5">
+        <a routerLink="/admin/subject-detail/1" class="border border-base-300 rounded">
+          <div class="bg-base-200 min-h-36"></div>
+          <div class="p-3">
+            <span class="font-semibold">Mathematics</span>
+            <br>
+            <span class="text-sm">Grade 7</span>
+            <br>
+            <p class="text-sm">
+              <span>100 Lessons</span>,
+              <span>32 Enrolled Teachers</span>
+            </p>
+            <br>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 </div>
+

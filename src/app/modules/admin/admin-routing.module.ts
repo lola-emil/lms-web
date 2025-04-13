@@ -11,6 +11,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { GeneralSettingsComponent } from './fragments/general-settings/general-settings.component';
 import { SchoolSettingsComponent } from './fragments/school-settings/school-settings.component';
 import { SubjectFormComponent } from './fragments/subject-form/subject-form.component';
+import { SubjectDetailsComponent } from './pages/subject-details/subject-details.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,11 @@ const routes: Routes = [
         pathMatch: 'full'
       }
     ]
+  },
+
+  {
+    path: "subject-detail/:id",
+    component: SubjectDetailsComponent
   },
 
   {

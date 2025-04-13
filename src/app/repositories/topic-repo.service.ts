@@ -17,6 +17,6 @@ export type Topic = {
 export class TopicRepoService extends CrudRepo<Topic> {
 
   constructor(http: HttpClient) {
-    super(http, "academic-management", "topics");
+    super(http, "subject-management", "topics");
   }
 }
