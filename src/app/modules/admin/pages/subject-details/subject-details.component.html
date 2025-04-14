@@ -3,7 +3,7 @@
     <main>
       <div class="h-14"></div>
       <div class="container mx-auto">
-        <h1 class="text-4xl font-bold">Mathematics</h1>
+        <h1 class="text-4xl font-bold">{{ subjectDetail?.subject?.subject_name }}</h1>
 
 
         <br>
@@ -20,7 +20,7 @@
               </span>
               Grade Level
             </td>
-            <td class="text-md">7</td>
+            <td class="text-md">{{ subjectDetail?.level?.level }}</td>
           </tr>
 
           <tr>
@@ -48,13 +48,13 @@
               </span>
               Enrolled Teachers
             </td>
-            <td class="text-md">32</td>
+            <td class="text-md">5</td>
           </tr>
         </table>
 
         <br>
 
-        <section class="grid grid-cols-12 gap-7">
+        <section class="grid grid-cols-12 gap-10">
           <div class="min-h-52 col-span-9">
             <div class="mb-3">
               <!-- <p class="font-semibold">Contents</p> -->
@@ -75,11 +75,11 @@
               <tbody>
                 <tr>
                   <td><a href="" class="link">Module 1: Introduction to Algebra</a></td>
-                  <td>2025-04-08</td>
+                  <td>{{"2025-04-08" | date }}</td>
                 </tr>
                 <tr>
                   <td><a href="" class="link">Module 2: Introduction to Algebra</a></td>
-                  <td>2025-04-08</td>
+                  <td>{{"2025-04-08" | date }}</td>
                 </tr>
               </tbody>
             </table>
@@ -99,22 +99,34 @@
               <tbody>
                 <tr>
                   <td><a href="" class="link">Module 1: Introduction to Algebra</a></td>
-                  <td>2025-04-08</td>
+                  <td>{{"2025-04-09" | date }}</td>
                   <td></td>
                 </tr>
                 <tr>
                   <td><a href="" class="link">Module 2: Introduction to Algebra</a></td>
-                  <td>2025-04-08</td>
+                  <td>{{"2025-04-09" | date }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <div class="col-span-3">
+            <div class="mt-2"></div>
             <div class="mb-3">
               <p class="font-semibold">Enrolled Teachers</p>
             </div>
             <hr>
+            <br>
+            <div class="flex flex-col gap-2">
+              @for (item of enrolledTeachers; track $index) {
+                <div class="card border border-base-200">
+                  <div class="card-body p-3">
+                    <p class="font-semibold text-sm">{{ item.fname }} {{ item.lname }}</p>
+                    <p class="text-xs">Date Added: {{ "2025-03-26" | date}}</p>
+                  </div>
+                </div>
+              }
+            </div>
           </div>
 
         </section>

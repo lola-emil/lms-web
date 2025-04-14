@@ -28,8 +28,17 @@ export class CrudRepo<T> {
     this.endpoint = `${this.apiURL}/${this.moduleName}/${this.resourceName}`;
   }
 
-  count() {
-    return this.http.get<{ count: number; }>(`${this.endpoint}/count`);
+  count(query?: QueryModifiers<Partial<T>>) {
+    let params = new HttpParams();
+
+    if (query)
+      Object.entries(query).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          params = params.set(key, value.toString());
+        }
+      });
+
+    return this.http.get<{ count: number; }>(`${this.endpoint}/count`, { params });
   }
 
   get(query?: QueryModifiers<Partial<T>>) {

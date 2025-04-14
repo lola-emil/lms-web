@@ -27,6 +27,8 @@ export class SubjectContentFormComponent implements AfterViewInit, OnDestroy {
       title: new FormControl("New Topic"),
       lessons: this.fb.array([this.createLessonField()])
     });
+
+
   }
 
 
@@ -59,11 +61,10 @@ export class SubjectContentFormComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.subscriptions.push(
-      this.route.paramMap.subscribe(params => {
-        this.subjectId = params.get("id");
-      })
-    );
+    this.route.paramMap.subscribe(params => {
+      this.subjectId = params.get("id");
+      console.log(this.subjectId);
+    });
 
     this.subscriptions.push(
       this.topicRepo.get({

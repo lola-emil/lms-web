@@ -1,7 +1,7 @@
-<div class="container mx-auto">
+<div class="container mx-auto min-h-screen">
   <section class="grid grid-cols-12">
-    <div class="col-span-2">
-    </div>
+    <!-- <div class="col-span-2">
+    </div> -->
 
     <div class="col-span-10">
       <div class="w-full flex mb-5 justify-between items-center">
@@ -25,22 +25,75 @@
       </div>
 
       <div class="grid grid-cols-4 gap-5">
-        <a routerLink="/admin/subject-detail/1" class="border border-base-300 rounded">
-          <div class="bg-base-200 min-h-36"></div>
+        @for (item of subjectList; track $index) {
+        <a [routerLink]="'/admin/subject-detail/' + item.subject.id" class="border border-base-300 rounded">
+          <div class="bg-base-200 h-36">
+          </div>
           <div class="p-3">
-            <span class="font-semibold">Mathematics</span>
+            <span class="font-semibold">{{ item.subject.subject_name }}</span>
             <br>
-            <span class="text-sm">Grade 7</span>
+            <span class="text-sm">Grade {{ item.level?.level }}</span>
             <br>
             <p class="text-sm">
-              <span>100 Lessons</span>,
+              <span>{{ item.lesson_count.count }} Lessons</span>,
               <span>32 Enrolled Teachers</span>
             </p>
             <br>
           </div>
         </a>
+        }
+
+        <!-- <a [routerLink]="'/admin/subject-detail/1'" class="border border-base-300 rounded">
+          <div class="bg-base-200 h-36">
+            <img class="h-full w-full object-cover" src="https://t3.ftcdn.net/jpg/04/83/90/18/360_F_483901821_46VsNR67uJC3xIKQN4aaxR6GtAZhx9G8.jpg" alt="">
+          </div>
+          <div class="p-3">
+            <span class="font-semibold">Math</span>
+            <br>
+            <span class="text-sm">Grade 7</span>
+            <br>
+            <p class="text-sm">
+              <span>4 Lessons</span>,
+              <span>5 Enrolled Teachers</span>
+            </p>
+            <br>
+          </div>
+        </a>
+
+        <a [routerLink]="'/admin/subject-detail/1'" class="border border-base-300 rounded">
+          <div class="bg-base-200 h-36">
+            <img class="h-full w-full object-cover" src="https://img.freepik.com/premium-vector/english-language-learning-dark-background_651276-157.jpg" alt="">
+          </div>
+          <div class="p-3">
+            <span class="font-semibold">English</span>
+            <br>
+            <span class="text-sm">Grade 7</span>
+            <br>
+            <p class="text-sm">
+              <span>0 Lessons</span>,
+              <span>32 Enrolled Teachers</span>
+            </p>
+            <br>
+          </div>
+        </a>
+
+        <a [routerLink]="'/admin/subject-detail/1'" class="border border-base-300 rounded">
+          <div class="bg-base-200 h-36">
+            <img class="h-full w-full object-cover" src="https://static.vecteezy.com/system/resources/thumbnails/013/717/509/small_2x/school-education-and-science-doodle-background-free-vector.jpg" alt="">
+          </div>
+          <div class="p-3">
+            <span class="font-semibold">Science</span>
+            <br>
+            <span class="text-sm">Grade 7</span>
+            <br>
+            <p class="text-sm">
+              <span>0 Lessons</span>,
+              <span>32 Enrolled Teachers</span>
+            </p>
+            <br>
+          </div>
+        </a> -->
       </div>
     </div>
   </section>
 </div>
-

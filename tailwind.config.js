@@ -21,7 +21,7 @@ module.exports = {
           "base-100": "#f7f7f5",
           "base-200": "#d7d7d5",
           "base-300": "#b7b7b6",
-          "base-content": "#151515",
+          "base-content": "#1f1f1f",
           "info": "#27918d",
           "info-content": "#010707",
           "success": "#27918d",

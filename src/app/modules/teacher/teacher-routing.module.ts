@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TeacherDashboardComponent } from './pages/teacher-dashboard/teacher-dashboard.component';
 import { SubjectManagementComponent } from './pages/subject-management/subject-management.component';
 import { GradeBookComponent } from './pages/grade-book/grade-book.component';
+import { SubjectDetailComponent } from './pages/subject-detail/subject-detail.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: "subject-management",
     component: SubjectManagementComponent
+  },
+
+  {
+    path: "subject-detail/:id",
+    component: SubjectDetailComponent
   },
 
   {
