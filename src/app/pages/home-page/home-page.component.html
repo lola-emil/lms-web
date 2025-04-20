@@ -1,15 +1,49 @@
-<nav class="h-16 px-8 flex items-center justify-between border-b bg-neutral-900 border-neutral-800">
-  <div>
-    <a routerLink="/" class="btn btn-ghost hover:bg-neutral-800">Sta. Cruz Learning Center</a>
+<nav class="navbar container mx-auto">
+  <div class="navbar-start">
+    <div class="logo">
+      <img src="" alt="">
+    </div>
+    <a href="" class="btn btn-ghost">Sta. Cruz Learning Center</a>
   </div>
-
-  <div class="flex items-center gap-10">
+  <div class="navbar-end">
     <ul class="menu menu-horizontal gap-10">
-      <li><a routerLink="" class="btn btn-ghost btn-sm hover:bg-neutral-800">Home</a></li>
-      <li><a routerLink="" class="btn btn-ghost btn-sm hover:bg-neutral-800">About Us</a></li>
-      <li><a routerLink="" class="btn btn-ghost btn-sm hover:bg-neutral-800">Contact Us</a></li>
+      <li><a href="">Home</a></li>
+      <li><a href="">About</a></li>
+      <li><a href="">Contact Us</a></li>
     </ul>
-
-    <a routerLink="/signin" class="btn btn-ghost btn-sm hover:bg-neutral-800 hover:text-neutral-100 bg-neutral-100 text-neutral-800">Sign In</a>
   </div>
 </nav>
+
+
+<!-- HERO SECTION -->
+<section class="container mx-auto min-h-[70vh] flex items-center">
+  <div class="card w-full">
+    <div class="card-body flex flex-row">
+      <div class="flex-1 flex flex-col items-center justify-center">
+        <div>
+          <h1 class="text-5xl font-semibold">
+            Empowering Learners for Life
+          </h1>
+          <br>
+          <p class="text-lg">Your gateway to flexible, faith-based learning. <br>
+            Access lessons, submit activities, and grow in knowledge and values—anytime, anywhere.</p>
+          <br>
+
+          <div class="flex gap-5">
+            <a routerLink="/login" class="btn btn-neutral btn-wide">Log In</a>
+            <!-- <a href="" class="btn btn-neutral btn-wide">Help Center</a> -->
+          </div>
+
+        </div>
+      </div>
+
+      <div class="flex-1">
+        <img src="/img/dashboard-2.svg" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- About Section -->
+

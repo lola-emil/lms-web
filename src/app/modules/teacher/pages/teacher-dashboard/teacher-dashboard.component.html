@@ -1,19 +1,12 @@
-
-<app-layout pageTitle="Teacher Dashboard">
-  <app-section sectionTitle="Subject Overview">
-    <div class="w-full mt-10 grid grid-cols-4 gap-4">
-      @for (item of subjects; track $index) {
-      <button (click)="openDrawer()"
-        class="card border-neutral-700 text-left transition-colors hover:bg-neutral-600 bg-neutral-800">
-        <div class="card-body p-5">
-          <p class="font-semibold">{{item.subjectName}}</p>
-          <p class="text-sm">Grade {{item.gradeLevel}} - {{item.section}}</p>
-          <p class="text-sm">New Submissions {{item.newSubmissions}}, Participants 0</p>
-        </div>
-      </button>
-      }
+<app-drawer-layout>
+  <nav class="navbar border border-base-content/5"></nav>
+  <br>
+  <main class="grid grid-cols-12 grid-rows-4 container mx-auto">
+    <div class="card col-span-12 border">
+      <div class="card-body">
+        <p class="text-3xl">Welcome,</p>
+        <p class="text-3xl font-semibold">Pedro Duka</p>
+      </div>
     </div>
-  </app-section>
-  <app-section sectionTitle="Recent Submissions"></app-section>
-
-</app-layout>
+  </main>
+</app-drawer-layout>

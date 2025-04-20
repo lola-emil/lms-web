@@ -1,40 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
-import { CoursesComponent } from './pages/courses/courses.component';
-import { CourseDetailsPageComponent } from './pages/course-details-page/course-details-page.component';
-import { EventsAndSchedulesPageComponent } from './pages/events-and-schedules-page/events-and-schedules-page.component';
-import { QuizComponent } from './pages/quiz/quiz.component';
-import { LessonContentPageComponent } from './pages/lesson-content-page/lesson-content-page.component';
+import { GradebookComponent } from './pages/gradebook/gradebook.component';
+import { EnrolledSubjectsComponent } from './pages/enrolled-subjects/enrolled-subjects.component';
 
 const routes: Routes = [
   {
+    path: "dashboard",
+    component: StudentDashboardComponent
+  },
+  {
     path: "",
-    component: StudentDashboardComponent,
+    redirectTo: "dashboard",
+    pathMatch: "full"
   },
   {
-    path: "courses",
-    component: CoursesComponent
+    path: "enrolled-subjects",
+    component: EnrolledSubjectsComponent
   },
   {
-    path: "courses/:id",
-    component: CourseDetailsPageComponent
-  },
-  {
-    path: "calendar",
-    component: EventsAndSchedulesPageComponent
-  },
-
-  // MGA TEMPORARY LANG USA FOR DESIGN
-  {
-    path: "quiz",
-    component: QuizComponent
-  },
-  {
-    path: "lesson-content",
-    component: LessonContentPageComponent
-  },
-
+    path: "grade-book",
+    component: GradebookComponent
+  }
 ];
 
 @NgModule({

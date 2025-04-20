@@ -1,33 +1,3 @@
-
-<app-layout pageTitle="Student Dashboard">
-
-  <app-courses-section></app-courses-section>
-
-  <!-- <app-section title="Recent Submissions">
-    <table class="table">
-      <thead>
-        <tr class="border-b bg-neutral-800">
-          <th>Title</th>
-          <th>Subject</th>
-          <th align="center">Due Date</th>
-          <th align="center">Submission Date</th>
-          <th align="center">Grade</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let submission of assignments" class="border-t border-neutral-800">
-          <td><a (click)="drawerService.openDrawer()" class="link">{{submission.title}}</a></td>
-          <td></td>
-          <td align="center">{{submission.dueDate | date:'MMM d, yyyy'}}</td>
-          <td align="center">{{submission.submissionDate | date:'MMM d, yyyy' }}</td>
-          <td align="center">{{ !submission.grade ? "Not Graded" : `${submission.grade}/${submission.maxScore}` }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </app-section> -->
-
-  <app-section sectionTitle="Upcoming Deadlines">
-    <app-event-calendar></app-event-calendar>
-  </app-section>
-
-</app-layout>
+<app-drawer-layout>
+  
+</app-drawer-layout>

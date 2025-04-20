@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { SubjectsAndCurriculumComponent } from './pages/subjects-and-curriculum/subjects-and-curriculum.component';
+import { GradeLevelStrandsComponent } from './pages/grade-level-strands/grade-level-strands.component';
+import { AddNewSubjectComponent } from './pages/add-new-subject/add-new-subject.component';
+import { SubjectDetailComponent } from './pages/subject-detail/subject-detail.component';
+import { SchoolProfileComponent } from './pages/school-profile/school-profile.component';
 import { UserManagementComponent } from './pages/user-management/user-management.component';
-import { SchoolSettingsComponent } from './pages/school-settings/school-settings.component';
-import { AcademicManagementComponent } from './pages/academic-management/academic-management.component';
-import { SubjectMangementComponent } from './pages/subject-mangement/subject-mangement.component';
-import { AddUserPageComponent } from './pages/add-user-page/add-user-page.component';
-import { AddSubjectPageComponent } from './pages/add-subject-page/add-subject-page.component';
-import { AddGradeSectionPageComponent } from './pages/add-grade-section-page/add-grade-section-page.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
     path: "",
+    redirectTo: "dashboard",
+    pathMatch: "full"
+  },
+  {
+    path: "dashboard",
     component: AdminDashboardComponent
   },
   {
@@ -19,29 +24,29 @@ const routes: Routes = [
     component: UserManagementComponent
   },
   {
-    path: "subject-management",
-    component: SubjectMangementComponent
+    path: "subjects-and-curriculum",
+    component: SubjectsAndCurriculumComponent
   },
   {
-    path: "academic-management",
-    component: AcademicManagementComponent
+    path: "subjects-and-curriculum/subject-detail/:id",
+    component: SubjectDetailComponent
   },
   {
-    path: "school-settings",
-    component: SchoolSettingsComponent
+    path: "grade-level-and-strands",
+    component: GradeLevelStrandsComponent
   },
   {
-    path: "add-user",
-    component: AddUserPageComponent
+    path: "add-new-subject",
+    component: AddNewSubjectComponent
+  },
+    {
+    path: "school-profile",
+    component: SchoolProfileComponent
   },
   {
-    path: "add-grade-section",
-    component: AddGradeSectionPageComponent
+    path: "user-management/user-profile/:id",
+    component: UserProfileComponent
   },
-  {
-    path: "add-subject",
-    component: AddSubjectPageComponent
-  }
 ];
 
 @NgModule({

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MainLayoutComponent } from "./components/layout/main-layout/main-layout.component";
 
 @Component({
   selector: 'app-root',
@@ -9,5 +8,5 @@ import { MainLayoutComponent } from "./components/layout/main-layout/main-layout
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'lms-design';
+  title = 'lms';
 }

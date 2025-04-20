@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   {
@@ -8,19 +9,23 @@ export const routes: Routes = [
     component: HomePageComponent
   },
   {
-    path: "signin",
-    component: SignInPageComponent
+    path: "login",
+    component: LoginPageComponent
   },
   {
-    path: "student",
-    loadChildren: () => import("./modules/student/student.module").then(m => m.StudentModule)
+    path: "admin",
+    loadChildren: () => import("./modules/admin/admin.module").then(m => m.AdminModule)
   },
   {
     path: "teacher",
     loadChildren: () => import("./modules/teacher/teacher.module").then(m => m.TeacherModule)
   },
   {
-    path: "admin",
-    loadChildren: () => import("./modules/admin/admin.module").then(m => m.AdminModule)
+    path: "student",
+    loadChildren: () => import("./modules/student/student.module").then(m => m.StudentModule)
+  },
+  {
+    path: "**",
+    component: PageNotFoundComponent
   }
 ];
