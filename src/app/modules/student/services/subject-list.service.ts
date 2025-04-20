@@ -30,7 +30,7 @@ export type SubjectDetail = {
 @Injectable({
   providedIn: 'root'
 })
-export class SubjectListServiceService {
+export class SubjectListService {
 
   constructor(
     private teacherSubjectRepo: TeacherSubjectRepoService,
@@ -48,7 +48,9 @@ export class SubjectListServiceService {
     return this.teacherSubjectRepo.get({
       limit: opt?.limit,
       offset: opt?.offset,
-      teacher_id: teacherId
+      grade_level_id: 1,
+      grade_section_id: 1,
+      school_year_id: 1
     }).pipe(
       switchMap((teacherSubjects) => {
         const subjectIds = teacherSubjects.map(val => val.subject_id);

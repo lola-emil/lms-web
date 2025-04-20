@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { TeacherSubjectRepoService } from '../../../../repositories/teacher-subject-repo.service';
 import { Subscription, tap } from 'rxjs';
 import { SubjectListItem, SubjectListServiceService } from '../../services/subject-list-service.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-subject-management',
@@ -22,7 +23,8 @@ export class SubjectManagementComponent implements OnInit, OnDestroy {
 
   constructor(
     private teacherSubjectRepo: TeacherSubjectRepoService,
-    private subjectListService: SubjectListServiceService
+    private subjectListService: SubjectListServiceService,
+    private authService: AuthService
   ) {
   }
 
@@ -35,7 +37,9 @@ export class SubjectManagementComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.teacherSubjectRepo.count()
+      this.teacherSubjectRepo.count({
+        teacher_id: this.authService.getUserDetail().user_id
+      })
         .subscribe(val => this.subjectsCount = val.count),
     );
 
@@ -43,6 +47,7 @@ export class SubjectManagementComponent implements OnInit, OnDestroy {
   }
 
   updateSubjectList() {
+
     this.subscriptions.push(
       this.subjectListService.getSubjectList()
         .pipe(

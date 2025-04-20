@@ -20,6 +20,8 @@ export class CrudRepo<T> {
   apiURL = "http://localhost:8081/api";
   endpoint: string = "";
   http!: HttpClient;
+
+  accessToken: string = "";
   constructor(
     http: HttpClient,
     private moduleName: string,
@@ -27,6 +29,8 @@ export class CrudRepo<T> {
   ) {
     this.endpoint = `${this.apiURL}/${this.moduleName}/${this.resourceName}`;
     this.http = http;
+
+    this.accessToken = JSON.parse(localStorage.getItem("user-detail") ?? "{}").token;
   }
 
   count(query?: QueryModifiers<Partial<T>>) {
@@ -39,7 +43,12 @@ export class CrudRepo<T> {
         }
       });
 
-    return this.http.get<{ count: number; }>(`${this.endpoint}/count`, { params });
+    return this.http.get<{ count: number; }>(`${this.endpoint}/count`, {
+      params,
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`
+      }
+    });
   }
 
   get(query?: QueryModifiers<Partial<T>>) {
@@ -52,17 +61,34 @@ export class CrudRepo<T> {
         }
       });
 
-    return this.http.get<T[]>(`${this.endpoint}/`, { params });
+    return this.http.get<T[]>(`${this.endpoint}/`, {
+      params,
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`
+      }
+    });
   }
   post(body: any) {
-    return this.http.post(`${this.endpoint}/`, body);
+    return this.http.post(`${this.endpoint}/`, body, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`
+      }
+    });
   }
 
   patch(id: number | string, body: any) {
-    return this.http.patch(`${this.endpoint}/${id}`, body);
+    return this.http.patch(`${this.endpoint}/${id}`, body, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`
+      }
+    });
   }
 
   delete(id: number | string) {
-    this.http.delete(`${this.endpoint}/${id}`);
+    this.http.delete(`${this.endpoint}/${id}`, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`
+      }
+    });
   }
 }

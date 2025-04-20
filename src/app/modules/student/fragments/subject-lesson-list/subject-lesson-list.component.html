@@ -1,0 +1,51 @@
+<div class="grid grid-cols-12">
+  <div class="col-span-8">
+    <br>
+
+    @for (topic of topics; track $index) {
+    <hr>
+    <br>
+    <h3 class="text-xl font-semibold">{{ topic.topic.title }}</h3>
+
+    <br>
+    @if (topic.subjectMaterials.length < 1) {
+      <div class="flex justify-center">
+        <p class="text-lg">No lessons added yet!</p>
+      </div>
+     } @else { <ul class="list bg-base-100 rounded-box shadow-md">
+
+      @for (item of topic.subjectMaterials; track $index) {
+      <li class="list-row flex justify-between items-center">
+        <div class="flex gap-3">
+          <div class="text-2xl">
+            @if (item.material_type == "lesson") {
+            📚
+            }
+            @else if (item.material_type == "video-quiz") {
+            📹
+            }
+            @else {
+            💡
+            }
+          </div>
+          <div>
+            <div><a [routerLink]="item.material_type == 'quiz' ? '/student/quiz/' : ''" class="link">{{ item.title }}</a></div>
+            <div class="text-xs opacity-60">Date added: {{ item.created_at| date }}</div>
+          </div>
+        </div>
+        <div>
+          <!-- <button class="btn btn-square btn-ghost" title="View">
+            <svg class="size-[1.5em]" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 9.005a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 1.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM12 5.5c4.613 0 8.596 3.15 9.701 7.564a.75.75 0 1 1-1.455.365 8.503 8.503 0 0 0-16.493.004.75.75 0 0 1-1.455-.363A10.003 10.003 0 0 1 12 5.5Z"
+                class="fill-base-content" />
+            </svg>
+          </button> -->
+        </div>
+      </li>
+      }
+      </ul>
+      }
+      }
+  </div>
+</div>

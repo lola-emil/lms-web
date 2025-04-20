@@ -1,62 +1,47 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { GradeLevel, GradeLevelRepoService } from '../../../../repositories/grade-level-repo.service';
-import { Subscription, tap } from 'rxjs';
 import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { SubjectListServiceService } from '../../services/subject-list-service.service';
+import { SubjectListService } from '../../services/subject-list.service';
+import { Subscription, tap } from 'rxjs';
 
 @Component({
   selector: 'app-subject-detail',
-  imports: [ReactiveFormsModule, RouterLink, RouterOutlet, RouterLinkActive],
+  imports: [RouterLink, RouterOutlet, RouterLinkActive],
   templateUrl: './subject-detail.component.html',
   styles: ``
 })
 export class SubjectDetailComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
-
   private subjectId: string | null = null;
 
-  gradeLevels: GradeLevel[] = [];
+  subjectName = "";
+  subjectCode: string | null = "";
   gradeLevel = "";
-  subjectName: string | null = null;
-  subjectCode: string | null = null;
-
 
   constructor(
+    private subjectListService: SubjectListService,
     private route: ActivatedRoute,
-    private gradeLevelRepo: GradeLevelRepoService,
-    private gradelevelRepo: GradeLevelRepoService,
-    private subjectListService: SubjectListServiceService,
   ) {
 
+    this.route.paramMap.subscribe(param => {
+      this.subjectId = param.get("id");
+    });
   }
 
-
   ngOnInit(): void {
-
     this.subscriptions.push(
-      this.gradeLevelRepo.get()
-        .subscribe(val => this.gradeLevels = val),
-
       this.subjectListService.getSubjectDetail(parseInt(this.subjectId ?? ""))
         .pipe(
           tap(val => {
             this.subjectName = val.subject.subject_name;
-            this.gradeLevel = val.level?.level + "";
             this.subjectCode = val.subject.subject_code;
+            this.gradeLevel = val.level?.level + "";
           })
-        ).subscribe(),
-
-
-      this.gradelevelRepo.get()
-        .subscribe(val => this.gradeLevels = val),
-    );
+        )
+        .subscribe());
   }
-
-
-
   ngOnDestroy(): void {
     this.subscriptions.forEach(val => val.unsubscribe());
   }
+
 
 }

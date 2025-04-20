@@ -51,7 +51,7 @@
     <div class="grid grid-cols-4 gap-5">
 
       @for (item of subjects; track $index) {
-      <a [routerLink]="'/teacher/subject-management/subject-detail/' + item.subject?.id"
+      <a [routerLink]="'/teacher/subject-management/subject-detail/' + item.teacherSubject?.id"
         class="card border border-base-content/55">
         <figure class="">
           <div class="h-52 bg-base-300 w-full">
