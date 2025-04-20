@@ -1,0 +1,92 @@
+<app-drawer-layout>
+  <nav class="navbar bg-base-100 border-b border-base-content/5">
+    <div class="flex items-centers gap-5">
+      <button class="btn btn-sm btn-ghost lg:hidden inline-flex">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M2.75 18h12.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.494L2.75 18h12.5-12.5Zm0-6.5h18.5a.75.75 0 0 1 .102 1.493L21.25 13H2.75a.75.75 0 0 1-.102-1.493l.102-.007h18.5-18.5Zm0-6.497h15.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.493l.102-.007h15.5-15.5Z"
+            class="fill-base-content" />
+        </svg>
+      </button>
+
+    </div>
+    <div class="flex-none">
+    </div>
+  </nav>
+
+
+
+  <div class="container mx-auto">
+    <div class="breadcrumbs text-sm">
+      <ul class="ml-5">
+        <li class="font-semibold">Academic Management</li>
+        <li class="font-semibold">Subjects & Curriculum</li>
+      </ul>
+    </div>
+    <br>
+
+    <p class="text-lg font-semibold">Total Subjects - <span>{{subjectsCount}}</span></p>
+
+    <br>
+    <div class="flex items-center justify-between">
+      <button (click)="addNewSubject()" class="btn btn-sm">Add New Subject</button>
+      <div>
+        <div class="dropdown">
+          <div tabindex="0" role="button" class="btn btn-sm btn-outline btn-ghost border m-1">Table View</div>
+          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+            <li><a>Card</a></li>
+            <li><a>Item 2</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <div tabindex="0" role="button" class="btn btn-sm btn-outline btn-ghost border m-1">Filter</div>
+          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+            <li><a>Card</a></li>
+            <li><a>Item 2</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <div tabindex="0" role="button" class="btn btn-sm btn-outline btn-ghost border m-1">Sort</div>
+          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+            <li><a>Card</a></li>
+            <li><a>Item 2</a></li>
+          </ul>
+        </div>
+        <div class="join">
+          <button class="join-item btn btn-sm btn-outline" [disabled]="this.page == 1">«</button>
+          <button class="join-item btn btn-sm btn-outline">Page {{ page }}</button>
+          <button class="join-item btn btn-sm btn-outline" [disabled]="this.page == this.maxPage">»</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+      <table class="table table-zebra">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th></th>
+            <th>Subject</th>
+            <th>Subject Code</th>
+            <th align="center">Grade Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of subjectList; track $index) {
+          <tr>
+            <th>{{ $index + 1 }}</th>
+            <td><a [routerLink]="'/admin/subjects-and-curriculum/subject-detail/' + item.subject.id" class="link">{{
+                item.subject.subject_name }}</a></td>
+            <td>{{ item.subject.subject_code }}</td>
+            <td align="center">Grade - {{ item.level?.level }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</app-drawer-layout>

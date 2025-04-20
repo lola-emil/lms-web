@@ -1,21 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
+import { GradebookComponent } from './pages/gradebook/gradebook.component';
 import { EnrolledSubjectsComponent } from './pages/enrolled-subjects/enrolled-subjects.component';
-import { CalendarComponent } from './pages/calendar/calendar.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: "dashboard",
     component: StudentDashboardComponent
   },
   {
-    path: "subjects",
+    path: "",
+    redirectTo: "dashboard",
+    pathMatch: "full"
+  },
+  {
+    path: "enrolled-subjects",
     component: EnrolledSubjectsComponent
   },
   {
-    path: "calendar",
-    component: CalendarComponent
+    path: "grade-book",
+    component: GradebookComponent
   }
 ];
 

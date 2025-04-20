@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserProfile } from './user-profile-repo.service';
 import { CrudRepo } from './crud-repo';
@@ -17,7 +17,20 @@ export type User = {
   providedIn: 'root'
 })
 export class UserRepoService extends CrudRepo<User> {
-  constructor(http: HttpClient) {
-    super(http, 'user-management', 'users')
+  constructor(override http: HttpClient) {
+    super(http, 'user-management', 'users');
+  }
+
+  importFile(file: File) {
+    const formData: FormData = new FormData();
+    formData.append("role", "teacher");
+    formData.append("importFile", file);
+
+    const req = new HttpRequest("POST", `http://localhost:8081/api/user-management/users/bulk`, formData, {
+      reportProgress: true,
+      responseType: "json"
+    });
+
+    return this.http.request(req);
   }
 }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "lms-design": {
+    "lms": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/lms-design",
+            "outputPath": "dist/lms",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -50,13 +50,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -65,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "lms-design:build:production"
+              "buildTarget": "lms:build:production"
             },
             "development": {
-              "buildTarget": "lms-design:build:development"
+              "buildTarget": "lms:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -95,9 +89,6 @@
             ],
             "scripts": []
           }
-        },
-        "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }

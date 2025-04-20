@@ -1,46 +1,62 @@
-<app-admin-layout>
-
-  <main>
-    <div class="h-28"></div>
-    <div class="container mx-auto">
-      <h1 class="text-4xl font-bold">Admin Dashboard</h1>
-    </div>
-
-    <br>
-    <br>
-    <br>
-
-    <div class="container mx-auto">
-      <div class="grid grid-cols-12 ">
-        <div class="col-span-10">
-          <!-- OVERVIEW SECTIONS -->
-          <section class="grid grid-cols-3 gap-5">
-            <div class="card card-bordered p-1">
-              <div class="card-body flex flex-col items-center">
-                <span class="text-4xl">{{ userCount }}</span>
-                <span class="font-semibold">Total Users</span>
-              </div>
-            </div>
-
-            <div class="card card-bordered p-1">
-              <div class="card-body flex flex-col items-center">
-                <span class="text-4xl">{{ sectionCount }}</span>
-                <span class="font-semibold">Total Sections</span>
-              </div>
-            </div>
-
-            <div class="card card-bordered p-1">
-              <div class="card-body flex flex-col items-center">
-                <span class="text-4xl">{{ subjectCount }}</span>
-                <span class="font-semibold">Total Subjects</span>
-              </div>
-            </div>
-          </section>
-
-        </div>
-        <div class="col-span-2"></div>
+<app-drawer-layout>
+  <nav class="navbar bg-base-100 border-b border-base-content/5">
+    <div class="navbar-start flex items-centers gap-5">
+      <button class="btn btn-sm btn-ghost lg:hidden inline-flex">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M2.75 18h12.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.494L2.75 18h12.5-12.5Zm0-6.5h18.5a.75.75 0 0 1 .102 1.493L21.25 13H2.75a.75.75 0 0 1-.102-1.493l.102-.007h18.5-18.5Zm0-6.497h15.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.493l.102-.007h15.5-15.5Z"
+            class="fill-base-content" />
+        </svg>
+      </button>
+      <div class="breadcrumbs text-sm">
+        <ul class="ml-5">
+          <li class="font-semibold">Dashboard</li>
+        </ul>
       </div>
+    </div>
+    <div class="flex-none">
+    </div>
+  </nav>
+  <br>
+  <main class="container mx-auto">
+
+    <div class="grid grid-cols-12 grid-rows-4 gap-5">
+      <!-- WELCOME SECTION -->
+      <div class="card col-span-8 w-full h-48 ">
+        <div class="card-body">
+          <div class="flex items-center h-full">
+            <div class="flex-1">
+              <p class="text-3xl">Welcome,</p>
+              <p class="text-3xl font-semibold">Pedro Madafak</p>
+            </div>
+            <div class="flex-1 h-full">
+              <div class="h-full w-full bg-base-200"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card border border-base-content/5 col-span-4 row-span-2"></div>
+
+      <!--  -->
+      <div class="col-span-8 grid grid-cols-3 gap-5">
+        <div class="card border border-base-content/5">
+          <div class="card-body"></div>
+        </div>
+        <div class="card border border-base-content/5">
+          <div class="card-body"></div>
+        </div>
+        <div class="card border border-base-content/5">
+          <div class="card-body"></div>
+        </div>
+      </div>
+
+      <div class="card border border-base-content/5 col-span-12 grid grid-cols-2 row-span-2 gap-5">
+
+      </div>
+
     </div>
   </main>
 
-</app-admin-layout>
+
+</app-drawer-layout>

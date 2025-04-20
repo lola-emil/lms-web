@@ -1,59 +1,147 @@
-<app-admin-layout>
+<app-drawer-layout>
+  <nav class="navbar bg-base-100 border-b border-base-content/5 px-10">
+    <div class="navbar-start">
+      <button class="btn btn-sm btn-ghost lg:hidden inline-flex">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M2.75 18h12.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.494L2.75 18h12.5-12.5Zm0-6.5h18.5a.75.75 0 0 1 .102 1.493L21.25 13H2.75a.75.75 0 0 1-.102-1.493l.102-.007h18.5-18.5Zm0-6.497h15.5a.75.75 0 0 1 .102 1.493l-.102.007H2.75a.75.75 0 0 1-.102-1.493l.102-.007h15.5-15.5Z"
+            class="fill-base-content" />
+        </svg>
+      </button>
 
-  <main>
+    </div>
+    <div class="navbar-end">
+      <button class="btn btn-neutral" (click)="toggleImportModal()">
+        <span>
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M18.25 3.509a.75.75 0 1 0 0-1.5l-13-.004a.75.75 0 1 0 0 1.5l13 .004Zm-6.602 18.488.102.007a.75.75 0 0 0 .743-.649l.007-.101-.001-13.685 3.722 3.72a.75.75 0 0 0 .976.072l.085-.072a.75.75 0 0 0 .072-.977l-.073-.084-4.997-4.996a.75.75 0 0 0-.976-.073l-.085.072-5.003 4.997a.75.75 0 0 0 .976 1.134l.084-.073 3.719-3.713L11 21.254c0 .38.282.693.648.743Z"
+              class="fill-neutral-content" />
+          </svg>
+        </span>
+        <span>Bulk import users</span>
+      </button>
+    </div>
+  </nav>
 
-    <div class="h-14"></div>
-    <div class="container mx-auto">
-      <h1 class="text-4xl font-bold">User Management</h1>
+  <div class="container mx-auto">
+    <div class="breadcrumbs text-sm">
+      <ul class="ml-5">
+      </ul>
     </div>
     <br>
-    <br>
+
+    <p class="text-lg font-semibold">Total Users - <span>{{ usersCount }}</span></p>
+
     <br>
 
-    <div class="container mx-auto flex justify-between items-end border-b border-base-200">
+    <div class="flex items-center justify-between">
+      <button class="btn btn-sm">Add New User</button>
+      <div class="flex items-center gap-5">
+        <div>
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-sm btn-outline btn-ghost border m-1">Table View</div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+              <li><a>Card</a></li>
+              <li><a>Item 2</a></li>
+            </ul>
+          </div>
 
-      <div role="tablist" class="tabs tabs-bordered">
-        <a routerLinkActive="tab-active" [routerLinkActiveOptions]="{exact: true}"
-          routerLink="/admin/user-management/user-list" role="tab" class="tab ">
-          <span class="mr-3">
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M14.754 10c.966 0 1.75.784 1.75 1.75v4.749a4.501 4.501 0 0 1-9.002 0V11.75c0-.966.783-1.75 1.75-1.75h5.502Zm-7.623 0c-.35.422-.575.95-.62 1.53l-.01.22v4.749c0 .847.192 1.649.534 2.365A4.001 4.001 0 0 1 2 14.999V11.75a1.75 1.75 0 0 1 1.606-1.744L3.75 10h3.381Zm9.744 0h3.375c.966 0 1.75.784 1.75 1.75V15a4 4 0 0 1-5.03 3.866c.3-.628.484-1.32.525-2.052l.009-.315V11.75c0-.665-.236-1.275-.63-1.75ZM12 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm6.5 1a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-13 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
-                class="fill-base-content" />
-            </svg>
-          </span>
-          User List</a>
-        <a routerLinkActive="tab-active" [routerLinkActiveOptions]="{exact: true}"
-          routerLink="/admin/user-management/user-form" role="tab" class="tab  border-transparent">
-          <span class="mr-3">
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M17.5 12a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm0 2-.09.007a.5.5 0 0 0-.402.402L17 14.5V17L14.498 17l-.09.008a.5.5 0 0 0-.402.402l-.008.09.008.09a.5.5 0 0 0 .402.402l.09.008H17v2.503l.008.09a.5.5 0 0 0 .402.402l.09.008.09-.008a.5.5 0 0 0 .402-.402l.008-.09V18l2.504.001.09-.008a.5.5 0 0 0 .402-.402l.008-.09-.008-.09a.5.5 0 0 0-.403-.402l-.09-.008H18v-2.5l-.008-.09a.5.5 0 0 0-.402-.403L17.5 14Zm-3.246-4c.835 0 1.563.454 1.951 1.13A6.502 6.502 0 0 0 12.023 21l-.02-.001a4.501 4.501 0 0 1-4.501-4.501V12.25A2.25 2.25 0 0 1 9.752 10h4.502Zm-6.848 0a3.238 3.238 0 0 0-.897 2.034l-.007.216v4.249c0 .847.191 1.649.533 2.365A4.001 4.001 0 0 1 2 14.999V12.25a2.25 2.25 0 0 1 2.096-2.245L4.25 10h3.156Zm12.344 0A2.25 2.25 0 0 1 22 12.25v.56A6.478 6.478 0 0 0 17.5 11l-.243.005A3.25 3.25 0 0 0 16.599 10h3.151ZM18.5 4a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM12 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM5.5 4a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"
-                class="fill-base-content" />
-            </svg>
-          </span>
-          Add user</a>
-        <a routerLinkActive="tab-active" [routerLinkActiveOptions]="{exact: true}"
-          routerLink="/admin/user-management/import-user" role="tab" class="tab  border-transparent">
-          <span class="mr-3">
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M21.25 4.5a.75.75 0 0 1 .743.648L22 5.25v13.5a.75.75 0 0 1-1.493.102l-.007-.102V5.25a.75.75 0 0 1 .75-.75Zm-9.04 1.887.083-.094a1 1 0 0 1 1.32-.083l.094.083 4.997 4.998a1 1 0 0 1 .083 1.32l-.083.093-4.996 5.004a1 1 0 0 1-1.499-1.32l.083-.094L15.581 13H3a1 1 0 0 1-.993-.883L2 12a1 1 0 0 1 .883-.993L3 11h12.584l-3.291-3.293a1 1 0 0 1-.083-1.32l.083-.094-.083.094Z"
-                class="fill-base-content" />
-            </svg>
-          </span>
-          Import users</a>
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-sm btn-outline btn-ghost border m-1">Filter</div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+              <li><a>Card</a></li>
+              <li><a>Item 2</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-sm btn-outline btn-ghost border m-1">Sort</div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+              <li><a>Card</a></li>
+              <li><a>Item 2</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="join">
+          <button class="join-item btn btn-sm btn-outline" (click)="prevPage()" [disabled]="page == 1">«</button>
+          <button class="join-item btn btn-sm btn-outline">Page {{ page }}</button>
+          <button class="join-item btn btn-sm btn-outline" (click)="nextPage()"
+            [disabled]="this.page == this.maxPage">»</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+      <table class="table table-zebra">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Grade - Section</th>
+            <th>Date added</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of users; track $index) {
+          <tr>
+            <td></td>
+            <td><a [routerLink]="'/admin/user-management/user-profile/' + item.user.id"
+                class="link">{{item.profile?.fname}} {{ item.profile?.lname }}</a></td>
+            <td>{{item.user.email}}</td>
+            <td>{{item.role?.role_name}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</app-drawer-layout>
+
+
+<dialog #modal class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 class="text-lg font-bold">Import Teachers</h3>
+
+    <div class="flex flex-col items-center justify-center border rounded border-dashed">
+      <div>
+        <svg class="h-24 w-24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M6.087 7.75a5.752 5.752 0 0 1 11.326 0h.087a4 4 0 0 1 3.962 4.552 6.534 6.534 0 0 0-1.597-1.364A2.501 2.501 0 0 0 17.5 9.25h-.756a.75.75 0 0 1-.75-.713 4.25 4.25 0 0 0-8.489 0 .75.75 0 0 1-.749.713H6a2.5 2.5 0 0 0 0 5h4.4a6.458 6.458 0 0 0-.357 1.5H6a4 4 0 0 1 0-8h.087ZM22 16.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Zm-6-1.793V19.5a.5.5 0 0 0 1 0v-4.793l1.646 1.647a.5.5 0 0 0 .708-.708l-2.5-2.5a.5.5 0 0 0-.708 0l-2.5 2.5a.5.5 0 0 0 .708.708L16 14.707Z"
+            class="fill-base-content/70" />
+        </svg>
+      </div>
+      <p>Choose a file or drag and drop it here</p>
+      <p class="text-sm">Supported file: CSV, XLSX up to 50MB</p>
+      <br>
+      <label for="importFile">
+        <span class="btn">Browse File</span>
+        <input id="importFile" type="file" class="hidden" [accept]="acceptedFiles" (change)="importFile($event)"
+          #importFileInput>
+      </label>
+      <br>
+    </div>
+
+    @if (selectedFile) {
+    <br>
+    <div class="flex flex-col">
+      <div class="card card-body border p-3">
+        <p class="font-semibold">{{ selectedFile.name }}</p>
+        <p class="text-sm">{{ selectedFile.size }} bytes</p>
       </div>
     </div>
+    }
 
-    <div class="h-9"></div>
-
-    <router-outlet></router-outlet>
-  </main>
-
-  <br>
-  <br>
-  <br>
-  <br>
-
-</app-admin-layout>
+  </div>
+</dialog>

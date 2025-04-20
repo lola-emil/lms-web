@@ -17,15 +17,16 @@ type QueryModifiers<T> = {
 
 export class CrudRepo<T> {
 
-  private apiURL = "http://localhost:8080/api";
-  private endpoint: string = "";
-
+  apiURL = "http://localhost:8081/api";
+  endpoint: string = "";
+  http!: HttpClient;
   constructor(
-    private http: HttpClient,
+    http: HttpClient,
     private moduleName: string,
     private resourceName: string
   ) {
     this.endpoint = `${this.apiURL}/${this.moduleName}/${this.resourceName}`;
+    this.http = http;
   }
 
   count(query?: QueryModifiers<Partial<T>>) {

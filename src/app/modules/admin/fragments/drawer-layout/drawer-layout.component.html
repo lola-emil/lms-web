@@ -1,0 +1,77 @@
+<div class="drawer lg:drawer-open">
+  <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content">
+    <!-- Page content here -->
+    <ng-content></ng-content>
+  </div>
+  <div class="drawer-side">
+    <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+
+    <div class="min-h-full flex flex-col items-center border-r border-base-content/5 bg-base-200 w-72">
+
+      <div class="h-56 gap-5 flex flex-col items-center justify-center">
+        <img src="/sclc-logo-removebg-preview.png" class="w-32" alt="">
+        <h3 class="font-semibold text-md">Sta. Cruz Learning Center Inc.</h3>
+      </div>
+
+      <ul class="menu gap-3 w-full">
+        <li><a routerLink="/admin/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">🏠
+            Dashboard</a></li>
+
+        <li><a routerLink="/admin/user-management">👨‍🏫 User Management</a></li>
+        <!--
+        <li>
+          <details >
+            <summary>👩‍🎓 Student Management</summary>
+            <ul>
+              <li><a routerLink="/admin/student-records" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact: true}">Student Records</a></li>
+              <li><a routerLink="/admin/student-enrollment" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact: true}">Enrollment</a></li>
+            </ul>
+          </details>
+        </li> -->
+
+        <li>
+          <h2 class="menu-title"><span class="text-primary">📚</span> Academic Management</h2>
+          <ul>
+            <li><a routerLink="/admin/subjects-and-curriculum" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">Subjects</a></li>
+            <li><a routerLink="/admin/grade-level-and-strands" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">Grade Level & Strands</a></li>
+            <li><a routerLink="/admin/school-year" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">School Year & Grading Periods</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <h2 class="menu-title"><span class="text-primary">📦</span> Content & Resource</h2>
+          <ul>
+            <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Learning
+                Materials</a></li>
+            <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Question Bank</a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- <li>
+            <h2 class="menu-title"><span class="text-primary">📊</span> Reports & Analytics</h2>
+            <ul>
+              <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Academic Performance</a></li>
+              <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Teacher Reports</a></li>
+              <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Student Reports</a></li>
+            </ul>
+        </li> -->
+
+        <li>
+          <h2 class="menu-title"><span class="text-primary"></span>System Configuration</h2>
+
+          <ul>
+            <li><a routerLink="/admin/school-profile">School Profile</a></li>
+            <li><a routerLink="">General Settings</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

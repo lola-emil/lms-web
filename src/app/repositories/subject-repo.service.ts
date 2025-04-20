@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 export type Subject = {
   id: number;
   subject_name: string;
+  subject_code: string;
   description?: string;
   grade_level_id: number;
   created_at: string;
