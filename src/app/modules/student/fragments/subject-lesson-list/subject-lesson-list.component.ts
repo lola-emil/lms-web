@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TopicListService } from '../../services/topic-list.service';
 import { DatePipe } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { catchError, of, Subscription, tap } from 'rxjs';
 import { TopicItem } from '../../../teacher/services/topic-list.service';
-import { ActivatedRoute, ActivatedRouteSnapshot, RouterLink } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterLink } from '@angular/router';
+import { QuizSessionRepoService } from '../../../../repositories/quiz-session-repo.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-subject-lesson-list',
@@ -16,9 +18,14 @@ export class SubjectLessonListComponent implements OnInit, OnDestroy {
   subjectId: string | null | undefined = null;
   topics: TopicItem[] = [];
 
+  quizSessions: { [quizId: number]: boolean; } = {};
+
   constructor(
     private topicListService: TopicListService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private quizSessionRepo: QuizSessionRepoService,
+    private authService: AuthService
   ) {
   }
 
@@ -27,6 +34,7 @@ export class SubjectLessonListComponent implements OnInit, OnDestroy {
     console.log(this.subjectId);
     this.updateTopicList();
   }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
@@ -38,6 +46,30 @@ export class SubjectLessonListComponent implements OnInit, OnDestroy {
           this.topics = val;
         })
     );
+  }
+
+  loadSessions() {
+
+  }
+
+  takeQuiz(id: number) {
+    this.quizSessionRepo.post({
+      quiz_id: id,
+      student_id: this.authService.getUserDetail().user_id
+    }).pipe(
+      tap(val => {
+        console.log(val);
+        this.router.navigate(["student/quiz"], {
+          queryParams: {
+            session_id: val[0].id,
+            quiz_id: val[0].quiz_id
+          }
+        });
+      }),
+      catchError(error => {
+        return of(null);
+      })
+    ).subscribe();
   }
 
 }

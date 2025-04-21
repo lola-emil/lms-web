@@ -69,7 +69,7 @@ export class CrudRepo<T> {
     });
   }
   post(body: any) {
-    return this.http.post(`${this.endpoint}/`, body, {
+    return this.http.post<T[]>(`${this.endpoint}/`, body, {
       headers: {
         Authorization: `Bearer ${this.accessToken}`
       }

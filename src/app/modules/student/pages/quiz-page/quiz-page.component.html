@@ -1,1 +1,59 @@
-<p>quiz-page works!</p>
+<nav class="navbar border border-base-content/5">
+  <div class="navbar-start">
+    <a routerLink="/student/enrolled-subjects" class="btn btn-sm">Go back</a>
+  </div>
+</nav>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto p-6">
+  <!-- Sidebar -->
+  <div class="md:col-span-1">
+    <div class="card bg-base-200 shadow-md">
+      <div class="card-body p-4">
+        <h2 class="font-bold text-lg mb-2">Questions</h2>
+        <div class="grid grid-cols-4 md:grid-cols-1 gap-2">
+          <button *ngFor="let q of questions; let i = index" class="btn btn-sm w-full" [ngClass]="{
+              'btn-primary': currentQuestionIndex === i,
+              'btn-outline': currentQuestionIndex !== i && selectedAnswers[i] != null,
+              'btn-ghost': currentQuestionIndex !== i && selectedAnswers[i] == null
+            }" (click)="goToQuestion(i)">
+            {{ i + 1 }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="md:col-span-3">
+    <div *ngIf="!showResult" class="card shadow-xl bg-base-100">
+      <div class="card-body">
+        <h2 class="card-title">Question {{ currentQuestionIndex + 1 }} of {{ questions.length }}</h2>
+        <p class="text-lg">{{ questions[currentQuestionIndex].question[0].question_text }}</p>
+
+        <div class="space-y-2 mt-4">
+          <div *ngFor="let option of questions[currentQuestionIndex].options; let i = index" class="form-control">
+            <label class="label cursor-pointer">
+              <input type="radio" class="radio radio-primary" name="option-{{ currentQuestionIndex }}" [value]="option.id"
+                [(ngModel)]="selectedAnswers[currentQuestionIndex]"
+                />
+              <span class="label-text ml-3">{{ option.answer_text }}</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="card-actions justify-end mt-6">
+          <button class="btn btn-primary" (click)="nextQuestion()">
+            {{ currentQuestionIndex === questions.length - 1 ? 'Submit' : 'Next' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showResult" class="card shadow-xl bg-base-200 mt-8">
+      <div class="card-body text-center">
+        <h2 class="text-2xl font-bold">Quiz Complete!</h2>
+        <p class="text-lg">Your score: <strong>{{ score }}</strong> / {{ questions.length }}</p>
+        <button class="btn btn-accent mt-4" (click)="restartQuiz()">Try Again</button>
+      </div>
+    </div>
+  </div>
+</div>
