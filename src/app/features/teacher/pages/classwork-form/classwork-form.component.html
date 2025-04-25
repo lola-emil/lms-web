@@ -1,0 +1,46 @@
+<form (submit)="submit()" [formGroup]="classworkFormGroup" class="p-6 max-w-4xl mx-auto">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-2xl font-bold">📚 Create Classworks</h2>
+  </div>
+
+  <div class="card shadow">
+    <div class="card-body">
+      <input type="text" formControlName="title" class="input input-bordered w-full" placeholder="Title">
+
+      <textarea formControlName="instruction" class="textarea textarea-bordered"
+        placeholder="Instructions (optional)"></textarea>
+
+      <br>
+
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Points</span>
+        </div>
+        <input type="number" formControlName="hps" class="input input-bordered" placeholder="Add HPS">
+        <div class="label">
+          <span class="label-text-alt"></span>
+        </div>
+      </label>
+
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Due Date</span>
+        </div>
+        <input type="datetime-local" formControlName="due_date" placeholder="Type here"
+          class="input input-bordered w-full" />
+        <div class="label">
+          <span class="label-text-alt"></span>
+        </div>
+      </label>
+      <!-- <br>
+      <p class="font-semibold">Attach</p> -->
+
+
+      <div class="flex items-center gap-4">
+        <a [routerLink]="['/teacher/loads', loadId, 'classwork']" class="btn">Cancel</a>
+        <button type="submit" class="btn btn-primary">Assign</button>
+      </div>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,60 @@
+<div *ngIf="!showResults" class="flex w-full bg-white shadow-xl rounded-lg overflow-hidden">
+
+  <!-- Left: Quiz Content -->
+  <div class="w-3/4 p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-bold">{{ quizTitle }}</h2>
+      <div class="badge badge-secondary p-3">
+        <!-- ⏳ Time Left: <span>{{ timer }}</span> -->
+      </div>
+    </div>
+
+    <p class="mt-2 text-gray-600 text-lg font-medium">
+      {{ questions[currentQuestionIndex].question.question_text }}
+    </p>
+
+    <div class="mt-4 space-y-2">
+      <label *ngFor="let choice of questions[currentQuestionIndex]?.choices" class="flex items-center gap-2 p-2 border rounded cursor-pointer hover:bg-gray-100">
+        <input type="radio" name="answer" class="radio radio-primary" [value]="choice" (change)="selectAnswer(choice)">
+        {{ choice.answer_text }}
+      </label>
+    </div>
+
+    <div class="mt-6 flex justify-between">
+      <button (click)="prevQuestion()" class="btn btn-outline" [disabled]="currentQuestionIndex === 0">Previous</button>
+      <button (click)="nextQuestion()" class="btn btn-primary">{{ currentQuestionIndex === questions.length - 1 ? 'Finish' : 'Next' }}</button>
+    </div>
+  </div>
+
+  <!-- Right: Question List -->
+  <div class="w-1/4 bg-gray-200 p-4">
+    <h3 class="font-bold mb-2">Questions</h3>
+    <div class="space-y-2 grid grid-cols-3">
+      <button *ngFor="let q of questions; let i = index" class="btn btn-sm w-full" [ngClass]="{'btn-secondary': i === currentQuestionIndex, 'btn-outline': i !== currentQuestionIndex}" (click)="goToQuestion(i)">
+        Q{{ i + 1 }}
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Results Page -->
+<div *ngIf="showResults" class="w-full mx-auto max-w-2xl bg-white shadow-lg rounded-lg p-6 text-center">
+  <h2 class="text-xl font-bold">Quiz Results</h2>
+  <p class="text-lg mt-2">You scored: <span class="font-bold text-green-600">{{ score }}</span> / {{ questions.length }}</p>
+  <p class="text-lg">Percentage: <span class="font-bold text-blue-600">{{ (score / questions.length) * 100 | number: '1.2-2' }}%</span></p>
+
+  <!-- <div class="mt-4">
+    <h3 class="text-lg font-bold">Your Answers</h3>
+    <div *ngFor="let q of questions; let i = index" class="mt-2 p-3 border rounded-lg" [ngClass]="{'bg-green-100': answers[i] === q.answer, 'bg-red-100': answers[i] !== q.answer}">
+      <p class="font-medium">{{ q.question }}</p>
+      <p>Your Answer: <span class="font-bold">{{ answers[i] || 'No Answer' }}</span></p>
+      <p>Correct Answer: <span class="font-bold text-green-600">{{ q.answer }}</span></p>
+    </div>
+  </div> -->
+  <br>
+  <div class="flex justify-center items-center">
+    <!-- <button (click)="restartQuiz()" class="btn btn-primary mt-4">Restart Quiz</button> -->
+    <a routerLink="/student/courses" class="btn btn-primary">Proceed</a>
+  </div>
+</div>

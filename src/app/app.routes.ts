@@ -1,37 +1,33 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { LoginGuard } from './guards/login.guard';
-import { AuthGuard } from './guards/auth.guard';
+import { PageNotFoundComponent } from './features/common/pages/page-not-found/page-not-found.component';
+import { RoleGuard } from './auth/role.guard';
 
 export const routes: Routes = [
   {
     path: "",
-    component: HomePageComponent
+    canActivate: [RoleGuard],
+    loadChildren: () => import("./features/common/common-routing.module").then(m => m.CommonRoutingModule)
   },
+
   {
-    path: "login",
-    canActivate: [LoginGuard],
-    component: LoginPageComponent
-  },
-  {
-    path: "admin",
-    canActivate: [LoginGuard, AuthGuard],
-    loadChildren: () => import("./modules/admin/admin.module").then(m => m.AdminModule)
+    path: "student",
+    canActivate: [RoleGuard],
+    loadChildren: () => import("./features/student/student-routing.module").then(m => m.StudentRoutingModule)
   },
   {
     path: "teacher",
-    canActivate: [LoginGuard, AuthGuard],
-    loadChildren: () => import("./modules/teacher/teacher.module").then(m => m.TeacherModule)
+    canActivate: [RoleGuard],
+    loadChildren: () => import("./features/teacher/teacher-routing.module").then(m => m.TeacherRoutingModule)
   },
+
   {
-    path: "student",
-    canActivate: [LoginGuard, AuthGuard],
-    loadChildren: () => import("./modules/student/student.module").then(m => m.StudentModule)
+    path: "admin",
+    canActivate: [RoleGuard],
+    loadChildren: () => import("./features/admin/admin-routing.module").then(m => m.AdminRoutingModule)
   },
+
   {
     path: "**",
     component: PageNotFoundComponent
-  }
+  },
 ];

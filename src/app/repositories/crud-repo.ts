@@ -17,7 +17,7 @@ type QueryModifiers<T> = {
 
 export class CrudRepo<T> {
 
-  apiURL = "http://localhost:8081/api";
+  apiURL = "http://localhost:8080/api";
   endpoint: string = "";
   http!: HttpClient;
 
@@ -27,7 +27,7 @@ export class CrudRepo<T> {
     private moduleName: string,
     private resourceName: string
   ) {
-    this.endpoint = `${this.apiURL}/${this.moduleName}/${this.resourceName}`;
+    this.endpoint = `${this.apiURL}/${this.resourceName}`;
     this.http = http;
 
     this.accessToken = JSON.parse(localStorage.getItem("user-detail") ?? "{}").token;

@@ -1,0 +1,67 @@
+<div class="container mx-auto lg:p-6">
+  <h1 class="text-2xl font-bold lg:text-center mb-4">📚 Course Lessons</h1>
+  <div *ngIf="(lessons$ | async)?.length === 0" class="text-gray-500 text-center">
+    No lessons available for this course.
+  </div>
+
+  <!-- <div *ngFor="let lesson of (lessons$ | async)" class="card bg-base-100 shadow-md mt-4 border-l-4"
+       [ngClass]="{
+         'border-blue-500': lesson.type === 'document',
+         'border-green-500': lesson.type === 'video',
+         'border-orange-500': lesson.type === 'quiz'
+       }">
+    <div class="card-body">
+      <h3 class="font-bold text-lg">{{ lesson.title }}</h3>
+      <p class="text-md text-gray-600">⏳ Duration: {{ lesson.duration }}</p>
+      <p class="text-md text-gray-500">📅 Created: {{ lesson.created_at | date:'mediumDate' }}</p>
+      <p class="text-md text-gray-500">🔄 Last Updated: {{ lesson.updated_at | date:'mediumDate' }}</p>
+
+      <div class="flex justify-between items-center mt-2">
+        <span class="badge"
+              [ngClass]="{
+                'badge-primary': lesson.type === 'document',
+                'badge-success': lesson.type === 'video',
+                'badge-warning': lesson.type === 'quiz'
+              }">
+          {{ lesson.type | titlecase }}
+        </span>
+        <a routerLink="1" [queryParams]="{type: lesson.type}" class="btn btn-outline btn-sm" >📖 View Lesson</a>
+      </div>
+    </div>
+  </div> -->
+
+  @for (item of mgaLessons; track $index) {
+  <div class="card bg-base-100 shadow-md mt-4 border-l-4" [ngClass]="{
+      'border-blue-500': item.material.type === 'document',
+      'border-green-500': item.material.type === 'video',
+      'border-orange-500': item.material.type === 'quiz'
+    }">
+    <div class="card-body">
+      <h3 class="font-bold text-lg">{{ item.material.title }}</h3>
+
+      <div class="flex justify-between items-center mt-2">
+        <span class="badge" [ngClass]="{
+                  'badge-primary': item.material.type === 'document',
+                  'badge-success': item.material.type === 'video',
+                  'badge-warning': item.material.type === 'quiz'
+                }">
+          {{ item.material.type| titlecase }}
+        </span>
+
+        @if (item.material.type == "quiz") {
+
+          @if (item.sessions.length > 0) {
+            <span class="text-green-600 font-bold">Score: {{(item.sessions[0].score / item.sessions[0].hps) * 100}} %</span>
+            <!-- <a [routerLink]="item.material.id + ''" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 Take Quiz</a> -->
+          }
+          @else {
+            <a [routerLink]="item.material.id + ''" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 Take Quiz</a>
+          }
+        } @else {
+        <a routerLink="1" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 View Lesson</a>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>

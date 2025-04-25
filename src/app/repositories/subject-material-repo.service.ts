@@ -6,15 +6,17 @@ export type SubjectMaterial = {
   id: number;
   title: string;
 
-  teacher_subject_id: number;
-  subject_topic_id: number;
-
   file_url?: string;
 
-  material_type: "lesson" | "quiz" | "video-quiz";
+  type: "document" | "quiz" | "video";
+  subject_id: number;
+
 
   material_order: number;
 
+
+  created_by: number;
+  updated_by: number;
 
   created_at: string;
   updated_at: string;

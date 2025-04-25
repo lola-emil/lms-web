@@ -5,11 +5,12 @@ import { CrudRepo } from './crud-repo';
 
 export type UserProfile = {
   id: number;
-  fname: string;
-  mname?: string;
-  lname: string;
+  firstname: string;
+  middlename?: string;
+  lastname: string;
 
   home_address?: string;
+  lrn: string;
   contact_no: string;
   user_id: number
 };

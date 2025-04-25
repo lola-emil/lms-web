@@ -1,0 +1,55 @@
+<app-drawer>
+  <app-topbar></app-topbar>
+
+  <section class="container mx-auto px-5 lg:px-16">
+    <div class="flex items-center justify-between">
+      <select class="select select-bordered select-sm">
+        <option value="" disabled selected>Sort By</option>
+      </select>
+
+      <div class="flex items-center gap-5">
+        <p class="font-bold">{{users.length}} users</p>
+        <button class="btn btn-sm btn-primary">Add new user</button>
+      </div>
+    </div>
+    <br>
+    <table class="table border rounded">
+      <thead>
+        <tr>
+          <th><input type="checkbox" class="checkbox checkbox-sm"></th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Grade Lvl</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th align="center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of users; track $index) {
+        <tr>
+          <td><input type="checkbox" class="checkbox checkbox-xs"></td>
+          <td></td>
+          <td>{{ item.profile?.firstname }} {{ item.profile?.lastname }}</td>
+          <td>{{ item.user?.email }}</td>
+          <td></td>
+          <td>{{ item.role?.role_name }}</td>
+          <td>active</td>
+          <td align="center">
+            <button class="btn btn-square btn-sm">
+              <span>
+                <svg class="size-[1.25em]" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M13.94 5 19 10.06 9.062 20a2.25 2.25 0 0 1-.999.58l-5.116 1.395a.75.75 0 0 1-.92-.921l1.395-5.116a2.25 2.25 0 0 1 .58-.999L13.938 5Zm7.09-2.03a3.578 3.578 0 0 1 0 5.06l-.97.97L15 3.94l.97-.97a3.578 3.578 0 0 1 5.06 0Z"
+                    class="fill-base-content" />
+                </svg>
+              </span>
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</app-drawer>

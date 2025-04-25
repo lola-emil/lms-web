@@ -1,0 +1,38 @@
+<app-drawer>
+  <app-topbar title="Gradebook"></app-topbar>
+  <div class="p-6 max-w-6xl mx-auto">
+
+      <!-- Download Buttons -->
+      <div class="flex space-x-3 mb-6 justify-end">
+        <button (click)="downloadCSV()" class="btn bg-blue-500 text-white rounded hover:bg-blue-600">Download CSV</button>
+        <button (click)="downloadExcel()" class="btn bg-green-500 text-white rounded hover:bg-green-600">Download Excel</button>
+        <button (click)="downloadPDF()" class="btn bg-red-500 text-white rounded hover:bg-red-600">Download PDF</button>
+      </div>
+    <!-- Gradebook Table -->
+    <div class="overflow-x-auto">
+      <table class="table table-zebra shadow-md rounded-lg">
+        <thead>
+          <tr>
+            <th class="p-3 text-left">Subject</th>
+            <th class="p-3 text-center">Quizzes ({{ criteria.quizzes }}%)</th>
+            <th class="p-3 text-center">Assignments ({{ criteria.assignments }}%)</th>
+            <th class="p-3 text-center">Exams ({{ criteria.exams }}%)</th>
+            <th class="p-3 text-center">Total Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students" class="border-t">
+            <td class="p-3">{{ student.subject }}</td>
+            <td class="p-3 text-center">{{ student.scores.quizzes }}</td>
+            <td class="p-3 text-center">{{ student.scores.assignments }}</td>
+            <td class="p-3 text-center">{{ student.scores.exams }}</td>
+            <td class="p-3 text-center font-semibold">{{ student.total.toFixed(2) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+
+  </div>
+  
+</app-drawer>

@@ -5,27 +5,31 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  apiURL = "http://localhost:8081/auth";
+  apiURL = "http://localhost:8080";
+  constructor(private http: HttpClient) { }
 
-  constructor(
-    private http: HttpClient
-  ) { }
-
-  signIn(body: Partial<{ email: string | null, password: string | null; }>) {
-    return this.http.post<{ role: string; token: string; user_id: number; }>(`${this.apiURL}/sign-in`, body);
+  signIn(email: string, password: string) {
+    return this.http.post(`${this.apiURL}/auth/sign-in`, { email, password });
   }
 
-  setUserDetail(payload: { role: string; token: string; user_id: number; }) {
-    localStorage.setItem("user-detail", JSON.stringify(payload));
-    return;
+  setUserDetail(data: {
+    role: string;
+    token: string;
+    user_id: number;
+  }) {
+    localStorage.setItem("user_detail", JSON.stringify(data));
   }
 
-  getUserDetail(): { role: string; token: string; user_id: number; } {
-    const userDetail = JSON.parse(localStorage.getItem("user-detail") ?? "{}");
-    return userDetail;
+  getUserDetail(): {
+    role: string;
+    section_id: number;
+    token: string;
+    user_id: number;
+  } {
+    return JSON.parse(localStorage.getItem("user_detail") ?? "{}");
   }
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem("user-detail");
+  signOut() {
+    localStorage.removeItem("user_detail");
   }
 }

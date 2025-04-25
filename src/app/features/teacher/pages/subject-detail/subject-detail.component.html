@@ -1,0 +1,46 @@
+<app-drawer>
+  <app-topbar></app-topbar>
+
+  <div class="container mx-auto px-5">
+    <h3 class="text-2xl font-semibold">Mathematics</h3>
+    <br>
+  </div>
+
+  <div class="container mx-auto px-5 gap-5 my-3 flex">
+    <a routerLinkActive="bg-primary text-white" routerLink="classwork"
+      class="btn btn-sm rounded-full px-5">Classworks</a>
+    <a routerLinkActive="bg-primary text-white" routerLink="announcements"
+      class="btn btn-sm rounded-full px-5">Announcements</a>
+    <a routerLinkActive="bg-primary text-white" routerLink="students" class="btn btn-sm rounded-full px-5">Students</a>
+    <a routerLinkActive="bg-primary text-white" routerLink="grades" class="btn btn-sm rounded-full px-5">Grades</a>
+    <!-- <a routerLink="forum" class="btn btn-sm rounded-full px-5">Forum</a> -->
+    <!-- <a routerLink="live-session" class="btn btn-sm rounded-full px-5">Live session</a> -->
+  </div>
+
+  <div class="container flex gap-5 mx-auto px-5">
+    <div class="flex gap-5 w-full max-w-screen-lg">
+      <div class=" flex-1">
+        <div class="">
+
+          <!-- <img src="https://loremflickr.com/500/200?random=3" class="max-h-96 w-full rounded-md" alt=""> -->
+          <!-- <br> -->
+
+          <router-outlet />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <dialog id="my_modal_1" #createActivityModal class="modal">
+    <div class="modal-box">
+      <h3 class="text-lg font-bold">Hello!</h3>
+      <p class="py-4">Press ESC key or click the button below to close</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+</app-drawer>

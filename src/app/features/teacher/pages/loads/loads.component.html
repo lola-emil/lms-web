@@ -1,0 +1,41 @@
+<app-drawer>
+  <app-topbar title="Loads"></app-topbar>
+
+  <div class="container mx-auto px-5">
+    <div class="flex items-center lg:justify-between gap-3">
+      <input type="text" placeholder="Search Course" class="input w-full lg:w-96 lg:input-sm input-bordered">
+      <button class="btn btn-ghost btn-sm hidden">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="m17.25 4-.1.007a.75.75 0 0 0-.65.743v12.692l-3.22-3.218-.084-.072a.75.75 0 0 0-.976 1.134l4.504 4.5.084.072a.75.75 0 0 0 .976-.073l4.497-4.5.072-.084a.75.75 0 0 0-.073-.977l-.084-.072a.75.75 0 0 0-.977.073L18 17.446V4.75l-.006-.102A.75.75 0 0 0 17.251 4Zm-11.036.22L1.72 8.715l-.073.084a.75.75 0 0 0 .073.976l.084.073a.75.75 0 0 0 .976-.073l3.217-3.218v12.698l.008.102a.75.75 0 0 0 .743.648l.101-.007a.75.75 0 0 0 .649-.743L7.497 6.559l3.223 3.217.084.072a.75.75 0 0 0 .975-1.134L7.275 4.22l-.085-.072a.75.75 0 0 0-.976.073Z"
+            class="fill-base-content" />
+        </svg>
+        <span>Sort</span>
+      </button>
+    </div>
+    <br>
+
+    <div class="grid gap-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+      <a routerLink="1" class="rounded-lg border-[1px]">
+        <div>
+          <!-- <img {[]}="https://loremflickr.com/100/100?random=3" alt=""> -->
+          <!-- <img [src]="imgURL + item.id" class="w-full min-h-48 rounded-tl rounded-tr" alt=""> -->
+        </div>
+        <div class="p-5">
+          <p class="font-semibold">Math - Section A</p>
+          <div class="flex flex-col">
+            <!-- < class="text-sm">{{ item.instructor }}</ p> -->
+
+          </div>
+          <div class="flex mt-3 justify-between">
+            <div class="text-sm flex items-center gap-1" title="12 Participants/Students">
+              <span>12</span>
+              <span>Participants</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</app-drawer>

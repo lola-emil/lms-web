@@ -1,0 +1,50 @@
+<div class="flex h-screen">
+
+  <!-- HERO SECTION -->
+  <section class="flex-1 hidden md:flex flex-col items-center  justify-center">
+    <div class="container  flex flex-col items-center justify-center  gap-20">
+      <div>
+        <h3 class="text-xl font-semibold mb-5">Empowering Futures, One Lesson at a Time</h3>
+        <p class="">Where Curiosity Meets Opportunity: Inspiring Lifelong Learners <br> for a Brighter Tomorrow.</p>
+      </div>
+      <app-welcome />
+    </div>
+  </section>
+
+  <section class="flex-1 flex items-center justify-center flex-col">
+    <div class="container flex flex-col items-center justify-evenly">
+      <div>
+        <h3 class="text-lg font-semibold md:mb-5 md:text-left text-center md:text-xl">Sta. Cruz Learning Center</h3>
+        <p>Welcome, please login to your account</p>
+      </div>
+
+      <form [formGroup]="userForm" (submit)="submit()" action="/student/dashboard" class="card flex flex-col items-center">
+        <div class="card-body">
+          <label class="form-control w-72">
+            <div class="label">
+              <span class="label-text">Email</span>
+            </div>
+            <input type="text" formControlName="email" class="input input-bordered w-full" />
+            <div class="label">
+              <span class="label-text-alt text-error"></span>
+            </div>
+          </label>
+
+          <label class="form-control w-full">
+            <div class="label">
+              <span class="label-text">Password</span>
+            </div>
+            <input type="password" formControlName="password" name="password" class="input input-bordered w-full " />
+            <div class="label">
+              <span class="label-text-alt"></span>
+            </div>
+          </label>
+          <button class="btn btn-primary w-full">Log In</button>
+          <a routerLink="/forgot-credential" class="link link-secondary text-sm">Forgot email or password</a>
+        </div>
+      </form>
+
+      <div></div>
+    </div>
+  </section>
+</div>
