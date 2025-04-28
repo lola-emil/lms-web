@@ -58,7 +58,12 @@
             <a [routerLink]="item.material.id + ''" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 Take Quiz</a>
           }
         } @else {
-        <a routerLink="1" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 View Lesson</a>
+          @if (item.material.file_url) {
+            <a [href]="item.material.file_url" target="_blank" class="btn btn-outline btn-sm">📖 View Lesson</a>
+          }
+          @else {
+            <a routerLink="1" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 View Lesson</a>
+          }
         }
       </div>
     </div>

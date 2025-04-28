@@ -3,7 +3,7 @@ import { CrudRepo } from './crud-repo';
 import { HttpClient } from '@angular/common/http';
 
 
-interface Subject {
+export interface Subject {
   id: number; // Primary key, Auto Increment
   subject_name: string; // Name of the subject
   class_level_id: number; // Foreign key to the class_levels table

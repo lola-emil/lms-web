@@ -8,6 +8,7 @@ import { AnnouncementsComponent } from "./pages/announcements/announcements.comp
 import { StudentsComponent } from "./pages/students/students.component";
 import { GradesComponent } from "./pages/grades/grades.component";
 import { ClassworkFormComponent } from "./pages/classwork-form/classwork-form.component";
+import { GradebookComponent } from "./pages/gradebook/gradebook.component";
 
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: "loads",
     component: LoadsComponent
+  },
+  {
+    path: "gradebook",
+    component: GradebookComponent
   },
   {
     path: "loads/:id",

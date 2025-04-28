@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { UserManagementComponent } from "./pages/user-management/user-management.component";
 import { CurriculumManagementComponent } from "./pages/curriculum-management/curriculum-management.component";
+import { SubjectDetailPageComponent } from "./pages/subject-detail-page/subject-detail-page.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: "content-management",
     component: CurriculumManagementComponent
+  },
+  {
+    path: "content-management/:id",
+    component: SubjectDetailPageComponent
   }
 ];
 
