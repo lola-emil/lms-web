@@ -22,7 +22,7 @@
     <div class="grid gap-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
       @for (item of subjects; track $index) {
 
-      <a [routerLink]="item.subject.id + ''" class="rounded-lg border-[1px]">
+      <a [routerLink]="item.subject.id + ''" class="rounded-lg border-[1px] shadow">
         <div>
           <!-- <img {[]}="https://loremflickr.com/100/100?random=3" alt=""> -->
           <!-- <img [src]="imgURL + item.id" class="w-full min-h-48 rounded-tl rounded-tr" alt=""> -->
