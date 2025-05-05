@@ -56,12 +56,17 @@
           </span>
 
 
-          @if (item.material.type == "document") {
-          <a [href]="item.material.file_url" target="_blank" class="btn btn-outline btn-sm">📖 View Lesson</a>
-          }
-          @else {
-            <a routerLink="1" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 View Lesson</a>
-          }
+          <div class="flex gap-3">
+
+            @if (item.material.type == "document") {
+              <a [href]="item.material.file_url" target="_blank" class="btn btn-outline btn-sm">📖 View Lesson</a>
+              }
+              @else {
+                <a routerLink="1" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 View Lesson</a>
+              }
+
+              <button class="btn btn-sm btn-outline">Remove</button>
+          </div>
 
         </div>
       </div>
