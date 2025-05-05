@@ -88,7 +88,7 @@ export class SubjectDetailPageComponent {
                 quizSession: this.quizSessionRepo.get(
                   {
                     quiz_id: subjectMaterialIds,
-                    student_id: this.authService.getUserDetail().user_id
+                    student_id: this.authService.getUserDetail().id
                   }
                 )
               });
@@ -132,7 +132,7 @@ export class SubjectDetailPageComponent {
       const formData = new FormData();
       const userDetail = this.authService.getUserDetail();
 
-      formData.append("created_by", userDetail.user_id + "");
+      formData.append("created_by", userDetail.id + "");
       formData.append("subject_id", val["id"]);
       formData.append("title", this.title.value + "");
 

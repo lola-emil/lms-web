@@ -104,7 +104,7 @@ export class CurriculumManagementComponent implements OnInit {
     this.subjectRepo.post({
       subject_name: this.subjectName.value,
       class_level_id: this.selectedGradeLevel.value,
-      created_by: this.authService.getUserDetail().user_id
+      created_by: this.authService.getUserDetail().id
     }).subscribe(val => {
       location.reload();
     });

@@ -24,7 +24,7 @@ export class TopbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileRepo.get({
-      user_id: this.authService.getUserDetail().user_id
+      user_id: this.authService.getUserDetail().id
     }).subscribe(val => {
       console.log(val);
       this.user = val[0];

@@ -12,6 +12,7 @@ import { ProgressAndReportComponent } from './pages/progress-and-report/progress
 import { SchedulesComponent } from './pages/schedules/schedules.component';
 import { ForumComponent } from './pages/forum/forum.component';
 import { LectureContentComponent } from './pages/lecture-content/lecture-content.component';
+import { MeetingComponent } from './pages/meeting/meeting.component';
 
 
 const routes: Routes = [
@@ -83,6 +84,11 @@ const routes: Routes = [
   {
     path: "forums",
     component: ForumComponent
+  },
+
+  {
+    path: "meeting",
+    component: MeetingComponent
   }
 
 ];

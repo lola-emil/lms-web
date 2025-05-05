@@ -27,7 +27,8 @@
         <p>Welcome, please login to your account</p>
       </div>
 
-      <form [formGroup]="userForm" (submit)="submit()" action="/student/dashboard" class="card flex flex-col items-center">
+      <form [formGroup]="userForm" (submit)="submit()" action="/student/dashboard"
+        class="card flex flex-col items-center">
         <div class="card-body">
           <label class="form-control w-72">
             <div class="label">
@@ -35,7 +36,11 @@
             </div>
             <input type="text" formControlName="email" class="input input-bordered w-full" />
             <div class="label">
-              <span class="label-text-alt text-error"></span>
+              <span class="label-text-alt text-error">
+                @if (errors.get("email")) {
+                {{errors.get("email")}}
+                }
+              </span>
             </div>
           </label>
 
@@ -45,10 +50,21 @@
             </div>
             <input type="password" formControlName="password" name="password" class="input input-bordered w-full " />
             <div class="label">
-              <span class="label-text-alt"></span>
+              <span class="label-text-alt text-error">
+                @if (errors.get("password")) {
+                  {{errors.get("password")}}
+                  }
+              </span>
             </div>
           </label>
-          <button class="btn btn-primary w-full">Log In</button>
+          <button class="btn btn-primary w-full" [disabled]="isSigningIn">
+            @if (isSigningIn) {
+              <span class="loading loading-bars loading-sm"></span>
+            }
+            @else {
+              <span>Log In</span>
+            }
+          </button>
           <a routerLink="/forgot-credential" class="link link-secondary text-sm">Forgot email or password</a>
         </div>
       </form>

@@ -57,7 +57,7 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
     this.quizSessionRepo.get({
-      student_id: this.authService.getUserDetail().user_id,
+      student_id: this.authService.getUserDetail().id,
       quiz_id: this.quizId
     }).subscribe(val => {
       console.log("session", val);
@@ -150,7 +150,7 @@ export class QuizComponent implements OnInit {
     this.quizSessionRepo.post({
       selectedAnswers: this.answers,
       questions: this.questions,
-      student_id: this.authService.getUserDetail().user_id,
+      student_id: this.authService.getUserDetail().id,
       quiz_id: this.quizId
     }).subscribe((val: any) => {
       this.score = val.score;

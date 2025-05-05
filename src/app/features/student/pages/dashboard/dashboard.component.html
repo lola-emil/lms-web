@@ -49,13 +49,28 @@
               </div>
             </a>
           } -->
-
+<!--
           @for (item of subjects; track $index) {
           <a [routerLink]="'/student/courses/' + item.subject_id" class="p-5 rounded-lg"
             [style.background-color]="colors[$index]">
             <p class="text-sm font-semibold text-secondary-content">{{ item.subject_name }}</p>
             <div class="flex items-center justify-between">
               <p class="text-xs  text-secondary-content">Pedro Duka</p>
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M13.267 4.209a.75.75 0 0 0-1.034 1.086l6.251 5.955H3.75a.75.75 0 0 0 0 1.5h14.734l-6.251 5.954a.75.75 0 0 0 1.034 1.087l7.42-7.067a.996.996 0 0 0 .3-.58.758.758 0 0 0-.001-.29.995.995 0 0 0-.3-.578l-7.419-7.067Z"
+                  class="fill-base-content" />
+              </svg>
+            </div>
+          </a>
+          } -->
+
+          @for (item of subjects?.enrolledSubjectsByStudentId; track $index) {
+            <a [routerLink]="'/student/courses/' + item.teacherSubject.id" class="p-5 rounded-lg"
+            [style.background-color]="colors[$index]">
+            <p class="text-sm font-semibold text-secondary-content">{{ item.teacherSubject.subject.title }}</p>
+            <div class="flex items-center justify-between">
+              <p class="text-xs  text-secondary-content">{{ item.teacherSubject.teacher.firstname }} {{ item.teacherSubject.teacher.lastname }}</p>
               <svg width="16" height="16" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M13.267 4.209a.75.75 0 0 0-1.034 1.086l6.251 5.955H3.75a.75.75 0 0 0 0 1.5h14.734l-6.251 5.954a.75.75 0 0 0 1.034 1.087l7.42-7.067a.996.996 0 0 0 .3-.58.758.758 0 0 0-.001-.29.995.995 0 0 0-.3-.578l-7.419-7.067Z"

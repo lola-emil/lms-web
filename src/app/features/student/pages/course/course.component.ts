@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
@@ -7,6 +7,9 @@ import { CourseService } from '../../services/course.service';
 import { Observable, switchMap } from 'rxjs';
 import { SubjectRepoService } from '../../../../repositories/subject-repo.service';
 import { TeacherSubjectRepoService } from '../../../../repositories/teacher-subject-repo.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../environments/environment';
+import { MeetingSession } from '../../../teacher/pages/subject-detail/services/meeting.service';
 
 @Component({
   selector: 'app-course',
@@ -15,7 +18,7 @@ import { TeacherSubjectRepoService } from '../../../../repositories/teacher-subj
   templateUrl: './course.component.html',
   styleUrl: './course.component.css'
 })
-export class CourseComponent {
+export class CourseComponent implements OnInit {
   title$!: Observable<{ course_name: string; instructor: string; }>;
 
   readonly today = new Date();
@@ -39,11 +42,14 @@ export class CourseComponent {
 
   angTitle = "";
 
+  teacherSubjectId?: number;
+  matchedMeetingSession?: MeetingSession;
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
     private subjectService: SubjectRepoService,
-    private teacherSubjectRepo: TeacherSubjectRepoService
+    private teacherSubjectRepo: TeacherSubjectRepoService,
+    private http: HttpClient
   ) {
     this.title$ = this.route.params.pipe(
       switchMap(params => this.courseService.getById(params['id']))
@@ -51,13 +57,19 @@ export class CourseComponent {
 
 
     this.route.params.subscribe(val => {
+      this.teacherSubjectId = val['id'];
+    });
+  }
 
-      this.subjectService.get({
-        id: val['id']
-      }).subscribe(val => {
-        this.angTitle = val[0].subject_name;
-      });
 
+  ngOnInit(): void {
+    this.http.get<MeetingSession>(`${environment.apiURL}/zoom/get-live-session`, {
+      params: {
+        teacher_subject_id: this.teacherSubjectId + ""
+      }
+    }).subscribe(val => {
+      this.matchedMeetingSession = val;
+      console.log(val);
     });
   }
 

@@ -16,10 +16,10 @@
     </div>
     <br>
     <div class="grid gap-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-      @for (item of subjects; track $index) {
+      <!-- @for (item of subjects; track $index) {
       <a [routerLink]="item.id" class="rounded-lg border-[1px]">
         <div>
-          <!-- <img {[]}="https://loremflickr.com/100/100?random=3" alt=""> -->
+          <img {[]}="https://loremflickr.com/100/100?random=3" alt="">
           <img [src]="imgURL + item.id" class="w-full min-h-48 rounded-tl rounded-tr" alt="">
         </div>
         <div class="p-5">
@@ -34,7 +34,29 @@
           </div>
         </div>
       </a>
-      }
+      } -->
+
+      @for (item of subjects?.enrolledSubjectsByStudentId; track $index) {
+        <a [routerLink]="item.teacherSubject.id" class="rounded-lg border-[1px]">
+          <div>
+            <!-- <img {[]}="https://loremflickr.com/100/100?random=3" alt=""> -->
+             @if(item.teacherSubject.subject.coverImgUrl) {
+               <img [src]="item.teacherSubject.subject.coverImgUrl" class="w-full min-h-48 rounded-tl rounded-tr" alt="">
+             }
+          </div>
+          <div class="p-5">
+            <p class="font-semibold">{{ item.teacherSubject.subject.title }}</p>
+            <div class="flex flex-col">
+              <p class="text-sm">{{ item.teacherSubject.teacher.firstname }} {{ item.teacherSubject.teacher.lastname}}</p>
+
+            </div>
+            <div class="flex mt-3 justify-between">
+              <p class="text-sm">12 module(s)</p>
+              <p class="text-sm">45% complete</p>
+            </div>
+          </div>
+        </a>
+        }
     </div>
   </div>
 

@@ -1,8 +1,12 @@
 <div class="container mx-auto lg:p-6">
   <h1 class="text-2xl font-bold lg:text-center mb-4">📚 Course Lessons</h1>
-  <div *ngIf="(lessons$ | async)?.length === 0" class="text-gray-500 text-center">
+
+  @if (teacherAssignedSubject?.teacherAssignedSubject?.subject?.subjectMaterials?.length == 0) {
+  <div class="text-gray-500 text-center">
     No lessons available for this course.
   </div>
+  }
+
 
   <!-- <div *ngFor="let lesson of (lessons$ | async)" class="card bg-base-100 shadow-md mt-4 border-l-4"
        [ngClass]="{
@@ -30,7 +34,48 @@
     </div>
   </div> -->
 
-  @for (item of mgaLessons; track $index) {
+
+  @for (item of teacherAssignedSubject?.teacherAssignedSubject?.subject?.subjectMaterials; track $index) {
+  <div class="card bg-base-100 shadow-md mt-4 border-l-4" [ngClass]="{
+      'border-blue-500': item.materialType === 'DOCUMENT',
+      'border-green-500': item.materialType === 'MD',
+      'border-orange-500': item.materialType === 'QUIZ'
+    }">
+    <div class="card-body">
+      <h3 class="font-bold text-lg">{{ item.description }}</h3>
+      <p class="text-md text-gray-500">📅 Created: {{ item.createdAt | date:'mediumDate' }}</p>
+      <p class="text-md text-gray-500">🔄 Last Updated: {{ item.updatedAt | date:'mediumDate' }}</p>
+
+      <div class="flex justify-between items-center mt-2">
+        <span class="badge" [ngClass]="{
+            'badge-primary': item.materialType  === 'DOCUMENT',
+            'badge-success': item.materialType  === 'MD',
+            'badge-warning': item.materialType  === 'QUIZ'
+          }">
+          {{ item.materialType | titlecase }}
+        </span>
+        @if (item.materialType == "QUIZ") {
+        <!--
+          @if (item.sessions.length > 0) {
+            <span class="text-green-600 font-bold">Score: {{(item.sessions[0].score / item.sessions[0].hps) * 100}} %</span>
+          }
+          @else {
+            <a [routerLink]="item.material.id + ''" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 Take Quiz</a>
+          } -->
+        } @else {
+        @if (item.materialType == "DOCUMENT") {
+        <a [href]="item.fileURL" target="_blank" class="btn btn-outline btn-sm">📖 View Lesson</a>
+        }
+        @else {
+        <a routerLink="1" [queryParams]="{type: item.materialType}" class="btn btn-outline btn-sm">📖 View Lesson</a>
+        }
+        }
+      </div>
+    </div>
+  </div>
+  }
+
+  <!-- @for (item of mgaLessons; track $index) {
   <div class="card bg-base-100 shadow-md mt-4 border-l-4" [ngClass]="{
       'border-blue-500': item.material.type === 'document',
       'border-green-500': item.material.type === 'video',
@@ -52,7 +97,6 @@
 
           @if (item.sessions.length > 0) {
             <span class="text-green-600 font-bold">Score: {{(item.sessions[0].score / item.sessions[0].hps) * 100}} %</span>
-            <!-- <a [routerLink]="item.material.id + ''" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 Take Quiz</a> -->
           }
           @else {
             <a [routerLink]="item.material.id + ''" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 Take Quiz</a>
@@ -68,5 +112,5 @@
       </div>
     </div>
   </div>
-  }
+  } -->
 </div>

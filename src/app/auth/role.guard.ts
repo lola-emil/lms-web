@@ -20,6 +20,8 @@ export class RoleGuard implements CanActivate {
     const userDetailRaw = localStorage.getItem('user_detail');
     const url = state.url;
 
+    console.log("madafak");
+
     // 🔓 Allow access to "" only if not logged in
     if (url === '/' || url === '') {
       if (!userDetailRaw) {
@@ -27,9 +29,9 @@ export class RoleGuard implements CanActivate {
       } else {
         const role = JSON.parse(userDetailRaw).role;
         // Redirect to correct dashboard
-        if (role === 'student') return this.router.parseUrl('/student');
-        if (role === 'teacher') return this.router.parseUrl('/teacher');
-        if (role === 'admin') return this.router.parseUrl('/admin');
+        if (role === 'STUDENT') return this.router.parseUrl('/student');
+        if (role === 'TEACHER') return this.router.parseUrl('/teacher');
+        if (role === 'ADMIN') return this.router.parseUrl('/admin');
         return this.router.parseUrl('/');
       }
     }
@@ -43,9 +45,9 @@ export class RoleGuard implements CanActivate {
     const role = userDetail.role;
 
     // ✅ Allow access if route matches role
-    if (url.startsWith('/student') && role === 'student') return true;
-    if (url.startsWith('/teacher') && role === 'teacher') return true;
-    if (url.startsWith('/admin') && role === 'admin') return true;
+    if (url.startsWith('/student') && role === 'STUDENT') return true;
+    if (url.startsWith('/teacher') && role === 'TEACHER') return true;
+    if (url.startsWith('/admin') && role === 'ADMIN') return true;
 
     // ❌ Role mismatch
     return this.router.parseUrl('/');

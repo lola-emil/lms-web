@@ -3,7 +3,9 @@ import { Router, RouterLink } from '@angular/router';
 import { WelcomeComponent } from '../../../../shared/svg/welcome/welcome.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, finalize, of, tap } from 'rxjs';
+import type { ValidationErrorItem } from "joi";
+import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -20,22 +22,36 @@ export class SignInPageComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) { }
+
+  errors: Map<string, string> = new Map();
+  isSigningIn = false;
 
   submit() {
     const value = this.userForm.value;
-    this.authService.signIn(value.email ?? "", value.password ?? "")
+    this.errors.clear();
+
+    this.isSigningIn = true;
+    this.authService.signIn(value.email + "", value.password + "")
       .pipe(
-        tap((val: any) => {
-          this.authService.setUserDetail(val);
+        tap(val => {
+          console.log(val);
+          this.authService.setUserDetail(val as any);
           location.reload();
         }),
-        catchError(error => {
-          console.log(error.data);
+
+        catchError(err => {
+          this.isSigningIn = false;
+          const validationErrors: ValidationErrorItem[] = err.error.data;
+          console.log("login error", err.error.data);
+
+          validationErrors.forEach(val => {
+            if (val.context?.key)
+              this.errors.set(val.context?.key, val.message);
+          });
           return of(null);
-        })
-      )
-      .subscribe();
+        }),
+      ).subscribe();
   }
 }

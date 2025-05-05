@@ -5,13 +5,16 @@ import { HelloSvgComponent } from '../../../../shared/svg/hello-svg/hello-svg.co
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
 import { Course, CourseService } from '../../services/course.service';
-import { forkJoin, map, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of, Subscription, switchMap, tap } from 'rxjs';
 import { createAvatar } from '@dicebear/core';
 import { pixelArt } from '@dicebear/collection';
 import { SubjectRepoService } from '../../../../repositories/subject-repo.service';
 import { StudentClassLevelRepo } from '../../../../repositories/student-class-level-repo.service';
 import { TeacherSubjectRepoService } from '../../../../repositories/teacher-subject-repo.service';
 import { UserRepoService } from '../../../../repositories/user-repo.service';
+import { Apollo, gql } from 'apollo-angular';
+import { DashboardService, EnrolledSubjectsByStudentIdResponse } from './services/dashboard.service';
+import { ApolloQueryResult } from '@apollo/client/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,70 +23,36 @@ import { UserRepoService } from '../../../../repositories/user-repo.service';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
   today: Date = new Date();
 
-
   recents$: Observable<Course[]>;
-
-  subjects: any;
+  subjects?: EnrolledSubjectsByStudentIdResponse;
 
   constructor(
     private courseService: CourseService,
-    private subjectService: SubjectRepoService,
-    private studentClassLevelRepo: StudentClassLevelRepo,
-    private teacherSubjectRepo: TeacherSubjectRepoService,
-    private userRepo: UserRepoService
+    private dashboardService: DashboardService
   ) {
     this.recents$ = this.courseService.get().pipe(map((val: any) => val.data));
   }
+
   ngOnInit(): void {
-    const userDetail = JSON.parse(localStorage.getItem("user_detail") ?? "{}");
-
-
-    this.studentClassLevelRepo.get({
-      student_id: userDetail.user_id
-    }).subscribe(val => {
-
-
-      let classLevelid = val[0].class_level_id;
-
-      this.teacherSubjectRepo.get({
-        class_section_id: val[0].class_section_id
-      }).pipe(
-        switchMap(teacherSubjects => {
-          const teacherIds = teacherSubjects.map(val => val.teacher_id);
-          const subjectIds = teacherSubjects.map(val => val.subject_id);
-
-          return forkJoin({
-            teacherSubjects: of(teacherSubjects),
-            subject: this.subjectService.get({ id: subjectIds }),
-            teacher: this.userRepo.get({ id: teacherIds })
-          });
-        }),
-      ).subscribe(({ teacherSubjects, subject, teacher }) => {
-        const formatted = teacherSubjects.map(ts => {
-          const subj = subject.find((s: any) => s.id === ts.subject_id);
-          const teach = teacher.find((t: any) => t.id === ts.teacher_id);
-
-          return {
-            subject_id: subj?.id,
-            subject_name: subj?.subject_name || 'Unknown Subject',
-            teacher: teach?.email || 'Unknown Teacher'
-          };
-        });
-
-
-        this.subjects = formatted;
-
-        console.log("Formatted subjects:", formatted);
-      });
-
-
-    });
-
-
-
+    this.subscriptions.push(
+      this.dashboardService.getEnrolledSubjects()
+        .pipe(
+          tap(val => {
+            this.subjects = val.data;
+            console.log(val.data.enrolledSubjectsByStudentId);
+          }),
+          catchError(res => {
+            console.log(res);
+            return of(null);
+          })
+        )
+        .subscribe()
+    );
   }
+
   ngOnDestroy(): void {
   }
 
