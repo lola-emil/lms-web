@@ -20,8 +20,6 @@ export class RoleGuard implements CanActivate {
     const userDetailRaw = localStorage.getItem('user_detail');
     const url = state.url;
 
-    console.log("madafak");
-
     // 🔓 Allow access to "" only if not logged in
     if (url === '/' || url === '') {
       if (!userDetailRaw) {

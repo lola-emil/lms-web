@@ -8,7 +8,7 @@
       </select>
 
       <div class="flex items-center gap-5">
-        <p class="font-bold">{{users.length}} users</p>
+        <p class="font-bold">{{mgaUsers.length}} users</p>
         <button class="btn btn-sm btn-primary">Add new user</button>
       </div>
     </div>
@@ -16,8 +16,8 @@
     <table class="table border rounded">
       <thead>
         <tr>
-          <th><input type="checkbox" class="checkbox checkbox-sm"></th>
-          <th>ID</th>
+          <!-- <th><input type="checkbox" class="checkbox checkbox-sm"></th> -->
+          <th></th>
           <th>Name</th>
           <th>Email</th>
           <th>Grade Lvl</th>
@@ -27,14 +27,14 @@
         </tr>
       </thead>
       <tbody>
-        @for (item of users; track $index) {
+        @for (item of mgaUsers; track $index) {
         <tr>
-          <td><input type="checkbox" class="checkbox checkbox-xs"></td>
+          <!-- <td><input type="checkbox" class="checkbox checkbox-xs"></td> -->
+          <td>{{ $index + 1 }}</td>
+          <td>{{ item.firstname }} {{ item.lastname }}</td>
+          <td>{{ item.email }}</td>
           <td></td>
-          <td>{{ item.profile?.firstname }} {{ item.profile?.lastname }}</td>
-          <td>{{ item.user?.email }}</td>
-          <td></td>
-          <td>{{ item.role?.role_name }}</td>
+          <td>{{ item.role }}</td>
           <td>active</td>
           <td align="center">
             <button class="btn btn-square btn-sm">

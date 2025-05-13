@@ -46,15 +46,8 @@ export class CourseComponent implements OnInit {
   matchedMeetingSession?: MeetingSession;
   constructor(
     private route: ActivatedRoute,
-    private courseService: CourseService,
-    private subjectService: SubjectRepoService,
-    private teacherSubjectRepo: TeacherSubjectRepoService,
     private http: HttpClient
   ) {
-    this.title$ = this.route.params.pipe(
-      switchMap(params => this.courseService.getById(params['id']))
-    );
-
 
     this.route.params.subscribe(val => {
       this.teacherSubjectId = val['id'];

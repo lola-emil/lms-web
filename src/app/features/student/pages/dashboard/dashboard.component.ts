@@ -8,13 +8,7 @@ import { Course, CourseService } from '../../services/course.service';
 import { catchError, forkJoin, map, Observable, of, Subscription, switchMap, tap } from 'rxjs';
 import { createAvatar } from '@dicebear/core';
 import { pixelArt } from '@dicebear/collection';
-import { SubjectRepoService } from '../../../../repositories/subject-repo.service';
-import { StudentClassLevelRepo } from '../../../../repositories/student-class-level-repo.service';
-import { TeacherSubjectRepoService } from '../../../../repositories/teacher-subject-repo.service';
-import { UserRepoService } from '../../../../repositories/user-repo.service';
-import { Apollo, gql } from 'apollo-angular';
 import { DashboardService, EnrolledSubjectsByStudentIdResponse } from './services/dashboard.service';
-import { ApolloQueryResult } from '@apollo/client/core';
 
 @Component({
   selector: 'app-dashboard',

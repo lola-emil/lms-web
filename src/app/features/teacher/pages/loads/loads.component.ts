@@ -25,9 +25,7 @@ export class LoadsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const userDetail = this.authService.getUserDetail();
-
     this.subscriptions.push(
-
       this.loadsService.getTeacherSubjects(userDetail.id)
         .pipe(
           tap(val => {

@@ -12,7 +12,6 @@ import { AuthService } from '../../../../services/auth.service';
 })
 export class DrawerComponent implements OnInit, OnDestroy {
   constructor(
-    private courseService: CourseService,
     private authService: AuthService
   ) {}
 
@@ -20,14 +19,7 @@ export class DrawerComponent implements OnInit, OnDestroy {
   courses: Course[] = [];
 
   ngOnInit(): void {
-    this.courseSubscription =  this.courseService.get()
-    .pipe(
-      tap(val => {
-        const data: Course[] = (val as any).data;
-        this.courses = data;
-      })
-    )
-    .subscribe();
+
   }
 
   ngOnDestroy(): void {

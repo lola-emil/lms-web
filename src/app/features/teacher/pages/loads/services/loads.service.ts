@@ -32,7 +32,7 @@ export class LoadsService {
     return this.apollo.watchQuery<TeacherAssignedSubjectsByTeacherIdResponse>({
       query: gql`
         query TeacherAssignedSubjectsByTeacherId {
-            teacherAssignedSubjectsByTeacherId(teacherId: 1) {
+            teacherAssignedSubjectsByTeacherId(teacherId: ${teacherId}) {
                 id
                 schoolYearId
                 createdAt

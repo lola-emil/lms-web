@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -9,8 +9,8 @@ import { AuthService } from '../../../../services/auth.service';
 import { CourseModuleService } from '../../../student/services/course-module.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Subject, SubjectRepoService } from '../../../../repositories/subject-repo.service';
 import { GradeLevel, GradeLevelRepoService } from '../../../../repositories/grade-level-repo.service';
+import { Subject, SubjectDetailService } from './services/subject-detail.service';
 
 @Component({
   selector: 'app-subject-detail-page',
@@ -18,7 +18,7 @@ import { GradeLevel, GradeLevelRepoService } from '../../../../repositories/grad
   templateUrl: './subject-detail-page.component.html',
   styles: ``
 })
-export class SubjectDetailPageComponent {
+export class SubjectDetailPageComponent implements OnInit {
   lessons$!: Observable<any>;
 
   @ViewChild("uploadModal") uploadModal!: ElementRef<HTMLDialogElement>;
@@ -31,83 +31,23 @@ export class SubjectDetailPageComponent {
 
   subjectId: any;
 
-  subjectDetail: {
-    subject: Subject,
-    gradeLevel: GradeLevel;
-  } | null = null;
+  subjectDetail: Subject | null = null;
+
 
   constructor(
     private route: ActivatedRoute,
-    private courseModuleService: CourseModuleService,
-    private subjectRepo: SubjectRepoService,
     private subjectMaterialRepo: SubjectMaterialRepoService,
-    private gradeLevelRepo: GradeLevelRepoService,
-    private quizSessionRepo: QuizSessionRepoService,
-    private authService: AuthService
+    private authService: AuthService,
+    private subjectDetailService: SubjectDetailService
   ) {
-    this.lessons$ = this.route.parent!.params.pipe(
-      map(param => param['id']),
-      switchMap(courseId => this.courseModuleService.getByCourseId(courseId)),
-      map(response => (response as any).data)
-    );
+    this.route.params.subscribe(val => this.subjectId = val['id']);
+  }
 
-    this.route.params.subscribe(param => {
-      this.subjectRepo.get({
-        id: param["id"]
-      }).pipe(
-        switchMap(subjects => {
-          const gradeLevelIds = subjects.map(val => val.class_level_id);
-          return forkJoin({
-            subjects: of(subjects),
-            gradeLevel: gradeLevelRepo.get({ id: gradeLevelIds })
-          });
-        })
-      ).subscribe(val => {
-        this.subjectDetail = {
-          subject: val.subjects[0],
-          gradeLevel: val.gradeLevel[0]
-        };
+  ngOnInit(): void {
+    this.subjectDetailService.getSubjectDetail(this.subjectId)
+      .subscribe(val => {
+        this.subjectDetail = val.data.subject;
       });
-    });
-
-    this.route.params.subscribe(
-      val => {
-        this.subjectId = val['id'];
-
-        console.log(val["id"]);
-
-        this.subjectMaterialRepo.get({
-          subject_id: val['id']
-        })
-          .pipe(
-            switchMap(materials => {
-              const subjectMaterialIds = materials.map(val => val.id);
-
-              return forkJoin({
-                subjectMaterials: of(materials),
-                quizSession: this.quizSessionRepo.get(
-                  {
-                    quiz_id: subjectMaterialIds,
-                    student_id: this.authService.getUserDetail().id
-                  }
-                )
-              });
-            })
-          )
-          .subscribe(subjects => {
-            const formatted = subjects.subjectMaterials.map(material => {
-              const sessions = subjects.quizSession.filter(val => material.id == val.quiz_id);
-              return {
-                material,
-                sessions
-              };
-            });
-
-            this.mgaLessons = formatted;
-            console.log(formatted);
-          });
-      }
-    );
   }
 
 

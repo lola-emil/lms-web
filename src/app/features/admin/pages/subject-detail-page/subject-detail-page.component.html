@@ -2,8 +2,7 @@
   <app-topbar></app-topbar>
   <div class="container mx-auto px-5">
     <div>
-      <h3 class="text-2xl font-semibold">{{subjectDetail?.subject?.subject_name}} - Grade {{
-        subjectDetail?.gradeLevel?.level }}</h3>
+      <h3 class="text-2xl font-semibold">{{subjectDetail?.title}}</h3>
       <br>
       <button class="btn btn-primary btn-sm" (click)="showModal()">Add New Module</button>
     </div>
@@ -37,32 +36,32 @@
     </div>
   </div> -->
 
-    @for (item of mgaLessons; track $index) {
+    @for (item of subjectDetail?.subjectMaterials; track $index) {
     <div class="card bg-base-100 shadow-md mt-4 border-l-4" [ngClass]="{
-        'border-blue-500': item.material.type === 'document',
-        'border-green-500': item.material.type === 'video',
-        'border-orange-500': item.material.type === 'quiz'
+        'border-blue-500': item.materialType === 'document',
+        'border-green-500': item.materialType === 'video',
+        'border-orange-500': item.materialType === 'quiz'
       }">
       <div class="card-body">
-        <h3 class="font-bold text-lg">{{ item.material.title }}</h3>
+        <h3 class="font-bold text-lg">{{ item.description }}</h3>
 
         <div class="flex justify-between items-center mt-2">
           <span class="badge" [ngClass]="{
-                    'badge-primary': item.material.type === 'document',
-                    'badge-success': item.material.type === 'video',
-                    'badge-warning': item.material.type === 'quiz'
+                    'badge-primary': item.materialType === 'document',
+                    'badge-success': item.materialType === 'video',
+                    'badge-warning': item.materialType === 'quiz'
                   }">
-            {{ item.material.type| titlecase }}
+            {{ item.materialType| titlecase }}
           </span>
 
 
           <div class="flex gap-3">
 
-            @if (item.material.type == "document") {
-              <a [href]="item.material.file_url" target="_blank" class="btn btn-outline btn-sm">📖 View Lesson</a>
+            @if (item.materialType == "document") {
+              <a [href]="item.fileURL" target="_blank" class="btn btn-outline btn-sm">📖 View Lesson</a>
               }
               @else {
-                <a routerLink="1" [queryParams]="{type: item.material.type}" class="btn btn-outline btn-sm">📖 View Lesson</a>
+                <a routerLink="1" [queryParams]="{type: item.materialType}" class="btn btn-outline btn-sm">📖 View Lesson</a>
               }
 
               <button class="btn btn-sm btn-outline">Remove</button>

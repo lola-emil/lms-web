@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { createAvatar } from "@dicebear/core";
 import { pixelArt } from '@dicebear/collection';
 import { AuthService } from '../../../../services/auth.service';
-import { UserProfile, UserProfileRepoService } from '../../../../repositories/user-profile-repo.service';
+import { UserProfile } from '../../../../repositories/user-profile-repo.service';
 
 @Component({
   selector: 'app-topbar',
@@ -14,22 +14,20 @@ export class TopbarComponent implements OnInit {
 
   @Input() title: string = "";
 
-  user?: UserProfile;
+  user?: {
+    firstname: string;
+    lastname: string;
+    role: any;
+  };
   role: string = "";
 
   constructor(
     private authService: AuthService,
-    private profileRepo: UserProfileRepoService
   ) { }
 
   ngOnInit(): void {
-    this.profileRepo.get({
-      user_id: this.authService.getUserDetail().id
-    }).subscribe(val => {
-      console.log(val);
-      this.user = val[0];
-      this.role = this.authService.getUserDetail().role;
-    });
+    const user = this.authService.getUserDetail();
+    this.user = user;
   }
 
   avatar = createAvatar(pixelArt, {
