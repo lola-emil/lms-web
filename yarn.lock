@@ -3195,13 +3195,6 @@ angular-cli-ghpages@2.0.3:
     fs-extra "^11.2.0"
     gh-pages "^3.1.0"
 
-angular-datatables@19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/angular-datatables/-/angular-datatables-19.0.0.tgz#41e0a8117c9768d860892c59084c5652cf9300d4"
-  integrity sha512-cxG4/1ew1lqwEkZ7qhxH1zkAh/MP1vwQQrMdxQTtcWJtgi0na83Ds46Pe41XKIuq3aEEuE0O0oCV1ANTAD4d1w==
-  dependencies:
-    tslib "^2.3.0"
-
 ansi-colors@4.1.3:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-4.1.3.tgz#37611340eb2243e70cc604cad35d63270d48781b"
@@ -3958,21 +3951,6 @@ daisyui@^4.12.23:
     culori "^3"
     picocolors "^1"
     postcss-js "^4"
-
-datatables.net-dt@^2.0.3:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-2.3.0.tgz#2361371c193aec7b497f063a4f1c0475f2a9682e"
-  integrity sha512-A2i2rt6b6VQ7ZwbuKpS3NbSy7EDfL65etpCm15vJ5Dk6Qv0OVr//xacTKgkJ7YFWCs32juloQ2vlnVIlGH7qfw==
-  dependencies:
-    datatables.net "2.3.0"
-    jquery ">=1.7"
-
-datatables.net@2.3.0, datatables.net@^2.0.3:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-2.3.0.tgz#2d9a040dbbf03b8fe6afb6134f57a94fa7744982"
-  integrity sha512-IX5Dsc7bTNqI3RyT4B7imtFicLMCg7ZLwwx/gvR6cbwYgfG+mLX2KAVm7BNmnwOhUdMMcGSGSE19RpTn31TTGQ==
-  dependencies:
-    jquery ">=1.7"
 
 date-format@^4.0.14:
   version "4.0.14"
@@ -5374,7 +5352,7 @@ joi@^17.13.3:
     "@sideway/formula" "^3.0.1"
     "@sideway/pinpoint" "^2.0.0"
 
-jquery@>=1.7, jquery@^3.6.0:
+jquery@^3.6.0:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
   integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==

@@ -1,22 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
-export type TeacherAssignedSubjectResponse = {
-  teacherAssignedSubject: {
-    id: string;
-    teacher: {
-      firstname: string;
-      middlename: string;
-      lastname: string;
-    };
+export type StudentSubject = {
+  teacherSubject: {
     subject: {
-      title: string;
-      coverImgUrl: string;
       subjectMaterials: {
-        id: string;
-        materialType: "DOCUMENT" | "QUIZ" | "MD"
-        fileURL?: string;
+        id: number;
         description: string;
+        materialType: any;
+        fileURL?: string;
         createdAt: string;
         updatedAt: string;
       }[];
@@ -33,32 +25,28 @@ export class LecturesService {
     private readonly apollo: Apollo
   ) { }
 
-  getMaterials(teacherSubjectId: number) {
-    return this.apollo.watchQuery<TeacherAssignedSubjectResponse>({
+  getMaterials(studentSubjectId: number) {
+    return this.apollo.watchQuery<{ studentEnrolledSubject: StudentSubject; }>({
       query: gql`
-        query TeacherAssignedSubject {
-            teacherAssignedSubject(id: ${teacherSubjectId}) {
-                id
-                teacher {
-                    firstname
-                    middlename
-                    lastname
-                }
-                subject {
-                    title
-                    coverImgUrl
-                    subjectMaterials {
-                        id
-                        description
-                        materialType
-                        fileURL
-                        createdAt
-                        updatedAt
+        query StudentEnrolledSubjects {
+            studentEnrolledSubject(id: ${studentSubjectId}) {
+                teacherSubject {
+                    subject {
+                        subjectMaterials {
+                            id
+                            description
+                            materialType
+                            fileURL
+                            mdContentId
+                            createdAt
+                            updatedAt
+                        }
                     }
                 }
             }
         }
+
       `
-    }).valueChanges
+    }).valueChanges;
   }
 }

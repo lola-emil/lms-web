@@ -14,22 +14,18 @@ export class TopbarComponent implements OnInit {
 
   @Input() title: string = "";
 
-  user?: UserProfile;
-  role: string = "";
+  user?: {
+    firstname: string;
+    lastname: string;
+    role: any
+  };
 
   constructor(
     private authService: AuthService,
-    private profileRepo: UserProfileRepoService
   ) { }
 
   ngOnInit(): void {
-    this.profileRepo.get({
-      user_id: this.authService.getUserDetail().id
-    }).subscribe(val => {
-      console.log(val);
-      this.user = val[0];
-      this.role = this.authService.getUserDetail().role;
-    });
+    this.user = this.authService.getUserDetail();
   }
 
   avatar = createAvatar(pixelArt, {

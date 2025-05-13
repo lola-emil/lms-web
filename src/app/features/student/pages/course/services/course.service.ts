@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { AuthService } from '../../../../../services/auth.service';
-
 
 export type StudentSubject = {
-  id: number;
   teacherSubject: {
-    id: number;
     subject: {
       id: number;
-      title: string;
-      coverImgUrl?: string;
+      title:  string;
     },
     teacher: {
       firstname: string;
@@ -22,37 +17,32 @@ export type StudentSubject = {
 @Injectable({
   providedIn: 'root'
 })
-export class CoursesService {
+export class CourseService {
 
   constructor(
-    private readonly apollo: Apollo,
-    private authService: AuthService
+    private readonly apollo: Apollo
   ) { }
 
-  getEnrolledSubjects() {
-    const userDetail = this.authService.getUserDetail();
-    return this.apollo.watchQuery<{studentEnrolledSubjects: StudentSubject[]}>({
+  getSubjectDetail(studentSubjectId: number) {
+    return this.apollo.watchQuery<{studentEnrolledSubject: StudentSubject}>({
       query: gql`
-        query StudentEnrolledSubjects {
-            studentEnrolledSubjects {
-                id
+        query StudentEnrolledSubject {
+            studentEnrolledSubject(id: ${studentSubjectId}) {
                 teacherSubject {
-                    id
                     subject {
                         id
                         title
-                        coverImgUrl
-                        createdAt
                     }
                     teacher {
                         firstname
+                        middlename
                         lastname
                     }
                 }
             }
         }
 
-        `
+      `
     }).valueChanges;
   }
 }

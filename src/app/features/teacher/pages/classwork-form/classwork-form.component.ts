@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ClassworkRepoService } from '../../../../repositories/classwork-repo.service';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ClassworkService } from '../classwork/services/classwork.service';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-classwork-form',
@@ -23,8 +24,7 @@ export class ClassworkFormComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private classworkRepo: ClassworkRepoService,
-    private router: Router
+    private classworkService: ClassworkService
   ) {
     this.route.parent?.params.subscribe(val => {
       this.loadId = val["id"];
@@ -32,14 +32,21 @@ export class ClassworkFormComponent {
   }
 
   submit() {
-    console.log(this.classworkFormGroup.value);
-
-    this.classworkRepo.post({
-      ...this.classworkFormGroup.value,
-      teacher_subject_id: this.loadId
-    }).subscribe(val => {
-      this.router.navigate(['/teacher/loads', this.loadId, 'classwork'])
+    alert("ehllo");
+    const {
+      title,
+      instruction,
+      due_date,
+      hps
+    } = this.classworkFormGroup.value;
+    this.classworkService.createClasswork({
+      title: title!,
+      instructions: instruction!,
+      dueDate: new Date(due_date).toISOString(),
+      hps,
+      teacherAssignedSubjectId: parseInt(this.loadId)
+    }).subscribe(res => {
+      console.log(res)
     });
-
   }
 }

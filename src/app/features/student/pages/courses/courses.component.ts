@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
 import { catchError, Subscription, of, tap } from 'rxjs';
-import { CoursesService, EnrolledSubjectsByStudentIdResponse } from './services/courses.service';
+import { CoursesService, StudentSubject } from './services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -21,23 +21,15 @@ export class CoursesComponent implements OnInit, OnDestroy {
   page: number = 1;
   pageItems: number = 9;
 
-  subjects?: EnrolledSubjectsByStudentIdResponse;
+  subjects: StudentSubject[] = [];
 
 
   ngOnInit(): void {
     this.subscriptions.push(
       this.coursesService.getEnrolledSubjects()
-        .pipe(
-          tap(val => {
-            this.subjects = val.data;
-            console.log(val);
-          }),
-          catchError(res => {
-            console.log(res);
-            return of(null);
-          })
-        )
-        .subscribe()
+        .subscribe(res => {
+          this.subjects = res.data.studentEnrolledSubjects;
+        })
     );
   }
 

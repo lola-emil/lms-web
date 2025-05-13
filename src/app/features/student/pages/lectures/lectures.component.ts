@@ -5,7 +5,7 @@ import { DatePipe, NgClass, TitleCasePipe } from '@angular/common';
 import { SubjectMaterial } from '../../../../repositories/subject-material-repo.service';
 import { QuizSession } from '../../../../repositories/quiz-session-repo.service';
 import { AuthService } from '../../../../services/auth.service';
-import { LecturesService, TeacherAssignedSubjectResponse } from './services/lectures.service';
+import { LecturesService, StudentSubject } from './services/lectures.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -25,25 +25,29 @@ export class LecturesComponent implements OnInit, OnDestroy {
     sessions: QuizSession[];
   }[] = [];
 
-  teacherSubjectId?: number;
+  studentSubjectId?: number;
 
-  teacherAssignedSubject?: TeacherAssignedSubjectResponse;
+
+  lessons?: StudentSubject;
+
+
+  // teacherAssignedSubject?: TeacherAssignedSubjectResponse;
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService,
     private lecturesService: LecturesService
   ) {
-    this.route.parent?.params.subscribe(val => this.teacherSubjectId = val['id']);
+    this.route.parent?.params.subscribe(val => this.studentSubjectId = val['id']);
   }
 
   ngOnInit(): void {
-    if (this.teacherSubjectId)
+    if (this.studentSubjectId)
       this.subscriptions.push(
-        this.lecturesService.getMaterials(this.teacherSubjectId)
+        this.lecturesService.getMaterials(this.studentSubjectId)
           .pipe(
             tap(val => {
-              this.teacherAssignedSubject = val.data;
+              // this.teacherAssignedSubject = v  al.data;
               console.log(val);
+              this.lessons = val.data.studentEnrolledSubject;
             }),
             catchError(res => {
               console.log(res);

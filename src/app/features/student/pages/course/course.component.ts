@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
-import { CourseService } from '../../services/course.service';
 import { Observable, switchMap } from 'rxjs';
 import { SubjectRepoService } from '../../../../repositories/subject-repo.service';
 import { TeacherSubjectRepoService } from '../../../../repositories/teacher-subject-repo.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { MeetingSession } from '../../../teacher/pages/subject-detail/services/meeting.service';
+import { CourseService, StudentSubject } from './services/course.service';
 
 @Component({
   selector: 'app-course',
@@ -40,31 +40,42 @@ export class CourseComponent implements OnInit {
     }
   ];
 
-  angTitle = "";
 
-  teacherSubjectId?: number;
+  studentSubjectId?: number;
   matchedMeetingSession?: MeetingSession;
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private courseService: CourseService
   ) {
 
     this.route.params.subscribe(val => {
-      this.teacherSubjectId = val['id'];
+      this.studentSubjectId = val['id'];
     });
   }
+
+  subjectDetail?: StudentSubject;
 
 
   ngOnInit(): void {
     this.http.get<MeetingSession>(`${environment.apiURL}/zoom/get-live-session`, {
       params: {
-        teacher_subject_id: this.teacherSubjectId + ""
+        teacher_subject_id: this.studentSubjectId + ""
       }
     }).subscribe(val => {
       this.matchedMeetingSession = val;
       console.log(val);
     });
+
+    this.courseService.getSubjectDetail(this.studentSubjectId ?? 0)
+      .subscribe(res => {
+        console.log(res);
+        this.subjectDetail = res.data.studentEnrolledSubject;
+      });
+
   }
+
+  angTitle = ""
 
   isSessionUpcoming(): boolean {
     return new Date(this.sessionSchedule) > new Date();

@@ -10,10 +10,10 @@
     @for (item of activities; track $index) {
     <div class="card bg-base-100 shadow-md border">
       <div class="card-body">
-        <h3 class="text-lg font-semibold">📖 {{ item.activity.title }}</h3>
-        <p class="text-gray-600">{{ item.activity.instruction }}</p>
-        <p class="text-sm text-gray-500">📅 Due Date: {{ item.activity.due_date | date }} </p>
-        <p class="text-sm text-gray-400">🗓️ Posted on: {{ item.activity.created_at | date }}</p>
+        <h3 class="text-lg font-semibold">📖 {{ item.title }}</h3>
+        <p class="text-gray-600">{{ item.instructions }}</p>
+        <p class="text-sm text-gray-500">📅 Due Date: {{ item.dueDate | date }} </p>
+        <p class="text-sm text-gray-400">🗓️ Posted on: {{ item.createdAt | date }}</p>
 
         <br>
 
@@ -23,18 +23,18 @@
           Hide Submissions
           }
           @else {
-          Show Submissions ({{item.submissions.length}})
+          Show Submissions ({{item.assignmentSubmissions.length}})
           }
         </button>
 
         @if (item.showSubmissions) {
         <div>
-          @for (submission of item.submissions; track $index) {
+          @for (submission of item.assignmentSubmissions; track $index) {
           <div class="mt-2 p-3 border-l-4 border-blue-500 bg-gray-100 rounded-lg">
             <div class="flex items-center gap-3 mb-1">
               <img [src]="getAvatar('madffakin')" class="w-8 h-8 rounded-full" alt="Avatar">
               <p class="text-sm font-medium">
-                {{ submission.student_id }} (student) • {{ "2025-08-25" | date: 'short' }}
+                {{ submission.studentId }} (student) • {{ "2025-08-25" | date: 'short' }}
               </p>
             </div>
             <p class="text-gray-800">{{ submission.comment }}</p>
