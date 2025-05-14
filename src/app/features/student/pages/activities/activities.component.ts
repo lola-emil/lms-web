@@ -3,6 +3,8 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ActivityService, Assignment } from './services/activity.service';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../../../services/auth.service';
 
 
 // interface Activity {
@@ -16,7 +18,7 @@ import { ActivityService, Assignment } from './services/activity.service';
 
 @Component({
   selector: 'app-activities',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './activities.component.html',
   styleUrl: './activities.component.css'
 })
@@ -27,18 +29,22 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
 
   @ViewChild("activityModal") activityModal?: ElementRef<HTMLDialogElement>;
 
+  comment = new FormControl("");
+
   constructor(
     private route: ActivatedRoute,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private authService: AuthService
   ) {
     this.route.parent?.params.subscribe(val => this.studentSubjectId = val['id']);
   }
 
   ngOnInit(): void {
-    this.activityService.getAssignments(this.studentSubjectId ?? 0)
+    const user = this.authService.getUserDetail();
+    this.activityService.getAssignments(this.studentSubjectId ?? 0, user.id)
       .subscribe(val => {
         this.activities2 = val.data.assignments;
-        console.log(val.data);
+        console.log("mga activities", val.data);
       });
   }
 
@@ -77,7 +83,7 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
   }
 
   closeModal() {
-    this.isModalOpen = false;
+    this.activityModal?.nativeElement.close();
     this.selectedActivity = null;
     this.submissionText = '';
     this.submittedFiles = [];
@@ -88,8 +94,15 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
   }
 
   submitActivity() {
-    console.log("📝 Submitted Text:", this.submissionText);
-    console.log("📂 Submitted Files:", this.submittedFiles);
+    const user = this.authService.getUserDetail();
+    this.activityService.submitActivity({
+      assignmentId: this.selectedActivity.id,
+      comment: this.comment.value ?? "",
+      files: this.submittedFiles,
+      studentId: user.id
+    }).subscribe(val => {
+      console.log(val);
+    });
     this.closeModal();
   }
 }

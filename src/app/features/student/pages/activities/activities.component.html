@@ -15,9 +15,26 @@
           🎯 Score: {{ activity.score }}/100
         </p> -->
 
+        @if (item.studentSubmissions.length > 0) {
+        @if (item.studentSubmissions[0].feedback[0]) {
+        <p class="text-green-600 font-bold">
+          🎯 Score: {{ item.studentSubmissions[0].feedback[0].mark }}/100
+        </p>
+        }@else {
+        <p class="text-green-600 font-bold">
+          Pending Submission
+        </p>
+
+        <button (click)="openModal(item)" class="btn btn-primary w-full">
+          ✍️ Resubmit Activity
+        </button>
+        }
+        } @else {
+
         <button (click)="openModal(item)" class="btn btn-primary w-full">
           ✍️ Submit Activity
         </button>
+        }
       </div>
     </div>
     }
@@ -38,7 +55,7 @@
       <!-- *ngIf="selectedActivity?.score === null" -->
       <div>
         <label class="block font-medium mt-4">✏️ Your Answer:</label>
-        <textarea rows="3" class="textarea textarea-bordered w-full"></textarea>
+        <textarea [formControl]="comment" rows="3" class="textarea textarea-bordered w-full"></textarea>
 
         <label class="block font-medium mt-4">📂 Upload Files:</label>
         <input type="file" multiple (change)="handleFileInput($event)" class="file-input file-input-bordered w-full" />
