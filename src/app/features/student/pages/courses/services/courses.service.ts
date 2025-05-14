@@ -15,8 +15,8 @@ export type StudentSubject = {
     teacher: {
       firstname: string;
       lastname: string;
-    }
-  }
+    };
+  };
 };
 
 @Injectable({
@@ -31,11 +31,10 @@ export class CoursesService {
 
   getEnrolledSubjects() {
     const userDetail = this.authService.getUserDetail();
-    return this.apollo.watchQuery<{studentEnrolledSubjects: StudentSubject[]}>({
+    return this.apollo.watchQuery<{ studentEnrolledSubjects: StudentSubject[]; }>({
       query: gql`
-        query StudentEnrolledSubjects {
-            studentEnrolledSubjects {
-                id
+        query EnrolledSubjectsByStudentId {
+            enrolledSubjectsByStudentId(studentId: ${userDetail.id}) {
                 teacherSubject {
                     id
                     subject {
@@ -51,7 +50,6 @@ export class CoursesService {
                 }
             }
         }
-
         `
     }).valueChanges;
   }
