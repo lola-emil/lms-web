@@ -84,4 +84,5 @@ export class DocEditorComponent implements OnInit {
   removeFile(index: number) {
     this.files.splice(index, 1);
   }
+
 }

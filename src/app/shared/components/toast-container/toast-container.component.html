@@ -1,0 +1,9 @@
+<div class="fixed bottom-4 right-4 z-50 space-y-2">
+
+  @for (toast of toasts; track $index) {
+  <app-toast [message]="toast.message" [type]="toast.type" [duration]="toast.duration"
+    (onClose)="removeToast(toast)">
+  </app-toast>
+
+  }
+</div>
