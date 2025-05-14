@@ -56,7 +56,11 @@
       <br>
       <br>
       <select [formControl]="selectedGradeLevel" class="select select-bordered w-full">
-        <option value="">-- Select Grade Level</option>
+        <option value="null" selected disabled>-- Select Grade Level</option>
+
+        @for (item of levels; track $index) {
+          <option [value]="item.id">{{ item.level }}</option>
+        }
 
       </select>
       <div class="modal-action">

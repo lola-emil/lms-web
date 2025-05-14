@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+import { environment } from '../../../../../../environments/environment';
 
 export type Subject = {
   id: number;
@@ -11,13 +13,19 @@ export type Subject = {
   updatedAt: string;
 };
 
+export type ClassLevel = {
+  id: number;
+  level: number;
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class CurriculumManagementService {
 
   constructor(
-    private readonly apollo: Apollo
+    private readonly apollo: Apollo,
+    private http: HttpClient
   ) { }
 
   getSubjects() {
@@ -35,5 +43,34 @@ export class CurriculumManagementService {
         }
       `
     }).valueChanges;
+  }
+
+  getGradeLevels() {
+    return this.apollo.watchQuery<{ classLevels: ClassLevel[]; }>({
+      query: gql`
+        query ClassLevels {
+          classLevels {
+            id
+            level
+          }
+        }
+      `
+    }).valueChanges;
+  }
+
+  addSubject(body: {
+    title: string;
+    gradeLevelId: number;
+    coverImage?: File;
+  }) {
+    const formData = new FormData();
+
+    if (body.coverImage)
+      formData.append("files", body.coverImage);
+
+    formData.append("title", body.title);
+    formData.append("gradeLevelId", body.gradeLevelId + '');
+
+    return this.http.post(`${environment.apiURL}/graphql-ext/add-subject`, formData);
   }
 }

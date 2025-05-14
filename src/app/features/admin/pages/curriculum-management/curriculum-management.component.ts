@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GradeLevel } from '../../../../repositories/grade-level-repo.service';
 import { tap } from 'rxjs';
-import { CurriculumManagementService, Subject } from './services/curriculum-management.service';
+import { ClassLevel, CurriculumManagementService, Subject } from './services/curriculum-management.service';
 
 @Component({
   selector: 'app-curriculum-management',
@@ -25,6 +25,8 @@ export class CurriculumManagementComponent implements OnInit {
 
   mgaSubjects: Subject[] = [];
 
+  levels: ClassLevel[] = [];
+
   constructor(
     private curriculumService: CurriculumManagementService
   ) { }
@@ -36,7 +38,14 @@ export class CurriculumManagementComponent implements OnInit {
           this.mgaSubjects = val.data.subjects;
         })
       ).subscribe();
+
+    this.curriculumService.getGradeLevels()
+      .subscribe(val => {
+        this.levels = val.data.classLevels;
+      });
   }
+
+  addSubjectInProgress = false;
 
   openModal() {
     this.subjectModal.nativeElement.showModal();
@@ -48,9 +57,16 @@ export class CurriculumManagementComponent implements OnInit {
 
 
   subjectName = new FormControl("");
-  selectedGradeLevel = new FormControl("");
+  selectedGradeLevel = new FormControl<number | null>(null);
 
   addSubject() {
-
+    this.addSubjectInProgress = true;
+    this.curriculumService.addSubject({
+      title: this.subjectName.value!,
+      gradeLevelId: this.selectedGradeLevel.value!,
+      coverImage: undefined
+    }).subscribe(res => {
+      console.log(res);
+    });
   }
 }

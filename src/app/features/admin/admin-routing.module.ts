@@ -4,6 +4,7 @@ import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { UserManagementComponent } from "./pages/user-management/user-management.component";
 import { CurriculumManagementComponent } from "./pages/curriculum-management/curriculum-management.component";
 import { SubjectDetailPageComponent } from "./pages/subject-detail-page/subject-detail-page.component";
+import { DocEditorComponent } from "./pages/doc-editor/doc-editor.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: "content-management/:id",
     component: SubjectDetailPageComponent
+  },
+  {
+    path: "doc-editor",
+    component: DocEditorComponent
   }
 ];
 
@@ -34,7 +39,8 @@ const routes: Routes = [
     RouterModule
   ],
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+
   ]
 })
 export class AdminRoutingModule { }

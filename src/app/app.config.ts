@@ -9,9 +9,31 @@ import { provideHttpClient } from '@angular/common/http';
 import { InMemoryCache } from '@apollo/client/cache';
 import { environment } from "../environments/environment";
 
+import { provideQuillConfig } from 'ngx-quill/config';
+
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
   provideHttpClient(),
+  provideQuillConfig({
+    modules: {
+      // syntax: true,
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['blockquote', 'code-block'],
+
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+        [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+        [{ 'direction': 'rtl' }],                         // text direction
+
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ 'color': [] }, { 'background': [] }],
+
+        ['link', 'image', 'video']
+      ]
+    }
+  }),
   provideApollo(() => {
     const httpLink = inject(HttpLink);
 

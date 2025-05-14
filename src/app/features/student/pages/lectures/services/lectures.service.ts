@@ -6,9 +6,8 @@ export type StudentSubject = {
     subject: {
       subjectMaterials: {
         id: number;
-        description: string;
+        title?: string;
         materialType: any;
-        fileURL?: string;
         createdAt: string;
         updatedAt: string;
       }[];
@@ -34,10 +33,8 @@ export class LecturesService {
                     subject {
                         subjectMaterials {
                             id
-                            description
+                            title
                             materialType
-                            fileURL
-                            mdContentId
                             createdAt
                             updatedAt
                         }

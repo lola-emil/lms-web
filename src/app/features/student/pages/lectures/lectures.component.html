@@ -42,7 +42,9 @@
       'border-orange-500': item.materialType === 'QUIZ'
     }">
     <div class="card-body">
-      <h3 class="font-bold text-lg">{{ item.description }}</h3>
+      <h3 class="font-bold text-lg">
+            {{ item.title?.trim() ? item.title : "(No Title)" }}
+      </h3>
       <p class="text-md text-gray-500">📅 Created: {{ item.createdAt | date:'mediumDate' }}</p>
       <p class="text-md text-gray-500">🔄 Last Updated: {{ item.updatedAt | date:'mediumDate' }}</p>
 
@@ -64,10 +66,10 @@
           } -->
         } @else {
         @if (item.materialType == "DOCUMENT") {
-        <a [href]="item.fileURL" target="_blank" class="btn btn-outline btn-sm">📖 View Lesson</a>
+        <a target="_blank" class="btn btn-outline btn-sm">📖 View Lesson</a>
         }
         @else {
-        <a routerLink="1" [queryParams]="{type: item.materialType}" class="btn btn-outline btn-sm">📖 View Lesson</a>
+        <a [routerLink]="item.id + ''" [queryParams]="{type: item.materialType}" class="btn btn-outline btn-sm">📖 View Lesson</a>
         }
         }
       </div>

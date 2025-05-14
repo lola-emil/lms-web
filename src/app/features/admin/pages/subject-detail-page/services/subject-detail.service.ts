@@ -11,14 +11,14 @@ export type Subject = {
 
   subjectMaterials: {
     id: number;
-    description: string;
+    title?: string;
     subjectId: number;
     materialType: string;
     fileURL?: string;
     mdContentId?: number;
     createdAt: string;
     updatedAt: string;
-  }[]
+  }[];
 };
 
 @Injectable({
@@ -31,10 +31,10 @@ export class SubjectDetailService {
   ) { }
 
   getSubjectDetail(subjectId: number) {
-    return this.apollo.watchQuery<{subject: Subject}>({
+    return this.apollo.watchQuery<{ subject: Subject; }>({
       query: gql`
           query Subject {
-              subject(id: 1) {
+              subject(id: ${subjectId}) {
                   id
                   title
                   coverImgUrl
@@ -43,11 +43,9 @@ export class SubjectDetailService {
                   updatedAt
                   subjectMaterials {
                       id
-                      description
+                      title
                       subjectId
                       materialType
-                      fileURL
-                      mdContentId
                       createdAt
                       updatedAt
                   }
