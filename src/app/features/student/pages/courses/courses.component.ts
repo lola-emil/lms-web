@@ -28,7 +28,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.coursesService.getEnrolledSubjects()
         .subscribe(res => {
-          this.subjects = res.data.studentEnrolledSubjects;
+          this.subjects = res.data.enrolledSubjectsByStudentId;
+          console.log(res.data)
         })
     );
   }

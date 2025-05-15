@@ -41,7 +41,8 @@ export class CurriculumManagementService {
               updatedAt
           }
         }
-      `
+      `,
+      fetchPolicy: "no-cache"
     }).valueChanges;
   }
 

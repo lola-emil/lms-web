@@ -32,6 +32,10 @@ export class CurriculumManagementComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getSubjects();
+  }
+
+  getSubjects() {
     this.curriculumService.getSubjects()
       .pipe(
         tap(val => {
@@ -44,6 +48,7 @@ export class CurriculumManagementComponent implements OnInit {
         this.levels = val.data.classLevels;
       });
   }
+
 
   addSubjectInProgress = false;
 
@@ -66,7 +71,8 @@ export class CurriculumManagementComponent implements OnInit {
       gradeLevelId: this.selectedGradeLevel.value!,
       coverImage: undefined
     }).subscribe(res => {
-      console.log(res);
+      this.closeModal();
+      this.getSubjects();
     });
   }
 }
