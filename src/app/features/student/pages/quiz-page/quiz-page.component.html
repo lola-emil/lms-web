@@ -1,0 +1,102 @@
+<app-drawer>
+  <app-topbar></app-topbar>
+  <br>
+
+  <div class="container mx-auto grid grid-cols-12 gap-5">
+    <div class="col-span-12 px-5 lg:px-0 lg:col-span-8">
+
+      <p class="text-lg font-semibold">Quiz: {{ quiz?.title }}</p>
+      <br>
+      <div [formGroup]="answerForm" class="flex gap-5 flex-col w-full">
+        @for (item of quiz?.questions; let qIndex = $index; track $index) {
+        <div formArrayName="answers" class="card rounded border shadow-md p-5 w-full">
+          <div class="card-body p-3" [id]="item.id">
+            <p class="mb-3">Question {{$index + 1 }}</p>
+            <p class="text-lg font-semibold">{{ item.questionText }}</p>
+
+            @if (item.type == "MULTIPLE_CHOICE") {
+            <div>
+              @for (answer of item.answers; track $index) {
+              <div class="flex items-center p-3 gap-3">
+                <input type="radio" [formControlName]="qIndex + ''" [value]="answer.id" [id]="answer.id"
+                  class="peer hidden">
+                <label [for]="answer.id"
+                  class="border border-neutral rounded-md  p-4 text-neutral peer-checked:bg-primary peer-checked:text-primary-content w-full text-left">
+                  <p>{{ answer.answerText }}</p>
+                </label>
+              </div>
+              }
+            </div>
+            }
+
+            @else if (item.type == "TRUE_FALSE") {
+            @for (answer of item.answers; track $index) {
+            <div class="flex items-center gap-3">
+              <label [for]="$index" class="flex items-center gap-3">
+                <input type="radio" [formControlName]="qIndex + ''" [value]="answer.id" [id]="answer.id" class="">
+                <span>{{ answer.answerText }}</span>
+              </label>
+            </div>
+            }
+            }
+
+            @else {
+            <input type="text" [formControlName]="qIndex" class="input input-bordered w-full"
+              placeholder="Type here the correct answer..">
+            }
+
+          </div>
+        </div>
+        }
+      </div>
+      <br>
+      <button class="w-full btn btn-primary lg:hidden">Finish Quiz</button>
+    </div>
+    <div class="col-span-3 hidden lg:block">
+      <br>
+      <br>
+      <div class="card shadow border rounded-md sticky top-10 max-h-[calc(100vh-5rem)]">
+        <div class="card-body">
+          <div class="flex items-center mb-3">
+            <p class="text-sm font-semibold ">Quiz Navigation</p>
+          </div>
+          <div class="flex flex-col gap-1">
+            @for (item of quiz?.questions; track $index) {
+            <a [routerLink]="'#' + item.id"
+              class="p-2 rounded hover:border-neutral hover:text-neutral cursor-pointer transition-colors duration-75 border text-sm flex items-center gap-5 overflow-hidden"
+              [ngClass]="
+                {
+                  'border-primary': answersArray.at($index).value,
+                }
+              "
+              >
+              <span>{{ $index + 1 }}</span>
+              <span>{{ item.questionText }}</span>
+            </a>
+            }
+          </div>
+          <button class="btn btn-sm btn-outline btn-primary" (click)="showModal()">Finish Quiz</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+</app-drawer>
+
+<!-- Open the modal using ID.showModal() method -->
+<dialog #confirmationModal class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Alert</h3>
+    <p class="py-4">Are you sure you want to finish this quiz?</p>
+    <div class="modal-action">
+      <button class="btn btn-primary" (click)="finishQuiz()">Yes</button>
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">No</button>
+      </form>
+    </div>
+  </div>
+</dialog>

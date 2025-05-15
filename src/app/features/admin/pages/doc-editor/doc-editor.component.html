@@ -1,10 +1,10 @@
 <app-drawer>
   <app-topbar title="Doc Editor"></app-topbar>
   <br>
-  <div class="container mx-auto">
-    <div class="w-3/4">
-      <div class=" w-full flex justify-between">
-        <select name="" id="" class="select font-bold select-bordered min-w-96" [formControl]="subject">
+  <div class="container px-5 mx-auto">
+    <div class="w-full lg:w-3/4">
+      <div class=" w-full flex gap-5 lg:justify-between">
+        <select name="" id="" class="select font-bold select-bordered flex-1 max-w-96" [formControl]="subject">
 
           @for (item of subjects; track $index) {
           <option [value]="item.id">{{ item.title }}</option>

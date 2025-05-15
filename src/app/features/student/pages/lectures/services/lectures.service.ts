@@ -10,6 +10,12 @@ export type StudentSubject = {
         materialType: any;
         createdAt: string;
         updatedAt: string;
+        quizSessions: {
+          id: number;
+          createdAt: string;
+          score: number;
+        }[];
+        questions: { id: number; }[];
       }[];
     };
   };
@@ -37,6 +43,14 @@ export class LecturesService {
                             materialType
                             createdAt
                             updatedAt
+                            quizSessions {
+                              id
+                              createdAt
+                              score
+                           }
+                            questions {
+                              id
+                            }
                         }
                     }
                 }

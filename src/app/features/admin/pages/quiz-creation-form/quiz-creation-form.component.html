@@ -53,7 +53,6 @@
           <textarea formControlName="questionText" class="textarea textarea-bordered w-full"></textarea>
 
           <br>
-          <p></p>
           <div formArrayName="answers">
             @if(question.value.type == "MULTIPLE_CHOICE") {
             @for (answer of getAnswers(qIndex).controls; let aIndex = $index; track answer.value.id) {
@@ -78,8 +77,8 @@
             @else if (question.value.type == "TRUE_FALSE") {
             @for (answer of getAnswers(qIndex).controls; let aIndex = $index; track answer.value.id) {
             <div [formGroupName]="aIndex" class="flex items-center p-3 gap-3">
-              <label for="false" class="flex items-center gap-3">
-                <input type="checkbox" formControlName="correct" id="false" class="checkbox checkbox-sm">
+              <label [for]="aIndex" class="flex items-center gap-3">
+                <input type="checkbox" formControlName="correct" [id]="aIndex" class="checkbox checkbox-sm">
                 <span>{{ answer.value.answerText }}</span>
               </label>
             </div>
