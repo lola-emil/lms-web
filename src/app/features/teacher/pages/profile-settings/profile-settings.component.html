@@ -1,0 +1,142 @@
+<app-drawer>
+  <!-- <app-topbar></app-topbar> -->
+
+  <br>
+  <br>
+  <br>
+
+  <div class="container mx-auto md:px-5">
+    <div class="card border w-full lg:px-0 lg:w-3/4">
+      <div class="card-body">
+        <p class="font-semibold">Basic Details</p>
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Firstname</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input type="text" class="input input-bordered w-full" [value]="userDetails.firstname" disabled />
+
+          </div>
+          <div class="label">
+          </div>
+        </label>
+
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Middlename</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input type="text" class="input input-bordered w-full " [value]="userDetails.middlename" disabled />
+
+          </div>
+          <div class="label">
+          </div>
+        </label>
+
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Lastname</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input type="text" class="input input-bordered w-full " [value]="userDetails.lastname" disabled />
+
+          </div>
+          <div class="label">
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="card border w-full px-5 lg:px-0 lg:w-3/4">
+      <div class="card-body">
+        <p class="font-semibold">Account Info</p>
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Email</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input type="text" [formControl]="email" class="input input-bordered w-full " [disabled]="true" />
+
+            <button class="btn btn-ghost btn-sm">Edit</button>
+          </div>
+          <div class="label">
+          </div>
+        </label>
+
+        <p class="menu-title px-0">Change Password</p>
+
+
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">New Password</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input type="password" [formControl]="newPassword" class="input input-bordered w-full"
+              [disabled]="changePasswordInProgress" />
+            <button class="btn btn-ghost btn-sm" (click)="requestChangePassword()"
+              [disabled]="changePasswordInProgress">
+              @if (changePasswordInProgress) {
+              <span class="loading loading-dots loading-sm"></span>
+              }
+              @else {
+              <span>Save</span>
+              }
+            </button>
+          </div>
+          <div class="label">
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+</app-drawer>
+
+<!-- Open the modal using ID.showModal() method -->
+<dialog #codeModal id="my_modal_1" class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Info</h3>
+    <p class="py-4">Confirmation message sent to <span class="font-semibold">{{recepient}}</span></p>
+
+    <label class="form-control w-full">
+      <div class="label">
+      </div>
+      <input type="text" [formControl]="confirmCode" placeholder="Enter code" class="input input-bordered w-full " />
+      <div class="label">
+        <span class="label-text-alt"></span>
+        <span class="label-text-alt text-error font-bold">
+          @if (timeLeft <= 0) { <button class="link" (click)="requestChangePassword()">Resend code</button>}
+            @else {
+            <span>
+              {{ countdown.minutes.toString().padStart(2, '0') }} :
+              {{countdown.seconds.toString().padStart(2, '0')}}
+            </span>
+            }
+        </span>
+      </div>
+    </label>
+    <div class="modal-action">
+      <button class="btn btn-primary" (click)="confirmChangePassword()" [disabled]="confirmationInProgress">
+        @if (confirmationInProgress) {
+        <span class="loading loading-dots loading-sm"></span>
+        }
+        @else {
+        <span>Confirm</span>
+        }
+      </button>
+      <form method="dialog">
+        <button class="btn">Cancel</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+
+<div class="toast toast-top toast-end">
+  @for (item of toastMessages; track $index) {
+  <div class="alert alert-success">
+    <span>{{item.message}}</span>
+  </div>
+  }
+</div>

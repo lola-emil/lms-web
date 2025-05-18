@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { createAvatar } from "@dicebear/core";
 import { pixelArt } from '@dicebear/collection';
 import { AuthService } from '../../../../services/auth.service';
-import { UserProfile, UserProfileRepoService } from '../../../../repositories/user-profile-repo.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.css'
 })
@@ -17,7 +17,7 @@ export class TopbarComponent implements OnInit {
   user?: {
     firstname: string;
     lastname: string;
-    role: any
+    role: any;
   };
 
   constructor(

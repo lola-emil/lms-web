@@ -6,6 +6,7 @@ import { CurriculumManagementComponent } from "./pages/curriculum-management/cur
 import { SubjectDetailPageComponent } from "./pages/subject-detail-page/subject-detail-page.component";
 import { DocEditorComponent } from "./pages/doc-editor/doc-editor.component";
 import { QuizCreationFormComponent } from "./pages/quiz-creation-form/quiz-creation-form.component";
+import { ProfileSettingsComponent } from "../student/pages/profile-settings/profile-settings.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: "quiz-creation",
     component: QuizCreationFormComponent
+  },
+  {
+    path: "profile-settings",
+    component: ProfileSettingsComponent
   }
 ];
 

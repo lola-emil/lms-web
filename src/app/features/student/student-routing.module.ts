@@ -14,6 +14,7 @@ import { ForumComponent } from './pages/forum/forum.component';
 import { LectureContentComponent } from './pages/lecture-content/lecture-content.component';
 import { MeetingComponent } from './pages/meeting/meeting.component';
 import { QuizPageComponent } from './pages/quiz-page/quiz-page.component';
+import { ProfileSettingsComponent } from './pages/profile-settings/profile-settings.component';
 
 
 const routes: Routes = [
@@ -94,6 +95,10 @@ const routes: Routes = [
   {
     path: "quiz",
     component: QuizPageComponent
+  },
+  {
+    path: "profile-settings",
+    component: ProfileSettingsComponent
   }
 ];
 

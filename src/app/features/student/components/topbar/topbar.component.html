@@ -13,13 +13,11 @@
     </div>
     <!-- <p class="text-sm">{{ today | date }}</p> -->
 
-    <div class="dropdown dropdown-end">
-      <div tabindex="0" role="button" class="btn btn-ghost m-1">
-        <!-- <img [src]="avatar" class="w-8" alt=""> -->
-        <div tabindex="0" class="hidden md:flex flex-col items-start">
-          <p class="text-sm">{{user?.firstname}} {{user?.lastname}}</p>
-          <p class="text-xs">{{ user?.role }}</p>
-        </div>
+    <a routerLink="/student/profile-settings" role="button" class="btn btn-ghost m-1">
+      <!-- <img [src]="avatar" class="w-8" alt=""> -->
+      <div tabindex="0" class="hidden md:flex flex-col items-start">
+        <p class="text-sm">{{user?.firstname}} {{user?.lastname}}</p>
+        <p class="text-xs">{{ user?.role }}</p>
       </div>
-    </div>
+    </a>
   </div>

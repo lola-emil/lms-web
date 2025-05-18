@@ -10,6 +10,7 @@ import { GradesComponent } from "./pages/grades/grades.component";
 import { ClassworkFormComponent } from "./pages/classwork-form/classwork-form.component";
 import { GradebookComponent } from "./pages/gradebook/gradebook.component";
 import { MeetingComponent } from "./pages/meeting/meeting.component";
+import { ProfileSettingsComponent } from "./pages/profile-settings/profile-settings.component";
 
 
 const routes: Routes = [
@@ -65,6 +66,10 @@ const routes: Routes = [
   {
     path: "meeting",
     component: MeetingComponent
+  },
+  {
+    path: "profile-settings",
+    component: ProfileSettingsComponent
   }
 ];
 
