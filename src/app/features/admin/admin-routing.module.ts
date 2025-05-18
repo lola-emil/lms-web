@@ -7,6 +7,8 @@ import { SubjectDetailPageComponent } from "./pages/subject-detail-page/subject-
 import { DocEditorComponent } from "./pages/doc-editor/doc-editor.component";
 import { QuizCreationFormComponent } from "./pages/quiz-creation-form/quiz-creation-form.component";
 import { ProfileSettingsComponent } from "../student/pages/profile-settings/profile-settings.component";
+import { LessonContentComponent } from "./pages/lesson-content/lesson-content.component";
+import { EditLessonComponent } from "./pages/edit-lesson/edit-lesson.component";
 
 const routes: Routes = [
   {
@@ -29,6 +31,14 @@ const routes: Routes = [
   {
     path: "content-management/:id",
     component: SubjectDetailPageComponent
+  },
+  {
+    path: "lesson-content/:id",
+    component: LessonContentComponent
+  },
+  {
+    path: "edit-lesson",
+    component: EditLessonComponent
   },
   {
     path: "doc-editor",

@@ -88,9 +88,12 @@
             <input type="text" class="input input-bordered w-full" placeholder="Type here the correct answer..">
             }
           </div>
+
+          @if (question.value.type == "MULTIPLE_CHOICE") {
           <div class="flex justify-end">
             <button class="btn btn-outline btn-sm" (click)="addAnswer($index)">Add answer</button>
           </div>
+          }
         </div>
       </div>
       }

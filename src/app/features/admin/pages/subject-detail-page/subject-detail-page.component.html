@@ -50,7 +50,8 @@
             <a [href]="item.fileURL" target="_blank" class="btn btn-outline btn-sm">📖 View Lesson</a>
             }
             @else {
-            <a routerLink="1" [queryParams]="{type: item.materialType}" class="btn btn-outline btn-sm">📖 View
+            <a [routerLink]="['/admin', 'lesson-content', item.id]"
+              class="btn btn-outline btn-sm">📖 View
               Lesson</a>
             }
 

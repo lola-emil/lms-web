@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { ActivatedRoute } from '@angular/router';
-import { filter } from 'rxjs';
 import { Location } from '@angular/common';
-import { QuizComponent } from "../../components/quiz/quiz.component";
 import { LectureContentService, SubjectMaterial } from './services/lecture-content.service';
 
 @Component({
