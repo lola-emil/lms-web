@@ -3,7 +3,7 @@ import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { Location } from '@angular/common';
 import { LessonContentService, SubjectMaterial } from './services/lesson-content.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-lesson-content',
@@ -15,11 +15,10 @@ export class LessonContentComponent implements OnInit {
     material?: SubjectMaterial;
   materialId?: number;
   constructor(
-    private location: Location,
-    private router: ActivatedRoute,
-    private lessonContentService: LessonContentService
+    private route: ActivatedRoute,
+    private lessonContentService: LessonContentService,
   ) {
-    this.router.params.subscribe(val => this.materialId = val["id"]);
+    this.route.params.subscribe(val => this.materialId = val["id"]);
   }
 
   ngOnInit(): void {
@@ -29,7 +28,4 @@ export class LessonContentComponent implements OnInit {
       });
   }
 
-  goBack() {
-    this.location.back();
-  }
 }

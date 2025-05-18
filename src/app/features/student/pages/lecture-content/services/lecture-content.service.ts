@@ -3,6 +3,7 @@ import { Apollo, gql } from 'apollo-angular';
 
 export type SubjectMaterial = {
   id: number;
+  subjectId: number;
   materialType: any;
   createdAt: string;
   updatedAt: string;
@@ -12,7 +13,7 @@ export type SubjectMaterial = {
     id: number;
     filename?: string;
     fileURL: string;
-  }[]
+  }[];
 };
 
 @Injectable({

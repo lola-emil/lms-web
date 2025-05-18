@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Location } from '@angular/common';
 import { LectureContentService, SubjectMaterial } from './services/lecture-content.service';
 
 @Component({
   selector: 'app-lecture-content',
-  imports: [DrawerComponent, TopbarComponent],
+  imports: [DrawerComponent, TopbarComponent, RouterLink],
   templateUrl: './lecture-content.component.html',
   styleUrl: './lecture-content.component.css'
 })
@@ -31,8 +31,4 @@ export class LectureContentComponent implements OnInit {
       });
   }
 
-
-  goBack() {
-    this.location.back();
-  }
 }
