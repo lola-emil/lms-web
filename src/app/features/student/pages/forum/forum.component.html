@@ -2,73 +2,60 @@
   <h2 class="text-2xl font-bold mb-4">Forum Discussions</h2>
 
   <!-- New Forum Post Form -->
-  <div class="border rounded-lg shadow-lg p-5 mb-6">
+  <div [formGroup]="forumForm" class="border rounded-lg shadow-lg p-5 mb-6">
     <h3 class="font-semibold text-lg mb-3">Ask a Question</h3>
-    <input 
-      placeholder="Title"
-      class="w-full input input-bordered bg-white"
-    />
-    <textarea 
-      placeholder="Describe your question..."
-      class="w-full textarea textarea-bordered bg-white mt-2"
-    ></textarea>
-    <button 
-      class="mt-2 btn bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-      (click)="addForum()"
-    >
+    <input placeholder="Title" formControlName="title" class="w-full input input-bordered bg-white" />
+    <textarea formControlName="query" placeholder="Describe your question..."
+      class="w-full textarea textarea-bordered bg-white mt-2"></textarea>
+    <button class="mt-2 btn bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" (click)="askQuestion()">
       Post Question
     </button>
   </div>
 
   <!-- Forum Threads -->
-  <div *ngFor="let forum of forums | async" class="border rounded-lg shadow-lg p-5 mb-6">
+
+  @for (forum of announcements; track $index) {
+  <div class="border rounded-lg shadow-lg p-5 mb-6">
     <div class="flex items-center gap-3 mb-2">
-      <img [src]="getAvatar(forum.author)" class="w-10 h-10 rounded-full" alt="Avatar">
+      <!-- <img [src]="getAvatar(forum.createdBy.firstname)" class="w-10 h-10 rounded-full" alt="Avatar"> -->
       <div>
         <p class="font-semibold text-lg">{{ forum.title }}</p>
         <p class="text-sm text-gray-500">
-          Posted by <span class="font-medium">{{ forum.author }}</span> ({{ forum.author_role }}) 
-          • {{ forum.created_at | date: 'medium' }}
+          Posted by <span class="font-medium">{{ forum.createdBy.firstname }}</span> ({{ forum.createdBy.role }})
+          • {{ forum.createdAt | date: 'medium' }}
         </p>
       </div>
     </div>
-    
-    <p class="text-gray-700 mb-4">{{ forum.content }}</p>
+
+    <p class="text-gray-700 mb-4">{{ forum.query }}</p>
 
     <!-- Toggle Replies Button -->
-    <button 
-      class="bg-blue-500 btn text-white px-4 py-2 rounded hover:bg-blue-600"
-      (click)="toggleReplies(forum)"
-    >
-      {{ forum.showReplies ? 'Hide Replies' : 'Show Replies (' + forum.replies.length + ')' }}
+    <button class="bg-blue-500 btn btn-sm text-white px-4 py-2 rounded hover:bg-blue-600"
+      (click)="toggleReplies(forum)">
+      {{ forum.showReplies ? 'Hide Replies' : 'Show Replies (' + forum.forumComments.length + ')' }}
     </button>
 
     <!-- Replies Section -->
     <div *ngIf="forum.showReplies" class="mt-4">
       <h3 class="font-semibold text-md text-gray-600">Replies:</h3>
-      <div *ngFor="let reply of forum.replies" class="mt-2 p-3 border-l-4 border-blue-500 bg-gray-100 rounded-lg">
+      <div *ngFor="let reply of forum.forumComments" class="mt-2 p-3 border-l-4 border-blue-500 bg-gray-100 rounded-lg">
         <div class="flex items-center gap-3 mb-1">
-          <img [src]="getAvatar(reply.author)" class="w-8 h-8 rounded-full" alt="Avatar">
+          <!-- <img [src]="getAvatar(reply.createdBy.firstname)" class="w-8 h-8 rounded-full" alt="Avatar"> -->
           <p class="text-sm font-medium">
-            {{ reply.author }} ({{ reply.author_role }}) • {{ reply.created_at | date: 'short' }}
+            {{ reply.createdBy.firstname }} ({{ reply.createdBy.role }}) • {{ reply.createdAt | date: 'short' }}
           </p>
         </div>
-        <p class="text-gray-800">{{ reply.content }}</p>
+        <p class="text-gray-800">{{ reply.commentText }}</p>
       </div>
 
       <!-- Add Reply Form -->
-      <div class="mt-4">
-        <textarea 
-          placeholder="Write a reply..." 
-          class="w-full p-2 border rounded-md"
-        ></textarea>
-        <button 
-          class="mt-2 bg-green-500 btn text-white px-4 py-2 rounded hover:bg-green-600"
-          (click)="addReply(forum)"
-        >
+      <div class="mt-4" [formGroup]="replyForms[$index]">
+        <textarea formControlName="commentText" placeholder="Write a reply..." class="w-full p-2 border rounded-md"></textarea>
+        <button class="mt-2 bg-green-500 btn btn-sm text-white px-4 py-2 rounded hover:bg-green-600" (click)="addReply($index)">
           Add Reply
         </button>
       </div>
     </div>
   </div>
+  }
 </div>

@@ -69,7 +69,6 @@ export class CourseComponent implements OnInit {
 
     this.courseService.getSubjectDetail(this.studentSubjectId ?? 0)
       .subscribe(res => {
-        console.log(res);
         this.subjectDetail = res.data.studentEnrolledSubject;
       });
 

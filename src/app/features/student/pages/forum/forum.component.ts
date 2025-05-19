@@ -1,34 +1,55 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { createAvatar } from '@dicebear/core';
 import { pixelArt } from '@dicebear/collection';
 import { CommonModule } from '@angular/common';
-import { ForumService } from '../../services/forum.service';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ForumDiscussion, ForumService } from './services/forum.service';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-forum',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './forum.component.html',
   styleUrl: './forum.component.css'
 })
-export class ForumComponent {
+export class ForumComponent implements OnInit {
   forums!: Observable<any[]>;
   newForum = { title: '', content: '' };
 
-  constructor(private forumService: ForumService) {
-    this.loadForums();
+  teacherSubjectId?: number;
+
+  constructor(
+    private forumService: ForumService,
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) {
+    this.route.parent?.params.subscribe(val => this.teacherSubjectId = parseInt(val['id']));
   }
 
+  ngOnInit(): void {
+    this.loadForums();
+
+  }
+
+  announcements: (ForumDiscussion & { showReplies: boolean; })[] = [];
+
   loadForums() {
-    this.forums = this.forumService.get().pipe(
-      map((val: any) =>
-        val.data.map((forum: any) => ({
-          ...forum,
-          showReplies: false,
-          newReply: ''
-        }))
-      )
-    );
+    this.forumService.getAnnouncements(this.teacherSubjectId ?? 0)
+      .subscribe(res => {
+        this.announcements = res.data.forumDiscussions.map(data => ({
+          ...data,
+          showReplies: false
+        }));
+
+        this.announcements.forEach(val => {
+          this.replyForms.push(new FormGroup({
+            forumDiscussionId: new FormControl(val.id),
+            commentText: new FormControl("")
+          }));
+        });
+      });
   }
 
   getAvatar(seed: string): string {
@@ -39,43 +60,39 @@ export class ForumComponent {
     forum.showReplies = !forum.showReplies;
   }
 
-  addReply(forum: any) {
-    if (!forum.newReply.trim()) return;
-    
-    const newReply = {
-      id: Date.now(),
-      forum_id: forum.id,
-      author: 'current_user',
-      author_role: 'student',
-      content: forum.newReply.trim(),
-      created_at: new Date().toISOString()
-    };
+  forumForm = new FormGroup({
+    title: new FormControl(""),
+    query: new FormControl("")
+  });
 
-    forum.replies.push(newReply);
-    forum.newReply = ''; // Clear input
+  replyForms: FormGroup[] = [];
+
+  texts = new FormArray([]);
+
+  askQuestion() {
+    let form = this.forumForm.value as any;
+    if (this.teacherSubjectId)
+      form = {
+        ...form,
+        teacherSubjectId: this.teacherSubjectId
+      };
+
+
+    this.forumService.postAnnouncement(form)
+      .subscribe(res => {
+        this.loadForums();
+      });
   }
 
-  addForum() {
-    if (!this.newForum.title.trim() || !this.newForum.content.trim()) return;
+  addReply(index: number) {
+    console.log(this.replyForms[index].value);
 
-    const newForum = {
-      id: Date.now(),
-      course_id: 101, // Example course_id
-      title: this.newForum.title.trim(),
-      content: this.newForum.content.trim(),
-      author: 'current_user',
-      author_role: 'student',
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-      replies: []
-    };
-
-    // Add the new forum to the list (simulate database update)
-    this.forums = this.forums.pipe(
-      map((forums) => [newForum, ...forums])
-    );
-
-    // Reset form fields
-    this.newForum = { title: '', content: '' };
+    this.forumService.addReply({
+      ...this.replyForms[index].value,
+      createdById: this.authService.getUserDetail().id
+    })
+      .subscribe(res => {
+        this.loadForums();
+      });
   }
 }
