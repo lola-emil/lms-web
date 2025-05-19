@@ -16,15 +16,11 @@
         </p> -->
 
         @if (item.studentSubmissions.length > 0) {
-        @if (item.studentSubmissions[0].feedback[0]) {
+        @if (item.studentSubmissions[0].score) {
         <p class="text-green-600 font-bold">
-          🎯 Score: {{ item.studentSubmissions[0].feedback[0].mark }}/100
+          🎯 Score: {{ item.studentSubmissions[0].score }}/100
         </p>
         }@else {
-        <p class="text-green-600 font-bold">
-          Pending Submission
-        </p>
-
         <button (click)="openModal(item)" class="btn btn-primary w-full">
           ✍️ Resubmit Activity
         </button>

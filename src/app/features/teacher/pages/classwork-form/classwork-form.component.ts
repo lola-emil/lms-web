@@ -32,7 +32,6 @@ export class ClassworkFormComponent {
   }
 
   submit() {
-    alert("ehllo");
     const {
       title,
       instruction,

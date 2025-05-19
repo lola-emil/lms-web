@@ -14,6 +14,7 @@ export type Assignment = {
     id: number;
     comment?: string;
     createdAt: string;
+    score?: string;
     updatedAt: string;
     feedback: {
       id: number;
@@ -49,6 +50,7 @@ export class ActivityService {
                 studentSubmissions(studentId: ${studentId}) {
                     id
                     comment
+                    score
                     createdAt
                     updatedAt
                     feedback {
@@ -63,7 +65,8 @@ export class ActivityService {
             }
         }
 
-      `
+      `,
+      fetchPolicy: "no-cache"
     }).valueChanges;
   }
 

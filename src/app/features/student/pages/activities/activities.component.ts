@@ -7,15 +7,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
 
 
-// interface Activity {
-//   id: number;
-//   title: string;
-//   description: string;
-//   type: 'Project' | 'Assignment' | 'Live Session';
-//   postedDate: string;
-//   dueDate?: string;
-// }
-
 @Component({
   selector: 'app-activities',
   imports: [CommonModule, ReactiveFormsModule],
@@ -40,37 +31,20 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.loadAssignments();
+  }
+
+  loadAssignments() {
     const user = this.authService.getUserDetail();
     this.activityService.getAssignments(this.studentSubjectId ?? 0, user.id)
       .subscribe(val => {
         this.activities2 = val.data.assignments;
-        console.log("mga activities", val.data);
       });
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
-
-
-  activities = [
-    {
-      id: 1,
-      title: "📖 Math Assignment 1",
-      description: "Solve the given problems",
-      dueDate: "2025-03-10",
-      postedDate: "2025-03-01",
-      score: 95 // Already graded
-    },
-    {
-      id: 2,
-      title: "🧪 Science Report",
-      description: "Write a report on climate change",
-      dueDate: "2025-03-15",
-      postedDate: "2025-03-03",
-      score: null // Not yet graded
-    }
-  ];
 
   selectedActivity: any = null;
   isModalOpen = false;
@@ -101,7 +75,7 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
       files: this.submittedFiles,
       studentId: user.id
     }).subscribe(val => {
-      console.log(val);
+      this.loadAssignments();
     });
     this.closeModal();
   }

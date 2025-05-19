@@ -1,7 +1,7 @@
 <div class="p-6 max-w-4xl mx-auto">
   <div class="flex items-center justify-between mb-4">
     <h2 class="text-2xl font-bold">📚 Assignments/Activities</h2>
-    <a routerLink="create-classwork" class="btn btn-sm btn-primary">Add New Classwork</a>
+    <button (click)="openModal()" class="btn btn-sm btn-primary">Add New Classwork</button>
   </div>
 
   <div class="flex flex-col gap-4">
@@ -10,42 +10,91 @@
     @for (item of activities; track $index) {
     <div class="card bg-base-100 shadow-md border">
       <div class="card-body">
-        <h3 class="text-lg font-semibold">📖 {{ item.title }}</h3>
+        <a [routerLink]="['/teacher', 'classwork-detail', item.id]" class="text-lg link font-semibold">📖 {{ item.title
+          }}</a>
         <p class="text-gray-600">{{ item.instructions }}</p>
         <p class="text-sm text-gray-500">📅 Due Date: {{ item.dueDate | date }} </p>
         <p class="text-sm text-gray-400">🗓️ Posted on: {{ item.createdAt | date }}</p>
-
-        <br>
-
-        <button class="bg-blue-500 btn text-white px-4 py-2 rounded hover:bg-blue-600"
-          (click)="item.showSubmissions ?  hideSubmissions($index) : showSubmissions($index)">
-          @if (item.showSubmissions) {
-          Hide Submissions
-          }
-          @else {
-          Show Submissions ({{item.assignmentSubmissions.length}})
-          }
-        </button>
-
-        @if (item.showSubmissions) {
-        <div>
-          @for (submission of item.assignmentSubmissions; track $index) {
-          <div class="mt-2 p-3 border-l-4 border-blue-500 bg-gray-100 rounded-lg">
-            <div class="flex items-center gap-3 mb-1">
-              <img [src]="getAvatar('madffakin')" class="w-8 h-8 rounded-full" alt="Avatar">
-              <p class="text-sm font-medium">
-                {{ submission.studentId }} (student) • {{ "2025-08-25" | date: 'short' }}
-              </p>
-            </div>
-            <p class="text-gray-800">{{ submission.comment }}</p>
-          </div>
-          }
-        </div>
-        }
-
       </div>
 
     </div>
     }
   </div>
 </div>
+
+
+<dialog #createActivityModal id="my_modal_1" class="modal">
+  <div class="modal-box" [formGroup]="classworkFormGroup">
+    <h3 class="text-lg font-bold">Create assignment</h3>
+    <br>
+
+    <input type="text" formControlName="title" class="input input-bordered w-full" placeholder="Title">
+    <br>
+    <br>
+
+    <textarea formControlName="instruction" class="textarea textarea-bordered w-full"
+      placeholder="Instructions (optional)"></textarea>
+
+    <br>
+
+    <label class="form-control w-full">
+      <div class="label">
+        <span class="label-text">Points</span>
+      </div>
+      <input type="number" formControlName="hps" class="input input-bordered" placeholder="Add HPS">
+      <div class="label">
+        <span class="label-text-alt"></span>
+      </div>
+    </label>
+
+    <label class="form-control w-full">
+      <div class="label">
+        <span class="label-text">Due Date</span>
+      </div>
+      <input type="datetime-local" formControlName="due_date" placeholder="Type here"
+        class="input input-bordered w-full" />
+      <div class="label">
+        <span class="label-text-alt"></span>
+      </div>
+    </label>
+    <div class="modal-action">
+      <button class="btn btn-primary" (click)="createClasswork()">Submit</button>
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+
+<!-- Open the modal using ID.showModal() method -->
+<dialog #submissionModal class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">{{selectedSubmission?.student?.firstname}}</h3>
+    <p class="py-4">{{selectedSubmission?.comment}}</p>
+
+    <br>
+
+
+    <div class="">
+      <textarea class="textarea textarea-bordered w-full" placeholder="Feedback"></textarea>
+      <br>
+      <input type="number" class="input input-bordered w-full" placeholder="Score">
+    </div>
+    <br>
+    <div class="">
+      @for (item of selectedSubmission?.attachments; track $index) {
+      <a [href]="item.fileURL" target="_blank" class="link">{{ item.fileURL }}</a>
+      <br>
+      <br>
+      }
+    </div>
+    <div class="modal-action">
+      <button></button>
+      <form method="dialog">
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>

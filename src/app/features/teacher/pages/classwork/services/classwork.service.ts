@@ -2,6 +2,26 @@ import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
 
+export type Submission = {
+  id: number;
+  title: string;
+  comment: string;
+  studentId: number;
+  attachments: Attachment[];
+  student: {
+    id: number;
+    email: string;
+    firstname: string;
+    middlename?: string;
+    lastname: string;
+  };
+};
+
+export type Attachment = {
+  id: number;
+  fileURL: string;
+};
+
 export type Classwork = {
   id: number;
   title: string;
@@ -11,20 +31,7 @@ export type Classwork = {
 
   createdAt: string;
 
-
-  assignmentSubmissions: {
-    id: number;
-    title: string;
-    comment: string;
-    studentId: number;
-    student: {
-      id: number;
-      email: string;
-      firstname: string;
-      middlename?: string;
-      lastname: string;
-    };
-  }[];
+  assignmentSubmissions: Submission[];
 };
 
 @Injectable({
@@ -53,6 +60,10 @@ export class ClassworkService {
                   comment
                   assignmentId
                   createdAt
+                  attachments {
+                    id
+                    fileURL
+                  }
                   student {
                     id
                     email
@@ -63,7 +74,8 @@ export class ClassworkService {
                 }
             }
           }
-      `
+      `,
+      fetchPolicy: "no-cache"
     }).valueChanges;
   }
 

@@ -11,6 +11,7 @@ import { ClassworkFormComponent } from "./pages/classwork-form/classwork-form.co
 import { GradebookComponent } from "./pages/gradebook/gradebook.component";
 import { MeetingComponent } from "./pages/meeting/meeting.component";
 import { ProfileSettingsComponent } from "./pages/profile-settings/profile-settings.component";
+import { ClassworkDetailsComponent } from "./pages/classwork-details/classwork-details.component";
 
 
 const routes: Routes = [
@@ -62,6 +63,10 @@ const routes: Routes = [
       },
 
     ]
+  },
+  {
+    path: "classwork-detail/:id",
+    component: ClassworkDetailsComponent
   },
   {
     path: "meeting",

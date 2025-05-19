@@ -1,0 +1,77 @@
+<app-drawer>
+  <app-topbar></app-topbar>
+
+
+  <div class="container mx-auto">
+    <h3 class="text-xl font-semibold">{{ assignment?.title }} - Submissions</h3>
+
+    <br>
+
+    <div class="grid grid-cols-3 gap-4">
+
+      @for (item of submissions; track $index) {
+      <div class="card card-bordered cursor-pointer" (click)="showSubmissionDetail($index)">
+        <div class="card-body p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="font-semibold">{{item.student.firstname}} {{ item.student.lastname }}</p>
+
+              @if (item.score) {
+              <p class="text-sm">{{item.score}}</p>
+              }
+              @else {
+              <p class="text-sm">Not scored</p>
+              }
+            </div>
+            <span>
+              {{item.attachments.length}} files
+            </span>
+          </div>
+
+        </div>
+      </div>
+      }
+
+    </div>
+  </div>
+</app-drawer>
+
+
+<!-- Open the modal using ID.showModal() method -->
+<dialog #submissionDetailModal class="modal" (close)="resetModal()">
+  <div class="modal-box w-11/12 max-w-3xl">
+    <div class="flex items-start justify-between">
+      <h3 class="text-lg font-bold">
+        {{ selectedSubmission?.student?.firstname }}
+        {{ selectedSubmission?.student?.lastname }}
+      </h3>
+
+      <div class="flex items-center gap-3">
+        @if (!selectedSubmission?.score || editingScore) {
+        <input type="number" [formControl]="score" class="input input-sm input-bordered" placeholder="Score">
+        <button class="btn btn-sm btn-primary" (click)="addScore()">{{editingScore ? "Update" : "Add score"}}</button>
+        }
+        @else {
+        <div class="flex items-center justify-between gap-3">
+          <p class="text-success font-semibold">Score: {{ selectedSubmission?.score }}</p>
+          <button class="btn btn-sm" (click)="editScore()">Edit</button>
+        </div>
+        }
+      </div>
+    </div>
+    <p class="py-4">{{ selectedSubmission?.comment }}</p>
+
+    <div>
+      @for (item of selectedSubmission?.attachments; track $index) {
+      <a [href]="item.fileURL" target="_blank" class="link link-primary">{{ item.fileURL }}</a>
+      <br>
+      }
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
