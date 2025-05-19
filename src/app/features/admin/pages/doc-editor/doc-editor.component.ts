@@ -68,7 +68,7 @@ export class DocEditorComponent implements OnInit {
       console.log(val);
       this.submitInProgress = false;
 
-      location.href = `http://${window.location.host}/admin/content-management/${this.subjectId}`;
+      // location.href = `http://${window.location.host}/admin/content-management/${this.subjectId}`;
     });
   }
 

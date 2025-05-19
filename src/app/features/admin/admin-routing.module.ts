@@ -9,6 +9,10 @@ import { QuizCreationFormComponent } from "./pages/quiz-creation-form/quiz-creat
 import { ProfileSettingsComponent } from "../student/pages/profile-settings/profile-settings.component";
 import { LessonContentComponent } from "./pages/lesson-content/lesson-content.component";
 import { EditLessonComponent } from "./pages/edit-lesson/edit-lesson.component";
+import { SubjectLessonsComponent } from "./pages/subject-lessons/subject-lessons.component";
+import { TeacherSubjectComponent } from "./pages/teacher-subject/teacher-subject.component";
+import { EnrolledStudentsComponent } from "./pages/enrolled-students/enrolled-students.component";
+import { UserProfileComponent } from "./pages/user-profile/user-profile.component";
 
 const routes: Routes = [
   {
@@ -30,7 +34,26 @@ const routes: Routes = [
   },
   {
     path: "content-management/:id",
-    component: SubjectDetailPageComponent
+    component: SubjectDetailPageComponent,
+    children: [
+      {
+        path: "lessons",
+        component: SubjectLessonsComponent
+      },
+      {
+        path: "",
+        pathMatch: "full",
+        redirectTo: "lessons"
+      },
+      {
+        path: "assigned-teachers",
+        component: TeacherSubjectComponent
+      },
+      {
+        path: "enrolled-students",
+        component: EnrolledStudentsComponent
+      }
+    ]
   },
   {
     path: "lesson-content/:id",
@@ -47,6 +70,10 @@ const routes: Routes = [
   {
     path: "quiz-creation",
     component: QuizCreationFormComponent
+  },
+  {
+    path: "user-profile/:id",
+    component: UserProfileComponent
   },
   {
     path: "profile-settings",

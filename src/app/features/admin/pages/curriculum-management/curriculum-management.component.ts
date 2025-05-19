@@ -40,6 +40,7 @@ export class CurriculumManagementComponent implements OnInit {
       .pipe(
         tap(val => {
           this.mgaSubjects = val.data.subjects;
+          console.log(val);
         })
       ).subscribe();
 

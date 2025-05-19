@@ -1,0 +1,57 @@
+<button class="btn btn-sm" (click)="showAddStudentModa()">Add Student</button>
+
+<br>
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Date Added</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (sub of subject?.teacherAssignedSubjects; track $index) {
+    @for (item of sub.studentEnrolledSubjects; track $index) {
+    <tr>
+      <td>{{ item.student.firstname }} {{ item.student.lastname }}</td>
+      <td>{{ item.student.email }}</td>
+      <td>{{ item.createdAt | date: "medium"}}</td>
+    </tr>
+    }
+    }
+  </tbody>
+</table>
+
+
+<!-- Open the modal using ID.showModal() method -->
+<dialog #addStudentModal id="my_modal_1" class="modal" (close)="cleanForm()">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Add Student</h3>
+    <br>
+    <select [formControl]="studentSelect" class="select select-bordered w-full">
+      <option value="" selected disabled>-- Select student</option>
+
+      @for (item of students; track $index) {
+      <option [value]="item.id">{{ item.firstname }} {{ item.lastname }}</option>
+      }
+    </select>
+    <br>
+    <br>
+
+    <select [formControl]="teacherSubjectSelect" class="select select-bordered w-full">
+      <option value="" selected disabled>-- Select teacher</option>
+      @for (item of subject?.teacherAssignedSubjects; track $index) {
+      <option [value]="item.id">{{ item.teacher.firstname }} {{ item.teacher.lastname }}</option>
+      }
+    </select>
+    <div class="modal-action">
+      <button class="btn btn-primary" (click)="addStudent()">Add</button>
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>

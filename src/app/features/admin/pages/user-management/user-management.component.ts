@@ -6,10 +6,11 @@ import { User, UserManagementService } from './services/user-management.service'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ToastContainerComponent } from "../../../../shared/components/toast-container/toast-container.component";
 import { ToastService } from '../../../../shared/components/toast/toast.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-management',
-  imports: [DrawerComponent, TopbarComponent, ReactiveFormsModule, ToastContainerComponent],
+  imports: [DrawerComponent, TopbarComponent, ReactiveFormsModule, ToastContainerComponent, RouterLink],
   templateUrl: './user-management.component.html',
   styles: ``
 })

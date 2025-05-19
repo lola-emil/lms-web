@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { QuizSession } from '../../../../repositories/quiz-session-repo.service';
 import { SubjectMaterial } from '../../../../repositories/subject-material-repo.service';
@@ -13,7 +13,7 @@ import { Subject, SubjectDetailService } from './services/subject-detail.service
 
 @Component({
   selector: 'app-subject-detail-page',
-  imports: [DrawerComponent, TopbarComponent, CommonModule, RouterLink, ReactiveFormsModule],
+  imports: [DrawerComponent, TopbarComponent, CommonModule, RouterLink, ReactiveFormsModule, RouterOutlet],
   templateUrl: './subject-detail-page.component.html',
   styles: ``
 })

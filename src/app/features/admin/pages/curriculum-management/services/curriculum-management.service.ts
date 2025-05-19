@@ -9,6 +9,11 @@ export type Subject = {
   coverImgUrl?: string;
   classLevelId: number;
 
+  gradeLevel: {
+    id: number;
+    level: number;
+  };
+
   createdAt: string;
   updatedAt: string;
 };
@@ -39,6 +44,10 @@ export class CurriculumManagementService {
               classLevelId
               createdAt
               updatedAt
+              gradeLevel {
+                id
+                level
+              }
           }
         }
       `,

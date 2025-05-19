@@ -45,7 +45,8 @@
         <tr>
           <!-- <td><input type="checkbox" class="checkbox checkbox-xs"></td> -->
           <td></td>
-          <td><a href="" class="link">{{ item.firstname }} {{ item.lastname }}</a></td>
+          <td><a [routerLink]="['/admin', 'user-profile', item.id]" class="link">{{ item.firstname }} {{ item.lastname
+              }}</a></td>
           <td>{{ item.email }}</td>
           <td></td>
           <td>{{ item.role }}</td>
@@ -62,7 +63,8 @@
   <div class="modal-box">
     <h3 class="text-lg font-bold">Bulk Import User</h3>
     <br>
-    <a href="http://localhost:4000/public/files/student-template.xlsx" target="_blank" class="btn btn-primary btn-outline btn-sm">Download template xlsx</a>
+    <a href="http://localhost:4000/public/files/student-template.xlsx" target="_blank"
+      class="btn btn-primary btn-outline btn-sm">Download template xlsx</a>
     <br>
     <br>
     <input type="file" #fileInput (change)="onFileSelected($event)"

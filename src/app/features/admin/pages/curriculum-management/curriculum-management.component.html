@@ -30,8 +30,7 @@
         <div class="p-5">
           <p class="font-semibold">{{item.title }}</p>
           <div class="flex flex-col">
-            <!-- < class="text-sm">{{ item.instructor }}</ p> -->
-
+            <p>Grade {{ item.gradeLevel.level }}</p>
           </div>
           <div class="flex mt-3 justify-between">
             <div class="text-sm flex items-center gap-1" title="12 Participants/Students">
@@ -55,14 +54,11 @@
       <input [formControl]="subjectName" type="text" class="input input-bordered w-full" placeholder="Subject Name">
       <br>
       <br>
-      <input [formControl]="subjectName" type="text" class="input input-bordered w-full" placeholder="Subject Code">
-      <br>
-      <br>
       <select [formControl]="selectedGradeLevel" class="select select-bordered w-full">
         <option value="null" selected disabled>-- Select Grade Level</option>
 
         @for (item of levels; track $index) {
-          <option [value]="item.id">{{ item.level }}</option>
+        <option [value]="item.id">{{ item.level }}</option>
         }
 
       </select>

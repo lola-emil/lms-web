@@ -1,0 +1,85 @@
+<app-drawer>
+  <app-topbar></app-topbar>
+  <form [formGroup]="userForm" (submit)="updateUser()" class="container mx-auto md:px-5">
+    <div class="card border w-full lg:px-0 lg:w-3/4">
+      <div class="card-body">
+        <p class="font-semibold">User Profile</p>
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Firstname</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input formControlName="firstname" type="text" class="input input-bordered w-full" />
+
+          </div>
+          <div class="label">
+          </div>
+        </label>
+
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Middlename</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input formControlName="middlename" type="text" class="input input-bordered w-full" />
+
+          </div>
+          <div class="label">
+          </div>
+        </label>
+
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Lastname</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input formControlName="lastname" type="text" class="input input-bordered w-full " />
+
+          </div>
+          <div class="label">
+          </div>
+        </label>
+
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Email</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input formControlName="email" type="text" class="input input-bordered w-full" />
+
+          </div>
+          <div class="label">
+          </div>
+        </label>
+
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">New Password</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input formControlName="password" type="password" class="input input-bordered w-full" />
+
+          </div>
+          <div class="label">
+          </div>
+        </label>
+
+        <div>
+          <button class="btn btn-primary">Update</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </form>
+</app-drawer>
+
+
+<div class="toast toast-top toast-end">
+  @for (item of toastMessages; track $index) {
+  <div class="alert alert-success">
+    <span>{{item.message}}</span>
+  </div>
+  }
+</div>
