@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
+    "@angular/service-worker": "^19.0.0",
     "@apollo/client": "^3.13.8",
     "@dicebear/collection": "^9.2.2",
     "@dicebear/core": "^9.2.2",

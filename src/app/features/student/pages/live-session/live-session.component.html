@@ -1,12 +1,11 @@
-<div class="container mx-auto lg:p-6">
+<div class="container mx-auto px-5 lg:px-0">
   <h1 class="text-2xl font-bold lg:text-center">📊 Score History</h1>
 
-  <div *ngIf="scoreHistory.length === 0" class="text-gray-500 text-center mt-4">
+  <!-- <div *ngIf="scoreHistory.length === 0" class="text-gray-500 text-center mt-4">
     No scores available.
-  </div>
-
-  <div *ngFor="let history of scoreHistory" class="card bg-base-100 shadow-md mt-4 border-l-4"
-       [ngClass]="{
+  </div> -->
+  <!--
+  <div *ngFor="let history of scoreHistory" class="card bg-base-100 shadow-md mt-4 border-l-4" [ngClass]="{
          'border-green-500': history.type === 'Quiz',
          'border-red-500': history.type === 'Exam',
          'border-blue-500': history.type === 'Assignment',
@@ -17,8 +16,32 @@
       <p class="text-md text-gray-600">📆 {{ history.date }} | 🎯 {{ history.type }}</p>
       <p class="text-md text-gray-700">🏆 Score: <strong>{{ history.score }} / {{ history.total }}</strong></p>
 
+    </div>
+  </div> -->
+
+  @if (history.length == 0) {
+  <div class="text-gray-500 text-center mt-4">
+    No scores available.
+  </div>
+  }
+
+  <!--
+  'border-red-500': item.type === 'Exam',
+  'border-purple-500': item.type === 'Project' -->
+  @for (item of history; track $index) {
+  <div class="card bg-base-100 shadow-md mt-4 border-l-4" [ngClass]="{
+         'border-green-500': item.category === 'QUIZ',
+         'border-blue-500': item.category === 'ACTIVITY',
+
+       }">
+    <div class="card-body">
+      <h3 class="font-bold text-lg">{{ item.title ?? item.teacherSubject.subject.title }}</h3>
+      <p class="text-md text-gray-600">📆 {{ item.createdAt | date: "short" }} | 🎯 {{ item.category }}</p>
+      <p class="text-md text-gray-700">🏆 Score: <strong>{{ item.score }} / {{ item.hps }}</strong></p>
+
       <!-- Review Answers Button -->
       <!-- <button (click)="reviewAnswers(history.id)" class="btn btn-info w-full mt-2">🔍 Review Answers</button> -->
     </div>
   </div>
+  }
 </div>

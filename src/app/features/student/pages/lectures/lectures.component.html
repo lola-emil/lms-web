@@ -1,4 +1,4 @@
-<div class="container mx-auto lg:p-6">
+<div class="container mx-auto px-5">
   <h1 class="text-2xl font-bold lg:text-center mb-4">📚 Course Lessons</h1>
 
   @if (lessons?.teacherSubject?.subject?.subjectMaterials?.length == 0) {
@@ -21,7 +21,7 @@
       <p class="text-md text-gray-500">🔄 Last Updated: {{ item.updatedAt | date:'mediumDate' }}</p>
 
       @if (item.materialType == "QUIZ ") {
-        <p class="text-md text-gray-500">1️⃣ Items: {{ item.questions.length }}</p>
+      <p class="text-md text-gray-500">1️⃣ Items: {{ item.questions.length }}</p>
       }
 
       <div class="flex justify-between items-center mt-2">
@@ -38,7 +38,8 @@
         <span class="text-green-600 font-bold">Score: {{item.quizSessions[0].score}} / {{item.questions.length}}</span>
         }
         @else {
-        <a routerLink="/student/quiz" [queryParams]="{quiz_id: item.id}" class="btn btn-outline btn-sm">📖 Take
+        <a routerLink="/student/quiz" [queryParams]="{quiz_id: item.id, teacherSubjectId: lessons?.teacherSubject?.id, studentSubjectId}"
+          class="btn btn-outline btn-sm">📖 Take
           Quiz</a>
         }
         } @else {

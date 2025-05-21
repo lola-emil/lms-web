@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { Quiz, QuizPageService } from './services/quiz-page.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { AuthService } from '../../../../services/auth.service';
@@ -29,6 +29,9 @@ export class QuizPageComponent implements OnInit {
   quiz?: Quiz;
 
   quizId: number;
+  teacherSubjectId: number;
+  studentSubjectId: number;
+
   answerForm: FormGroup = new FormGroup({
     answers: new FormArray([])
   });
@@ -37,10 +40,12 @@ export class QuizPageComponent implements OnInit {
     private quizService: QuizPageService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.quizId = parseInt(this.route.snapshot.queryParamMap.get("quiz_id") ?? "");
-
+    this.teacherSubjectId = parseInt(this.route.snapshot.queryParamMap.get("teacherSubjectId") ?? "");
+    this.studentSubjectId = parseInt(this.route.snapshot.queryParamMap.get("studentSubjectId") ?? "");
   }
 
   get answersArray(): FormArray {
@@ -79,17 +84,16 @@ export class QuizPageComponent implements OnInit {
       answer: answers[index]
     }))!;
 
-    console.log({answers, body})
-
-
     this.closeModal();
     this.quizService.finishQuiz({
       id: this.quizId,
       studentId: user.id,
-      answers: body
+      answers: body,
+      teacherSubjectId: this.teacherSubjectId
     })
       .subscribe(res => {
         console.log(res);
+        this.router.navigate(['/student', 'courses', this.teacherSubjectId]);
       });
   }
 

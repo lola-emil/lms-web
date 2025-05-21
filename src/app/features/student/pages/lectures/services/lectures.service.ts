@@ -3,6 +3,7 @@ import { Apollo, gql } from 'apollo-angular';
 
 export type StudentSubject = {
   teacherSubject: {
+    id: number;
     subject: {
       subjectMaterials: {
         id: number;
@@ -36,6 +37,7 @@ export class LecturesService {
         query StudentEnrolledSubjects {
             studentEnrolledSubject(id: ${studentSubjectId}) {
                 teacherSubject {
+                    id
                     subject {
                         subjectMaterials {
                             id

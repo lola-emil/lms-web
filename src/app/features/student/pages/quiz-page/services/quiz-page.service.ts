@@ -50,6 +50,7 @@ export class QuizPageService {
   finishQuiz(body: {
     id: number;
     studentId: number;
+    teacherSubjectId: number;
     answers: {
       id: number;
       answer: any;

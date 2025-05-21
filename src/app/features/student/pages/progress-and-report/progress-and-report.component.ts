@@ -5,6 +5,7 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { GradebookService } from './services/gradebook.service';
 
 @Component({
   selector: 'app-progress-and-report',
@@ -33,9 +34,16 @@ export class ProgressAndReportComponent {
     exams: 40  // 40% weight
   };
 
-  constructor() {}
+  constructor(
+    private gradebookService: GradebookService
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.gradebookService.getGrades()
+      .subscribe(res => {
+        console.log(res);
+      });
+  }
 
   // Download as CSV
   downloadCSV() {
