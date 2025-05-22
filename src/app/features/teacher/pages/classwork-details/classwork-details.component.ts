@@ -62,6 +62,17 @@ export class ClassworkDetailsComponent implements OnInit {
     this.selectedSubmission = undefined;
   }
 
+  enforceMax(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const max = this.assignment?.hps ?? 0;
+
+    if (+input.value > max) {
+      input.value = max.toString();
+      this.score.setValue(max);
+    }
+  }
+
+
   addScore() {
     this.classworkService.addScore({
       submissionId: this.selectedSubmission?.id!,

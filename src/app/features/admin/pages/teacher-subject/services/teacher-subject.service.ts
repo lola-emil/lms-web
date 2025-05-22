@@ -50,7 +50,8 @@ export class TeacherSubjectService {
                 }
             }
         }
-      `
+      `,
+      fetchPolicy: "no-cache"
     }).valueChanges;
   }
 
@@ -70,7 +71,8 @@ export class TeacherSubjectService {
                 updatedAt
             }
         }
-      `
+      `,
+      fetchPolicy: "no-cache"
     }).valueChanges;
   }
 

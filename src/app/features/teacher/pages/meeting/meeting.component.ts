@@ -53,7 +53,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
       })
         .pipe(
           tap(val => {
-            console.log(val);
+            console.log("createMeeting", val);
             this.getSignature(val.data);
           })
         ).subscribe();
@@ -66,7 +66,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
 
     this.ngZone.runOutsideAngular(() => {
       ZoomMtg.init({
-        leaveUrl: "http://localhost:4200",
+        leaveUrl: `${environment.apiURL}/graphql-ext/delete-meeting?code=${this.code}&redirect_url=http://localhost:4200/`,
         patchJsMedia: true,
         leaveOnPageUnload: true,
         success: (success: any) => {

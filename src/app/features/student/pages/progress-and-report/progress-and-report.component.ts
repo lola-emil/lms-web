@@ -7,6 +7,13 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { GradebookService } from './services/gradebook.service';
 
+type SubjectSummary = {
+  subject: string;
+  quiz: number;
+  assignment: number;
+};
+
+
 @Component({
   selector: 'app-progress-and-report',
   imports: [DrawerComponent, TopbarComponent, CommonModule],
@@ -38,10 +45,41 @@ export class ProgressAndReportComponent {
     private gradebookService: GradebookService
   ) { }
 
+  scores: SubjectSummary[] = [];
+
   ngOnInit(): void {
     this.gradebookService.getGrades()
       .subscribe(res => {
         console.log(res);
+          this.scores = res.data.studentGrades.reduce<SubjectSummary[]>((acc, curr) => {
+            const subjectTitle = curr.teacherSubject.subject.title;
+            const category = curr.category;
+            const score = curr.score;
+
+            // Find or create subject entry
+            let subjectEntry = acc.find(entry => entry.subject === subjectTitle);
+
+            if (!subjectEntry) {
+              subjectEntry = {
+                subject: subjectTitle,
+                quiz: 0,
+                assignment: 0
+              };
+              acc.push(subjectEntry);
+            }
+
+            // Process based on category
+            if (category === 'QUIZ') {
+              subjectEntry.quiz += score;
+            } else if (category === 'ACTIVITY') {
+              subjectEntry.assignment += score;
+            }
+
+            return acc;
+          }, []);
+
+        console.log(this.scores);
+
       });
   }
 

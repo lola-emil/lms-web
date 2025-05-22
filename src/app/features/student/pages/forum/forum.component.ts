@@ -18,6 +18,7 @@ export class ForumComponent implements OnInit {
   forums!: Observable<any[]>;
   newForum = { title: '', content: '' };
 
+  studentSubjectId?: number;
   teacherSubjectId?: number;
 
   constructor(
@@ -25,7 +26,7 @@ export class ForumComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService
   ) {
-    this.route.parent?.params.subscribe(val => this.teacherSubjectId = parseInt(val['id']));
+    this.route.parent?.params.subscribe(val => this.studentSubjectId = parseInt(val['id']));
   }
 
   ngOnInit(): void {
@@ -36,19 +37,23 @@ export class ForumComponent implements OnInit {
   announcements: (ForumDiscussion & { showReplies: boolean; })[] = [];
 
   loadForums() {
-    this.forumService.getAnnouncements(this.teacherSubjectId ?? 0)
+    this.forumService.getStudentEnrolledSubject(this.studentSubjectId ?? 0)
       .subscribe(res => {
-        this.announcements = res.data.forumDiscussions.map(data => ({
-          ...data,
-          showReplies: false
-        }));
+        this.teacherSubjectId = res.data.studentEnrolledSubject.teacherSubjectId;
+        this.forumService.getAnnouncements(res.data.studentEnrolledSubject.teacherSubjectId ?? 0)
+          .subscribe(res => {
+            this.announcements = res.data.forumDiscussions.map(data => ({
+              ...data,
+              showReplies: false
+            }));
 
-        this.announcements.forEach(val => {
-          this.replyForms.push(new FormGroup({
-            forumDiscussionId: new FormControl(val.id),
-            commentText: new FormControl("")
-          }));
-        });
+            this.announcements.forEach(val => {
+              this.replyForms.push(new FormGroup({
+                forumDiscussionId: new FormControl(val.id),
+                commentText: new FormControl("")
+              }));
+            });
+          });
       });
   }
 
@@ -71,6 +76,7 @@ export class ForumComponent implements OnInit {
 
   askQuestion() {
     let form = this.forumForm.value as any;
+
     if (this.teacherSubjectId)
       form = {
         ...form,

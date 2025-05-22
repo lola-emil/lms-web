@@ -33,6 +33,11 @@ export class CurriculumManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSubjects();
+    this.curriculumService.getGradeLevels()
+      .subscribe(res => {
+        console.log(res);
+        this.levels = res.data.classLevels;
+      });
   }
 
   getSubjects() {
@@ -75,5 +80,18 @@ export class CurriculumManagementComponent implements OnInit {
       this.closeModal();
       this.getSubjects();
     });
+  }
+
+  filter(event: Event) {
+    const target = event.target as HTMLSelectElement;
+
+    if (target.value) {
+      this.curriculumService.filterSubject(parseInt(target.value))
+        .subscribe(res => {
+          this.mgaSubjects = res.data.subjectPerLevel;
+        });
+    } else {
+      this.getSubjects();
+    }
   }
 }

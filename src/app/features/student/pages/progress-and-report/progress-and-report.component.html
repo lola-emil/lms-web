@@ -14,19 +14,19 @@
         <thead>
           <tr>
             <th class="p-3 text-left">Subject</th>
-            <th class="p-3 text-center">Quizzes ({{ criteria.quizzes }}%)</th>
-            <th class="p-3 text-center">Assignments ({{ criteria.assignments }}%)</th>
-            <th class="p-3 text-center">Exams ({{ criteria.exams }}%)</th>
-            <th class="p-3 text-center">Total Grade</th>
+            <th class="p-3 text-center">Quiz </th>
+            <th class="p-3 text-center">Assignment </th>
+            <!-- <th class="p-3 text-center">Exams ({{ criteria.exams }}%)</th> -->
+            <!-- <th class="p-3 text-center">Total Grade</th> -->
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let student of students" class="border-t">
+          <tr *ngFor="let student of scores" class="border-t">
             <td class="p-3">{{ student.subject }}</td>
-            <td class="p-3 text-center">{{ student.scores.quizzes }}</td>
-            <td class="p-3 text-center">{{ student.scores.assignments }}</td>
-            <td class="p-3 text-center">{{ student.scores.exams }}</td>
-            <td class="p-3 text-center font-semibold">{{ student.total.toFixed(2) }}</td>
+            <td class="p-3 text-center">{{ student.quiz }}</td>
+            <td class="p-3 text-center">{{ student.assignment }}</td>
+            <!-- <td class="p-3 text-center">{{ student.scores.exams }}</td> -->
+            <!-- <td class="p-3 text-center font-semibold">{{ student.total.toFixed(2) }}</td> -->
           </tr>
         </tbody>
       </table>

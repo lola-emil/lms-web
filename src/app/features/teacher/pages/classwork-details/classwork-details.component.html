@@ -48,7 +48,7 @@
 
       <div class="flex items-center gap-3">
         @if (!selectedSubmission?.score || editingScore) {
-        <input type="number" [formControl]="score" class="input input-sm input-bordered" placeholder="Score">
+        <input type="number" [max]="assignment?.hps ?? 0" [formControl]="score" (input)="enforceMax($event)" class="input input-sm input-bordered" [placeholder]="'Score Max: ' + assignment?.hps">
         <button class="btn btn-sm btn-primary" (click)="addScore()">{{editingScore ? "Update" : "Add score"}}</button>
         }
         @else {

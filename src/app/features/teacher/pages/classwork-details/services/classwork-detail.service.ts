@@ -20,6 +20,8 @@ export type Submission = {
   comment: string;
   createdAt: string;
 
+  hps: number;
+
   score?: number;
 
   student: Student,

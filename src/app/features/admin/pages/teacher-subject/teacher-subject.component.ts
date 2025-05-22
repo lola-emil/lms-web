@@ -27,11 +27,7 @@ export class TeacherSubjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.teacherSubjectService.getTeacherSubjects(this.subjectId ?? 0)
-      .subscribe(res => {
-        this.subject = res.data.subject;
-      });
-
+    this.loadTeachers();
     this.teacherSubjectService.getTeachers()
       .subscribe(res => {
         console.log("Teachers", res);
@@ -43,6 +39,14 @@ export class TeacherSubjectComponent implements OnInit {
           return false;
         });
       });
+  }
+
+  loadTeachers() {
+    this.teacherSubjectService.getTeacherSubjects(this.subjectId ?? 0)
+      .subscribe(res => {
+        this.subject = res.data.subject;
+      });
+
   }
 
 
@@ -61,6 +65,8 @@ export class TeacherSubjectComponent implements OnInit {
       .pipe(
         tap(res => {
           console.log(res);
+          this.addTeacherDialog.nativeElement.close();
+          this.loadTeachers();
         }),
         catchError(errRes => {
           console.log(errRes);

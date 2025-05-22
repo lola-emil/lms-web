@@ -93,7 +93,7 @@ export class QuizPageComponent implements OnInit {
     })
       .subscribe(res => {
         console.log(res);
-        this.router.navigate(['/student', 'courses', this.teacherSubjectId]);
+        this.router.navigate(['/student', 'courses', this.studentSubjectId]);
       });
   }
 

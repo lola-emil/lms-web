@@ -115,6 +115,7 @@ export class QuizCreationFormComponent implements OnInit {
       .pipe(
         tap(res => {
           console.log(res);
+          window
         }),
         catchError(errRes => {
           console.log(errRes);

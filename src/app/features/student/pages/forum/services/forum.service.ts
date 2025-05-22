@@ -37,6 +37,22 @@ export class ForumService {
   ) { }
 
 
+  getStudentEnrolledSubject(studentSubjectId: number) {
+    return this.apollo.watchQuery<{studentEnrolledSubject: {teacherSubjectId: number}}>({
+      query: gql`
+        query EnrolledSubjectsByStudentId {
+            studentEnrolledSubject(id: ${studentSubjectId}) {
+                id
+                studentId
+                teacherSubjectId
+                createdAt
+                updatedAt
+            }
+        }
+      `
+    }).valueChanges;
+  }
+
   getAnnouncements(teacherSubjectId: number) {
     return this.apollo.watchQuery<{ forumDiscussions: ForumDiscussion[]; }>({
       query: gql`

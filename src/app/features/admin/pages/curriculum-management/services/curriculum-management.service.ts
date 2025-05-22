@@ -55,6 +55,27 @@ export class CurriculumManagementService {
     }).valueChanges;
   }
 
+  filterSubject(classLevelId: number) {
+    return this.apollo.watchQuery<{ subjectPerLevel: Subject[]; }>({
+      query: gql`
+        query SubjectPerLevel {
+            subjectPerLevel(classLevelId: ${classLevelId}) {
+                id
+                title
+                coverImgUrl
+                classLevelId
+                createdAt
+                updatedAt
+                gradeLevel {
+                  id
+                  level
+                }
+            }
+        }
+      `
+    }).valueChanges;
+  }
+
   getGradeLevels() {
     return this.apollo.watchQuery<{ classLevels: ClassLevel[]; }>({
       query: gql`
