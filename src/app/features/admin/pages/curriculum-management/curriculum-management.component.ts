@@ -69,13 +69,14 @@ export class CurriculumManagementComponent implements OnInit {
 
   subjectName = new FormControl("");
   selectedGradeLevel = new FormControl<number | null>(null);
+  selectedCoverImg?: File;
 
   addSubject() {
     this.addSubjectInProgress = true;
     this.curriculumService.addSubject({
       title: this.subjectName.value!,
       gradeLevelId: this.selectedGradeLevel.value!,
-      coverImage: undefined
+      coverImage: this.selectedCoverImg
     }).subscribe(res => {
       this.closeModal();
       this.getSubjects();
@@ -93,5 +94,10 @@ export class CurriculumManagementComponent implements OnInit {
     } else {
       this.getSubjects();
     }
+  }
+
+  chooseCoverImage(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.selectedCoverImg = target.files![0];
   }
 }

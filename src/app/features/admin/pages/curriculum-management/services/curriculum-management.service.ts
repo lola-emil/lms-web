@@ -14,6 +14,8 @@ export type Subject = {
     level: number;
   };
 
+  subjectMaterials: { id: number; }[];
+
   createdAt: string;
   updatedAt: string;
 };
@@ -48,6 +50,9 @@ export class CurriculumManagementService {
                 id
                 level
               }
+              subjectMaterials {
+                id
+              }
           }
         }
       `,
@@ -66,13 +71,17 @@ export class CurriculumManagementService {
                 classLevelId
                 createdAt
                 updatedAt
+                subjectMaterials {
+                  id
+                }
                 gradeLevel {
                   id
                   level
                 }
             }
         }
-      `
+      `,
+      fetchPolicy: "no-cache"
     }).valueChanges;
   }
 
