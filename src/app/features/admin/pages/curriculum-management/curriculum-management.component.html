@@ -4,31 +4,35 @@
   <div class="container mx-auto px-5">
     <div class="flex items-center lg:justify-between gap-3">
       <div class="flex items-center gap-5">
-        <input type="text" placeholder="Search Course" class="input w-full lg:w-96 lg:input-sm input-bordered">
+        <input type="text" placeholder="Search Course" (input)="searchSubject($event)"
+          class="input w-full lg:w-96 lg:input-sm input-bordered">
         <button class="btn btn-sm btn-primary" (click)="openModal()">Add subject</button>
+
+        <select class="select select-bordered select-sm" (change)="filter($event)">
+          <option value="" selected>All</option>
+
+          @for (item of levels; track $index) {
+          <option [value]="item.id">Grade {{ item.level }}</option>
+          }
+        </select>
       </div>
 
-      <select class="select select-bordered select-sm" (change)="filter($event)">
-        <option value="" selected>Filter grade level</option>
 
-        @for (item of levels; track $index) {
-          <option [value]="item.id">{{ item.level }}</option>
-        }
-      </select>
     </div>
 
     <br>
 
     <div class="grid gap-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-      @for (item of mgaSubjects; track $index) {
+      @for (item of (!!searchQuery ? filterSubject() : mgaSubjects); track $index) {
 
       <a [routerLink]="item.id + ''" class="rounded-lg border-[1px] shadow">
         <div>
           @if (item.coverImgUrl) {
-          <img [src]="'http://' + item.coverImgUrl" class="w-full max-h-48 object-cover rounded-tl rounded-tr" alt="" crossOrigin="anonymous">
+          <img [src]="'http://' + item.coverImgUrl" class="w-full max-h-48 object-cover rounded-tl rounded-tr" alt=""
+            crossOrigin="anonymous">
           }
           @else {
-            <div class="w-full min-h-48 bg-neutral-200 rounded-tl rounded-tr"></div>
+          <div class="w-full min-h-48 bg-neutral-200 rounded-tl rounded-tr"></div>
           }
           <!-- <img {[]}="https://loremflickr.com/100/100?random=3" alt=""> -->
         </div>
@@ -71,14 +75,15 @@
       <br>
       <br>
 
-    <label class="form-control w-full">
-      <div class="label">
-        <span class="label-text">Cover Image (optional)</span>
-      </div>
-      <input type="file" (input)="chooseCoverImage($event)" placeholder="Type here" class="file-input file-input-bordered w-full" accept="image/*"/>
-      <div class="label">
-      </div>
-    </label>
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Cover Image (optional)</span>
+        </div>
+        <input type="file" (input)="chooseCoverImage($event)" placeholder="Type here"
+          class="file-input file-input-bordered w-full" accept="image/*" />
+        <div class="label">
+        </div>
+      </label>
       <div class="modal-action">
         <button class="btn btn-primary" (click)="addSubject()">Submit</button>
         <form method="dialog">

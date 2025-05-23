@@ -12,7 +12,7 @@
       <div class="card border bg-blue-300">
         <div class="card-body flex flex-row items-center">
           <div class="flex-1">
-            <p class="text-4xl">430</p>
+            <p class="text-4xl">{{ studentCount }}</p>
             <p>Total Students</p>
           </div>
           <div class="flex-1">
@@ -30,7 +30,7 @@
       <div class="card border bg-red-300">
         <div class="card-body flex flex-row items-center">
           <div class="flex-1">
-            <p class="text-4xl">30</p>
+            <p class="text-4xl">{{teacherCount}}</p>
             <p>Total Teachers</p>
           </div>
           <div class="flex-1">
@@ -48,8 +48,8 @@
       <div class="card border bg-orange-300">
         <div class="card-body flex flex-row items-center">
           <div class="flex-1">
-            <p class="text-4xl">8</p>
-            <p>Total Uploaded</p>
+            <p class="text-4xl">{{ materialCount }}</p>
+            <p>Total Uploaded <br>Modules</p>
           </div>
           <div class="flex-1">
             <span>
@@ -65,18 +65,18 @@
     </div>
   </main>
 
-<!-- Open the modal using ID.showModal() method -->
-<dialog id="my_modal_1" class="modal">
-  <div class="modal-box">
-    <h3 class="text-lg font-bold">Hello!</h3>
-    <p class="py-4">Press ESC key or click the button below to close</p>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
+  <!-- Open the modal using ID.showModal() method -->
+  <dialog id="my_modal_1" class="modal">
+    <div class="modal-box">
+      <h3 class="text-lg font-bold">Hello!</h3>
+      <p class="py-4">Press ESC key or click the button below to close</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn">Close</button>
+        </form>
+      </div>
     </div>
-  </div>
-</dialog>
+  </dialog>
 
 </app-drawer>

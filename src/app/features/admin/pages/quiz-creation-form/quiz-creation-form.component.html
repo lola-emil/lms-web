@@ -9,7 +9,7 @@
     </p>
   </div>
   <br>
-  <form [formGroup]="quizForm" (submit)="onSubmit()" class="container px-5 lg:px-0 mx-auto">
+  <form [formGroup]="quizForm" class="container px-5 lg:px-0 mx-auto">
     <label class="form-control w-full lg:w-3/4">
       <div class="label">
         <span class="label-text font-semibold text-lg">Quiz Title</span>
@@ -102,7 +102,7 @@
 
     <br>
 
-    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
 
   </form>
 

@@ -25,6 +25,8 @@ export class UserProfileComponent implements OnInit {
 
   toastMessages: Toast[] = [];
 
+  isUpdating = false;
+
   removeToast(index: number) {
     this.toastMessages.splice(index, 1);
   }
@@ -65,7 +67,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   updateUser() {
-
+    this.isUpdating = true;
     this.userProfile.updateUser({
       ...this.userForm.value,
       id: this.userId
@@ -75,10 +77,12 @@ export class UserProfileComponent implements OnInit {
           console.log(res);
           this.addToast({
             message: "User updated successfully"
-          })
+          });
+
+          this.isUpdating = false;
         }),
         catchError(errRes => {
-          console.log(errRes);
+          this.isUpdating = false;
           return of(null);
         })
       )

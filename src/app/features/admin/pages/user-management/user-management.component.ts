@@ -17,12 +17,12 @@ import { RouterLink } from '@angular/router';
 export class UserManagementComponent implements OnInit {
   @ViewChild("importUserModal") importUserModal!: ElementRef<HTMLDialogElement>;
   @ViewChild("fileInput", { static: false }) fileInput!: ElementRef<HTMLInputElement>;
-
   @ViewChild("addUserModal") addUserModal!: ElementRef<HTMLDialogElement>;
 
   mgaUsers: User[] = [];
 
   roles = ["ADMIN", "STUDENT", "TEACHER"];
+
 
   userFormGroup = new FormGroup({
     firstname: new FormControl(""),
@@ -44,17 +44,57 @@ export class UserManagementComponent implements OnInit {
   }
 
   getUsers() {
-    this.userManagementService.getUsers()
+    this.userManagementService.getUsers(this.page, this.selectedRole, this.searchQuery)
       .pipe(
         tap(val => {
           this.mgaUsers = val.data.users;
+          this.userCount = val.data.count;
+
+          this.maxPage = Math.ceil(this.userCount / this.userManagementService.limit);
         })
       )
       .subscribe();
   }
 
-  showImportModal() {
+
+  page = 1;
+  userCount = 0;
+  maxPage = 1;
+  selectedRole?: "ADMIN" | "STUDENT" | "TEACHER";
+  searchQuery?: string;
+
+  nextPage() {
+    this.page += 1;
+    this.getUsers();
+  }
+
+  prevPage() {
+    this.page -= 1;
+    this.getUsers();
+  }
+
+  filterUsers(event: Event) {
+    const target = event.target as HTMLSelectElement;
+
+    this.selectedRole = target.value as any;
+
+    this.getUsers();
+
+    // if (target.value)
+    //   this.userManagementService.getUserByRole((<any>target.value))
+    //     .subscribe(res => {
+    //       this.mgaUsers = res.data.userByRole;
+    //     });
+    // else
+    //   this.getUsers();
+  }
+
+  selectedImportRole!: "TEACHER" | "STUDENT";
+
+  showImportModal(role: "TEACHER" | "STUDENT") {
+    this.selectedImportRole = role;
     this.importUserModal.nativeElement.showModal();
+
   }
 
   showAddUserModal() {
@@ -75,9 +115,8 @@ export class UserManagementComponent implements OnInit {
   }
 
   uploadImportFiles() {
-    this.userManagementService.uploadImportFile(this.importFiles[0])
+    this.userManagementService.uploadImportFile(this.importFiles[0], this.selectedImportRole)
       .subscribe(res => {
-        console.log(res);
         setTimeout(() => {
           console.log('Triggering getUsers()...');
           this.getUsers();  // Ensure this is being reached
@@ -87,11 +126,15 @@ export class UserManagementComponent implements OnInit {
   }
 
   submitUser() {
-    console.log(this.userFormGroup.value);
     this.userManagementService.submitUser(this.userFormGroup.value).subscribe(res => {
-      console.log(res);
       this.addUserModal.nativeElement.close();
       this.getUsers();
     });
+  }
+
+  searchUser(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.searchQuery = target.value;
+    this.getUsers();
   }
 }

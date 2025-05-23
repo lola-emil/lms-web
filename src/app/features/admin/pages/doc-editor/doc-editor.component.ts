@@ -4,7 +4,7 @@ import { QuillModule } from 'ngx-quill';
 import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { DocEditorService, Subject } from './services/doc-editor.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Quill from 'quill';
 
 
@@ -30,7 +30,8 @@ export class DocEditorComponent implements OnInit {
 
   constructor(
     private katungService: DocEditorService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
 
     const param = this.route.snapshot.queryParamMap;
@@ -64,11 +65,11 @@ export class DocEditorComponent implements OnInit {
       content: this.content.value,
       subjectId: this.subject.value,
       files: this.files
-    }).subscribe(val => {
+    }).subscribe((val) => {
       console.log(val);
       this.submitInProgress = false;
 
-      // location.href = `http://${window.location.host}/admin/content-management/${this.subjectId}`;
+      this.router.navigate(['/admin', 'lesson-content', (<{ id: number; }>val).id]);
     });
   }
 

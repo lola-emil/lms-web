@@ -100,4 +100,17 @@ export class CurriculumManagementComponent implements OnInit {
     const target = event.target as HTMLInputElement;
     this.selectedCoverImg = target.files![0];
   }
+
+  searchQuery?: string;
+
+  searchSubject(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.searchQuery = target.value;
+  }
+
+  filterSubject() {
+    const lowerQuery = this.searchQuery?.toLowerCase() ?? "";
+    return this.mgaSubjects.filter(subject =>
+      subject.title.toLowerCase().includes(lowerQuery));
+  }
 }
