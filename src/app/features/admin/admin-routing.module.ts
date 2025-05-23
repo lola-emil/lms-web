@@ -65,7 +65,7 @@ const routes: Routes = [
   },
   {
     path: "doc-editor",
-    component: DocEditorComponent
+    loadComponent: () => import("./pages/doc-editor/doc-editor.component").then(c => c.DocEditorComponent)
   },
   {
     path: "quiz-creation",

@@ -70,7 +70,7 @@ const routes: Routes = [
   },
   {
     path: "meeting",
-    component: MeetingComponent
+    loadComponent: () => import("./pages/meeting/meeting.component").then(c => c.MeetingComponent)
   },
   {
     path: "profile-settings",
