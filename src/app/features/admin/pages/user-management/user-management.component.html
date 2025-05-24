@@ -159,7 +159,14 @@
       </select>
     </div>
     <div class="modal-action">
-      <button class="btn btn-primary" (click)="submitUser()">Submit</button>
+      <button class="btn btn-primary" (click)="submitUser()" [disabled]="submitUserInProgress">
+        @if (submitUserInProgress) {
+          <span class="loading loading-dots loading-sm"></span>
+        }
+        @else {
+          <span>Submit</span>
+        }
+      </button>
       <form method="dialog">
         <!-- if there is a button in form, it will close the modal -->
         <button class="btn">Close</button>

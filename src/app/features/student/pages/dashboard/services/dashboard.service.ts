@@ -11,6 +11,12 @@ export type EnrolledSubjectsByStudentIdResponse = {
         id: string;
         title: string;
         coverImgUrl: string;
+        gradeLevel: {
+          level: number
+        }
+        subjectMaterials: {
+          quizSessions: {}[]
+        }[]
       };
       teacher: {
         firstname: string;
@@ -46,6 +52,14 @@ export class DashboardService {
                           id
                           title
                           coverImgUrl
+                          gradeLevel{
+                            level
+                          }
+                          subjectMaterials {
+                            quizSessions {
+                              id
+                            }
+                          }
                       }
                       teacher {
                           firstname

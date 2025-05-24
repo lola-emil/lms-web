@@ -125,8 +125,12 @@ export class UserManagementComponent implements OnInit {
       });
   }
 
+  submitUserInProgress = false;
+
   submitUser() {
+    this.submitUserInProgress = true;
     this.userManagementService.submitUser(this.userFormGroup.value).subscribe(res => {
+      this.submitUserInProgress = false;
       this.addUserModal.nativeElement.close();
       this.getUsers();
     });

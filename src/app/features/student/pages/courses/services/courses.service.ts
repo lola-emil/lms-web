@@ -12,6 +12,9 @@ export type StudentSubject = {
       title: string;
       coverImgUrl?: string;
       subjectMaterials: { id: number; }[];
+      gradeLevel: {
+        level: number
+      }
     },
     teacher: {
       firstname: string;
@@ -44,6 +47,9 @@ export class CoursesService {
                         title
                         coverImgUrl
                         createdAt
+                        gradeLevel {
+                          level
+                        }
                         subjectMaterials {
                           id
                         }

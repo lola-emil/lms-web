@@ -20,11 +20,12 @@
     </div>
     <br>
 
+
     <!-- MGA COURSES -->
     <section class=" w-full">
       <div class="">
         <div class="flex gap-5 justify-between items-center mb-3">
-          <div></div>
+          <div class="font-semibold">Your courses</div>
           <!-- <p class="text-sm font-semibold">Recently viewed courses</p> -->
           <a routerLink="/student/courses" class="text-sm flex items-center gap-1">More
             <svg class="w-[0.875rem]" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -36,59 +37,45 @@
         </div>
 
         <div class="grid gap-5 grid-cols-1 xl:grid-cols-3">
-          <!-- @for (item of (recents$ | async)?.slice(0,3); track $index) {
-            <a [routerLink]="'/student/courses/' + ($index + 1)" class="p-5 rounded-lg" [style.background-color]="colors[$index]">
-              <p class="text-xs text-secondary-content">{{ item.course_name }}</p>
-              <div class="flex items-center justify-between">
-                <p class="text-sm font-semibold text-secondary-content">{{ item.instructor }}</p>
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M13.267 4.209a.75.75 0 0 0-1.034 1.086l6.251 5.955H3.75a.75.75 0 0 0 0 1.5h14.734l-6.251 5.954a.75.75 0 0 0 1.034 1.087l7.42-7.067a.996.996 0 0 0 .3-.58.758.758 0 0 0-.001-.29.995.995 0 0 0-.3-.578l-7.419-7.067Z"
-                    class="fill-base-content" />
-                </svg>
-              </div>
-            </a>
-          } -->
-<!--
-          @for (item of subjects; track $index) {
-          <a [routerLink]="'/student/courses/' + item.subject_id" class="p-5 rounded-lg"
-            [style.background-color]="colors[$index]">
-            <p class="text-sm font-semibold text-secondary-content">{{ item.subject_name }}</p>
-            <div class="flex items-center justify-between">
-              <p class="text-xs  text-secondary-content">Pedro Duka</p>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M13.267 4.209a.75.75 0 0 0-1.034 1.086l6.251 5.955H3.75a.75.75 0 0 0 0 1.5h14.734l-6.251 5.954a.75.75 0 0 0 1.034 1.087l7.42-7.067a.996.996 0 0 0 .3-.58.758.758 0 0 0-.001-.29.995.995 0 0 0-.3-.578l-7.419-7.067Z"
-                  class="fill-base-content" />
-              </svg>
+          @for (item of subjects?.enrolledSubjectsByStudentId?.slice(0, 3); track $index) {
+          <a [routerLink]="['/student', 'courses', item.id]" class="rounded-lg border-[1px] shadow">
+            <div>
+              @if (item.teacherSubject.subject.coverImgUrl) {
+              <img [src]="'http://' + item.teacherSubject.subject.coverImgUrl"
+                class="w-full max-h-48 object-cover rounded-tl rounded-tr" alt="" crossOrigin="anonymous">
+              }
+              @else {
+              <img [src]="avatar(item.teacherSubject.subject.title + item.teacherSubject.subject.gradeLevel.level)"
+                class="w-full max-h-48 object-cover rounded-tl rounded-tr" alt="" crossOrigin="anonymous">
+              }
+              <!-- <img {[]}="https://loremflickr.com/100/100?random=3" alt=""> -->
             </div>
-          </a>
-          } -->
-
-          @for (item of subjects?.enrolledSubjectsByStudentId; track $index) {
-            <a [routerLink]="'/student/courses/' + item.id" class="p-5 rounded-lg"
-            [style.background-color]="colors[$index]">
-            <p class="text-sm font-semibold text-secondary-content">{{ item.teacherSubject.subject.title }}</p>
-            <div class="flex items-center justify-between">
-              <p class="text-xs  text-secondary-content">{{ item.teacherSubject.teacher.firstname }} {{ item.teacherSubject.teacher.lastname }}</p>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M13.267 4.209a.75.75 0 0 0-1.034 1.086l6.251 5.955H3.75a.75.75 0 0 0 0 1.5h14.734l-6.251 5.954a.75.75 0 0 0 1.034 1.087l7.42-7.067a.996.996 0 0 0 .3-.58.758.758 0 0 0-.001-.29.995.995 0 0 0-.3-.578l-7.419-7.067Z"
-                  class="fill-base-content" />
-              </svg>
+            <div class="p-5">
+              <p class="font-semibold">{{item.teacherSubject.subject.title }}</p>
+              <div class="flex flex-col">
+                <p class="text-sm">{{ item.teacherSubject.teacher.firstname }} {{ item.teacherSubject.teacher.lastname
+                  }}</p>
+              </div>
+              <div class="flex mt-3 justify-between">
+                <div class="text-sm flex items-center gap-1" title="12 Participants/Students">
+                  <span>{{ item.teacherSubject.subject.subjectMaterials.length }}</span>
+                  <span>Module(s)</span>
+                </div>
+              </div>
             </div>
           </a>
           }
         </div>
-
       </div>
     </section>
 
     <br>
 
+
+
     <!-- KATU MGA OVERVIEW UNSA MAN GALING TO -->
     <section class="flex gap-5 flex-col xl:flex-row">
-      <div class="card flex-1 shadow-md">
+      <div class="card flex-1 card-bordered shadow-md">
         <div class="card-body">
           <div class="flex">
             <p class="text-sm font-semibold">Progress overview</p>
@@ -117,11 +104,12 @@
             </div>
             }
 
+
           </div>
         </div>
       </div>
 
-      <div class="card shadow-md flex-1">
+      <div class="card card-bordered shadow-md flex-1">
         <div class="card-body">
           <div class="flex">
             <p class="text-sm font-semibold">Upcoming activities</p>
@@ -167,6 +155,9 @@
         </div>
       </div>
     </section>
+    <br>
+
+
 
     <br>
   </section>

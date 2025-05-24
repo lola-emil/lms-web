@@ -5,6 +5,8 @@ import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
 import { catchError, Subscription, of, tap } from 'rxjs';
 import { CoursesService, StudentSubject } from './services/courses.service';
+import { createAvatar } from '@dicebear/core';
+import { shapes } from '@dicebear/collection';
 
 @Component({
   selector: 'app-courses',
@@ -29,12 +31,18 @@ export class CoursesComponent implements OnInit, OnDestroy {
       this.coursesService.getEnrolledSubjects()
         .subscribe(res => {
           this.subjects = res.data.enrolledSubjectsByStudentId;
-          console.log(res.data)
+          console.log(res.data);
         })
     );
   }
 
   ngOnDestroy(): void {
+  }
+
+  avatar(seed: any) {
+    return createAvatar(shapes, {
+      seed: seed
+    }).toDataUri();
   }
 
 

@@ -7,7 +7,7 @@ import { TopbarComponent } from '../../components/topbar/topbar.component';
 import { Course, CourseService } from '../../services/course.service';
 import { catchError, forkJoin, map, Observable, of, Subscription, switchMap, tap } from 'rxjs';
 import { createAvatar } from '@dicebear/core';
-import { pixelArt } from '@dicebear/collection';
+import { shapes } from '@dicebear/collection';
 import { DashboardService, EnrolledSubjectsByStudentIdResponse } from './services/dashboard.service';
 
 @Component({
@@ -50,9 +50,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
-  avatar = createAvatar(pixelArt, {
-    seed: "Bilat sa Kabayo"
-  }).toDataUri();
+  avatar(seed: any) {
+    return createAvatar(shapes, {
+      seed: seed
+    }).toDataUri();
+  }
 
   progress = [
     { courseName: "Introduction to Angular", progress: 0.75 },
