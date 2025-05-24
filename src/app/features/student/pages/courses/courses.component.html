@@ -4,7 +4,7 @@
   <div class="container mx-auto px-5">
 
     <div class="flex items-center lg:justify-between gap-3">
-      <input type="text" placeholder="Search Course" class="input w-full lg:w-96 lg:input-sm input-bordered">
+      <input type="text" placeholder="Search Course" (input)="search($event)" class="input w-full lg:w-96 lg:input-sm input-bordered">
       <button class="btn btn-ghost btn-sm hidden">
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -36,7 +36,7 @@
       </a>
       } -->
 
-      @for (item of subjects; track $index) {
+      @for (item of (!!searchQuery ? filterSubject() : subjects); track $index) {
       <a [routerLink]="['/student', 'courses', item.id]" class="rounded-lg border-[1px] shadow">
         <div>
           @if (item.teacherSubject.subject.coverImgUrl) {

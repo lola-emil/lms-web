@@ -27,6 +27,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   subjects: StudentSubject[] = [];
 
+  searchQuery?: string;
+
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -46,23 +48,15 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
 
-  today = new Date;
+  search(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.searchQuery = target.value;
+  }
 
-  courses: any = [
+  filterSubject() {
+    const lowerQuery = this.searchQuery?.toLowerCase() ?? "";
+    return this.subjects.filter(subject =>
+      subject.teacherSubject.subject.title.toLowerCase().includes(lowerQuery));
+  }
 
-  ];
-
-  colors = [
-    "#0ea5e9",
-    "#10b981",
-    "#d946ef",
-    "#8b5cf6",
-    "#f59e0b",
-    "#14b8a6",
-    "#f43f5e",
-    "#6366f1",
-    "#f97316"
-  ];
-
-  imgURL = "https://loremflickr.com/200/100?random=";
 }

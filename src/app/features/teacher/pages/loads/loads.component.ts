@@ -52,4 +52,17 @@ export class LoadsComponent implements OnInit, OnDestroy {
     return this.avatarService.avatar(seed);
   }
 
+  searchQuery?: string;
+
+  search(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.searchQuery = target.value;
+  }
+
+  filterSubject() {
+    const lowerQuery = this.searchQuery?.toLowerCase() ?? "";
+    return this.data?.teacherAssignedSubjectsByTeacherId.filter(subject =>
+      subject.subject.title.toLowerCase().includes(lowerQuery));
+  }
+
 }
