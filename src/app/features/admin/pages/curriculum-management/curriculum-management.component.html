@@ -32,7 +32,8 @@
             crossOrigin="anonymous">
           }
           @else {
-          <div class="w-full min-h-48 bg-neutral-200 rounded-tl rounded-tr"></div>
+          <img [src]="imgPlaceholder(item.title + item.gradeLevel.level)"
+            class="w-full max-h-48 object-cover rounded-tl rounded-tr" alt="" crossOrigin="anonymous">
           }
           <!-- <img {[]}="https://loremflickr.com/100/100?random=3" alt=""> -->
         </div>

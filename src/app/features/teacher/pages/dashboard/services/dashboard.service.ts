@@ -21,14 +21,13 @@ export type TeacherAssignedSubjectsByTeacherIdResponse = {
   }[];
 };
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class LoadsService {
+export class DashboardService {
 
   constructor(
-    private readonly apollo: Apollo
+    private apollo: Apollo
   ) { }
 
   getTeacherSubjects(teacherId: number) {

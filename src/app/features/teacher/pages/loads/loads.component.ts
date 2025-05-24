@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 import { LoadsService, TeacherAssignedSubjectsByTeacherIdResponse } from './services/loads.service';
 import { catchError, of, Subscription, tap } from 'rxjs';
+import { AvatarService } from '../../../../services/avatar.service';
 
 @Component({
   selector: 'app-loads',
@@ -20,7 +21,8 @@ export class LoadsComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private loadsService: LoadsService
+    private loadsService: LoadsService,
+    private avatarService: AvatarService
   ) { }
 
   ngOnInit(): void {
@@ -41,8 +43,13 @@ export class LoadsComponent implements OnInit, OnDestroy {
 
     );
   }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(val => val.unsubscribe());
+  }
+
+  avatar(seed: any) {
+    return this.avatarService.avatar(seed);
   }
 
 }

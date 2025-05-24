@@ -18,10 +18,16 @@
     <div class="grid gap-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
 
       @for (item of data?.teacherAssignedSubjectsByTeacherId; track $index) {
-      <a [routerLink]="item.id" class="rounded-lg border-[1px]">
+      <a [routerLink]="item.id" class="rounded-lg border-[1px] shadow">
         <div>
-          <!-- <img {[]}="https://loremflickr.com/100/100?random=3" alt=""> -->
-          <!-- <img [src]="imgURL + item.id" class="w-full min-h-48 rounded-tl rounded-tr" alt=""> -->
+          @if (item.subject.coverImgUrl) {
+          <img [src]="'http://' + item.subject.coverImgUrl"
+            class="w-full max-h-48 object-cover rounded-tl rounded-tr" alt="" crossOrigin="anonymous">
+          }
+          @else {
+          <img [src]="avatar(item.subject.title + item.subject.gradeLevel.level)"
+            class="w-full max-h-48 object-cover rounded-tl rounded-tr" alt="" crossorigin="anonymous">
+          }
         </div>
         <div class="p-5">
           <p class="font-semibold">{{ item.subject.title }}</p>

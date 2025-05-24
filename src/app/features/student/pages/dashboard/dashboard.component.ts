@@ -5,10 +5,9 @@ import { HelloSvgComponent } from '../../../../shared/svg/hello-svg/hello-svg.co
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
 import { Course, CourseService } from '../../services/course.service';
-import { catchError, forkJoin, map, Observable, of, Subscription, switchMap, tap } from 'rxjs';
-import { createAvatar } from '@dicebear/core';
-import { shapes } from '@dicebear/collection';
+import { catchError, map, Observable, of, Subscription, tap } from 'rxjs';
 import { DashboardService, EnrolledSubjectsByStudentIdResponse } from './services/dashboard.service';
+import { AvatarService } from '../../../../services/avatar.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +24,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private courseService: CourseService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private avatarService: AvatarService
   ) {
     this.recents$ = this.courseService.get().pipe(map((val: any) => val.data));
   }
@@ -51,9 +51,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   avatar(seed: any) {
-    return createAvatar(shapes, {
-      seed: seed
-    }).toDataUri();
+    return this.avatarService.avatar(seed);
   }
 
   progress = [

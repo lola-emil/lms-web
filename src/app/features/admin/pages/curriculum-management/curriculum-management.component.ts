@@ -6,6 +6,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GradeLevel } from '../../../../repositories/grade-level-repo.service';
 import { tap } from 'rxjs';
 import { ClassLevel, CurriculumManagementService, Subject } from './services/curriculum-management.service';
+import { AvatarService } from '../../../../services/avatar.service';
 
 @Component({
   selector: 'app-curriculum-management',
@@ -28,7 +29,8 @@ export class CurriculumManagementComponent implements OnInit {
   levels: ClassLevel[] = [];
 
   constructor(
-    private curriculumService: CurriculumManagementService
+    private curriculumService: CurriculumManagementService,
+    private avatarService: AvatarService
   ) { }
 
   ngOnInit(): void {
@@ -112,5 +114,9 @@ export class CurriculumManagementComponent implements OnInit {
     const lowerQuery = this.searchQuery?.toLowerCase() ?? "";
     return this.mgaSubjects.filter(subject =>
       subject.title.toLowerCase().includes(lowerQuery));
+  }
+
+  imgPlaceholder(seed: any) {
+    return this.avatarService.avatar(seed);
   }
 }

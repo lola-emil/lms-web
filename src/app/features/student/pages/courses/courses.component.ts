@@ -7,6 +7,7 @@ import { catchError, Subscription, of, tap } from 'rxjs';
 import { CoursesService, StudentSubject } from './services/courses.service';
 import { createAvatar } from '@dicebear/core';
 import { shapes } from '@dicebear/collection';
+import { AvatarService } from '../../../../services/avatar.service';
 
 @Component({
   selector: 'app-courses',
@@ -18,6 +19,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   constructor(
     private coursesService: CoursesService,
+    private avatarService: AvatarService
   ) { }
 
   page: number = 1;
@@ -40,9 +42,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   avatar(seed: any) {
-    return createAvatar(shapes, {
-      seed: seed
-    }).toDataUri();
+    return this.avatarService.avatar(seed);
   }
 
 

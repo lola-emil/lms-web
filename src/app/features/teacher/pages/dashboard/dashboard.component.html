@@ -19,8 +19,59 @@
 
     <br>
 
-    <div class="grid grid-cols-2 gap-5">
-      <div class="card shadow-md flex-1">
+    <section class=" w-full">
+      <div class="">
+        <div class="flex gap-5 justify-between items-center mb-3">
+          <div class="font-semibold">Your courses</div>
+          <!-- <p class="text-sm font-semibold">Recently viewed courses</p> -->
+          <a routerLink="/teacher/loads" class="text-sm flex items-center gap-1">More
+            <svg class="w-[0.875rem]" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M8.47 4.22a.75.75 0 0 0 0 1.06L15.19 12l-6.72 6.72a.75.75 0 1 0 1.06 1.06l7.25-7.25a.75.75 0 0 0 0-1.06L9.53 4.22a.75.75 0 0 0-1.06 0Z"
+                class="fill-base-content" />
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+
+      <div class="grid gap-5 grid-cols-1 xl:grid-cols-3">
+        @for (item of data?.teacherAssignedSubjectsByTeacherId?.slice(0,3); track $index) {
+        <a [routerLink]="['/teacher', 'loads', item.id]" class="rounded-lg border-[1px] shadow">
+          <div>
+            @if (item.subject.coverImgUrl) {
+            <img [src]="'http://' + item.subject.coverImgUrl" class="w-full max-h-48 object-cover rounded-tl rounded-tr"
+              alt="" crossOrigin="anonymous">
+            }
+            @else {
+            <img [src]="avatar(item.subject.title + item.subject.gradeLevel.level)"
+              class="w-full max-h-48 object-cover rounded-tl rounded-tr" alt="" crossOrigin="anonymous">
+            }
+            <!-- <img {[]}="https://loremflickr.com/100/100?random=3" alt=""> -->
+          </div>
+          <div class="p-5">
+            <p class="font-semibold">{{item.subject.title }}</p>
+            <div class="flex flex-col">
+              <!-- <p class="text-sm">{{ item.teacher.firstname }} {{ item.teacher.lastname
+                  }}</p> -->
+            </div>
+            <div class="flex mt-3 justify-between">
+              <div class="text-sm flex items-center gap-1" title="12 Participants/Students">
+                <!-- <span>{{ item.subject.length }}</span> -->
+                <!-- <span>Module(s)</span> -->
+              </div>
+            </div>
+          </div>
+        </a>
+        }
+      </div>
+
+      <br>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <div class="card card-bordered shadow-md flex-1">
         <div class="card-body">
           <div class="flex">
             <p class="text-sm font-semibold">Recent Student Submissions</p>
@@ -52,7 +103,7 @@
       </div>
 
 
-      <div class="card shadow-md flex-1">
+      <div class="card card-bordered shadow-md flex-1">
         <div class="card-body">
           <div class="flex">
             <p class="text-sm font-semibold">Upcoming activities</p>
@@ -99,6 +150,10 @@
       </div>
     </div>
   </section>
+
+  <br>
+  <br>
+  <br>
 
 
 </app-drawer>

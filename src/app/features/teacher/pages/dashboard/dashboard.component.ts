@@ -11,6 +11,8 @@ import { TeacherSubjectRepoService } from '../../../../repositories/teacher-subj
 import { AuthService } from '../../../../services/auth.service';
 import { forkJoin, of, switchMap } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { DashboardService, TeacherAssignedSubjectsByTeacherIdResponse } from './services/dashboard.service';
+import { AvatarService } from '../../../../services/avatar.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +21,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './dashboard.component.css',
   standalone: true
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
 
   reminders = [
@@ -78,16 +80,24 @@ export class DashboardComponent {
     }
   ];
 
+  data?: TeacherAssignedSubjectsByTeacherIdResponse;
 
   constructor(
-    private teacherSubjectRepo: TeacherSubjectRepoService,
-    private classworkRepo: ClassworkRepoService,
-    private classworkSubmissionRepo: ClassworkSubmissionRepoService,
-    private userRepo: UserRepoService,
-    private userProfileRepo: UserProfileRepoService,
-    private authService: AuthService
+    private dashboardService: DashboardService,
+    private authService: AuthService,
+    private avatarService: AvatarService
   ) { }
 
+  ngOnInit(): void {
+    const userDetail = this.authService.getUserDetail();
+    this.dashboardService.getTeacherSubjects(userDetail.id)
+      .subscribe(res => {
+        this.data = res.data;
+      });
+  }
 
+  avatar(seed: any) {
+    return this.avatarService.avatar(seed);
+  }
 
 }
