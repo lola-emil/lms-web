@@ -3,6 +3,14 @@ import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { environment } from '../../../../../../environments/environment';
 
+export interface Person {
+  firstname: string;
+  middlename: string;
+  lastname: string;
+  email: string;
+  reason: { message: string }[];
+}
+
 export type User = {
   id: number;
   email: string;
@@ -135,7 +143,34 @@ export class UserManagementService {
     formData.append("file", file);
     formData.append("role", role);
 
-    return this.http.post(`${environment.apiURL}/bulk-import/bulk-import-user`, formData);
+    return this.http.post<{data: Person[], message: string; successful: Person[], unsuccessful: Person[]}>(`${environment.apiURL}/bulk-import/bulk-import-user`, formData);
+  }
+
+  downloadCSV(data: Person[], filename: string = 'data.csv'): void {
+    const headers = ['firstname', 'middlename', 'lastname', 'email', 'reason'];
+    const csvRows = data.map(person => {
+      const reasonMessage = person.reason.length > 0 ? person.reason[0].message : '';
+      const fields = [
+        person.firstname,
+        person.middlename,
+        person.lastname,
+        person.email,
+        reasonMessage
+      ];
+      return fields.map(field => `"${field.replace(/"/g, '""')}"`).join(',');
+    });
+
+    const csvContent = [headers.join(','), ...csvRows].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.setAttribute('download', filename);
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
   }
 }
 
