@@ -58,23 +58,26 @@ export class CourseComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.http.get<MeetingSession>(`${environment.apiURL}/zoom/get-live-session`, {
-      params: {
-        teacher_subject_id: this.studentSubjectId + ""
-      }
-    }).subscribe(val => {
-      this.matchedMeetingSession = val;
-      console.log(val);
-    });
+
 
     this.courseService.getSubjectDetail(this.studentSubjectId ?? 0)
       .subscribe(res => {
         this.subjectDetail = res.data.studentEnrolledSubject;
+        console.log("student subject id", this.subjectDetail);
+
+        this.http.get<MeetingSession>(`${environment.apiURL}/zoom/get-live-session`, {
+          params: {
+            teacher_subject_id: this.subjectDetail.teacherSubject.id
+          }
+        }).subscribe(val => {
+          this.matchedMeetingSession = val;
+          console.log(val);
+        });
       });
 
   }
 
-  angTitle = ""
+  angTitle = "";
 
   isSessionUpcoming(): boolean {
     return new Date(this.sessionSchedule) > new Date();

@@ -49,10 +49,9 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
   }
 
   initateMeeting() {
-    this.meetingService.authorize()
+    this.meetingService.authorize(this.teacherSubjectId!)
       .subscribe(val => {
-        console.log(val);
-        location.href = val.redirect_url
+        location.href = val.redirect_url;
       });
   }
 

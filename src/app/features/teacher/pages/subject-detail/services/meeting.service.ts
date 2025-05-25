@@ -47,17 +47,17 @@ export class MeetingService {
   }
 
   createMeeting(code: string, meetingInfo: Partial<MeetingBody>) {
-    return this.http.get<{data: MeetingSession}>(`${environment.apiURL}/zoom/oauth/callback`, {
-      params: {
-        code
-      }
+    return this.http.post<{ data: MeetingSession; }>(`${environment.apiURL}/zoom/oauth/callback`, {
+      ...meetingInfo,
+      code,
+      redirect_uri: `${environment.host}/teacher/meeting?teacherSubjectId=${meetingInfo.teacher_assigned_subject_id}`
     });
   }
 
-  authorize() {
+  authorize(teacherSubjectId: number) {
     return this.http.get<{ redirect_url: string; }>(`${environment.apiURL}/zoom/authorize`, {
       params: {
-        redirect_uri: `${environment.host}/teacher/meeting`
+        redirect_uri: `${environment.host}/teacher/meeting?teacherSubjectId=${teacherSubjectId}`
       }
     });
   }

@@ -74,7 +74,7 @@
 
             <!-- Show "Join Live Session" button only if the session is today -->
             <a [routerLink]="['/student', 'meeting']" [queryParams]="matchedMeetingSession" *ngIf="isSessionToday()"
-              class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-all">
+              class="mt-4 w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-all">
               Join Live Session
             </a>
           </div>

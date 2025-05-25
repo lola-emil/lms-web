@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { environment } from '../../../../../../environments/environment';
+import { AuthService } from '../../../../../services/auth.service';
 
 export type User = {
   id: number;
@@ -18,7 +19,8 @@ export class UserProfileService {
 
   constructor(
     private apollo: Apollo,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) { }
 
   getUser(userId: number) {
@@ -42,7 +44,11 @@ export class UserProfileService {
   }
 
   updateUser(body: Partial<User>) {
-    return this.http.post(`${environment.apiURL}/graphql-ext/update-user`, body);
+    const userDetail = this.authService.getUserDetail();
+    return this.http.post(`${environment.apiURL}/graphql-ext/update-user`, {
+      ...body,
+      updatedById: userDetail.id
+    });
 
   }
 }

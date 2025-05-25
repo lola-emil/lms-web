@@ -17,6 +17,8 @@ import { environment } from '../../../../../environments/environment';
 export class MeetingComponent implements OnInit, OnDestroy {
 
   code?: string;
+  teacherSubjectId?: number;
+
   constructor(
     private route: ActivatedRoute,
     private meetingService: MeetingService,
@@ -26,6 +28,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
   ) {
     this.route.queryParams.subscribe(params => {
       this.code = params['code'];
+      this.teacherSubjectId = parseInt(params['teacherSubjectId']);
     });
 
     ZoomMtg.preLoadWasm();
@@ -49,7 +52,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
         },
 
         "teacher_id": userDetail.id,
-        "teacher_assigned_subject_id": 1 // todo para dynamic ni siya
+        "teacher_assigned_subject_id": this.teacherSubjectId // todo para dynamic ni siya
       })
         .pipe(
           tap(val => {
