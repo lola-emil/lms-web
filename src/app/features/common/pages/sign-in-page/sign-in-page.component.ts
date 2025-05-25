@@ -9,7 +9,7 @@ import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'app-sign-in-page',
-  imports: [WelcomeComponent, RouterLink, ReactiveFormsModule],
+  imports: [WelcomeComponent, ReactiveFormsModule],
   templateUrl: './sign-in-page.component.html',
   styleUrl: './sign-in-page.component.css'
 })

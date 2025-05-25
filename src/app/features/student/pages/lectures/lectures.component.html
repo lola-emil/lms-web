@@ -9,7 +9,7 @@
 
   @for (item of lessons?.teacherSubject?.subject?.subjectMaterials; track $index) {
   <div class="card bg-base-100 shadow-md mt-4 border-l-4" [ngClass]="{
-      'border-blue-500': item.materialType === 'DOCUMENT',
+      'border-blue-500': item.materialType === 'MODULE',
       'border-green-500': item.materialType === 'MD',
       'border-orange-500': item.materialType === 'QUIZ'
     }">

@@ -57,9 +57,7 @@
             <span class="label-text">Email</span>
           </div>
           <div class="flex items-center gap-3">
-            <input type="text" [formControl]="email" class="input input-bordered w-full " [disabled]="true" />
-
-            <button class="btn btn-ghost btn-sm">Edit</button>
+            <input type="text" class="input input-bordered w-full" [value]="email.value" [disabled]="true" />
           </div>
           <div class="label">
           </div>
@@ -75,22 +73,42 @@
           <div class="flex items-center gap-3">
             <input type="password" [formControl]="newPassword" class="input input-bordered w-full"
               [disabled]="changePasswordInProgress" />
-            <button class="btn btn-ghost btn-sm" (click)="requestChangePassword()"
-              [disabled]="changePasswordInProgress">
-              @if (changePasswordInProgress) {
-              <span class="loading loading-dots loading-sm"></span>
-              }
-              @else {
-              <span>Save</span>
-              }
-            </button>
+
           </div>
           <div class="label">
           </div>
         </label>
+
+
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Confirm Password</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <input type="password" [formControl]="confirmPassword" class="input input-bordered w-full"
+              [disabled]="changePasswordInProgress" />
+          </div>
+          <div class="label">
+          </div>
+        </label>
+        <div>
+
+          <button class="btn" (click)="requestChangePassword()" [disabled]="changePasswordInProgress">
+            @if (changePasswordInProgress) {
+            <span class="loading loading-dots loading-sm"></span>
+            }
+            @else {
+            <span>Save Password</span>
+            }
+          </button>
+        </div>
       </div>
     </div>
   </div>
+
+  <br>
+  <br>
+  <br>
 </app-drawer>
 
 <!-- Open the modal using ID.showModal() method -->
@@ -133,7 +151,7 @@
 </dialog>
 
 
-<div class="toast toast-top toast-end">
+<div class="toast toast-top toast-center">
   @for (item of toastMessages; track $index) {
   <div class="alert alert-success">
     <span>{{item.message}}</span>

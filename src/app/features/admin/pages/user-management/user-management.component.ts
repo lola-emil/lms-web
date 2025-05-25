@@ -121,7 +121,10 @@ export class UserManagementComponent implements OnInit {
     this.userManagementService.uploadImportFile(this.importFiles[0], this.selectedImportRole)
       .subscribe(res => {
         console.log(res);
-        this.userManagementService.downloadCSV(res.unsuccessful, "unsuccessful.csv");
+
+        if (res.unsuccessful.length > 0)
+          this.userManagementService.downloadCSV(res.unsuccessful, "unsuccessful.csv");
+
         this.getUsers();  // Ensure this is being reached
         this.importUserModal.nativeElement.close();
         this.importInProgress = false;

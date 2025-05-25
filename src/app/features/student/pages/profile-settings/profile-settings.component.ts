@@ -92,6 +92,15 @@ export class ProfileSettingsComponent {
 
   requestChangePassword() {
     this.changePasswordInProgress = true;
+
+    if (this.newPassword.value != this.confirmPassword.value) {
+      this.addToast({
+        message: "Password doesn't match.",
+      });
+      this.changePasswordInProgress = false;
+      return;
+    }
+
     this.profileSettingService.requestChangePassword(this.newPassword.value)
       .pipe(
         tap(res => {
@@ -115,6 +124,8 @@ export class ProfileSettingsComponent {
 
 
   confirmChangePassword() {
+
+
     this.confirmationInProgress = true;
     this.profileSettingService.confirmChangePassword({
       updateRequestId: this.updateRequestId!,
@@ -139,7 +150,7 @@ export class ProfileSettingsComponent {
   }
 
   resetForm() {
-    this.newPassword = new FormControl("");
+    this.newPassword.setValue("");
+    this.confirmPassword.setValue("");
   };
-
 }
