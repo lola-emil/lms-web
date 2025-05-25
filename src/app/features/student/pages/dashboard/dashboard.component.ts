@@ -45,6 +45,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+
+    this.dashboardService.getActivities()
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 
   ngOnDestroy(): void {

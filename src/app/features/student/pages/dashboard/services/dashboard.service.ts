@@ -74,4 +74,40 @@ export class DashboardService {
           `
     }).valueChanges;
   }
+
+
+  getActivities() {
+    return this.apollo.watchQuery({
+      query: gql`
+        query EnrolledSubjectsByStudentId {
+            enrolledSubjectsByStudentId(studentId: 2) {
+                teacherSubject {
+                    subject {
+                        title
+                    }
+                    assignments {
+                        id
+                        title
+                        instructions
+                        dueDate
+                        hps
+                        createdAt
+                        updatedAt
+                        assignmentSubmissions {
+                            id
+                            title
+                            comment
+                            assignmentId
+                            studentId
+                            score
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                }
+            }
+        }
+      `
+    }).valueChanges;
+  }
 }
