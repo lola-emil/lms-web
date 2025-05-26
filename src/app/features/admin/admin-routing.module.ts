@@ -35,14 +35,14 @@ const routes: Routes = [
     path: "content-management/:id",
     component: SubjectDetailPageComponent,
     children: [
-      {
-        path: "lessons",
-        component: SubjectLessonsComponent
-      },
+      // {
+      //   path: "lessons",
+      //   component: SubjectLessonsComponent
+      // },
       {
         path: "",
         pathMatch: "full",
-        redirectTo: "lessons"
+        redirectTo: "assigned-teachers"
       },
       {
         path: "assigned-teachers",
