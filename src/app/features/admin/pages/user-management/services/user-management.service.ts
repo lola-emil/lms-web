@@ -96,45 +96,7 @@ export class UserManagementService {
     password: string | null;
     role: string | null;
   }>) {
-    return this.apollo.mutate({
-      mutation: gql`
-
-      mutation CreateUser(
-        $firstname: String!,
-        $middlename: String,
-        $lastname: String!,
-        $email: String!,
-        $password: String!,
-        $role: Role!
-      ) {
-        createUser(
-          firstname: $firstname
-          middlename: $middlename
-          lastname: $lastname
-          email: $email
-          password: $password
-          role: $role
-        ) {
-          id
-          email
-          firstname
-          middlename
-          lastname
-          role
-          createdAt
-          updatedAt
-        }
-      }
-    `,
-      variables: {
-        firstname: body.firstname,
-        middlename: body.middlename,
-        lastname: body.lastname,
-        email: body.email,
-        password: body.password,
-        role: body.role,  // This will pass the role value from the input body
-      }
-    });
+    return this.http.post(`${environment.apiURL}/graphql-ext/create-user`, body)
   }
 
   uploadImportFile(file: File, role: "TEACHER" | "STUDENT") {
@@ -143,7 +105,7 @@ export class UserManagementService {
     formData.append("file", file);
     formData.append("role", role);
 
-    return this.http.post<{data: Person[], message: string; successful: Person[], unsuccessful: Person[]}>(`${environment.apiURL}/bulk-import/bulk-import-user`, formData);
+    return this.http.post<{ data: Person[], message: string; successful: Person[], unsuccessful: Person[] }>(`${environment.apiURL}/bulk-import/bulk-import-user`, formData);
   }
 
   downloadCSV(data: Person[], filename: string = 'data.csv'): void {

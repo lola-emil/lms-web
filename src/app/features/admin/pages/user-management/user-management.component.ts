@@ -8,6 +8,13 @@ import { ToastContainerComponent } from "../../../../shared/components/toast-con
 import { ToastService } from '../../../../shared/components/toast/toast.service';
 import { RouterLink } from '@angular/router';
 
+
+type Toast = {
+  type?: 'success' | 'error' | 'warning' | 'info';
+  duration?: number; // in ms
+  message: string;
+};
+
 @Component({
   selector: 'app-user-management',
   imports: [DrawerComponent, TopbarComponent, ReactiveFormsModule, ToastContainerComponent, RouterLink],
@@ -116,6 +123,15 @@ export class UserManagementComponent implements OnInit {
 
   importInProgress = false;
 
+  userErrors: any = {
+    firstname: null,
+    middlename: null,
+    lastname: null,
+    email: null,
+    password: null,
+    role: null
+  }
+
   uploadImportFiles() {
     this.importInProgress = true;
     this.userManagementService.uploadImportFile(this.importFiles[0], this.selectedImportRole)
@@ -132,14 +148,53 @@ export class UserManagementComponent implements OnInit {
   }
 
   submitUserInProgress = false;
+  resetError() {
+    this.userErrors = {
+      firstname: null,
+      middlename: null,
+      lastname: null,
+      email: null,
+      password: null,
+      role: null
+    }
+  }
+
+  toastMessages: Toast[] = [];
+
+  removeToast(index: number) {
+    this.toastMessages.splice(index, 1);
+  }
+
+  addToast(toast: Toast) {
+    this.toastMessages.push(toast);
+    setTimeout(() => this.removeToast(this.toastMessages.length - 1), toast.duration || 3000);
+  }
 
   submitUser() {
     this.submitUserInProgress = true;
-    this.userManagementService.submitUser(this.userFormGroup.value).subscribe(res => {
-      this.submitUserInProgress = false;
-      this.addUserModal.nativeElement.close();
-      this.getUsers();
-    });
+    this.userManagementService.submitUser(this.userFormGroup.value).pipe(
+      tap(res => {
+        this.submitUserInProgress = false;
+        this.getUsers();
+        this.addUserModal.nativeElement.close();
+        this.addToast({
+          message: "User created successfully."
+        })
+      }),
+      catchError(errRes => {
+        console.log(errRes.error);
+        this.resetError();
+        (<any[]>errRes.error).forEach(error => {
+          const field = error.context.label;
+          // Only set the error message for the first error encountered per field
+          if (!this.userErrors[field]) {
+            this.userErrors[field] = error.message;
+          }
+        });
+        this.submitUserInProgress = false;
+        return of(null);
+      })
+    ).subscribe()
   }
 
   searchUser(event: Event) {

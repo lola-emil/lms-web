@@ -51,7 +51,8 @@ export class SubjectDetailService {
                   }
               }
           }
-      `
+      `,
+      fetchPolicy: "no-cache"
     }).valueChanges;
   }
 }

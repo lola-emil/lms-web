@@ -25,6 +25,15 @@ export type Assignment = {
   }[]
 };
 
+export type Kuan = {
+  teacherSubject: {
+    id: number;
+    subject: {
+      id: number
+    }
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -68,6 +77,27 @@ export class ActivityService {
       `,
       fetchPolicy: "no-cache"
     }).valueChanges;
+  }
+
+  getTeacherSubject(studentSubjectId: number) {
+    return this.apollo.watchQuery<{studentEnrolledSubject: Kuan}>(
+      {
+        query: gql`
+          query EnrolledSubject {
+            studentEnrolledSubject(id: ${studentSubjectId}) {
+              teacherSubject {
+              id
+                subject {
+                id
+                
+                }
+              }
+            }
+          }
+        `,
+        fetchPolicy: "no-cache"
+      }
+    ).valueChanges;
   }
 
   submitActivity(body: {

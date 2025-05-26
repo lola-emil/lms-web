@@ -115,11 +115,11 @@
   <div class="modal-action">
     <button class="btn btn-primary" (click)="uploadImportFiles()" [disabled]="importInProgress">
       @if (importInProgress) {
-        <span class="loading loading-dots loading-sm"></span>
-        <span>Importing</span>
+      <span class="loading loading-dots loading-sm"></span>
+      <span>Importing</span>
       }
       @else {
-        <span>Submit</span>
+      <span>Submit</span>
       }
     </button>
     <form method="dialog">
@@ -139,40 +139,91 @@
 
     <div [formGroup]="userFormGroup" class="">
       <div>
-        <input type="text" formControlName="firstname" class="input input-bordered w-full" placeholder="Firstname">
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Firstname</span>
+          </div>
+          <input type="text" formControlName="firstname" placeholder="Type here" class="input input-bordered w-full" />
+          <div class="label">
+            <span class="label-text-alt text-error">{{ userErrors.firstname ?? "" }}</span>
+          </div>
+        </label>
       </div>
       <br>
       <div>
-        <input type="text" formControlName="middlename" class="input input-bordered w-full" placeholder="Middlename">
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Middlename</span>
+          </div>
+          <input type="text" formControlName="middlename" placeholder="Type here" class="input input-bordered w-full" />
+          <div class="label">
+            <span class="label-text-alt text-error">{{ userErrors.middlename ?? "" }}</span>
+          </div>
+        </label>
       </div>
       <br>
       <div>
-        <input type="text" formControlName="lastname" class="input input-bordered w-full" placeholder="Lastname">
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Lastname</span>
+          </div>
+          <input type="text" formControlName="lastname" placeholder="Type here" class="input input-bordered w-full" />
+          <div class="label">
+            <span class="label-text-alt text-error">{{ userErrors.lastname ?? "" }}</span>
+          </div>
+        </label>
       </div>
       <br>
       <div>
-        <input type="text" formControlName="email" class="input input-bordered w-full" placeholder="Email">
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Email</span>
+          </div>
+          <input type="text" formControlName="email" placeholder="Type here" class="input input-bordered w-full" />
+          <div class="label">
+            <span class="label-text-alt text-error">{{ userErrors.email ?? "" }}</span>
+          </div>
+        </label>
       </div>
       <br>
       <div>
-        <input type="password" formControlName="password" class="input input-bordered w-full" placeholder="Password">
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Password</span>
+          </div>
+          <input type="password" formControlName="password" placeholder="Type here"
+            class="input input-bordered w-full" />
+          <div class="label">
+            <span class="label-text-alt text-error">{{ userErrors.password ?? "" }}</span>
+          </div>
+        </label>
       </div>
       <br>
-      <select formControlName="role" class="select select-bordered w-full" id="">
-        <option value="" selected disabled>-- Select role for this user</option>
 
-        @for (item of roles; track $index) {
-        <option [value]="item">{{ item }}</option>
-        }
-      </select>
+
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Role</span>
+        </div>
+        <select formControlName="role" class="select select-bordered w-full" id="">
+          <option value="" selected disabled>-- Select role for this user</option>
+
+          @for (item of roles; track $index) {
+          <option [value]="item">{{ item }}</option>
+          }
+        </select>
+        <div class="label">
+          <span class="label-text-alt text-error">{{ userErrors.role ?? "" }}</span>
+        </div>
+      </label>
     </div>
     <div class="modal-action">
       <button class="btn btn-primary" (click)="submitUser()" [disabled]="submitUserInProgress">
         @if (submitUserInProgress) {
-          <span class="loading loading-dots loading-sm"></span>
+        <span class="loading loading-dots loading-sm"></span>
         }
         @else {
-          <span>Submit</span>
+        <span>Submit</span>
         }
       </button>
       <form method="dialog">
@@ -184,3 +235,11 @@
 </dialog>
 
 <app-toast-container></app-toast-container>
+
+<div class="toast toast-top toast-center">
+  @for (item of toastMessages; track $index) {
+  <div class="alert alert-success">
+    <span>{{item.message}}</span>
+  </div>
+  }
+</div>

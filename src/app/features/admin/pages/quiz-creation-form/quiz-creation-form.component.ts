@@ -3,7 +3,7 @@ import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { QuizCreationService, Subject } from './services/quiz-creation.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
 
 
@@ -20,7 +20,8 @@ export class QuizCreationFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private quizCreationService: QuizCreationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.quizForm = new FormGroup({
       title: new FormControl(""),
@@ -115,7 +116,7 @@ export class QuizCreationFormComponent implements OnInit {
       .pipe(
         tap(res => {
           console.log(res);
-          window
+          this.router.navigate(['/admin', 'content-management', this.subjectDetail?.id])
         }),
         catchError(errRes => {
           console.log(errRes);
