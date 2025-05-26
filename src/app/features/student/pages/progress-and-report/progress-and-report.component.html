@@ -1,6 +1,6 @@
 <app-drawer>
   <app-topbar title="Gradebook"></app-topbar>
-  <div class="p-6 max-w-6xl mx-auto">
+  <div class="p-6 container mx-auto">
 
       <!-- Download Buttons -->
       <!-- <div class="flex space-x-3 mb-6 justify-end">
@@ -22,7 +22,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let student of scores" class="border-t">
-            <td class="p-3">{{ student.subject }}</td>
+            <td class="p-3 font-semibold">{{ student.subject }}</td>
             <td class="p-3 text-center">{{ student.quiz }}</td>
             <td class="p-3 text-center">{{ student.assignment }}</td>
             <!-- <td class="p-3 text-center">{{ student.scores.exams }}</td> -->

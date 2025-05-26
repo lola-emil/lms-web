@@ -16,6 +16,17 @@ export type TeacherAssignedSubject2Response = {
 };
 
 
+export type EnrolledStudent = {
+  student: {
+    id: number;
+    email: string;
+    firstname: string;
+    middlename?: string;
+    lastname: string;
+    role: string;
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -42,6 +53,30 @@ export class SubjectDetailService {
           }
         }
 
+      `
+    }).valueChanges;
+  }
+
+  getStudents(teacherSubjectId: number) {
+    return this.apollo.watchQuery<{teacherAssignedSubject: {id: number; studentEnrolledSubjects: EnrolledStudent[]}}>({
+      query: gql`
+        query TeacherAssignedSubject {
+            teacherAssignedSubject(id: ${teacherSubjectId}) {
+                id
+                studentEnrolledSubjects {
+                    student {
+                        id
+                        email
+                        firstname
+                        middlename
+                        lastname
+                        role
+                        createdAt
+                        updatedAt
+                    }
+                }
+            }
+        }
       `
     }).valueChanges;
   }

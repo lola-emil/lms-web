@@ -5,20 +5,22 @@ export type StudentSubject = {
   teacherSubject: {
     id: number;
     subject: {
-      subjectMaterials: {
-        id: number;
-        title?: string;
-        materialType: any;
-        createdAt: string;
-        updatedAt: string;
-        quizSessions: {
-          id: number;
-          createdAt: string;
-          score: number;
-        }[];
-        questions: { id: number; }[];
-      }[];
+      id: number;
+      title: string;
     };
+    subjectMaterials: {
+      id: number;
+      title?: string;
+      materialType: any;
+      createdAt: string;
+      updatedAt: string;
+      quizSessions: {
+        id: number;
+        createdAt: string;
+        score: number;
+      }[];
+      questions: { id: number; }[];
+    }[];
   };
 };
 
@@ -39,27 +41,30 @@ export class LecturesService {
                 teacherSubject {
                     id
                     subject {
-                        subjectMaterials {
-                            id
-                            title
-                            materialType
-                            createdAt
-                            updatedAt
-                            quizSessions {
-                              id
-                              createdAt
-                              score
-                           }
-                            questions {
-                              id
-                            }
-                        }
+                      id
+                      title
                     }
+                    subjectMaterials {
+                      id
+                      title
+                      materialType
+                      createdAt
+                      updatedAt
+                      quizSessions {
+                        id
+                        createdAt
+                        score
+                     }
+                      questions {
+                        id
+                      }
+                  }
                 }
             }
         }
 
-      `
+      `,
+      fetchPolicy: "no-cache"
     }).valueChanges;
   }
 }

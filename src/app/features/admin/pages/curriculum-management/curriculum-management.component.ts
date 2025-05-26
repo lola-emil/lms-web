@@ -4,9 +4,15 @@ import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { RouterLink } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GradeLevel } from '../../../../repositories/grade-level-repo.service';
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { ClassLevel, CurriculumManagementService, Subject } from './services/curriculum-management.service';
 import { AvatarService } from '../../../../services/avatar.service';
+
+type Toast = {
+  type?: 'success' | 'error' | 'warning' | 'info';
+  duration?: number; // in ms
+  message: string;
+};
 
 @Component({
   selector: 'app-curriculum-management',
@@ -16,7 +22,6 @@ import { AvatarService } from '../../../../services/avatar.service';
 })
 export class CurriculumManagementComponent implements OnInit {
   @ViewChild("subjectModal") subjectModal!: ElementRef<HTMLDialogElement>;
-
 
   subjects: {
     subject: Subject,
@@ -69,20 +74,60 @@ export class CurriculumManagementComponent implements OnInit {
   }
 
 
-  subjectName = new FormControl("");
+  resetForm() {
+    this.title.setValue("");
+    this.selectedGradeLevel.setValue(null);
+    this.selectedCoverImg = undefined;
+  }
+
+  title = new FormControl("");
   selectedGradeLevel = new FormControl<number | null>(null);
   selectedCoverImg?: File;
+
+
+  subjectErrors: any = {
+    title: null
+  };
+
+  resetError() {
+    this.subjectErrors = {
+      title: null
+    };
+  }
 
   addSubject() {
     this.addSubjectInProgress = true;
     this.curriculumService.addSubject({
-      title: this.subjectName.value!,
+      title: this.title.value!,
       gradeLevelId: this.selectedGradeLevel.value!,
       coverImage: this.selectedCoverImg
-    }).subscribe(res => {
-      this.closeModal();
-      this.getSubjects();
-    });
+    }).pipe(
+      tap(res => {
+        this.closeModal();
+        this.getSubjects();
+
+        this.addSubjectInProgress = false;
+
+        this.addToast({
+          message: "Subject added successfully."
+        });
+      }),
+      catchError(errRes => {
+        console.log(errRes.error);
+
+        this.resetError();
+        (<any[]>errRes.error).forEach(error => {
+          const field = error.context.label;
+          // Only set the error message for the first error encountered per field
+          if (!this.subjectErrors[field]) {
+            this.subjectErrors[field] = error.message;
+          }
+        });
+
+        this.addSubjectInProgress = false;
+        return of(null);
+      }))
+      .subscribe();
   }
 
   filter(event: Event) {
@@ -119,4 +164,17 @@ export class CurriculumManagementComponent implements OnInit {
   imgPlaceholder(seed: any) {
     return this.avatarService.avatar(seed);
   }
+
+
+  toastMessages: Toast[] = [];
+
+  removeToast(index: number) {
+    this.toastMessages.splice(index, 1);
+  }
+
+  addToast(toast: Toast) {
+    this.toastMessages.push(toast);
+    setTimeout(() => this.removeToast(this.toastMessages.length - 1), toast.duration || 3000);
+  }
+
 }

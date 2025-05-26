@@ -15,12 +15,15 @@ export class LectureContentComponent implements OnInit {
 
   material?: SubjectMaterial;
   materialId?: number;
+  studentSubjectId?: number;
+
   constructor(
     private router: ActivatedRoute,
-    private location: Location,
     private lectureContentService: LectureContentService
   ) {
     this.router.params.subscribe(val => this.materialId = val["id"]);
+
+    this.router.queryParams.subscribe(val => this.studentSubjectId = val['studentSubjectId']);
   }
 
 

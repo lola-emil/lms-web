@@ -1,0 +1,22 @@
+<app-drawer>
+  <app-topbar></app-topbar>
+
+
+  <div class="container px-5 mx-auto">
+    <h3 class="text-2xl font-semibold">{{subjectDetail?.title}}</h3>
+    <br>
+    <div class="gap-3 my-3 flex">
+      <a routerLinkActive="bg-primary text-white" routerLink="lessons" class="btn btn-sm rounded-full px-5">Lessons</a>
+      <a routerLinkActive="bg-primary text-white" routerLink="assigned-teachers" class="btn btn-sm rounded-full px-5">Assigned
+        Teachers</a>
+
+        <a routerLinkActive="bg-primary text-white" routerLink="enrolled-students" class="btn btn-sm rounded-full px-5">
+          Enrolled Students
+        </a>
+    </div>
+    <br>
+
+
+    <router-outlet></router-outlet>
+  </div>
+</app-drawer>

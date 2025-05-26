@@ -12,6 +12,11 @@ import { GradebookComponent } from "./pages/gradebook/gradebook.component";
 import { MeetingComponent } from "./pages/meeting/meeting.component";
 import { ProfileSettingsComponent } from "./pages/profile-settings/profile-settings.component";
 import { ClassworkDetailsComponent } from "./pages/classwork-details/classwork-details.component";
+import { SubjectLessonsComponent } from "./pages/subject-lessons/subject-lessons.component";
+import { LessonContentComponent } from "./pages/lesson-content/lesson-content.component";
+import { QuizCreationFormComponent } from "./pages/quiz-creation-form/quiz-creation-form.component";
+import { EditLessonComponent } from "./pages/edit-lesson/edit-lesson.component";
+import { EditQuizComponent } from "./pages/edit-quiz/edit-quiz.component";
 
 
 const routes: Routes = [
@@ -42,8 +47,12 @@ const routes: Routes = [
       },
       {
         path: "",
-        redirectTo: "classwork",
+        redirectTo: "lessons",
         pathMatch: "full"
+      },
+      {
+        path: "lessons",
+        component: SubjectLessonsComponent
       },
       {
         path: "classwork/create-classwork",
@@ -62,6 +71,7 @@ const routes: Routes = [
         component: GradesComponent
       },
 
+
     ]
   },
   {
@@ -75,6 +85,27 @@ const routes: Routes = [
   {
     path: "profile-settings",
     component: ProfileSettingsComponent
+  },
+  {
+    path: "doc-editor",
+    loadComponent: () => import("./pages/doc-editor/doc-editor.component").then(c => c.DocEditorComponent)
+  },
+  {
+    path: "lesson-content/:id",
+    component: LessonContentComponent
+  },
+  {
+    path: "quiz-creation",
+    component: QuizCreationFormComponent
+  },
+
+  {
+    path: "edit-lesson",
+    component: EditLessonComponent
+  },
+  {
+    path: "edit-quiz/:id",
+    component: EditQuizComponent
   }
 ];
 

@@ -44,8 +44,8 @@
           </div>
           <div class="flex mt-3 justify-between">
             <div class="text-sm flex items-center gap-1" title="12 Participants/Students">
-              <span>{{ item.subjectMaterials.length }}</span>
-              <span>Module(s)</span>
+              <!-- <span>{{ item.subjectMaterials.length }}</span> -->
+              <!-- <span>Module(s)</span> -->
             </div>
           </div>
         </div>
@@ -57,11 +57,18 @@
   </div>
 
   <!-- Open the modal using ID.showModal() method -->
-  <dialog id="my_modal_1" #subjectModal class="modal">
+  <dialog #subjectModal class="modal" (close)="resetForm()">
     <div class="modal-box">
       <h3 class="text-lg font-bold">Add New Subject</h3>
       <br>
-      <input [formControl]="subjectName" type="text" class="input input-bordered w-full" placeholder="Subject Name">
+      <label class="form-control w-full">
+        <div class="label">
+        </div>
+        <input type="text" [formControl]="title" placeholder="Type here" class="input input-bordered w-full" />
+        <div class="label">
+          <span class="label-text-alt text-error">{{subjectErrors.title ?? ""}}</span>
+        </div>
+      </label>
       <br>
       <br>
       <select [formControl]="selectedGradeLevel" class="select select-bordered w-full">
@@ -86,7 +93,14 @@
         </div>
       </label>
       <div class="modal-action">
-        <button class="btn btn-primary" (click)="addSubject()">Submit</button>
+        <button class="btn btn-primary" (click)="addSubject()" [disabled]="addSubjectInProgress">
+          @if (addSubjectInProgress) {
+            <span class="loading loading-dots"></span>
+          }
+          @else {
+            <span>Submit</span>
+          }
+        </button>
         <form method="dialog">
           <!-- if there is a button in form, it will close the modal -->
           <button class="btn">Close</button>
@@ -95,3 +109,13 @@
     </div>
   </dialog>
 </app-drawer>
+
+
+
+<div class="toast toast-top toast-center">
+  @for (item of toastMessages; track $index) {
+  <div class="alert alert-success">
+    <span>{{item.message}}</span>
+  </div>
+  }
+</div>

@@ -1,0 +1,73 @@
+<div class="container flex items-center mx-auto px-5">
+  <div class="">
+    <div class="flex gap-3 items-center">
+      <a [routerLink]="['/teacher','doc-editor']" [queryParams]="{
+        subject_id: teacherSubjectId
+      }" class="btn btn-primary btn-sm">Add New Module</a>
+      <a [routerLink]="['/teacher', 'quiz-creation']" [queryParams]="{
+          subject_id: teacherSubjectId
+        }" class="btn btn-primary btn-sm"> Add Quiz</a>
+    </div>
+  </div>
+  <br>
+</div>
+
+<div class="container mx-auto lg:p-6">
+  <!-- 'border-green-500': item.materialType === 'video', -->
+
+  @for (item of subjectDetail?.subjectMaterials; track $index) {
+  <div class="card bg-base-100 shadow-md mb-5 border-l-4" [ngClass]="{
+        'border-blue-500': item.materialType === 'MODULE',
+        'border-orange-500': item.materialType === 'QUIZ'
+      }">
+    <div class="card-body">
+      <h3 class="font-bold text-lg">
+        <h3 class="font-bold text-lg max-w-96 text-nowrap overflow-hidden text-ellipsis">
+          {{ item.title.trim() ? item.title : "(No Title)" }}
+        </h3>
+      </h3>
+
+
+      <p class="text-md text-gray-500">📅 Created: {{ item.createdAt | date:'mediumDate' }}</p>
+      <p class="text-md text-gray-500">🔄 Last Updated: {{ item.updatedAt | date:'mediumDate' }}</p>
+
+      <div class="flex justify-between items-center mt-2">
+        <span class="badge" [ngClass]="{
+        'border-blue-500': item.materialType === 'MODULE',
+        'border-orange-500': item.materialType === 'QUIZ'
+                  }">
+          {{ item.materialType| titlecase }}
+        </span>
+
+
+        <div class="flex gap-3">
+          @if (item.materialType === "MODULE") {
+          <a [routerLink]="['/teacher', 'lesson-content', item.id]" class="btn btn-outline btn-sm">📖 View
+            Lesson</a>
+          } @else {
+          <a [routerLink]="['/teacher', 'edit-quiz', item.id]" class="btn btn-outline btn-sm">📖 Edit Quiz</a>
+          }
+          <button type="button" class="btn btn-sm btn-outline" (click)="openDialog(item.id)">Remove</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  }
+</div>
+
+
+<!-- Open the modal using ID.showModal() method -->
+<dialog #confirmationModal class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Warning!</h3>
+    <p class="py-4">Are you sure you want to delete this module?</p>
+    <div class="modal-action">
+      <button class="btn btn-primary" (click)="deleteMaterial()">Confirm</button>
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>

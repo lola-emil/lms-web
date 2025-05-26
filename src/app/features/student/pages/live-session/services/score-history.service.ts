@@ -46,7 +46,8 @@ export class ScoreHistoryService {
                 }
             }
         }
-      `
+      `,
+      fetchPolicy: "no-cache"
     }).valueChanges;
   }
 

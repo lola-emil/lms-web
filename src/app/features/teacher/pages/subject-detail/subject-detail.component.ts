@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewRef } from '@a
 import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { SubjectDetailService, TeacherAssignedSubject2Response } from './services/subject-detail.service';
+import { EnrolledStudent, SubjectDetailService, TeacherAssignedSubject2Response } from './services/subject-detail.service';
 import { catchError, of, Subscription, tap } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { MeetingService } from './services/meeting.service';
@@ -23,6 +23,8 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
 
   data?: TeacherAssignedSubject2Response;
 
+  students: EnrolledStudent[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private subjectDetailService: SubjectDetailService,
@@ -32,7 +34,7 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.teacherSubjectId)
+    if (this.teacherSubjectId) {
       this.subscriptions.push(
         this.subjectDetailService.getSubjectDetail(this.teacherSubjectId)
           .pipe(
@@ -46,6 +48,17 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
           )
           .subscribe()
       );
+
+
+
+      this.subscriptions.push(
+        this.subjectDetailService.getStudents(this.teacherSubjectId)
+          .subscribe(res => {
+            console.log(res.data.teacherAssignedSubject);
+            this.students = res.data.teacherAssignedSubject.studentEnrolledSubjects;
+          })
+      );
+    }
   }
 
   initateMeeting() {

@@ -1,13 +1,13 @@
 <div class="container mx-auto px-5">
   <h1 class="text-2xl font-bold lg:text-center mb-4">📚 Course Lessons</h1>
 
-  @if (lessons?.teacherSubject?.subject?.subjectMaterials?.length == 0) {
+  @if (lessons?.teacherSubject?.subjectMaterials?.length == 0) {
   <div class="text-gray-500 text-center">
     No lessons available for this course.
   </div>
   }
 
-  @for (item of lessons?.teacherSubject?.subject?.subjectMaterials; track $index) {
+  @for (item of lessons?.teacherSubject?.subjectMaterials; track $index) {
   <div class="card bg-base-100 shadow-md mt-4 border-l-4" [ngClass]="{
       'border-blue-500': item.materialType === 'MODULE',
       'border-green-500': item.materialType === 'MD',
@@ -26,9 +26,9 @@
 
       <div class="flex justify-between items-center mt-2">
         <span class="badge" [ngClass]="{
-            'badge-primary': item.materialType  === 'DOCUMENT',
+            'border-blue-500': item.materialType  === 'MODULE',
             'badge-success': item.materialType  === 'MD',
-            'badge-warning': item.materialType  === 'QUIZ'
+            'border-orange-500': item.materialType  === 'QUIZ'
           }">
           {{ item.materialType | titlecase }}
         </span>
@@ -47,7 +47,7 @@
         <a target="_blank" class="btn btn-outline btn-sm">📖 View Lesson</a>
         }
         @else {
-        <a [routerLink]="item.id + ''" [queryParams]="{type: item.materialType}" class="btn btn-outline btn-sm">📖 View
+        <a [routerLink]="item.id + ''" [queryParams]="{type: item.materialType, studentSubjectId}" class="btn btn-outline btn-sm">📖 View
           Lesson</a>
         }
         }

@@ -28,9 +28,9 @@ export class GradebookComponent implements OnInit {
   ];
 
   criteria = {
-    quizzes: 30,  // 30% weight
-    assignments: 70, // 30% weight
-    exams: 40  // 40% weight
+    quizzes: 30,
+    assignments: 70,
+    exams: 40
   };
 
   teacherSubjects: TeacherSubject[] = [];

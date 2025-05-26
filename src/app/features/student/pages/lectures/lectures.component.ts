@@ -4,7 +4,6 @@ import { Observable, of, tap, catchError } from 'rxjs';
 import { DatePipe, NgClass, TitleCasePipe } from '@angular/common';
 import { SubjectMaterial } from '../../../../repositories/subject-material-repo.service';
 import { QuizSession } from '../../../../repositories/quiz-session-repo.service';
-import { AuthService } from '../../../../services/auth.service';
 import { LecturesService, StudentSubject } from './services/lectures.service';
 import { Subscription } from 'rxjs';
 

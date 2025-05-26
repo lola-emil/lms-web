@@ -31,7 +31,6 @@ export class QuizPageService {
             quiz(id: ${id}) {
                 id
                 title
-                subjectId
                 questions {
                     id
                     questionText

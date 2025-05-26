@@ -17,14 +17,14 @@
               <p class="font-semibold">{{item.student.firstname}} {{ item.student.lastname }}</p>
 
               @if (item.score) {
-              <p class="text-sm">{{item.score}}</p>
+              <p class="text-sm font-semibold text-success">Score: {{item.score}}</p>
               }
               @else {
               <p class="text-sm">Not scored</p>
               }
             </div>
-            <span>
-              {{item.attachments.length}} files
+            <span class="font-semibold">
+              {{item.attachments.length}} file(s)
             </span>
           </div>
 
@@ -63,7 +63,7 @@
 
     <div>
       @for (item of selectedSubmission?.attachments; track $index) {
-      <a [href]="item.fileURL" target="_blank" class="link link-primary">{{ item.fileURL }}</a>
+      <a [href]="'http://' + item.fileURL" target="_blank" class="link link-primary">{{ item.fileURL }}</a>
       <br>
       }
     </div>

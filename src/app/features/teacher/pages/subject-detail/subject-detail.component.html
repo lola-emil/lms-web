@@ -7,15 +7,18 @@
   </div>
 
   <div class="container mx-auto px-5 gap-5 my-3 flex">
+    <a routerLinkActive="bg-primary text-white" routerLink="lessons" class="btn btn-sm rounded-full px-5">Lessons</a>
     <a routerLinkActive="bg-primary text-white" routerLink="classwork"
       class="btn btn-sm rounded-full px-5">Classworks</a>
     <a routerLinkActive="bg-primary text-white" routerLink="announcements"
       class="btn btn-sm rounded-full px-5">Announcements</a>
-    <a routerLinkActive="bg-primary text-white" routerLink="students" class="btn btn-sm rounded-full px-5">Students</a>
+    <!-- <a routerLinkActive="bg-primary text-white" routerLink="students" class="btn btn-sm rounded-full px-5">Students</a> -->
     <!-- <a routerLinkActive="bg-primary text-white" routerLink="grades" class="btn btn-sm rounded-full px-5">Grades</a> -->
     <!-- <a routerLink="forum" class="btn btn-sm rounded-full px-5">Forum</a> -->
     <!-- <a routerLink="live-session" class="btn btn-sm rounded-full px-5">Live session</a> -->
   </div>
+
+  <br>
 
   <div class="container flex gap-5 mx-auto px-5">
     <div class="flex gap-5 w-full max-w-screen-lg">
@@ -31,11 +34,11 @@
     </div>
 
     <div class="flex-1 lg:flex flex-col gap-5 md:hidden hidden ">
-      <div class="flex flex-col gap-5 sticky top-5">
+      <div class="flex h-full flex-col gap-5 sticky top-5">
         <div class="card w-96 max-w-screen-sm border rounded-lg shadow-lg">
           <div class="card-body p-5">
             <p class="font-semibold text-lg flex items-center gap-2">
-              🎥 Live Session
+              🎥 Meeting
             </p>
 
             <!-- If No Live Session -->
@@ -46,8 +49,25 @@
             <!-- Show "Join Live Session" button only if the session is today -->
             <button (click)="initateMeeting()"
               class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-all">
-              Initiate Live Session
+              Create Meeting
             </button>
+          </div>
+        </div>
+
+        <div class="card max-h-96 w-96 max-w-screen-sm border rounded-lg shadow-lg">
+          <div class="card-body p-5 flex-none">
+            <p class="font-semibold text-lg flex items-center gap-2">
+              🧑🏽‍🎓 Students
+            </p>
+
+            <div class="flex mt-3 flex-col">
+              @for (item of students.slice(0,5); track $index) {
+              <div class="p-2 even:border-t">
+                <p class="font-semibold">{{item.student.firstname}} {{item.student.lastname}}</p>
+                <p class="text-sm">{{item.student.email}}</p>
+              </div>
+              }
+            </div>
           </div>
         </div>
       </div>

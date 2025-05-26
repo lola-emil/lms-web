@@ -12,12 +12,13 @@ export type EnrolledSubjectsByStudentIdResponse = {
         title: string;
         coverImgUrl: string;
         gradeLevel: {
-          level: number
-        }
-        subjectMaterials: {
-          quizSessions: {}[]
-        }[]
+          level: number;
+        };
+
       };
+      subjectMaterials: {
+        quizSessions: {}[];
+      }[];
       teacher: {
         firstname: string;
         middlename: string;
@@ -55,11 +56,12 @@ export class DashboardService {
                           gradeLevel{
                             level
                           }
-                          subjectMaterials {
-                            quizSessions {
-                              id
-                            }
-                          }
+
+                      }
+                      subjectMaterials {
+                        quizSessions {
+                          id
+                        }
                       }
                       teacher {
                           firstname

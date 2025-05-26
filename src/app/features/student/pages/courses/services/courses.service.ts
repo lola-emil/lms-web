@@ -11,11 +11,11 @@ export type StudentSubject = {
       id: number;
       title: string;
       coverImgUrl?: string;
-      subjectMaterials: { id: number; }[];
       gradeLevel: {
-        level: number
-      }
+        level: number;
+      };
     },
+    subjectMaterials: { id: number; }[];
     teacher: {
       firstname: string;
       lastname: string;
@@ -50,9 +50,10 @@ export class CoursesService {
                         gradeLevel {
                           level
                         }
-                        subjectMaterials {
-                          id
-                        }
+
+                    }
+                    subjectMaterials {
+                        id
                     }
                     teacher {
                         firstname
