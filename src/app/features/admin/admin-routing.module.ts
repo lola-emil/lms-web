@@ -7,11 +7,11 @@ import { SubjectDetailPageComponent } from "./pages/subject-detail-page/subject-
 import { QuizCreationFormComponent } from "./pages/quiz-creation-form/quiz-creation-form.component";
 import { LessonContentComponent } from "./pages/lesson-content/lesson-content.component";
 import { EditLessonComponent } from "./pages/edit-lesson/edit-lesson.component";
-import { SubjectLessonsComponent } from "./pages/subject-lessons/subject-lessons.component";
 import { TeacherSubjectComponent } from "./pages/teacher-subject/teacher-subject.component";
 import { EnrolledStudentsComponent } from "./pages/enrolled-students/enrolled-students.component";
 import { UserProfileComponent } from "./pages/user-profile/user-profile.component";
 import { ProfileSettingsComponent } from "./pages/profile-settings/profile-settings.component";
+import { AcademicSettingsComponent } from "./pages/academic-settings/academic-setings.component";
 
 const routes: Routes = [
   {
@@ -77,6 +77,10 @@ const routes: Routes = [
   {
     path: "profile-settings",
     component: ProfileSettingsComponent
+  },
+  {
+    path: "academic-settings",
+    component: AcademicSettingsComponent
   }
 ];
 
