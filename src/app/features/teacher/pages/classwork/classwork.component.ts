@@ -99,7 +99,7 @@ export class ClassworkComponent implements OnInit {
       instructions: instruction!,
       dueDate: new Date(due_date).toISOString(),
       hps,
-      teacherAssignedSubjectId: this.teacherSubjectId
+      teacherSubjectId: this.teacherSubjectId
     }).subscribe(res => {
       console.log(res);
 

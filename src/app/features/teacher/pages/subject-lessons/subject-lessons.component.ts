@@ -31,7 +31,7 @@ export class SubjectLessonsComponent {
   getMaterials() {
     this.subjectDetailService.getSubjectDetail(this.teacherSubjectId ?? 0)
       .subscribe(val => {
-        this.subjectDetail = val.data.teacherAssignedSubject;
+        this.subjectDetail = val.data.teacherSubject;
       });
   }
 

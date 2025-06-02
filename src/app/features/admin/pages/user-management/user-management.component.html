@@ -132,7 +132,7 @@
 
 
 <!-- Open the modal using ID.showModal() method -->
-<dialog #addUserModal id="my_modal_1" class="modal">
+<dialog #addUserModal id="my_modal_1" class="modal" (close)="resetAddUserForm()">
   <div class="modal-box">
     <h3 class="text-lg font-bold">Add New User</h3>
     <br>

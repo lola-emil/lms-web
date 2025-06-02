@@ -4,7 +4,13 @@ import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { AcademicSettingsService, ClassLevel, ClassSection, SchoolYear } from './services/academic-settings.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { catchError, of, tap } from 'rxjs';
-import { AuthService } from '../../../../services/auth.service';
+import { RouterLink } from '@angular/router';
+
+type Toast = {
+  type?: 'success' | 'error' | 'warning' | 'info';
+  duration?: number; // in ms
+  message: string;
+};
 
 type ErrorResponse = {
   message: string;
@@ -20,56 +26,49 @@ type ErrorResponse = {
 export class AcademicSettingsComponent implements OnInit {
 
   @ViewChild("schoolYearModal") schoolYearModal!: ElementRef<HTMLDialogElement>;
-  @ViewChild("sectionModal") sectionModal!: ElementRef<HTMLDialogElement>;
+  @ViewChild("passwordModal") passwordModal!: ElementRef<HTMLDialogElement>;
 
-  classLevels: ClassLevel[] = [];
-  classSections: ClassSection[] = [];
   schoolYears: SchoolYear[] = [];
 
 
-  classSectionForm = new FormGroup({
-    classLevelId: new FormControl(""),
-    sectionName: new FormControl("")
-  });
 
   schoolYearForm = new FormGroup({
     yearStart: new FormControl(),
     yearEnd: new FormControl()
   });
 
-  classSectionErrors: any = {
-    classLevelId: null,
-    sectionName: null,
-  };
+
   schoolYearErrors: any = {
     yearStart: null,
     yearEnd: null
   };
 
   submitInProgress = false;
+  toastMessages: Toast[] = [];
 
   constructor(
     private academicSettingService: AcademicSettingsService,
   ) { }
 
   ngOnInit(): void {
-    this.academicSettingService.getGradeLevels()
-      .subscribe(res => {
-        this.classLevels = res.data.classLevels;
-      });
+
 
     this.loadSchoolYears();
-    this.loadSections();
 
   }
 
 
-  loadSections() {
-    this.academicSettingService.getSections()
-      .subscribe(res => {
-        this.classSections = res.data.classSections;
-      });
+  removeToast(index: number) {
+    this.toastMessages.splice(index, 1);
   }
+
+  addToast(toast: Toast) {
+    this.toastMessages.push(toast);
+    setTimeout(() => this.removeToast(this.toastMessages.length - 1), toast.duration || 3000);
+  }
+
+
+
 
   loadSchoolYears() {
 
@@ -83,21 +82,11 @@ export class AcademicSettingsComponent implements OnInit {
     this.schoolYearModal.nativeElement.showModal();
   }
 
-  showSectionModal() {
-    this.sectionModal.nativeElement.showModal();
-  }
 
   schoolyearModalClosed() {
     this.schoolYearForm.reset({
       yearEnd: "",
       yearStart: ""
-    });
-  }
-
-  sectionModalClosed() {
-    this.classSectionForm.reset({
-      classLevelId: "",
-      sectionName: ""
     });
   }
 
@@ -122,10 +111,14 @@ export class AcademicSettingsComponent implements OnInit {
           this.submitInProgress = false;
           this.schoolYearModal.nativeElement.close();
           this.loadSchoolYears();
+          this.resetErrors();
 
+          this.addToast({
+            message: "Added successfully"
+          });
         }),
         catchError(errRes => {
-          console.log(errRes);
+          this.resetErrors();
           try {
             (<ErrorResponse[]>errRes.error).forEach(error => {
               const field = error.context.label;
@@ -143,36 +136,61 @@ export class AcademicSettingsComponent implements OnInit {
       ).subscribe();
   }
 
-  submitSection() {
+  selectedSchoolYearId?: number;
+  selectedSchoolYearStatus = false;
+  password = new FormControl("");
+  passwordError: string | null = null;
+
+  changeSchoolYear() {
     this.submitInProgress = true;
-    const {
-      classLevelId,
-      sectionName
-    } = this.classSectionForm.value;
-    this.academicSettingService.submitSection({
-      classLevelId: parseInt(classLevelId ?? ""),
-      sectionName: sectionName ?? ""
-    })
-      .pipe(
-        tap(res => {
-          console.log(res);
-          this.submitInProgress = false;
-          this.sectionModal.nativeElement.close();
-          this.loadSections();
+    this.academicSettingService.changeCurrentSchoolYear({
+      isCurrent: this.selectedSchoolYearStatus,
+      schoolYearId: this.selectedSchoolYearId,
+      adminPassword: this.password.value!
+    }).pipe(
+      tap(res => {
+        console.log(res);
+        this.submitInProgress = false;
+        this.passwordModal.nativeElement.close();
+        this.loadSchoolYears();
+      }),
+      catchError(errRes => {
+        this.passwordError = null;
+        const errorResponse = errRes.error as ErrorResponse[];
 
-        }),
+        this.passwordError = errorResponse[0].message;
+        this.submitInProgress = false;
+        return of(null);
+      })
+    ).subscribe();
+  }
 
-        catchError(errRes => {
-          console.log(errRes);
-          (<ErrorResponse[]>errRes.error).forEach(error => {
-            const field = error.context.label;
-            if (!this.classSectionErrors[field]) {
-              this.classSectionErrors[field] = error.message;
-            }
-          });
-          this.submitInProgress = false;
-          return of(null);
-        })
-      ).subscribe();
+
+  openPasswordModal(event: Event, schoolYearId: number) {
+    const target = event.target as HTMLInputElement;
+
+    event.preventDefault();
+
+    this.selectedSchoolYearId = schoolYearId;
+    this.selectedSchoolYearStatus = target.checked;
+
+    this.passwordModal.nativeElement.showModal();
+  }
+
+  resetErrors() {
+    this.schoolYearErrors = {
+      yearStart: null,
+      yearEnd: null
+    };
+  }
+
+  resetUpdateForm() {
+    this.selectedSchoolYearId = undefined;
+    this.password.setValue("");
+    this.passwordError = null;
+  }
+
+  nothing(event: Event) {
+    event.preventDefault();
   }
 }

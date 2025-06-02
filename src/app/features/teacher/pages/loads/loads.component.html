@@ -17,7 +17,7 @@
 
     <div class="grid gap-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
 
-      @for (item of (!!searchQuery ? filterSubject() : data?.teacherAssignedSubjectsByTeacherId); track $index) {
+      @for (item of (!!searchQuery ? filterSubject() : data?.teacherSubjectsPerTeacher); track $index) {
       <a [routerLink]="item.id" class="rounded-lg border-[1px] shadow">
         <div>
           @if (item.subject.coverImgUrl) {
@@ -32,13 +32,14 @@
         <div class="p-5">
           <p class="font-semibold">{{ item.subject.title }}</p>
           <div class="flex flex-col">
-            <!-- < class="text-sm">{{ item.instructor }}</ p> -->
+            <p class="text-sm">Grade {{ item.subject.gradeLevel.level }}</p>
 
           </div>
           <div class="flex mt-3 justify-between">
             <div class="text-sm flex items-center gap-1" title="12 Participants/Students">
-              <span>{{ item.studentEnrolledSubjects.length }}</span>
-              <span>Participants</span>
+
+              <!-- <span>{{ item.studentEnrolledSubjects.length }}</span> -->
+              <!-- <span>Participants</span> -->
             </div>
           </div>
         </div>

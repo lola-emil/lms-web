@@ -1,5 +1,7 @@
-<button class="btn btn-sm" (click)="showAddTeacherDialog()">Add teacher</button>
-
+<div class="flex justify-between">
+  <button class="btn btn-sm" (click)="showAddTeacherDialog()">Add teacher</button>
+  <input type="text" class="input input-sm input-bordered" placeholder="Search">
+</div>
 <br>
 <br>
 
@@ -12,11 +14,15 @@
     </tr>
   </thead>
   <tbody>
-    @for (item of subject?.teacherAssignedSubjects; track $index) {
+    @for (item of subject?.teacherSubjects; track $index) {
     <tr>
       <td>{{item.teacher.firstname}} {{item.teacher.lastname}}</td>
       <td>{{item.teacher.email}}</td>
       <td>{{ item.createdAt | date : "medium"}}</td>
+
+      <td align="right">
+        <button class="link" (click)="openSectionAssignmentModal(item)">Assign section</button>
+      </td>
     </tr>
     }
   </tbody>
@@ -24,20 +30,100 @@
 
 
 <!-- Open the modal using ID.showModal() method -->
-<dialog #addTeacherDialog id="my_modal_1" class="modal">
+<dialog #addTeacherDialog id="my_modal_1" class="modal" (close)="teacherDialogClosed()">
   <div class="modal-box">
     <h3 class="text-lg font-bold">Add Teacher</h3>
     <br>
     <!-- <p class="py-4">Press ESC key or click the button below to close</p> -->
-     <select [formControl]="teacherSelect" class="select select-bordered w-full">
+    <select [formControl]="teacherSelect" class="select select-bordered w-full">
       <option value="" selected disabled>-- Select Teacher</option>
 
       @for (item of teachers; track $index) {
-        <option [value]="item.id">{{ item.firstname }} {{ item.lastname }}</option>
+      <option [value]="item.id">{{ item.firstname }} {{ item.lastname }}</option>
       }
-     </select>
+    </select>
+    <br>
+    <br>
+    <p class="font-semibold">Assign Sections</p>
+    <br>
+    <table class="table border">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" class="checkbox checkbox-sm">
+          </th>
+          <th align="left">Section</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of sections; track $index) {
+        <tr>
+          <td>
+            <input type="checkbox" class="checkbox checkbox-sm">
+          </td>
+          <td>Grade {{ item.classLevel.level }} - {{ item.sectionName }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+
     <div class="modal-action">
       <button class="btn btn-primary" (click)="addTeacher()">Add</button>
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+
+<dialog #sectionAssignmentModal class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Teacher 1</h3>
+
+    <br>
+    <br>
+
+    <table class="table border">
+      <thead>
+        <tr>
+
+          <th align="left">Assigned Sections</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of teacherAssignedSections; track $index) {
+        <tr>
+
+          <td>Grade {{ item.classSection.classLevel.level }} - {{ item.classSection.sectionName }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <br>
+    <p class="font-semibold">Assign New Sections</p>
+    <br>
+    <table class="table border">
+      <thead>
+        <tr>
+          <th align="left">Section</th>
+          <th>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of sections; track $index) {
+        <tr>
+          <td>Grade {{ item.classLevel.level }} - {{ item.sectionName }}</td>
+          <td align="right">
+            <button class="btn btn-sm" (click)="assignNewSection(item)">Add</button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <div class="modal-action">
       <form method="dialog">
         <!-- if there is a button in form, it will close the modal -->
         <button class="btn">Close</button>

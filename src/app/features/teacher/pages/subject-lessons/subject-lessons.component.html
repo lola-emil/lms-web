@@ -5,8 +5,14 @@
         subject_id: teacherSubjectId
       }" class="btn btn-primary btn-sm">Add New Module</a>
       <a [routerLink]="['/teacher', 'quiz-creation']" [queryParams]="{
-          subject_id: teacherSubjectId
+          subject_id: teacherSubjectId,
+          materialType: 'QUIZ'
         }" class="btn btn-primary btn-sm"> Add Quiz</a>
+
+      <a [routerLink]="['/teacher', 'quiz-creation']" [queryParams]="{
+        subject_id: teacherSubjectId,
+        materialType: 'EXAM'
+      }" class="btn btn-primary btn-sm">Add Exam</a>
     </div>
   </div>
   <br>
@@ -45,7 +51,8 @@
           <a [routerLink]="['/teacher', 'lesson-content', item.id]" class="btn btn-outline btn-sm">📖 View
             Lesson</a>
           } @else {
-          <a [routerLink]="['/teacher', 'edit-quiz', item.id]" class="btn btn-outline btn-sm">📖 Edit Quiz</a>
+          <a [routerLink]="['/teacher', 'edit-quiz', item.id]" class="btn btn-outline btn-sm">📖 Edit
+            {{item.materialType | titlecase}}</a>
           }
           <button type="button" class="btn btn-sm btn-outline" (click)="openDialog(item.id)">Remove</button>
         </div>

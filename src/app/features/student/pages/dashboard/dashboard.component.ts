@@ -6,12 +6,12 @@ import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
 import { Course, CourseService } from '../../services/course.service';
 import { catchError, map, Observable, of, Subscription, tap } from 'rxjs';
-import { DashboardService, EnrolledSubjectsByStudentIdResponse } from './services/dashboard.service';
+import { DashboardService, EnrolledSubjectsByStudentIdResponse, TeacherSubjectSection } from './services/dashboard.service';
 import { AvatarService } from '../../../../services/avatar.service';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DrawerComponent, DatePipe, HelloSvgComponent, RouterLink, TopbarComponent, CommonModule],
+  imports: [DrawerComponent, HelloSvgComponent, RouterLink, TopbarComponent, CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -21,6 +21,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   recents$: Observable<Course[]>;
   subjects?: EnrolledSubjectsByStudentIdResponse;
+
+
+  enrolledSubjects?: TeacherSubjectSection[] = [];
 
   constructor(
     private courseService: CourseService,
@@ -50,6 +53,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         console.log(res);
       });
+
+    this.dashboardService.getEnrolledSection()
+      .subscribe(res => {
+        console.log(res);
+        const studentSection = res.data.studentCurrentEnrolledSection[0];
+
+        this.dashboardService.getSubjects(studentSection.classSectionId)
+        .subscribe(res => {
+          console.log("Mga Subjects", res.data.teacherSubjectSectionsPerSection);
+
+          this.enrolledSubjects = res.data.teacherSubjectSectionsPerSection;
+        });
+      });
+
   }
 
   ngOnDestroy(): void {

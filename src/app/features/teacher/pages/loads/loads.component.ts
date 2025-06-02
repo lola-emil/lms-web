@@ -61,7 +61,7 @@ export class LoadsComponent implements OnInit, OnDestroy {
 
   filterSubject() {
     const lowerQuery = this.searchQuery?.toLowerCase() ?? "";
-    return this.data?.teacherAssignedSubjectsByTeacherId.filter(subject =>
+    return this.data?.teacherSubjectsPerTeacher.filter(subject =>
       subject.subject.title.toLowerCase().includes(lowerQuery));
   }
 

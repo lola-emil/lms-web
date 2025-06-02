@@ -37,7 +37,7 @@
 
 
       <div class="grid gap-5 grid-cols-1 xl:grid-cols-3">
-        @for (item of data?.teacherAssignedSubjectsByTeacherId?.slice(0,3); track $index) {
+        @for (item of data?.teacherSubjectsPerTeacher?.slice(0,3); track $index) {
         <a [routerLink]="['/teacher', 'loads', item.id]" class="rounded-lg border-[1px] shadow">
           <div>
             @if (item.subject.coverImgUrl) {

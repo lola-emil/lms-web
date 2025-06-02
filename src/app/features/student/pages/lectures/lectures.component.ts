@@ -2,9 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, of, tap, catchError } from 'rxjs';
 import { DatePipe, NgClass, TitleCasePipe } from '@angular/common';
-import { SubjectMaterial } from '../../../../repositories/subject-material-repo.service';
-import { QuizSession } from '../../../../repositories/quiz-session-repo.service';
-import { LecturesService, StudentSubject } from './services/lectures.service';
+import { LecturesService, StudentSubject, TeacherSubject } from './services/lectures.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -19,15 +17,10 @@ export class LecturesComponent implements OnInit, OnDestroy {
 
   lessons$!: Observable<any>;
 
-  mgaLessons: {
-    material: SubjectMaterial,
-    sessions: QuizSession[];
-  }[] = [];
-
   studentSubjectId?: number;
 
 
-  lessons?: StudentSubject;
+  lessons?: TeacherSubject;
 
 
   // teacherAssignedSubject?: TeacherAssignedSubjectResponse;
@@ -46,7 +39,7 @@ export class LecturesComponent implements OnInit, OnDestroy {
             tap(val => {
               // this.teacherAssignedSubject = v  al.data;
               console.log(val);
-              this.lessons = val.data.studentEnrolledSubject;
+              this.lessons = val.data.teacherSubject;
             }),
             catchError(res => {
               console.log(res);

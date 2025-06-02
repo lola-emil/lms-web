@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, viewChild, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { catchError, of, tap } from 'rxjs';
@@ -130,7 +130,7 @@ export class UserManagementComponent implements OnInit {
     email: null,
     password: null,
     role: null
-  }
+  };
 
   uploadImportFiles() {
     this.importInProgress = true;
@@ -156,7 +156,7 @@ export class UserManagementComponent implements OnInit {
       email: null,
       password: null,
       role: null
-    }
+    };
   }
 
   toastMessages: Toast[] = [];
@@ -179,7 +179,8 @@ export class UserManagementComponent implements OnInit {
         this.addUserModal.nativeElement.close();
         this.addToast({
           message: "User created successfully."
-        })
+        });
+
       }),
       catchError(errRes => {
         console.log(errRes.error);
@@ -194,12 +195,23 @@ export class UserManagementComponent implements OnInit {
         this.submitUserInProgress = false;
         return of(null);
       })
-    ).subscribe()
+    ).subscribe();
   }
 
   searchUser(event: Event) {
     const target = event.target as HTMLInputElement;
     this.searchQuery = target.value;
     this.getUsers();
+  }
+
+  resetAddUserForm() {
+    this.userFormGroup.reset({
+      firstname: "",
+      middlename: "",
+      lastname: "",
+      email: "",
+      password: "",
+      role: ""
+    });
   }
 }

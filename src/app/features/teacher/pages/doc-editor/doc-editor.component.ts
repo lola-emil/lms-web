@@ -54,7 +54,7 @@ export class DocEditorComponent implements OnInit {
     this.katungService.getSubjects()
       .subscribe(val => {
         console.log(val);
-        this.subjects = val.data.teacherAssignedSubjectsByTeacherId;
+        this.subjects = val.data.teacherSubjectsPerTeacher;
       });
   }
 

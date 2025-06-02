@@ -9,16 +9,9 @@ export type Subject = {
   createdAt: string;
   updatedAt: string;
 
-  subjectMaterials: {
-    id: number;
-    title?: string;
-    subjectId: number;
-    materialType: string;
-    fileURL?: string;
-    mdContentId?: number;
-    createdAt: string;
-    updatedAt: string;
-  }[];
+  gradeLevel: {
+    level: number
+  }
 };
 
 @Injectable({
@@ -41,13 +34,8 @@ export class SubjectDetailService {
                   classLevelId
                   createdAt
                   updatedAt
-                  subjectMaterials {
-                      id
-                      title
-                      subjectId
-                      materialType
-                      createdAt
-                      updatedAt
+                  gradeLevel {
+                    level
                   }
               }
           }

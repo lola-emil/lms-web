@@ -4,12 +4,32 @@ import { Apollo, gql } from 'apollo-angular';
 import { environment } from '../../../../../../environments/environment';
 
 export type Subject = {
-  teacherAssignedSubjects: TeacherSubject[];
+  id: number;
+  title: number;
+  classLevelId: number;
+  teacherSubjects: TeacherSubject[];
 };
 
 export type TeacherSubject = {
+  id: number;
   teacher: Teacher;
   createdAt: string;
+  subject: Subject
+};
+
+export type TeacherSubjectSection = {
+  id: number;
+  teacherSubjectId: number;
+  classSectionId: number;
+  teacherSubject: TeacherSubject;
+  classSection: {
+    id: number;
+    sectionName: string;
+    classLevelId: number;
+    classLevel: {
+      level: number;
+    };
+  };
 };
 
 export type Teacher = {
@@ -18,6 +38,14 @@ export type Teacher = {
   firstname: string;
   middlename?: string;
   lastname: string;
+};
+
+export type ClassSection = {
+  id: number;
+  sectionName: string;
+  classLevel: {
+    level: number;
+  };
 };
 
 @Injectable({
@@ -35,7 +63,9 @@ export class TeacherSubjectService {
       query: gql`
         query Subjects {
             subject(id: ${subjectId}) {
-                teacherAssignedSubjects {
+              id
+                teacherSubjects {
+                  id
                   createdAt
                     teacher {
                         id
@@ -56,11 +86,11 @@ export class TeacherSubjectService {
   }
 
 
-  getTeachers() {
-    return this.apollo.watchQuery<{ teachers: Teacher[]; }>({
+  getTeachers(subjectId: number) {
+    return this.apollo.watchQuery<{ unassignedTeachers: Teacher[]; }>({
       query: gql`
-        query Users {
-            teachers {
+        query TeacherSubject {
+            unassignedTeachers(subjectId: ${subjectId}) {
                 id
                 email
                 firstname
@@ -76,10 +106,93 @@ export class TeacherSubjectService {
     }).valueChanges;
   }
 
+  getSections(levelId: number) {
+    return this.apollo.watchQuery<{
+      classSectionsPerLevel: ClassSection[],
+      teacherSubjectSections: TeacherSubjectSection[];
+    }>({
+      query: gql`
+        query ClassSections {
+            classSectionsPerLevel(classLevelId: ${levelId}) {
+                id
+                sectionName
+                classLevel {
+                    level
+                }
+            }
+            teacherSubjectSections {
+                id
+                classSectionId
+                teacherSubjectId
+                teacherSubject {
+                  id
+                  subject {
+                    id
+                  }
+                }
+            }
+
+        }
+      `
+    }).valueChanges;
+  }
+
+  getTeacherSections(teacherSubjectId: number) {
+    return this.apollo.watchQuery<{ teacherSubjectSectionsPerTeacher: TeacherSubjectSection[]; }>({
+      query: gql`
+        query TeacherSubjectSectionsPerTeacher {
+            teacherSubjectSectionsPerTeacher(teacherSubjectId: ${teacherSubjectId}) {
+                id
+                teacherSubjectId
+                classSectionId
+                classSection {
+                    id
+                    sectionName
+                    classLevelId
+
+                    classLevel {
+                      id
+                      level
+                      createdAt
+                      updatedAt
+                  }
+                }
+            }
+        }
+      `,
+      fetchPolicy: "no-cache"
+    }).valueChanges;
+  }
+
+  getSubject(id: number) {
+    return this.apollo.watchQuery<{ subject: Subject; }>({
+      query: gql`
+        query ClassSections {
+            subject(id: ${id}) {
+                id
+                title
+                coverImgUrl
+                classLevelId
+                createdAt
+                updatedAt
+            }
+        }
+      `,
+      fetchPolicy: "no-cache"
+    }).valueChanges;
+  }
+
   addTeacher(body: {
     subjectId: number;
     teacherId: number;
   }) {
     return this.http.post(`${environment.apiURL}/graphql-ext/add-teacher-to-subject`, body);
+  }
+
+  assignNewSubject(body: Partial<{
+    teacherSubjectId: number;
+    classSectionId: number;
+  }>) {
+    return this.http.post(`${environment.apiURL}/graphql-ext/assign-teacher-section`, body);
   }
 }

@@ -3,7 +3,6 @@ import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { RouterLink } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { GradeLevel } from '../../../../repositories/grade-level-repo.service';
 import { catchError, of, tap } from 'rxjs';
 import { ClassLevel, CurriculumManagementService, Subject } from './services/curriculum-management.service';
 import { AvatarService } from '../../../../services/avatar.service';
@@ -26,7 +25,6 @@ export class CurriculumManagementComponent implements OnInit {
   subjects: {
     subject: Subject,
     moduleCount: number;
-    gradeLevel?: GradeLevel;
   }[] = [];
 
   mgaSubjects: Subject[] = [];

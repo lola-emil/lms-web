@@ -12,6 +12,8 @@ import { EnrolledStudentsComponent } from "./pages/enrolled-students/enrolled-st
 import { UserProfileComponent } from "./pages/user-profile/user-profile.component";
 import { ProfileSettingsComponent } from "./pages/profile-settings/profile-settings.component";
 import { AcademicSettingsComponent } from "./pages/academic-settings/academic-setings.component";
+import { StudentPerSectionComponent } from "./pages/student-per-section/student-per-section.component";
+import { ClassSectionComponent } from "./pages/class-section/class-section.component";
 
 const routes: Routes = [
   {
@@ -81,6 +83,14 @@ const routes: Routes = [
   {
     path: "academic-settings",
     component: AcademicSettingsComponent
+  },
+  {
+    path: "class-sections/:id",
+    component: StudentPerSectionComponent
+  },
+  {
+    path: "class-sections",
+    component: ClassSectionComponent
   }
 ];
 

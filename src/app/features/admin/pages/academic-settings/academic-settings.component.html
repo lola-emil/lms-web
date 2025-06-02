@@ -3,38 +3,6 @@
 
   <br>
   <div class="container mx-auto">
-    <div class="card w-full">
-      <div class="card-body p-5">
-        <div class="flex gap-3 items-center justify-start">
-          <p class="font-bold">Class Sections</p>
-          <button class="btn btn-primary btn-sm" (click)="showSectionModal()">Add new section</button>
-        </div>
-
-        <br>
-
-        <table class="table border table-zebra">
-          <thead>
-            <tr>
-              <th>Section Name</th>
-              <th>Grade Level</th>
-              <th></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            @for (item of classSections; track $index) {
-            <tr>
-              <td>{{ item.sectionName }}</td>
-              <td>Grade {{ item.classLevel.level }}</td>
-              <td></td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <br>
-
 
     <div class="card w-full">
       <div class="card-body p-5">
@@ -48,6 +16,7 @@
             <tr>
               <th>School Year</th>
               <th>Is Current</th>
+              <th>Unlocked</th>
             </tr>
           </thead>
 
@@ -55,6 +24,10 @@
             @for (item of schoolYears; track $index) {
             <tr>
               <td>{{ item.yearStart }} - {{ item.yearEnd }}</td>
+              <td><input type="checkbox" class="toggle toggle-primary"
+                  (click)="!item.isCurrent ? openPasswordModal($event, item.id) : nothing($event) "
+                  [checked]="item.isCurrent"></td>
+
               <td><input type="checkbox" class="toggle toggle-primary"></td>
             </tr>
             }
@@ -66,47 +39,25 @@
 
 </app-drawer>
 
-
-<dialog #sectionModal class="modal" (close)="sectionModalClosed()">
+<dialog id="my_modal_1" #passwordModal class="modal" (close)="resetUpdateForm()">
   <div class="modal-box">
-    <h3 class="text-lg font-bold">Add class section</h3>
-
-
-    <div [formGroup]="classSectionForm">
-      <label class="form-control w-full">
-        <div class="label">
-        </div>
-        <!-- <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" /> -->
-        <select formControlName="classLevelId" class="select select-bordered w-full">
-          <option value="" disabled selected>-- Select Grade Level</option>
-
-          @for (item of classLevels; track $index) {
-          <option [value]="item.id">Grade {{ item.level }}</option>
-          }
-        </select>
-        <div class="label">
-          <span class="label-text-alt text-error">{{ classSectionErrors.classLevelId ?? ""}}</span>
-        </div>
-      </label>
-
-      <label class="form-control w-full">
-        <div class="label">
-        </div>
-        <input type="text" formControlName="sectionName" placeholder="Section name"
-          class="input input-bordered w-full" />
-        <div class="label">
-          <span class="label-text-alt text-error">{{ classSectionErrors.sectionName ?? "" }}</span>
-        </div>
-      </label>
-    </div>
-
+    <h3 class="text-lg font-bold">Warning</h3>
+    <p class="py-4">You must enter your password before changing the current school year</p>
+    <label class="form-control w-full">
+      <div class="label">
+      </div>
+      <input type="password" [formControl]="password" class="input input-bordered w-full" placeholder="Password">
+      <div class="label">
+        <span class="label-text-alt text-error">{{passwordError ?? ""}}</span>
+      </div>
+    </label>
     <div class="modal-action">
-      <button class="btn btn-primary" [disabled]="submitInProgress" (click)="submitSection()">
+      <button class="btn btn-primary" (click)="changeSchoolYear()" [disabled]="submitInProgress">
         @if (submitInProgress) {
         <span class="loading loading-dots"></span>
         }
         @else {
-        <span>Submit</span>
+        <span>Confirm</span>
         }
       </button>
       <form method="dialog">
@@ -159,3 +110,14 @@
     </div>
   </div>
 </dialog>
+
+
+
+
+<div class="toast toast-top toast-center">
+  @for (item of toastMessages; track $index) {
+  <div class="alert alert-success">
+    <span>{{item.message}}</span>
+  </div>
+  }
+</div>

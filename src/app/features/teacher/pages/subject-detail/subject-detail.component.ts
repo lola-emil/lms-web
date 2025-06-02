@@ -52,11 +52,11 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
 
 
       this.subscriptions.push(
-        this.subjectDetailService.getStudents(this.teacherSubjectId)
-          .subscribe(res => {
-            console.log(res.data.teacherAssignedSubject);
-            this.students = res.data.teacherAssignedSubject.studentEnrolledSubjects;
-          })
+        // this.subjectDetailService.getStudents(this.teacherSubjectId)
+        //   .subscribe(res => {
+        //     console.log(res.data);
+        //     // this.students = res.data.teacherAssignedSubject.studentEnrolledSubjects;
+        //   })
       );
     }
   }

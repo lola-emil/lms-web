@@ -12,7 +12,7 @@
   <form [formGroup]="quizForm" class="container px-5 lg:px-0 mx-auto">
     <label class="form-control w-full lg:w-3/4">
       <div class="label">
-        <span class="label-text font-semibold text-lg">Quiz Title</span>
+        <span class="label-text font-semibold text-lg"> {{ this.materialType | titlecase}} Title</span>
       </div>
       <input type="text" formControlName="title" placeholder="Type here" class="input input-bordered w-full" />
       <div class="label">

@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { createAvatar } from "@dicebear/core";
 import { pixelArt } from '@dicebear/collection';
 import { AuthService } from '../../../../services/auth.service';
-import { UserProfile } from '../../../../repositories/user-profile-repo.service';
 import { RouterLink } from '@angular/router';
 
 @Component({

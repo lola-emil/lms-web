@@ -24,25 +24,21 @@ export class LiveSessionComponent implements OnInit {
 
 
   history: StudentGrade[] = [];
-  studentSubjectId?: number;
+  teacherSubjectId?: number;
 
   constructor(private router: Router,
     private scoreHistoryService: ScoreHistoryService,
     private route: ActivatedRoute,
     private activityService: ActivityService
   ) {
-    this.route.parent?.params.subscribe(val => this.studentSubjectId = parseInt(val['id']));
+    this.route.parent?.params.subscribe(val => this.teacherSubjectId = parseInt(val['id']));
   }
 
   ngOnInit(): void {
-    this.activityService.getTeacherSubject(this.studentSubjectId ?? 0)
+    this.scoreHistoryService.getScores(this.teacherSubjectId ?? 0)
       .subscribe(res => {
-        this.scoreHistoryService.getScores(res.data.studentEnrolledSubject.teacherSubject.id ?? 0)
-          .subscribe(res => {
-            console.log(res.data.gradePerSubject);
-
-            this.history = res.data.gradePerSubject;
-          });
+        console.log("scores", res.data.gradePerSubject);
+        this.history = res.data.gradePerSubject;
       });
   }
 

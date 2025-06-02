@@ -3,8 +3,8 @@
 
   <!-- <br> -->
   <div class="container mx-auto px-5">
-    <h3 class="text-2xl font-semibold">{{ subjectDetail?.teacherSubject?.subject?.title }}</h3>
-    <!-- <p>{{ subjectDetail?.teacherSubject?.teacher?.firstname }} {{ subjectDetail?.teacherSubject?.teacher?.lastname }}</p> -->
+    <h3 class="text-2xl font-semibold">{{ subjectDetail?.subject?.title }}</h3>
+    <p>{{ subjectDetail?.teacher?.firstname }} {{ subjectDetail?.teacher?.lastname }}</p>
     <br>
     @if (matchedMeetingSession) {
     <a [routerLink]="['/student', 'meeting']" [queryParams]="matchedMeetingSession" *ngIf="isSessionToday()"

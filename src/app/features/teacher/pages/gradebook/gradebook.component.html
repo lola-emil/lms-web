@@ -2,13 +2,23 @@
   <app-topbar title="Gradebook"></app-topbar>
   <div class="px-6 lg:px-0 container mx-auto">
     <div class="w-full flex justify-between items-center">
-      <select class="select select-bordered select-sm" (input)="getGrades($event)" >
-        <option value="" disabled selected>-- Select Subject</option>
+      <div class="flex items-center gap-3">
+        <select class="select select-bordered select-sm" (input)="getSections($event)">
+          <option value="" disabled selected>-- Select Subject</option>
 
-        @for (item of teacherSubjects; track $index) {
+          @for (item of teacherSubjects; track $index) {
           <option [value]="item.id">{{ item.subject.title }}</option>
-        }
-      </select>
+          }
+        </select>
+
+        <select class="select select-bordered select-sm" [disabled]="sections.length == 0" (change)="getStudentGrades($event)">
+          <option value="">-- Select Section</option>
+
+          @for (item of sections; track $index) {
+          <option [value]="item.classSectionId">{{item.classSection.sectionName}}</option>
+          }
+        </select>
+      </div>
 
       <div class="flex gap-5">
         <button class="btn btn-sm" (click)="downloadCSV()">Download CSV</button>
@@ -24,6 +34,7 @@
           <tr>
             <th class="p-3 text-left">Student</th>
             <th class="p-3 text-center">Quizzes ({{ criteria.quizzes }}%)</th>
+            <th class="p-3 text-center">Exams ({{ criteria.quizzes }}%)</th>
             <th class="p-3 text-center">Activities ({{ criteria.assignments }}%)</th>
             <th class="p-3 text-center">Total Grade</th>
           </tr>
@@ -32,6 +43,7 @@
           <tr *ngFor="let grade of studentGrades" class="border-t">
             <td class="p-3">{{ grade.studentName }}</td>
             <td class="p-3 text-center">{{ grade.quizAverage }}</td>
+            <td class="p-3 text-center">{{ grade.examAverage }}</td>
             <td class="p-3 text-center">{{ grade.activityAverage }}</td>
             <td class="p-3 text-center">{{ grade.finalGrade.toFixed(2) }}</td>
             <!-- <td class="p-3 text-center font-semibold">{{ student.total.toFixed(2) }}</td> -->

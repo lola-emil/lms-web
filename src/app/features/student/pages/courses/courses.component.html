@@ -36,8 +36,8 @@
       </a>
       } -->
 
-      @for (item of (!!searchQuery ? filterSubject() : subjects); track $index) {
-      <a [routerLink]="['/student', 'courses', item.id]" class="rounded-lg border-[1px] shadow">
+      @for (item of (!!searchQuery ? filterSubject() : enrolledSubjects); track $index) {
+      <a [routerLink]="['/student', 'courses', item.teacherSubject.id]" class="rounded-lg border-[1px] shadow">
         <div>
           @if (item.teacherSubject.subject.coverImgUrl) {
           <img [src]="'http://' + item.teacherSubject.subject.coverImgUrl"

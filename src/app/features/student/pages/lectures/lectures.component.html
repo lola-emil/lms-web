@@ -1,13 +1,13 @@
 <div class="container mx-auto px-5">
   <h1 class="text-2xl font-bold lg:text-center mb-4">📚 Course Lessons</h1>
 
-  @if (lessons?.teacherSubject?.subjectMaterials?.length == 0) {
+  @if (lessons?.subjectMaterials?.length == 0) {
   <div class="text-gray-500 text-center">
     No lessons available for this course.
   </div>
   }
 
-  @for (item of lessons?.teacherSubject?.subjectMaterials; track $index) {
+  @for (item of lessons?.subjectMaterials; track $index) {
   <div class="card bg-base-100 shadow-md mt-4 border-l-4" [ngClass]="{
       'border-blue-500': item.materialType === 'MODULE',
       'border-green-500': item.materialType === 'MD',
@@ -15,7 +15,7 @@
     }">
     <div class="card-body">
       <h3 class="font-bold text-lg">
-        {{ item.title?.trim() ? item.title : "(No Title)" }}
+        {{ item.title.trim() ? item.title : "(No Title)" }}
       </h3>
       <p class="text-md text-gray-500">📅 Created: {{ item.createdAt | date:'mediumDate' }}</p>
       <p class="text-md text-gray-500">🔄 Last Updated: {{ item.updatedAt | date:'mediumDate' }}</p>
@@ -32,24 +32,20 @@
           }">
           {{ item.materialType | titlecase }}
         </span>
-        @if (item.materialType == "QUIZ") {
+        @if (item.materialType == "QUIZ" || item.materialType == "EXAM") {
 
         @if (item.quizSessions[0]) {
         <span class="text-green-600 font-bold">Score: {{item.quizSessions[0].score}} / {{item.questions.length}}</span>
         }
         @else {
-        <a routerLink="/student/quiz" [queryParams]="{quiz_id: item.id, teacherSubjectId: lessons?.teacherSubject?.id, studentSubjectId}"
+        <a routerLink="/student/quiz" [queryParams]="{quiz_id: item.id, teacherSubjectId: lessons?.id, studentSubjectId}"
           class="btn btn-outline btn-sm">📖 Take
-          Quiz</a>
+          {{ item.materialType | titlecase }}</a>
         }
         } @else {
-        @if (item.materialType == "DOCUMENT") {
-        <a target="_blank" class="btn btn-outline btn-sm">📖 View Lesson</a>
-        }
-        @else {
+
         <a [routerLink]="item.id + ''" [queryParams]="{type: item.materialType, studentSubjectId}" class="btn btn-outline btn-sm">📖 View
           Lesson</a>
-        }
         }
       </div>
     </div>

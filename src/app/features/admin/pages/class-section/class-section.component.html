@@ -1,0 +1,89 @@
+<app-drawer>
+  <app-topbar title="Academic Settings"></app-topbar>
+  <br>
+
+  <div class="container mx-auto">
+
+    <div class="card w-full">
+      <div class="card-body p-5">
+        <div class="flex gap-3 items-center justify-start">
+          <p class="font-bold">Class Sections</p>
+          <button class="btn btn-primary btn-sm" (click)="showSectionModal()">Add new section</button>
+        </div>
+
+        <br>
+
+        <table class="table border table-zebra">
+          <thead>
+            <tr>
+              <th>Section Name</th>
+              <th>Grade Level</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (item of classSections; track $index) {
+            <tr>
+              <td>{{ item.sectionName }}</td>
+              <td>Grade {{ item.classLevel.level }}</td>
+              <td align="right">
+                <a [routerLink]="['/admin', 'class-sections', item.id]" class="link">View students</a>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</app-drawer>
+
+<dialog #sectionModal class="modal" (close)="sectionModalClosed()">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Add class section</h3>
+
+
+    <div [formGroup]="classSectionForm">
+      <label class="form-control w-full">
+        <div class="label">
+        </div>
+        <!-- <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" /> -->
+        <select formControlName="classLevelId" class="select select-bordered w-full">
+          <option value="" disabled selected>-- Select Grade Level</option>
+
+          @for (item of classLevels; track $index) {
+          <option [value]="item.id">Grade {{ item.level }}</option>
+          }
+        </select>
+        <div class="label">
+          <span class="label-text-alt text-error">{{ classSectionErrors.classLevelId ?? ""}}</span>
+        </div>
+      </label>
+
+      <label class="form-control w-full">
+        <div class="label">
+        </div>
+        <input type="text" formControlName="sectionName" placeholder="Section name"
+          class="input input-bordered w-full" />
+        <div class="label">
+          <span class="label-text-alt text-error">{{ classSectionErrors.sectionName ?? "" }}</span>
+        </div>
+      </label>
+    </div>
+
+    <div class="modal-action">
+      <button class="btn btn-primary" [disabled]="submitInProgress" (click)="submitSection()">
+        @if (submitInProgress) {
+        <span class="loading loading-dots"></span>
+        }
+        @else {
+        <span>Submit</span>
+        }
+      </button>
+      <form method="dialog">
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>

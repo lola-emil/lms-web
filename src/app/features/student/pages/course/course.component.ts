@@ -4,12 +4,10 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DrawerComponent } from '../../components/drawer/drawer.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
 import { Observable, switchMap } from 'rxjs';
-import { SubjectRepoService } from '../../../../repositories/subject-repo.service';
-import { TeacherSubjectRepoService } from '../../../../repositories/teacher-subject-repo.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { MeetingSession } from '../../../teacher/pages/subject-detail/services/meeting.service';
-import { CourseService, StudentSubject } from './services/course.service';
+import { CourseService, StudentSubject, TeacherSubject } from './services/course.service';
 
 @Component({
   selector: 'app-course',
@@ -54,7 +52,7 @@ export class CourseComponent implements OnInit {
     });
   }
 
-  subjectDetail?: StudentSubject;
+  subjectDetail?: TeacherSubject;
 
 
   ngOnInit(): void {
@@ -62,12 +60,13 @@ export class CourseComponent implements OnInit {
 
     this.courseService.getSubjectDetail(this.studentSubjectId ?? 0)
       .subscribe(res => {
-        this.subjectDetail = res.data.studentEnrolledSubject;
+        this.subjectDetail = res.data.teacherSubject;
+        console.log(res.data);
         console.log("student subject id", this.subjectDetail);
 
         this.http.get<MeetingSession>(`${environment.apiURL}/zoom/get-live-session`, {
           params: {
-            teacher_subject_id: this.subjectDetail.teacherSubject.id
+            // teacher_subject_id: this.subjectDetail.teacherSubject.id
           }
         }).subscribe(val => {
           this.matchedMeetingSession = val;

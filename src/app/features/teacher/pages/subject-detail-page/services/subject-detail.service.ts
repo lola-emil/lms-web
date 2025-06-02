@@ -48,10 +48,10 @@ export class SubjectDetailService {
   ) { }
 
   getSubjectDetail(teacherSubjectId: number) {
-    return this.apollo.watchQuery<{ teacherAssignedSubject: TeacherAssignedSubject; }>({
+    return this.apollo.watchQuery<{ teacherSubject: TeacherAssignedSubject; }>({
       query: gql`
-        query TeacherAssignedSubject {
-            teacherAssignedSubject(id: ${teacherSubjectId}) {
+        query TeacherSubject {
+            teacherSubject(id: ${teacherSubjectId}) {
                 id
                 schoolYearId
                 subject {

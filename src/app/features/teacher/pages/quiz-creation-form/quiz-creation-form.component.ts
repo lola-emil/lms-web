@@ -5,17 +5,19 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Reacti
 import { QuizCreationService, TeacherSubject } from './services/quiz-creation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
+import { TitleCasePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-quiz-creation-form',
-  imports: [DrawerComponent, TopbarComponent, ReactiveFormsModule],
+  imports: [DrawerComponent, TopbarComponent, ReactiveFormsModule, TitleCasePipe],
   templateUrl: './quiz-creation-form.component.html',
   styles: ``
 })
 export class QuizCreationFormComponent implements OnInit {
   quizForm: FormGroup;
   subjectDetail?: TeacherSubject;
+  materialType?: "EXAM" | "QUIZ";
 
   constructor(
     private fb: FormBuilder,
@@ -31,10 +33,11 @@ export class QuizCreationFormComponent implements OnInit {
 
   ngOnInit(): void {
     const param = this.route.snapshot.queryParamMap;
+    this.materialType = param.get("materialType") as any;
     this.quizCreationService.getSubject(parseInt(param.get("subject_id") ?? "0"))
       .subscribe(res => {
         console.log(res);
-        this.subjectDetail = res.data.teacherAssignedSubject;
+        this.subjectDetail = res.data.teacherSubject;
       });
   }
 
@@ -109,14 +112,16 @@ export class QuizCreationFormComponent implements OnInit {
   }
 
   onSubmit() {
+    const param = this.route.snapshot.queryParamMap;
+
     this.quizCreationService.submitQuiz({
       ...this.quizForm.value,
-      teacherSubjectId: this.subjectDetail?.id
-    })
+      teacherSubjectId: this.subjectDetail?.id,
+    }, this.materialType ?? "QUIZ")
       .pipe(
         tap(res => {
           console.log(res);
-          this.router.navigate(['/teacher', 'loads', this.subjectDetail?.id])
+          this.router.navigate(['/teacher', 'loads', this.subjectDetail?.id]);
         }),
         catchError(errRes => {
           console.log(errRes);

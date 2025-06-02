@@ -15,7 +15,7 @@ import { AuthService } from '../../../../services/auth.service';
 })
 export class ActivitiesComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
-  studentSubjectId?: number;
+  teacherSubjectId?: number;
   activities2: Assignment[] = [];
 
   @ViewChild("activityModal") activityModal?: ElementRef<HTMLDialogElement>;
@@ -27,7 +27,7 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
     private activityService: ActivityService,
     private authService: AuthService
   ) {
-    this.route.parent?.params.subscribe(val => this.studentSubjectId = val['id']);
+    this.route.parent?.params.subscribe(val => this.teacherSubjectId = val['id']);
 
   }
 
@@ -38,13 +38,11 @@ export class ActivitiesComponent implements OnInit, OnDestroy {
   loadAssignments() {
     const user = this.authService.getUserDetail();
 
-    this.activityService.getTeacherSubject(this.studentSubjectId ?? 0).subscribe(res => {
-      console.log(res)
-      this.activityService.getAssignments(res.data.studentEnrolledSubject.teacherSubject.id, user.id)
+
+      this.activityService.getAssignments(this.teacherSubjectId ?? 0, user.id)
         .subscribe(val => {
           this.activities2 = val.data.assignments;
         });
-    })
   }
 
   ngOnDestroy(): void {

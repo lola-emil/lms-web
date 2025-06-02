@@ -3,12 +3,9 @@ import { DrawerComponent } from "../../components/drawer/drawer.component";
 import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
-import { QuizSession } from '../../../../repositories/quiz-session-repo.service';
-import { SubjectMaterial } from '../../../../repositories/subject-material-repo.service';
 import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { } from '../../../../repositories/grade-level-repo.service';
 import { Subject, SubjectDetailService } from './services/subject-detail.service';
 
 @Component({
@@ -22,11 +19,6 @@ export class SubjectDetailPageComponent implements OnInit {
 
   @ViewChild("uploadModal") uploadModal!: ElementRef<HTMLDialogElement>;
 
-
-  mgaLessons: {
-    material: SubjectMaterial,
-    sessions: QuizSession[];
-  }[] = [];
 
   subjectId: any;
 
@@ -44,7 +36,8 @@ export class SubjectDetailPageComponent implements OnInit {
   ngOnInit(): void {
     this.subjectDetailService.getSubjectDetail(this.subjectId)
       .subscribe(val => {
-        this.subjectDetail = val.data.subject;
+        console.log(val.data)
+        // this.subjectDetail = val.data.subject;
       });
   }
 

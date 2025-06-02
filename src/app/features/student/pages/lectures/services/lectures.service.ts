@@ -24,6 +24,33 @@ export type StudentSubject = {
   };
 };
 
+export interface SubjectMaterial {
+  id: string;
+  title: string;
+  teacherSubjectId: string;
+  materialType: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  questions: { id: number; }[];
+  quizSessions: {
+    id: number;
+    createdAt: string;
+    score: number;
+  }[];
+}
+
+export interface TeacherSubject {
+  id: string;
+  subjectId: string;
+  teacherId: string;
+  schoolYearId: string;
+  createdAt: string;
+  updatedAt: string;
+  subject: {id: number, title: string}
+  subjectMaterials: SubjectMaterial[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,36 +60,36 @@ export class LecturesService {
     private readonly apollo: Apollo
   ) { }
 
-  getMaterials(studentSubjectId: number) {
-    return this.apollo.watchQuery<{ studentEnrolledSubject: StudentSubject; }>({
+  getMaterials(teacherSubjectId: number) {
+    return this.apollo.watchQuery<{ teacherSubject: TeacherSubject; }>({
       query: gql`
-        query StudentEnrolledSubjects {
-            studentEnrolledSubject(id: ${studentSubjectId}) {
-                teacherSubject {
+        query TeacherSubject {
+            teacherSubject(id: ${teacherSubjectId}) {
+                id
+                subjectId
+                teacherId
+                schoolYearId
+                createdAt
+                updatedAt
+                subjectMaterials {
                     id
-                    subject {
+                    title
+                    teacherSubjectId
+                    materialType
+                    content
+                    createdAt
+                    updatedAt
+                    quizSessions {
                       id
-                      title
-                    }
-                    subjectMaterials {
-                      id
-                      title
-                      materialType
                       createdAt
-                      updatedAt
-                      quizSessions {
-                        id
-                        createdAt
-                        score
-                     }
-                      questions {
-                        id
-                      }
-                  }
+                      score
+                    }
+                    questions {
+                      id
+                    }
                 }
             }
         }
-
       `,
       fetchPolicy: "no-cache"
     }).valueChanges;

@@ -24,6 +24,8 @@ export type SchoolYear = {
   yearStart: number;
   yearEnd: number;
 
+  isCurrent: boolean;
+
   createdAt: string;
   updatedAt: string;
 };
@@ -41,37 +43,6 @@ export class AcademicSettingsService {
   ) { }
 
 
-  getGradeLevels() {
-    return this.apollo.watchQuery<{ classLevels: ClassLevel[]; }>({
-      query: gql`
-        query ClassLevels {
-            classLevels {
-                id
-                level
-            }
-        }
-      `
-    }).valueChanges;
-  }
-
-  getSections() {
-    return this.apollo.watchQuery<{ classSections: ClassSection[]; }>({
-      query: gql`
-        query ClassSections {
-            classSections {
-                id
-                sectionName
-                classLevel {
-                    id
-                    level
-                }
-            }
-        }
-      `,
-      fetchPolicy: "no-cache"
-    }).valueChanges;
-  }
-
   getSchoolYears() {
     return this.apollo.watchQuery<{ schoolYears: SchoolYear[]; }>({
       query: gql`
@@ -80,6 +51,7 @@ export class AcademicSettingsService {
                 id
                 yearStart
                 yearEnd
+                isCurrent
                 createdAt
                 updatedAt
             }
@@ -102,10 +74,17 @@ export class AcademicSettingsService {
 
 
 
-  submitSection(body: Partial<{
-    classLevelId: number;
-    sectionName: string;
+  changeCurrentSchoolYear(body: Partial<{
+    schoolYearId: number;
+    isCurrent: boolean;
+    adminPassword: string;
   }>) {
-    return this.http.post(`${environment.apiURL}/graphql-ext/add-section`, body);
+    const user = this.authService.getUserDetail();
+    return this.http.post(`${environment.apiURL}/graphql-ext/change-school-year`, {
+      ...body,
+      adminId: user.id
+    });
   }
+
+
 }

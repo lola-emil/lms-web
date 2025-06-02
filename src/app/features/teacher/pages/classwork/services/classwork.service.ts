@@ -51,7 +51,7 @@ export class ClassworkService {
                 id
                 title
                 instructions
-                teacherAssignedSubjectId
+                teacherSubjectId
                 dueDate
                 createdAt
                 assignmentSubmissions {
@@ -81,7 +81,7 @@ export class ClassworkService {
 
   createClasswork(data: Partial<{
     title: string;
-    teacherAssignedSubjectId: number;
+    teacherSubjectId: number;
     instructions: string;
     dueDate: string;
     hps: number;
@@ -90,14 +90,14 @@ export class ClassworkService {
       mutation: gql`
       mutation CreateAssignment(
         $title: String!,
-        $teacherAssignedSubjectId: Int!,
+        $teacherSubjectId: Int!,
         $instructions: String,
         $dueDate: DateTime,
         $hps: Float
       ) {
         createAssignment(
           title: $title,
-          teacherAssignedSubjectId: $teacherAssignedSubjectId,
+          teacherSubjectId: $teacherSubjectId,
           instructions: $instructions,
           dueDate: $dueDate,
           hps: $hps
@@ -105,7 +105,7 @@ export class ClassworkService {
           id
           title
           instructions
-          teacherAssignedSubjectId
+          teacherSubjectId
           dueDate
           createdAt
           updatedAt
@@ -114,7 +114,7 @@ export class ClassworkService {
     `,
       variables: {
         title: data.title,
-        teacherAssignedSubjectId: data.teacherAssignedSubjectId,
+        teacherSubjectId: data.teacherSubjectId,
         instructions: data.instructions,
         dueDate: data.dueDate,
         hps: data.hps

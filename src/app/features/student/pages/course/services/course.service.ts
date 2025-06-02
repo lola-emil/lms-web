@@ -15,6 +15,34 @@ export type StudentSubject = {
   }
 };
 
+export interface SubjectMaterial {
+  id: string;
+  title: string;
+  teacherSubjectId: string;
+  materialType: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  questions: { id: number; }[];
+  quizSessions: {
+    id: number;
+    createdAt: string;
+    score: number;
+  }[];
+}
+
+export interface TeacherSubject {
+  id: string;
+  subjectId: string;
+  teacherId: string;
+  schoolYearId: string;
+  createdAt: string;
+  updatedAt: string;
+  subject: {id: number, title: string}
+  teacher: {firstname: string, lastname: string}
+  subjectMaterials: SubjectMaterial[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,25 +52,43 @@ export class CourseService {
     private readonly apollo: Apollo
   ) { }
 
-  getSubjectDetail(studentSubjectId: number) {
-    return this.apollo.watchQuery<{studentEnrolledSubject: StudentSubject}>({
+  getSubjectDetail(teacherSubjectId: number) {
+    return this.apollo.watchQuery<{teacherSubject: TeacherSubject}>({
       query: gql`
-        query StudentEnrolledSubject {
-            studentEnrolledSubject(id: ${studentSubjectId}) {
-                teacherSubject {
+        query TeacherSubject {
+                teacherSubject(id: ${teacherSubjectId}) {
+                  id
+                subjectId
+                teacherId
+                schoolYearId
+                createdAt
+                updatedAt
+                teacher {
+                  firstname
+                  lastname
+                }
+                subject {
+                  title
+                }
+                subjectMaterials {
                     id
-                    subject {
-                        id
-                        title
+                    title
+                    teacherSubjectId
+                    materialType
+                    content
+                    createdAt
+                    updatedAt
+                    quizSessions {
+                      id
+                      createdAt
+                      score
                     }
-                    teacher {
-                        firstname
-                        middlename
-                        lastname
+                    questions {
+                      id
                     }
                 }
+                }
             }
-        }
 
       `
     }).valueChanges;

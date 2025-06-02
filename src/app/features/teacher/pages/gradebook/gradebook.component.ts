@@ -6,7 +6,7 @@ import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { AuthService } from '../../../../services/auth.service';
-import { GradebookService, GradeSummary, TeacherSubject } from './services/gradebook.service';
+import { GradebookService, GradeSummary, StudentEnrolledSection, TeacherSubject, TeacherSubjectSection } from './services/gradebook.service';
 @Component({
   selector: 'app-gradebook',
   imports: [DrawerComponent, TopbarComponent, CommonModule],
@@ -28,9 +28,9 @@ export class GradebookComponent implements OnInit {
   ];
 
   criteria = {
-    quizzes: 30,
-    assignments: 70,
-    exams: 40
+    quizzes: 20,
+    assignments: 60,
+    exams: 20
   };
 
   teacherSubjects: TeacherSubject[] = [];
@@ -45,7 +45,7 @@ export class GradebookComponent implements OnInit {
     const user = this.authService.getUserDetail();
     this.gradebookService.getTeacherSubjects(user.id)
       .subscribe(res => {
-        this.teacherSubjects = res.data.teacherAssignedSubjectsByTeacherId;
+        this.teacherSubjects = res.data.teacherSubjectsPerTeacher;
       });
   }
 
@@ -77,22 +77,46 @@ export class GradebookComponent implements OnInit {
     doc.text("Gradebook Report", 14, 10);
     autoTable(doc, {
       head: [["Student", "Quizzes", "Assignments", "Exams", "Total"]],
-      body: this.studentGrades.map(s => [s.studentName, s.quizAverage, s.activityAverage, s.finalGrade]),
+      body: this.studentGrades.map(s => [s.studentName, s.quizAverage, s.activityAverage, s.examAverage, s.finalGrade]),
     });
     doc.save("gradebook.pdf");
   }
 
-  getGrades(event: Event) {
+
+  sections: TeacherSubjectSection[] = [];
+  selectedTeacherSubjectId?: number;
+
+  getSections(event: Event) {
     const target = event.target as HTMLSelectElement;
     const id = parseInt(target.value);
 
-    this.gradebookService.getGradesByTeacherSubjectId(id)
+    this.sections = [];
+    this.studentGrades = [];
+    this.selectedTeacherSubjectId = id;
+    this.gradebookService.getSections(id)
       .subscribe(res => {
-        console.log(res);
-        console.table(res.data.gradePerSubject);
-
-        this.studentGrades = this.gradebookService.computeStudentGrade(res.data.gradePerSubject);
+        console.log(res.data.teacherSubjectSectionsPerTeacher);
+        this.sections = res.data.teacherSubjectSectionsPerTeacher;
       });
+  }
 
+
+  studentGrades2: StudentEnrolledSection[] = [];
+
+
+
+
+  getStudentGrades(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const id = parseInt(target.value);
+
+    this.gradebookService.getStudents(id, this.selectedTeacherSubjectId ?? 0)
+      .subscribe(res => {
+        console.log(res.data.studentEnrolledSections);
+        this.studentGrades2 = res.data.studentEnrolledSections;
+
+        const result = this.gradebookService.computeGradeSummary(res.data);
+        this.studentGrades = result;
+      });
   }
 }

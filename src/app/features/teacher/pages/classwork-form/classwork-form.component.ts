@@ -43,7 +43,7 @@ export class ClassworkFormComponent {
       instructions: instruction!,
       dueDate: new Date(due_date).toISOString(),
       hps,
-      teacherAssignedSubjectId: parseInt(this.loadId)
+      teacherSubjectId: parseInt(this.loadId)
     }).subscribe(res => {
       console.log(res)
     });

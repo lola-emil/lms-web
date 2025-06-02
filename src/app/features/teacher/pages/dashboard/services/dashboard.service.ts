@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
 export type TeacherAssignedSubjectsByTeacherIdResponse = {
-  teacherAssignedSubjectsByTeacherId: {
+  teacherSubjectsPerTeacher: {
     id: string;
     schoolYearId: string;
     createdAt: string;
@@ -33,24 +33,21 @@ export class DashboardService {
   getTeacherSubjects(teacherId: number) {
     return this.apollo.watchQuery<TeacherAssignedSubjectsByTeacherIdResponse>({
       query: gql`
-        query TeacherAssignedSubjectsByTeacherId {
-            teacherAssignedSubjectsByTeacherId(teacherId: ${teacherId}) {
-                id
-                schoolYearId
-                createdAt
-                updatedAt
-                subject {
-                    id
-                    title
-                    coverImgUrl
-                    gradeLevel {
+        query TeacherSubject {
+          teacherSubjectsPerTeacher(teacherId: ${teacherId}) {
+              id
+              subjectId
+              teacherId
+              subject {
+                  id
+                  title
+                  coverImgUrl
+                  gradeLevel {
+                      id
                       level
-                    }
-                }
-                studentEnrolledSubjects {
-                    id
-                }
-            }
+                  }
+              }
+          }
         }
       `
     }).valueChanges;

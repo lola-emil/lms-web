@@ -25,10 +25,10 @@ export class DocEditorService {
 
   getSubjects() {
     const user = this.authService.getUserDetail();
-    return this.apollo.watchQuery<{ teacherAssignedSubjectsByTeacherId: TeacherSubject[]; }>({
+    return this.apollo.watchQuery<{ teacherSubjectsPerTeacher: TeacherSubject[]; }>({
       query: gql`
-        query Subject {
-            teacherAssignedSubjectsByTeacherId(teacherId: ${user.id}) {
+        query TeacherSubject {
+            teacherSubjectsPerTeacher(teacherId: ${user.id}) {
                 id
                 teacherId
                 schoolYearId

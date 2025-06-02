@@ -34,10 +34,10 @@ export class QuizCreationService {
   ) { }
 
   getSubject(id: number) {
-    return this.apollo.watchQuery<{ teacherAssignedSubject: TeacherSubject; }>({
+    return this.apollo.watchQuery<{ teacherSubject: TeacherSubject; }>({
       query: gql`
-        query TeacherAssignedSubject {
-            teacherAssignedSubject(id: ${id}) {
+        query TeacherSubject {
+            teacherSubject(id: ${id}) {
                 id
                 subject {
                     id
@@ -49,7 +49,10 @@ export class QuizCreationService {
     }).valueChanges;
   }
 
-  submitQuiz(data: Question) {
-    return this.http.post(`${environment.apiURL}/graphql-ext/create-quiz`, data);
+  submitQuiz(data: Question, materialType: "QUIZ" | "EXAM") {
+    return this.http.post(`${environment.apiURL}/graphql-ext/create-quiz`, {
+      ...data,
+      materialType
+    });
   }
 }

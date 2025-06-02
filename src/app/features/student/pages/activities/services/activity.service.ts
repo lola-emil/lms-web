@@ -34,6 +34,33 @@ export type Kuan = {
   }
 }
 
+export interface SubjectMaterial {
+  id: string;
+  title: string;
+  teacherSubjectId: string;
+  materialType: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  questions: { id: number; }[];
+  quizSessions: {
+    id: number;
+    createdAt: string;
+    score: number;
+  }[];
+}
+
+export interface TeacherSubject {
+  id: string;
+  subjectId: string;
+  teacherId: string;
+  schoolYearId: string;
+  createdAt: string;
+  updatedAt: string;
+  subject: {id: number, title: string}
+  teacher: {firstname: string, lastname: string}
+  subjectMaterials: SubjectMaterial[];
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -52,7 +79,7 @@ export class ActivityService {
                 id
                 title
                 instructions
-                teacherAssignedSubjectId
+                teacherSubjectId
                 dueDate
                 hps
                 createdAt
@@ -79,20 +106,18 @@ export class ActivityService {
     }).valueChanges;
   }
 
-  getTeacherSubject(studentSubjectId: number) {
+  getTeacherSubject(teacherSubjectId: number) {
     return this.apollo.watchQuery<{studentEnrolledSubject: Kuan}>(
       {
         query: gql`
-          query EnrolledSubject {
-            studentEnrolledSubject(id: ${studentSubjectId}) {
-              teacherSubject {
+          query TeacherSubject {
+            teacherSubject(id: ${teacherSubjectId}) {
               id
                 subject {
                 id
-                
+
                 }
               }
-            }
           }
         `,
         fetchPolicy: "no-cache"
