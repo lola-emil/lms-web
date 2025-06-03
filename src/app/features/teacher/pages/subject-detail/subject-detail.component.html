@@ -12,7 +12,7 @@
       class="btn btn-sm rounded-full px-5">Classworks</a>
     <a routerLinkActive="bg-primary text-white" routerLink="announcements"
       class="btn btn-sm rounded-full px-5">Announcements</a>
-    <!-- <a routerLinkActive="bg-primary text-white" routerLink="students" class="btn btn-sm rounded-full px-5">Students</a> -->
+    <a routerLinkActive="bg-primary text-white" routerLink="students" class="btn btn-sm rounded-full px-5">Students</a>
     <!-- <a routerLinkActive="bg-primary text-white" routerLink="grades" class="btn btn-sm rounded-full px-5">Grades</a> -->
     <!-- <a routerLink="forum" class="btn btn-sm rounded-full px-5">Forum</a> -->
     <!-- <a routerLink="live-session" class="btn btn-sm rounded-full px-5">Live session</a> -->
@@ -54,22 +54,6 @@
           </div>
         </div>
 
-        <div class="card max-h-96 w-96 max-w-screen-sm border rounded-lg shadow-lg">
-          <div class="card-body p-5 flex-none">
-            <p class="font-semibold text-lg flex items-center gap-2">
-              🧑🏽‍🎓 Students
-            </p>
-
-            <div class="flex mt-3 flex-col">
-              @for (item of students.slice(0,5); track $index) {
-              <div class="p-2 even:border-t">
-                <p class="font-semibold">{{item.student.firstname}} {{item.student.lastname}}</p>
-                <p class="text-sm">{{item.student.email}}</p>
-              </div>
-              }
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

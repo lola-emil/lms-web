@@ -34,8 +34,8 @@
         </span>
         @if (item.materialType == "QUIZ" || item.materialType == "EXAM") {
 
-        @if (item.quizSessions[0]) {
-        <span class="text-green-600 font-bold">Score: {{item.quizSessions[0].score}} / {{item.questions.length}}</span>
+        @if (item.studentQuizSessions[0]) {
+        <span class="text-green-600 font-bold">Score: {{item.studentQuizSessions[0].score}} / {{item.questions.length}}</span>
         }
         @else {
         <a routerLink="/student/quiz" [queryParams]="{quiz_id: item.id, teacherSubjectId: lessons?.id, studentSubjectId}"

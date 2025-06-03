@@ -3,6 +3,7 @@ import { createAvatar } from "@dicebear/core";
 import { pixelArt } from '@dicebear/collection';
 import { AuthService } from '../../../../services/auth.service';
 import { RouterLink } from '@angular/router';
+import { SchoolYear, SchoolYearService } from '../../../../services/school-year.service';
 
 @Component({
   selector: 'app-topbar',
@@ -21,13 +22,22 @@ export class TopbarComponent implements OnInit {
   };
   role: string = "";
 
+  currentSchoolYear?: SchoolYear;
+
   constructor(
     private authService: AuthService,
+    private schoolYearService: SchoolYearService
   ) { }
 
   ngOnInit(): void {
     const user = this.authService.getUserDetail();
     this.user = user;
+
+    this.schoolYearService.getCurrentSchoolYear()
+      .subscribe(res => {
+        console.log(res.data.currentSchoolYear);
+        this.currentSchoolYear = res.data.currentSchoolYear;
+      });
   }
 
   avatar = createAvatar(pixelArt, {

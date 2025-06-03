@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+import { AuthService } from '../../../../../services/auth.service';
 
 export type StudentSubject = {
   teacherSubject: {
@@ -33,7 +34,7 @@ export interface SubjectMaterial {
   createdAt: string;
   updatedAt: string;
   questions: { id: number; }[];
-  quizSessions: {
+  studentQuizSessions: {
     id: number;
     createdAt: string;
     score: number;
@@ -47,7 +48,7 @@ export interface TeacherSubject {
   schoolYearId: string;
   createdAt: string;
   updatedAt: string;
-  subject: {id: number, title: string}
+  subject: { id: number, title: string; };
   subjectMaterials: SubjectMaterial[];
 }
 
@@ -57,10 +58,12 @@ export interface TeacherSubject {
 export class LecturesService {
 
   constructor(
-    private readonly apollo: Apollo
+    private readonly apollo: Apollo,
+    private authService: AuthService
   ) { }
 
   getMaterials(teacherSubjectId: number) {
+    const user = this.authService.getUserDetail();
     return this.apollo.watchQuery<{ teacherSubject: TeacherSubject; }>({
       query: gql`
         query TeacherSubject {
@@ -79,7 +82,7 @@ export class LecturesService {
                     content
                     createdAt
                     updatedAt
-                    quizSessions {
+                    studentQuizSessions(studentId: ${user.id}) {
                       id
                       createdAt
                       score

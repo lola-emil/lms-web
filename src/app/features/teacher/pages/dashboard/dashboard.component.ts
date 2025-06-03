@@ -10,7 +10,7 @@ import { AvatarService } from '../../../../services/avatar.service';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DrawerComponent, TopbarComponent, HelloSvgComponent, DatePipe, RouterLink],
+  imports: [DrawerComponent, TopbarComponent, HelloSvgComponent, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
   standalone: true

@@ -43,29 +43,6 @@
       }
     </select>
     <br>
-    <br>
-    <p class="font-semibold">Assign Sections</p>
-    <br>
-    <table class="table border">
-      <thead>
-        <tr>
-          <th>
-            <input type="checkbox" class="checkbox checkbox-sm">
-          </th>
-          <th align="left">Section</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (item of sections; track $index) {
-        <tr>
-          <td>
-            <input type="checkbox" class="checkbox checkbox-sm">
-          </td>
-          <td>Grade {{ item.classLevel.level }} - {{ item.sectionName }}</td>
-        </tr>
-        }
-      </tbody>
-    </table>
 
     <div class="modal-action">
       <button class="btn btn-primary" (click)="addTeacher()">Add</button>
@@ -80,7 +57,7 @@
 
 <dialog #sectionAssignmentModal class="modal">
   <div class="modal-box">
-    <h3 class="text-lg font-bold">Teacher 1</h3>
+    <h3 class="text-lg font-bold">{{selectedTeacherSubject?.teacher?.firstname}} {{ selectedTeacherSubject?.teacher?.lastname }}</h3>
 
     <br>
     <br>

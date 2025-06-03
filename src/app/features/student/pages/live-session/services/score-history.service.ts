@@ -28,10 +28,11 @@ export class ScoreHistoryService {
   ) { }
 
   getScores(teacherSubjectId: number) {
+    const user = this.authService.getUserDetail();
     return this.apollo.watchQuery<{ gradePerSubject: StudentGrade[]; }>({
       query: gql`
         query StudentGrades {
-             gradePerSubject(teacherSubjectId: ${teacherSubjectId}) {
+             gradePerSubject(teacherSubjectId: ${teacherSubjectId}, studentId: ${user.id}) {
                 id
                 score
                 title

@@ -10,7 +10,7 @@ import { Subject, SubjectDetailService } from './services/subject-detail.service
 
 @Component({
   selector: 'app-subject-detail-page',
-  imports: [DrawerComponent, TopbarComponent, CommonModule, RouterLink, ReactiveFormsModule, RouterOutlet, RouterLinkActive],
+  imports: [DrawerComponent, TopbarComponent, CommonModule, ReactiveFormsModule, RouterOutlet],
   templateUrl: './subject-detail-page.component.html',
   styles: ``
 })
