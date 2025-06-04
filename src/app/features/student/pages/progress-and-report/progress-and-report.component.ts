@@ -5,13 +5,8 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { GradebookService } from './services/gradebook.service';
+import { GradebookService, SubjectSummary } from './services/gradebook.service';
 
-type SubjectSummary = {
-  subject: string;
-  quiz: number;
-  assignment: number;
-};
 
 
 @Component({
@@ -36,9 +31,9 @@ export class ProgressAndReportComponent {
   ];
 
   criteria = {
-    quizzes: 30,  // 30% weight
-    assignments: 30, // 30% weight
-    exams: 40  // 40% weight
+    quizzes: 20,  // 30% weight
+    assignments: 60, // 30% weight
+    exams: 20  // 40% weight
   };
 
   constructor(
@@ -48,38 +43,18 @@ export class ProgressAndReportComponent {
   scores: SubjectSummary[] = [];
 
   ngOnInit(): void {
-    this.gradebookService.getGrades()
+    this.gradebookService.getEnrolledSection()
       .subscribe(res => {
-        console.log(res);
-          this.scores = res.data.studentGrades.reduce<SubjectSummary[]>((acc, curr) => {
-            const subjectTitle = curr.teacherSubject.subject.title;
-            const category = curr.category;
-            const score = curr.score;
+        const studentSection = res.data.studentCurrentEnrolledSection[0];
 
-            // Find or create subject entry
-            let subjectEntry = acc.find(entry => entry.subject === subjectTitle);
+        this.gradebookService.getSubjects(studentSection.classSectionId)
+          .subscribe(res => {
+            console.log(res.data);
 
-            if (!subjectEntry) {
-              subjectEntry = {
-                subject: subjectTitle,
-                quiz: 0,
-                assignment: 0
-              };
-              acc.push(subjectEntry);
-            }
+            this.scores = this.gradebookService.computeSubjectSummaries(res.data.teacherSubjectSectionsPerSection);
 
-            // Process based on category
-            if (category === 'QUIZ') {
-              subjectEntry.quiz += score;
-            } else if (category === 'ACTIVITY') {
-              subjectEntry.assignment += score;
-            }
-
-            return acc;
-          }, []);
-
-        console.log(this.scores);
-
+            console.table(this.scores);
+          });
       });
   }
 

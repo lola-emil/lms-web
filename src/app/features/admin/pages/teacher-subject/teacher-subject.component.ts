@@ -4,6 +4,7 @@ import { ClassSection, Subject, Teacher, TeacherSubject, TeacherSubjectSection, 
 import { DatePipe } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { catchError, filter, of, tap } from 'rxjs';
+import { SchoolYear, SchoolYearService } from '../../../../services/school-year.service';
 
 @Component({
   selector: 'app-teacher-subject',
@@ -25,16 +26,38 @@ export class TeacherSubjectComponent implements OnInit {
 
   teacherAssignedSections: TeacherSubjectSection[] = [];
 
+  schoolYears: SchoolYear[] = [];
+
+
+  selectedSchoolYearId?: number;
+  currentSchoolYear?: SchoolYear;
+
   constructor(
     private route: ActivatedRoute,
-    private teacherSubjectService: TeacherSubjectService
+    private teacherSubjectService: TeacherSubjectService,
+    private schoolYear: SchoolYearService
   ) {
     this.route.parent?.params.subscribe(val => this.subjectId = parseInt(val["id"]));
+    this.schoolYear.getCurrentSchoolYear()
+      .subscribe(res => {
+        this.currentSchoolYear = res.data.currentSchoolYear;
+        this.selectedSchoolYearId = this.currentSchoolYear.id;
+      });
   }
 
   ngOnInit(): void {
     this.loadTeacherSubjects();
     this.loadUnassignedTeachers();
+    this.loadSchoolYears();
+
+  }
+
+  loadSchoolYears() {
+    this.schoolYear.getSchoolYears()
+      .subscribe(res => {
+        console.log(res.data.schoolYears);
+        this.schoolYears = res.data.schoolYears;
+      });
   }
 
   loadSections() {
@@ -64,7 +87,7 @@ export class TeacherSubjectComponent implements OnInit {
   }
 
   loadTeacherSubjects() {
-    this.teacherSubjectService.getTeacherSubjects(this.subjectId ?? 0)
+    this.teacherSubjectService.getTeacherSubjects(this.subjectId ?? 0, this.selectedSchoolYearId)
       .subscribe(res => {
         this.subject = res.data.subject;
 
@@ -137,5 +160,14 @@ export class TeacherSubjectComponent implements OnInit {
         return of(null);
       })
     ).subscribe();
+  }
+
+  selectSchoolYear(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const id = parseInt(target.value);
+
+    this.selectedSchoolYearId = id;
+
+    this.loadTeacherSubjects();
   }
 }

@@ -9,8 +9,15 @@
     <p class="font-semibold">Enrolled Students</p>
     <br>
     <div class="flex justify-between items-center">
-      <button class="btn btn-sm btn-primary" (click)="showAddStudentModal()">Add student(s)</button>
-      <input type="text" class="input input-sm input-bordered" placeholder="Search">
+      <button class="btn btn-sm btn-primary" (click)="showAddStudentModal()" [disabled]="currentSchoolYear?.id != selectedSchoolYearId">Add student(s)</button>
+      <select name="" id="" class="select select-bordered select-sm" (change)="selectSchoolYear($event)">
+        <option value="">-- Select School Year</option>
+
+        @for (item of schoolYears; track $index) {
+        <option [value]="item.id" [selected]="item.isCurrent">{{item.yearStart}} - {{item.yearEnd}}</option>
+        }
+
+      </select>
     </div>
     <br>
     <table class="table border">
@@ -28,7 +35,6 @@
           <td>{{item.student.firstname}} {{ item.student.lastname }}</td>
           <td>{{ item.student.email }}</td>
           <td align="right">
-            <button class="link">Remove</button>
           </td>
         </tr>
         }

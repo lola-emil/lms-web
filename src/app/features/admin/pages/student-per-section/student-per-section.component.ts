@@ -4,6 +4,7 @@ import { TopbarComponent } from "../../components/topbar/topbar.component";
 import { ActivatedRoute } from '@angular/router';
 import { Section, SectionStudentService, Student, StudentSection } from './services/section-student.service';
 import { catchError, of, tap } from 'rxjs';
+import { SchoolYear, SchoolYearService } from '../../../../services/school-year.service';
 
 @Component({
   selector: 'app-student-per-section',
@@ -20,9 +21,16 @@ export class StudentPerSectionComponent implements OnInit {
 
   section?: Section;
 
+    schoolYears: SchoolYear[] = [];
+
+
+    selectedSchoolYearId?: number;
+    currentSchoolYear?: SchoolYear;
+
   constructor(
     private route: ActivatedRoute,
-    private sectionStudentService: SectionStudentService
+    private sectionStudentService: SectionStudentService,
+    private schoolYear: SchoolYearService
   ) {
     this.route.params.subscribe(val => {
       this.sectionId = parseInt(val['id']);
@@ -35,18 +43,23 @@ export class StudentPerSectionComponent implements OnInit {
         this.section = res.data.classSection
       });
     this.loadEnrolledStudents();
+    this.loadSchoolYears();
   }
 
   loadEnrolledStudents() {
-    this.sectionStudentService.loadSectionStudents(this.sectionId ?? 0)
+    this.sectionStudentService.loadSectionStudents(this.sectionId ?? 0, this.selectedSchoolYearId)
       .subscribe(res => {
         console.log(res.data.studentEnrolledSections);
         this.studentSections = res.data.studentEnrolledSections;
       });
   }
 
-  search(event: Event) {
-
+  loadSchoolYears() {
+    this.schoolYear.getSchoolYears()
+      .subscribe(res => {
+        console.log(res.data.schoolYears);
+        this.schoolYears = res.data.schoolYears;
+      });
   }
 
   loadUnenrolledStudents() {
@@ -84,6 +97,15 @@ export class StudentPerSectionComponent implements OnInit {
   }
 
   studentModalClosed() {
+    this.loadEnrolledStudents();
+  }
+
+  selectSchoolYear(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const id = parseInt(target.value);
+
+    this.selectedSchoolYearId = id;
+
     this.loadEnrolledStudents();
   }
 }

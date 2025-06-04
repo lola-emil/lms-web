@@ -34,4 +34,21 @@ export class SchoolYearService {
       `
     }).valueChanges;
   }
+
+  getSchoolYears() {
+    return this.apollo.watchQuery<{schoolYears: SchoolYear[]}>({
+      query: gql`
+        query SchoolYears {
+            schoolYears {
+                id
+                yearStart
+                yearEnd
+                isCurrent
+                createdAt
+                updatedAt
+            }
+        }
+      `
+    }).valueChanges;
+  }
 }

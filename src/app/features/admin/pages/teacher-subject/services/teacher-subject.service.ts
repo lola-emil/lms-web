@@ -14,7 +14,7 @@ export type TeacherSubject = {
   id: number;
   teacher: Teacher;
   createdAt: string;
-  subject: Subject
+  subject: Subject;
 };
 
 export type TeacherSubjectSection = {
@@ -58,29 +58,33 @@ export class TeacherSubjectService {
     private http: HttpClient
   ) { }
 
-  getTeacherSubjects(subjectId: number) {
+  getTeacherSubjects(subjectId: number, schoolYearId?: number) {
     return this.apollo.watchQuery<{ subject: Subject; }>({
       query: gql`
-        query Subjects {
-            subject(id: ${subjectId}) {
+      query Subjects($id: Int!, $schoolYearId: Int) {
+        subject(id: $id) {
+          id
+          teacherSubjects(schoolYearId: $schoolYearId) {
+            id
+            createdAt
+            teacher {
               id
-                teacherSubjects {
-                  id
-                  createdAt
-                    teacher {
-                        id
-                        email
-                        firstname
-                        middlename
-                        lastname
-                        role
-                        createdAt
-                        updatedAt
-                    }
-                }
+              email
+              firstname
+              middlename
+              lastname
+              role
+              createdAt
+              updatedAt
             }
+          }
         }
-      `,
+      }
+    `,
+      variables: {
+        id: subjectId,
+        schoolYearId: schoolYearId
+      },
       fetchPolicy: "no-cache"
     }).valueChanges;
   }
@@ -133,7 +137,8 @@ export class TeacherSubjectService {
             }
 
         }
-      `
+      `,
+      fetchPolicy: "no-cache"
     }).valueChanges;
   }
 

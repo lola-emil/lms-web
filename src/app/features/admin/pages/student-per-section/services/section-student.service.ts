@@ -69,11 +69,11 @@ export class SectionStudentService {
     }).valueChanges;
   }
 
-  loadSectionStudents(sectionId: number) {
+  loadSectionStudents(sectionId: number, schoolYearId?: number) {
     return this.apollo.watchQuery<{ studentEnrolledSections: StudentSection[]; }>({
       query: gql`
-        query StudentEnrolledSections {
-            studentEnrolledSections(sectionId: ${sectionId}) {
+        query StudentEnrolledSections($sectionId: Int!, $schoolYearId: Int) {
+            studentEnrolledSections(sectionId: $sectionId, schoolYearId: $schoolYearId) {
               student {
                 id
                 email
@@ -84,6 +84,10 @@ export class SectionStudentService {
             }
         }
       `,
+      variables: {
+        sectionId,
+        schoolYearId
+      },
       fetchPolicy: "no-cache"
     }).valueChanges;
   }
